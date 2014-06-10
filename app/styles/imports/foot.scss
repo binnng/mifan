@@ -1,0 +1,22 @@
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 26px;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+
+  p{
+  	text-align: center;
+  	a{
+  		color: #777;
+  		&:hover{
+  			color: #777;
+  		}
+  	}
+
+    .loved{
+      //color: red;
+    }
+  }
+}

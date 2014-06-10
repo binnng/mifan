@@ -1,0 +1,40 @@
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* Space out content a bit */
+body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+a,
+.btn-link{
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+.main-mifan-view{
+  overflow: hidden;
+}
+
+.row{
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}

@@ -16,14 +16,14 @@ module.exports = function(grunt) {
       },
       js: {
         files: ["<%= yeoman.app %>/scripts/{,*/}*.js"],
-        tasks: ["newer:jshint:all"],
+        tasks: [],
         options: {
           livereload: true
         }
       },
       jsTest: {
         files: ["test/spec/{,*/}*.js"],
-        tasks: ["newer:jshint:test", "karma"]
+        tasks: ["karma"]
       },
       compass: {
         files: ["<%= yeoman.app %>/styles/{,*/}*.{scss,sass}"],
@@ -298,5 +298,5 @@ module.exports = function(grunt) {
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
   grunt.registerTask("build", ["clean:dist", "bowerInstall", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "rev", "usemin", "ng_template", "htmlmin", "clean:distView"]);
-  return grunt.registerTask("default", ["newer:jshint", "test", "build"]);
+  return grunt.registerTask("default", ["test", "build"]);
 };

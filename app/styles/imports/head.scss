@@ -1,0 +1,94 @@
+.header{
+	border-bottom: 1px solid #e5e5e5;
+	margin-top: 0;
+  margin-bottom: 0;
+  padding: 10px 0;
+  background: #fff;
+  position: relative;
+  .logo,
+  .nav{
+  	display: inline-block;
+  }
+	.logo{
+		font-size: 2.4em;
+		margin: 0;
+		color: $tone-color;
+    a{
+    	&:hover{
+    		text-decoration: none;
+    		color: $tone-color;
+    	}
+    }
+    small{
+    	.glyphicon{
+    		top: 2px;
+    	}
+			margin-left: .2em;
+			font-size: .4em;
+    }
+	}
+
+	.nav{
+		vertical-align: bottom;
+		margin-left: 2em;
+		margin-top: -2px;
+
+		li{
+			margin: 0 .4em;
+		}
+	}
+
+	.login,
+	.username{
+		margin-top: 10px;
+	}
+
+	.login{
+		span{
+			padding: 8px 0;
+		}
+	}
+
+	.username{
+		cursor: pointer;
+		&:hover{
+			color: #111;
+		}
+
+		.caret{
+			@include transition(all, 200ms, ease-in);
+			margin-right: 1.4em;
+			position: relative;
+		}
+
+		.dropdown-label{
+			padding: 8px 0;
+		}
+
+		.dropdown-menu{
+			margin-top: .3em;
+			li{
+				padding: .3em;
+				.glyphicon{
+					margin-right: .4em;
+				}
+			}
+		}
+
+		&.open{
+			.caret{
+				@include rotate(180);
+			}
+		}
+	}
+	&:after{
+		content: "";
+		display: block;
+		height: 5px;
+		width: 100%;
+		position: absolute;
+		bottom: -5px;
+		-webkit-mask-box-image: -webkit-gradient(linear,left top,right top,color-stop(0.0,rgba(0,0,0,0)),color-stop(0.5,rgba(0,0,0,.8)),color-stop(1.0,rgba(0,0,0,0)));
+		@include background-gradient(rgba(0, 0, 0, .4), transparent);
+	}
+}

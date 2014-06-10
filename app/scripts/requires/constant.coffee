@@ -1,0 +1,2 @@
+CLICK = "click"
+ACTIVE = "active"

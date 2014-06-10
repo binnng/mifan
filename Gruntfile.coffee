@@ -33,14 +33,14 @@ module.exports = (grunt) ->
 
       js:
         files: ["<%= yeoman.app %>/scripts/{,*/}*.js"]
-        tasks: ["newer:jshint:all"]
+        tasks: [] # "newer:jshint:all"]
         options:
           livereload: true
 
       jsTest:
         files: ["test/spec/{,*/}*.js"]
         tasks: [
-          "newer:jshint:test"
+          # "newer:jshint:test"
           "karma"
         ]
 
@@ -426,7 +426,7 @@ module.exports = (grunt) ->
     "clean:distView"
   ]
   grunt.registerTask "default", [
-    "newer:jshint"
+    # "newer:jshint"
     "test"
     "build"
   ]
