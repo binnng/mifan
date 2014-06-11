@@ -1,24 +1,59 @@
 <div class="home-page container clearfix">
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
-			这里是提问框和信息流。
-			这里是提问框和信息流。
-			这里是提问框和信息流。
-			这里是提问框和信息流。
-			这里是提问框和信息流。
+
+			<form role="form" class="ask-ques-form form-inline clearfix" action="/c">
+				<p class="h5">问你朋友一个问题吧！</p>
+				<textarea class="form-control pull-left" rows="3" name="question" ng-model="askQuesConent"></textarea>
+				<button type="submit" class="btn btn-primary pull-right {{askQuesConent?'':'disabled'}}">发送</button>
+			</form>
+
+			<ul class="nav nav-tabs">
+			  <li class="{{feedType=='news'?'active':''}}" ng-click="switchFeedType('news')">
+			  	<a class="btn-link">朋友动态</a>
+			  </li>
+			  <li class="{{feedType=='answer'?'active':''}}" ng-click="switchFeedType('answer')">
+			  	<a class="btn-link">回答我的</a>
+			  </li>
+			  <li class="{{feedType=='reply'?'active':''}}" ng-click="switchFeedType('reply')">
+			  	<a class="btn-link">回复我的</a>
+			  </li>
+			</ul>
+
+			<div class="feed-content {{feedType=='news'?'active':''}}">朋友动态</div>
+			<div class="feed-content {{feedType=='answer'?'active':''}}">回答我的</div>
+			<div class="feed-content {{feedType=='reply'?'active':''}}">回复我的</div>
 		</div>
 	</div>
-	<div class="row col-sm-1 hidden-xs">
+	<div class="row col-sm-1 hidden-xs separate-row" style="height:{{separateHeight}}px">
 		<div class="separate"></div>
 	</div>
 	<div class="row col-xs-12 col-sm-3">
 		<div class="side">
-			这里是每日一问。
-			这里是每日一问。
-			这里是每日一问。
-			这里是每日一问。
-			这里是每日一问。
-			这里是每日一问。
+			<div class="side-block">
+				<h5>每日一问</h5>
+				<div class="every-day-ask">
+					<a class="pull-left ans-num" href="/#!/">
+						<b>3.5万</b>
+						<span>回答</span>
+					</a>
+					<a class="content" href="/#!/">
+						高考结束你最想做的事情是什么？高考结束你最想做的事情是什么？高考结束你最想做的事情是什么？高考结束你最想做的事情是什么？高考结束你最想做的事情是什么？
+					</a>
+				</div>
+			</div>
+			<div class="side-block">
+				<h5>每日一问</h5>
+				<div class="every-day-ask">
+					<p class="pull-left ans-num">
+						<span>3.5万</span>
+						<span>回答</span>
+					</p>
+					<a class="content" href="/#!/">
+						高考结束你最想做的事情是什么？
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

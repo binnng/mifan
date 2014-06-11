@@ -63,6 +63,8 @@
 
 		.dropdown-label{
 			padding: 8px 0;
+			-webkit-user-select: none;
+			user-select: none;
 		}
 
 		.dropdown-menu{

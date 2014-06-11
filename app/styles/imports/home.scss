@@ -1,14 +1,38 @@
 .home-page{
-	height: 400px;
-	padding-top: 1.4em;
-	.main,
-	.side,
-	.separate,
-	.row{
+	padding-top: 2.4em;
+	
+	.separate-row{
 		height: 100%;
 	}
 
 	.main{
+
+		.ask-ques-form{
+			textarea{
+				height: 5em;
+				width: 84%;
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+
+			button[type="submit"]{
+				height: 5em;
+				width: 16%;
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+
+		.nav{
+			margin-top: 2em;
+		}
+
+		.feed-content{
+			display: none;
+			&.active{
+				display: block;
+			}
+		}
 		
 	}
 
@@ -16,5 +40,42 @@
 		background: #e5e5e5;
 		width: 1px;
 		margin: 0 auto;
+		height: 100%;
+	}
+
+	.side{
+		.side-block{
+			margin-bottom: 2em;
+		}
+		.every-day-ask{
+			color: #555;
+			.ans-num{
+				width: 60px;
+				height: 60px;
+				background: #428bca;
+				color: #fff;
+				margin-right: 1em;
+				border-radius: 3px;
+				span,
+				b{
+					display: block;
+					line-height: 2;
+					text-align: center;
+				}
+				b{
+					font-size: 1.2em;
+				}
+			}
+			.content{
+				color: #555;
+				display: block;
+				overflow: hidden;
+				text-align: justify;
+				&:hover,
+				&:active{
+					color: #111;
+				}
+			}
+		}
 	}
 }
