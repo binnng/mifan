@@ -10,5 +10,13 @@ angular.module("mifan").controller "homeCtrl", ($scope) ->
   	$scope.separateHeight = $(".home-page .main").height()
 
   $scope.askQuesConent = ""
+
+  $scope.remind = 
+  	newsNum: 0
+  	answerNum: 2
+  	replyNum: '...'
   
   no
+
+
+

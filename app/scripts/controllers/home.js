@@ -10,5 +10,10 @@ angular.module("mifan").controller("homeCtrl", function($scope) {
     return $scope.separateHeight = $(".home-page .main").height();
   });
   $scope.askQuesConent = "";
+  $scope.remind = {
+    newsNum: 0,
+    answerNum: 2,
+    replyNum: '...'
+  };
   return false;
 });

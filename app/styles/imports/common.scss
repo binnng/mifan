@@ -14,11 +14,15 @@
     color: #000;
     padding: 0.2em 0;
 }
-
-/* Space out content a bit */
-body {
-    padding-top: 10px;
-    padding-bottom: 10px;
+div, p, dl, dd, a, b, u, h1, li, h2, em, input, textarea, button, select, form, section, label, span, td, li, nav, footer, body, ul, i {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  word-wrap: break-word;
+  word-break: break-all;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  outline: 0;
 }
 
 a,
@@ -37,4 +41,8 @@ a,
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
+}
+
+.root{
+  padding: 10px 0;
 }

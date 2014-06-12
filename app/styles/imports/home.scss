@@ -10,14 +10,13 @@
 		.ask-ques-form{
 			textarea{
 				height: 5em;
-				width: 84%;
+				display: block;
 				border-top-right-radius: 0;
 				border-bottom-right-radius: 0;
 			}
 
 			button[type="submit"]{
 				height: 5em;
-				width: 16%;
 				border-top-left-radius: 0;
 				border-bottom-left-radius: 0;
 			}
@@ -25,13 +24,27 @@
 
 		.nav{
 			margin-top: 2em;
+
+			li{
+				b{
+					position: absolute;
+					top: 0;
+					right: 0;
+					background: #f33;
+					color: #fff;
+					text-indent: -999px;
+					//padding: 0 .4em;
+					border-radius: 100px;
+					font-size: .8em;
+					display: block;
+					width: 8px;
+					height: 8px;
+				}
+			}
 		}
 
 		.feed-content{
-			display: none;
-			&.active{
-				display: block;
-			}
+		
 		}
 		
 	}

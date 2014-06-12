@@ -2,27 +2,32 @@
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
 
-			<form role="form" class="ask-ques-form form-inline clearfix" action="/c">
+			<form role="form" class="ask-ques-form clearfix" action="/c">
 				<p class="h5">问你朋友一个问题吧！</p>
-				<textarea class="form-control pull-left" rows="3" name="question" ng-model="askQuesConent"></textarea>
-				<button type="submit" class="btn btn-primary pull-right {{askQuesConent?'':'disabled'}}">发送</button>
+				<div class="row col-xs-10">
+					<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary row col-xs-2 {{askQuesConent?'':'disabled'}}">发送</button>
 			</form>
 
 			<ul class="nav nav-tabs">
 			  <li class="{{feedType=='news'?'active':''}}" ng-click="switchFeedType('news')">
 			  	<a class="btn-link">朋友动态</a>
+			  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
 			  </li>
 			  <li class="{{feedType=='answer'?'active':''}}" ng-click="switchFeedType('answer')">
 			  	<a class="btn-link">回答我的</a>
+			  	<b ng-show="remind.answerNum!==0">{{remind.answerNum}}</b>
 			  </li>
 			  <li class="{{feedType=='reply'?'active':''}}" ng-click="switchFeedType('reply')">
-			  	<a class="btn-link">回复我的</a>
+			  	<a class="btn-link">回应我的</a>
+			  	<b ng-show="remind.replyNum!==0">{{remind.replyNum}}</b>
 			  </li>
 			</ul>
 
-			<div class="feed-content {{feedType=='news'?'active':''}}">朋友动态</div>
-			<div class="feed-content {{feedType=='answer'?'active':''}}">回答我的</div>
-			<div class="feed-content {{feedType=='reply'?'active':''}}">回复我的</div>
+			<div class="feed-content" ng-if="feedType=='news'" ng-controller="homeNews">{{content}}</div>
+			<div class="feed-content" ng-if="feedType=='answer'" ng-controller="homeAnswer">{{content}}</div>
+			<div class="feed-content" ng-if="feedType=='reply'" ng-controller="homeReply">{{content}}</div>
 		</div>
 	</div>
 	<div class="row col-sm-1 hidden-xs separate-row" style="height:{{separateHeight}}px">
