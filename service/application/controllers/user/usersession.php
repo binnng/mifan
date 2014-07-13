@@ -14,7 +14,7 @@
  * @response user资源编号为1，0000表示成功
  * @desc 响应编码ret		说明
  * 		 100000			登录成功
- * 		 104001			用户名或密码为空
+ * 		 104001			为空较验，用户名或密码为空 or userid和最后一次登录时间不能为空
  * 		 104002			邮箱不存在
  * 		 104003			密码错误
  * 		 104004			Token时间戳不对
@@ -80,7 +80,7 @@ class Usersession extends REST_Controller
              $this->response($message, 400); 
 		}
 
-		list($ret,$result) = $this->user_model->checkUserLogin($data['useremail'],$data['password']);
+		list($ret,$result) = $this->user_model->checkUserLogin($data['useremail'],$data['password'],$data);
 		
 		if($ret != '100000'){
 			 $message = array( 'ret' => $ret, 'msg' => $result);
@@ -92,6 +92,19 @@ class Usersession extends REST_Controller
 	}
 	
 	function _check_login_by_token($data){
+		if($data['userid']=='' || $data['lastdate']==''){
+			 $message = array( 'ret' => 104001, 'msg' => 'userid和最后一次登录时间不能为空!');
+             $this->response($message, 400); 
+		}
+
+		list($ret,$result) = $this->user_model->checkUserToken($data['userid'],$data['accesstoken'],$data);
 		
+		if($ret != '100000'){
+			 $message = array( 'ret' => $ret, 'msg' => $result);
+             $this->response($message, 400); 
+		}
+		
+		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);
+		$this->response($message, 200); 
 	}
 }

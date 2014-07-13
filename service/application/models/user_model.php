@@ -82,6 +82,7 @@ class User_model extends Base_model {
 		$this->session->set_userdata($sessiondata);
 		
 		$this->_update_login_info_by_id($strToken['userid']);
+		
 		return array('100000',$this->session->all_userdata());
 		
 	}
