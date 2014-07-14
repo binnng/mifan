@@ -99,10 +99,19 @@ class Base_model extends CI_Model {
 	 * 				  	  必选		参数范围		说明
 	 * @param $table 	 true		string		表名	 
 	 * @param $row 		 true		mix			添加内容
-	 * @return 			 true    	mix
+	 * @return 			 true    	mix			有自增ID返回自增ID，无则返回true/false
 	 */
 	public function create($table,$row){
-		return $this->db->insert($table,$row);
+		$result = $this->db->insert($table,$row);
+		if($result){
+			if($id = $this->db->insert_id()){
+				return $id;
+			}else{
+				return TRUE;
+			}
+		}
+		
+		return FALSE;
 	}
 	
 	/**

@@ -15,10 +15,11 @@
  * @desc 响应编码ret		说明
  * 		 100000			登录成功
  * 		 104001			为空较验，用户名或密码为空 or userid和最后一次登录时间不能为空
- * 		 104002			邮箱不存在
+ * 		 104002			邮箱不存在或用户不存在
  * 		 104003			密码错误
  * 		 104004			Token时间戳不对
- *		 104005			Token已过期  
+ *		 104005			Token不存在或已过期  
+ * 		 104006			
  * 		 104009			其他错误
  */
 
@@ -47,7 +48,7 @@ class Usersession extends REST_Controller
 	 * 返回数据	json
 	 * 
 	 */
-	function user_post(){
+	public function user_post(){
 		log_message('debug', "user_post...");
 		
 		$data['useremail'] 	= $this->post('user_email');
