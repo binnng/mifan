@@ -1,10 +1,6 @@
 "use strict"
-angular.module("mifan", [
-  "ngCookies"
-  "ngResource"
-  "ngSanitize"
-  "ngRoute"
-]).config ($routeProvider, $locationProvider) ->
+
+Mifan.config ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode(false).hashPrefix "!"
   $routeProvider
     .when("/",
@@ -21,6 +17,10 @@ angular.module("mifan", [
     .when("/me",
       templateUrl: "views/me.html"
       controller: "meCtrl"
+    )
+    .when("/welcome",
+      templateUrl: "views/welcome.html"
+      controller: "welcomeCtrl"
     )
     .otherwise
       templateUrl: "views/404.html"

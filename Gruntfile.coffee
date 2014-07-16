@@ -183,7 +183,7 @@ module.exports = (grunt) ->
 
       server:
         options:
-          debugInfo: true
+          debugInfo: false
 
     
     # Renames files for browser caching purposes

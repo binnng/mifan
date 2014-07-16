@@ -1,5 +1,5 @@
 "use strict"
-angular.module("mifan").controller "headCtrl", ($scope) ->
+Mifan.controller "headCtrl", ($scope) ->
   $scope.currentPage = "home"
 
   $scope.username = "老婆婆"

@@ -1,5 +1,5 @@
 
-angular.module("mifan").controller "homeReply", ($scope) ->
+Mifan.controller "homeReply", ($scope) ->
 	$scope.content = "huifuwode"
 	console.log "huifuwode"
 
