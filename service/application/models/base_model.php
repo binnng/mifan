@@ -59,7 +59,9 @@ class Base_model extends CI_Model {
 		
 		$query = $this->db->get($table);
 		
-		return empty($query->result_array())? FALSE : $query->result_array();
+		$result = $query->result_array();
+		
+		return empty($result)? FALSE : $result;
 	}
 	
 	/**
