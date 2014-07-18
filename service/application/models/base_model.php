@@ -2,6 +2,15 @@
 
 /**
  * Model基类
+ * 
+ * 封装通用数据库增删查改方法
+ * 
+ * @package		CodeIgniter
+ * @subpackage	Model
+ * @category	Controller
+ * @author		xie.hj
+ * @link		http://www.mifan.us
+ * 
  */
 class Base_model extends CI_Model {
 
@@ -11,14 +20,16 @@ class Base_model extends CI_Model {
 	}
 	
 	/**
-	 * @method find
-	 * @desc find function.获取一条符合条件的记录
-	 * 					 必选		参数范围		说明
-	 * @param $table 	 true		string		表名
-	 * @param $condition false		mix			条件
-	 * @param $fields	 false 		string		查询字段	
-	 * @param $sort 	 false		string		排序规则
-	 * @return			 true		mix			 查询结果，以数据形式反回，无符合条件记录返回false
+	 * find
+	 * 
+	 * find function.获取一条符合条件的记录
+
+	 * @param	string 	$table 	 必选，表名
+	 * @param	mix		$condition 	可选，条件
+	 * @param	string 	$fields 	 可选，查询字段
+	 * @param	string 	$sort 	 可选，排序规则
+	 * 
+	 * @return	array|false	查询结果，以数组形式反回，无符合条件记录返回false
 	 */
 	function find($table,$condition=array(),$fields="*",$sort=null){
 		if( $record = $this->findAll($table,$condition,$fields,$sort, 1) ){
@@ -29,16 +40,18 @@ class Base_model extends CI_Model {
 	}
 	
 	/**
-	 * @method findAll
-	 * @desc findAll function.查找符合条件的若干条记录
-	 * 					  必选		参数范围		说明
-	 * @param $table 	 true		string		表名
-	 * @param $condition false		mix			条件
-	 * @param $fields	 false 		string		查询字段	
-	 * @param $sort 	 false		string		排序规则
-	 * @param $limit 	 false		int			查找记录条数
-	 * @param $offset 	 false		int			偏移量
-	 * @return 			 true		mix			查询结果，以数组形式反回
+	 * findAll
+	 * 
+	 * findAll function.查找符合条件的若干条记录
+	 * 
+	 * @param	string 	$table 	 必选，表名
+	 * @param	mix		$condition 	可选，条件
+	 * @param	string 	$fields 	 可选，查询字段
+	 * @param	string 	$sort 	 可选，排序规则
+	 * @param 	int		$limit 	 可选，查找记录条数
+	 * @param	int		$offset 可选，偏移量
+	 * 
+	 * @return 	array|false	查询结果，以数组形式反回，无符合条件记录返回false
 	 */
 	function findAll($table,$condition=array(),$fields="*",$sort=null,$limit=null,$offset = 0){
 		$fields = empty($fields) ? "*" : $fields;
@@ -65,12 +78,14 @@ class Base_model extends CI_Model {
 	}
 	
 	/**
-	 * @method findCount
-	 * @desc findCount function.	查找符合条件的记录数
-	 * 				  	  必选		参数范围		说明
-	 * @param $table 	 true		string		表名	 
-	 * @param $condition false		mix			条件
-	 * @return 			 true    	int			记录条数
+	 * findCount
+	 * 
+	 * findCount function.	查找符合条件的记录数
+	 * 
+	 * @param	string	$table	必选，表名	 
+	 * @param	mix		$condition 可选，条件
+	 * 
+	 * @return array|false	查询结果，以数组形式反回，无符合条件记录返回false
 	 */
 	function findCount($table,$condition = null){
 		if(!empty($condition)){
@@ -80,13 +95,15 @@ class Base_model extends CI_Model {
 	}
 	
 	/**
-	 * @method update
-	 * @desc update function.	按条件更新记录
-	 * 				  	  必选		参数范围		说明
-	 * @param $table 	 true		string		表名	 
-	 * @param $row 		 true		mix			更新内容
-	 * @param $condition false		mix			条件
-	 * @return 			 true    	bool
+	 * update
+	 * 
+	 * update function.	按条件更新记录
+	 * 
+	 * @param	string	$table	必选，表名	 
+	 * @param	mix		$row 	必选，更新内容
+	 * @param	mix		$condition 可选，条件
+	 * 
+	 * @return bool	更新结果
 	 */
 	public function update($table,$row,$condition = NULL){
 		if(!empty($condition)){
@@ -96,12 +113,14 @@ class Base_model extends CI_Model {
 	}
 	
 	/**
-	 * @method create
-	 * @desc create function.	添加记录
-	 * 				  	  必选		参数范围		说明
-	 * @param $table 	 true		string		表名	 
-	 * @param $row 		 true		mix			添加内容
-	 * @return 			 true    	mix			有自增ID返回自增ID，无则返回true/false
+	 * create
+	 * 
+	 * create function.	添加记录
+	 * 
+	 * @param	string	$table	必选，表名	 
+	 * @param	mix		$row 	必选，添加内容
+	 * 
+	 * @return	mix			有自增ID返回自增ID，无则返回true/false
 	 */
 	public function create($table,$row){
 		$result = $this->db->insert($table,$row);
@@ -117,13 +136,15 @@ class Base_model extends CI_Model {
 	}
 	
 	/**
-	 * @method replace
-	 * @desc replace function.	添加或更新记录。并不是mysql自带的数据库，自己提供条件
-	 * 				  	  必选		参数范围		说明
-	 * @param $table 	 true		string		表名	
-	 * @param $row 		 true		mix			添加内容
-	 * @param $condition true		mix			更新条件
-	 * @return 			 true    	mix
+	 * replace
+	 * 
+	 * replace function.	添加或更新记录。并不是mysql自带的数据库，自己提供条件
+	 * 
+	 * @param	string	$table	必选，表名	 
+	 * @param	mix $row	必选，添加或更新内容
+	 * @param	mix	$condition 必选，更新条件
+	 * 
+	 * @return 	mix	操作结果
 	 */
 	public function replace($table,$row,$condition = NULL){
 		
@@ -139,12 +160,14 @@ class Base_model extends CI_Model {
 	}
 	
 	/**
-	 * @method delete
-	 * @desc delete function.	添加记录
-	 * 				  	  必选		参数范围		说明
-	 * @param $table 	 true		string		表名	 
-	 * @param $condition false		mix			删除条件,条件为空则truncate表
-	 * @return 			 true    	bool
+	 * delete
+	 * 
+	 * delete function.	添加记录
+	 * 
+	 * @param	string	$table	必选，表名
+	 * @param	mix	$condition 可选，删除条件,条件为空则truncate表
+	 * 
+	 * @return 	bool	删除结果
 	 */
 	public function delete($table,$condition){
 		if(!empty($condition)){
