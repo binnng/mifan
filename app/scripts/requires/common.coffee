@@ -1,5 +1,12 @@
 "use strict"
 
+Mifan = angular.module "mifan", [
+  "ngCookies"
+  "ngResource"
+  "ngSanitize"
+  "ngRoute"
+]
+
 Common = 
 	init: ->
 

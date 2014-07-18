@@ -1,5 +1,5 @@
 "use strict"
-angular.module("mifan").controller "msgCtrl", ($scope) ->
+Mifan.controller "msgCtrl", ($scope) ->
   
   $scope.$on "$viewContentLoaded", -> Common.setCurrentPage("msg")
 

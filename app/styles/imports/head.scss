@@ -84,13 +84,16 @@
 		}
 	}
 	&:after{
+		-webkit-mask-box-image: -webkit-gradient(linear,left top,right top,color-stop(0.0,rgba(0,0,0,0)),color-stop(0.5,rgba(0,0,0,.8)),color-stop(1.0,rgba(0,0,0,0)));
+		//@include background-gradient(rgba(0, 0, 0, .4), transparent);
+		background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .4)), to(transparent));
+		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .4), transparent);
+		background-image: linear-gradient(top, rgba(0, 0, 0, .4), transparent);
 		content: "";
 		display: block;
 		height: 5px;
 		width: 100%;
 		position: absolute;
 		bottom: -5px;
-		-webkit-mask-box-image: -webkit-gradient(linear,left top,right top,color-stop(0.0,rgba(0,0,0,0)),color-stop(0.5,rgba(0,0,0,.8)),color-stop(1.0,rgba(0,0,0,0)));
-		@include background-gradient(rgba(0, 0, 0, .4), transparent);
 	}
 }

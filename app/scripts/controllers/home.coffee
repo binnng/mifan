@@ -1,5 +1,6 @@
 "use strict"
-angular.module("mifan").controller "homeCtrl", ($scope) ->
+
+Mifan.controller "homeCtrl", ($scope) ->
   $scope.feedType = "news"
 
   $scope.switchFeedType = (feedType) ->
