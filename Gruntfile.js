@@ -15,10 +15,24 @@ module.exports = function(grunt) {
         tasks: ["bowerInstall"]
       },
       js: {
-        files: ["<%= yeoman.app %>/scripts/{,*/}*.js"],
+        files: ["<%= yeoman.app %>/scripts/*.js"],
         tasks: [],
         options: {
           livereload: true
+        }
+      },
+      controllers: {
+        files: ["<%= yeoman.app %>/scripts/controllers/*.js"],
+        tasks: ["concat:controllers"],
+        options: {
+          livereload: false
+        }
+      },
+      requires: {
+        files: ["<%= yeoman.app %>/scripts/requires/*.js"],
+        tasks: ["concat:requires"],
+        options: {
+          livereload: false
         }
       },
       jsTest: {
@@ -271,6 +285,16 @@ module.exports = function(grunt) {
       test: ["compass"],
       dist: ["compass:dist", "imagemin", "svgmin"]
     },
+    concat: {
+      controllers: {
+        src: ["<%= yeoman.app %>/scripts/controllers/*.js"],
+        dest: "<%= yeoman.app %>/scripts/controllers.js"
+      },
+      requires: {
+        src: ["<%= yeoman.app %>/scripts/requires/*.js"],
+        dest: "<%= yeoman.app %>/scripts/requires.js"
+      }
+    },
     karma: {
       unit: {
         configFile: "karma.conf.js",
@@ -290,13 +314,13 @@ module.exports = function(grunt) {
     if (target === "dist") {
       return grunt.task.run(["build", "connect:dist:keepalive"]);
     }
-    grunt.task.run(["clean:server", "bowerInstall", "concurrent:server", "autoprefixer", "connect:livereload", "watch"]);
+    grunt.task.run(["clean:server", "bowerInstall", "concurrent:server", "autoprefixer", "connect:livereload", "concat:controllers", "concat:requires", "watch"]);
   });
   grunt.registerTask("server", function(target) {
     grunt.log.warn("The `server` task has been deprecated. Use `grunt serve` to start a server.");
     grunt.task.run(["serve:" + target]);
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
-  grunt.registerTask("build", ["clean:dist", "bowerInstall", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "rev", "usemin", "ng_template", "htmlmin", "clean:distView"]);
+  grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "rev", "usemin", "ng_template", "htmlmin", "clean:distView"]);
   return grunt.registerTask("default", ["test", "build"]);
 };

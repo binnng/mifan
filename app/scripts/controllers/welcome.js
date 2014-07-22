@@ -5,8 +5,10 @@ Mifan.controller("welcomeCtrl", [
     $scope.$on("$viewContentLoaded", function() {
       return Common.setCurrentPage("welcome");
     });
-    $location.$$rewrite("/home");
-    console.log($location);
+    $scope.$watch("email + password", function() {
+      return $scope.isLoginValid = $scope.email && $scope.password;
+    });
+    $scope.loginSubmit = function() {};
     return false;
   }
 ]);

@@ -4,9 +4,11 @@ Mifan.controller "welcomeCtrl", [ "$scope", "$location", ($scope, $location) ->
 
   $scope.$on "$viewContentLoaded", -> Common.setCurrentPage("welcome")
 
-  $location.$$rewrite "/home"
+  $scope.$watch "email + password", ->
+  	$scope.isLoginValid = $scope.email and $scope.password
 
-  console.log $location
+  $scope.loginSubmit = ->
+  	
 	  
 
   no

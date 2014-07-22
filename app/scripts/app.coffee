@@ -1,7 +1,15 @@
 "use strict"
 
-Mifan.config ($routeProvider, $locationProvider) ->
-  $locationProvider.html5Mode(false).hashPrefix "!"
+Mifan = angular.module "mifan", [
+  "ngCookies"
+  "ngResource"
+  "ngSanitize"
+  "ngRoute"
+]
+
+mifanModuleConfig =  ($routeProvider, $locationProvider) ->
+  $locationProvider.html5Mode(no).hashPrefix "!"
+
   $routeProvider
     .when("/",
       redirectTo: "/home"
@@ -27,3 +35,5 @@ Mifan.config ($routeProvider, $locationProvider) ->
       controller: "404Ctrl"
 
   no
+
+Mifan.config mifanModuleConfig

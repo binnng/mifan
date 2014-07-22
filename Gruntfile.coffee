@@ -32,10 +32,22 @@ module.exports = (grunt) ->
         tasks: ["bowerInstall"]
 
       js:
-        files: ["<%= yeoman.app %>/scripts/{,*/}*.js"]
+        files: ["<%= yeoman.app %>/scripts/*.js"]
         tasks: [] # "newer:jshint:all"]
         options:
           livereload: true
+
+      controllers:
+        files: ["<%= yeoman.app %>/scripts/controllers/*.js"]
+        tasks: ["concat:controllers"] # "newer:jshint:all"]
+        options:
+          livereload: false
+
+      requires:
+        files: ["<%= yeoman.app %>/scripts/requires/*.js"]
+        tasks: ["concat:requires"] # "newer:jshint:all"]
+        options:
+          livereload: false
 
       jsTest:
         files: ["test/spec/{,*/}*.js"]
@@ -357,6 +369,14 @@ module.exports = (grunt) ->
     # concat: {
     #   dist: {}
     # },
+
+    concat:
+      controllers: 
+        src: ["<%= yeoman.app %>/scripts/controllers/*.js"]
+        dest: "<%= yeoman.app %>/scripts/controllers.js"
+      requires: 
+        src: ["<%= yeoman.app %>/scripts/requires/*.js"]
+        dest: "<%= yeoman.app %>/scripts/requires.js"
     
     # Test settings
     karma:
@@ -391,6 +411,8 @@ module.exports = (grunt) ->
       "concurrent:server"
       "autoprefixer"
       "connect:livereload"
+      "concat:controllers"
+      "concat:requires"
       "watch"
     ]
     return
@@ -410,6 +432,8 @@ module.exports = (grunt) ->
   grunt.registerTask "build", [
     "clean:dist"
     "bowerInstall"
+    "concat:controllers"
+    "concat:requires"
     "useminPrepare"
     "concurrent:dist"
     "autoprefixer"

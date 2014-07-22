@@ -20,12 +20,10 @@
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
-
-    <!-- Add your site or application content here -->
     <div class="root">
 
         <div ng-controller="headCtrl" ng-include src="'views/head.html'"></div>
-        <div ng-view="" class="main-mifan-view" class></div>
+        <div ng-view class="main-mifan-view"></div>
         <div ng-controller="footCtrl" ng-include src="'views/foot.html'"></div>
 
     </div>
@@ -57,19 +55,9 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
 
-    <script src="scripts/requires/constant.js"></script>
-    <script src="scripts/requires/common.js"></script>
+    <script src="scripts/requires.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/head.js"></script>
-    <script src="scripts/controllers/foot.js"></script>
-    <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/home_news.js"></script>
-    <script src="scripts/controllers/home_answer.js"></script>
-    <script src="scripts/controllers/home_reply.js"></script>
-    <script src="scripts/controllers/msg.js"></script>
-    <script src="scripts/controllers/me.js"></script>
-    <script src="scripts/controllers/404.js"></script>
-    <script src="scripts/controllers/welcome.js"></script>
+    <script src="scripts/controllers.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

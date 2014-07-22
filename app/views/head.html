@@ -25,10 +25,11 @@
 	  	</a>
     </h3>
     <ul class="nav nav-pills">
-      <li class="{{currentPage === 'home' ? 'active' : ''}}"><a ng-href="/#!/home">首页</a></li>
-      <li class="{{currentPage === 'msg' ? 'active' : ''}}"><a ng-href="/#!/msg">消息</a></li>
-      <li class="{{currentPage === 'me' ? 'active' : ''}}"><a ng-href="/#!/me">个人主页</a></li>
-      <li class="{{currentPage === 'friend' ? 'active' : ''}}"><a ng-href="/#!/friend">朋友</a></li>
+      <li ng-class="{active: currentPage === 'home'}"><a ng-href="/#!/home">首页</a></li>
+      <li ng-class="{active: currentPage === 'msg'}"><a ng-href="/#!/msg">消息</a></li>
+      <li ng-class="{active: currentPage === 'me'}"><a ng-href="/#!/me">个人主页</a></li>
+      <li ng-class="{active: currentPage === 'friend'}"><a ng-href="/#!/friend">朋友</a></li>
+      <li ng-class="{active: currentPage === 'welcome'}"><a ng-href="/#!/welcome">欢迎</a></li>
     </ul>
   </div>
 </div>
