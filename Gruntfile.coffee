@@ -177,11 +177,12 @@ module.exports = (grunt) ->
       options:
         sassDir: "<%= yeoman.app %>/styles"
         cssDir: ".tmp/styles"
+        specify: "<%= yeoman.app %>/styles/main.scss"
         generatedImagesDir: ".tmp/images/generated"
         imagesDir: "<%= yeoman.app %>/images"
         javascriptsDir: "<%= yeoman.app %>/scripts"
         fontsDir: "<%= yeoman.app %>/styles/fonts"
-        importPath: "<%= yeoman.app %>/bower_components"
+        importPath: "<%= yeoman.app %>/styles/imports"
         httpImagesPath: "/images"
         httpGeneratedImagesPath: "/images/generated"
         httpFontsPath: "/styles/fonts"
@@ -312,7 +313,7 @@ module.exports = (grunt) ->
               "views/{,*/}*.html"
               "images/{,*/}*.{webp}"
               "fonts/*"
-              "bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*"
+              "bower_components/bootstrap-sass/fonts/*"
               "bower_components/es5-shim/es5-shim.min.js"
               "bower_components/json3/lib/json3.min.js"
               "data/*"
@@ -448,6 +449,9 @@ module.exports = (grunt) ->
     "ng_template"
     "htmlmin"
     "clean:distView"
+  ]
+  grunt.registerTask "bower", [
+    "bowerInstall"
   ]
   grunt.registerTask "default", [
     # "newer:jshint"

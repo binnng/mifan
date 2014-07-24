@@ -1,14 +1,15 @@
 <div class="home-page container clearfix">
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
-
-			<form role="form" class="ask-ques-form clearfix" action="/c">
-				<p class="h5">问你朋友一个问题吧！</p>
-				<div class="row col-xs-10">
-					<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent"></textarea>
-				</div>
-				<button type="submit" class="btn btn-primary row col-xs-2 {{askQuesConent?'':'disabled'}}">发送</button>
-			</form>
+			
+			<div class="ask-ques">
+				<form role="form" class="ask-ques-form" action="/c">
+					<div class="ask-ques-text">
+						<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent" placeholder="问你朋友一个问题吧！"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary {{askQuesConent?'':'disabled'}}">发送</button>
+				</form>
+			</div>
 
 			<ul class="nav nav-tabs">
 			  <li class="{{feedType=='news'?'active':''}}" ng-click="switchFeedType('news')">
@@ -63,10 +64,7 @@
 			<div class="feed-content reply" ng-if="feedType=='reply'" ng-controller="homeReply">{{content}}</div>
 		</div>
 	</div>
-	<div class="row col-sm-1 hidden-xs separate-row" style="height:{{separateHeight}}px">
-		<div class="separate"></div>
-	</div>
-	<div class="row col-xs-12 col-sm-3">
+	<div class="row col-xs-12 col-sm-4">
 		<div class="side">
 			<div class="side-block">
 				<h5>每日一问</h5>

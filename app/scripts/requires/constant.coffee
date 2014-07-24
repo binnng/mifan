@@ -75,3 +75,5 @@ IsWeixin = /MicroMessenger/i.test(UA)
 
 CLICK = "click"
 ACTIVE = "active"
+
+NG = WIN['angular']

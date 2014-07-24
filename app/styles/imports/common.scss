@@ -32,8 +32,14 @@ a,
   }
 }
 
+html,
+body{
+  background-color: #e6e6e6;
+}
+
 .main-mifan-view{
   overflow: hidden;
+  margin-top: 30px;
 }
 
 .row{
@@ -44,5 +50,38 @@ a,
 }
 
 .root{
-  padding: 10px 0;
+  
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes rotate{
+  0%{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100%{
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate{
+  0%{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100%{
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

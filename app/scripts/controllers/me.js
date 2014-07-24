@@ -2,7 +2,7 @@
 "use strict";
 Mifan.controller("meCtrl", function($scope) {
   $scope.$on("$viewContentLoaded", function() {
-    return Common.setCurrentPage("me");
+    return $scope.$emit("pageChange", "me");
   });
   return false;
 });

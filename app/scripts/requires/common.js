@@ -2,10 +2,4 @@
 "use strict";
 var Common;
 
-Common = {
-  setCurrentPage: function(currentPage) {
-    var headScope;
-    headScope = angular.element(".header").scope();
-    return headScope.currentPage = currentPage;
-  }
-};
+Common = {};

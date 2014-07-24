@@ -1,35 +1,42 @@
 <div class="header clearfix">
 	<div class="container">
-		<div class="login pull-right" ng-if="!username"><span class="btn-link">登录or注册</span></div>
-		<div class="username pull-right dropdown hidden-xs" ng-if="username" >
-			<span class="dropdown-label" id="username-lable" data-toggle="dropdown">{{username}}</span>
-			<span class="caret"></span>
 
-			<ul class="dropdown-menu" role="menu" aria-labelledby="username-lable">
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-search"></span>找人</a></li>
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-phone-alt"></span>反馈</a></li>
-		    <li><a ng-click="support()"><span class="glyphicon glyphicon-thumbs-up"></span>32个赞</a></li>
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-off"></span>登出</a></li>
-		  </ul>
+		<div class="pc-head hidden-xs">
+			<div class="login pull-right" ng-show="!username && currentPage != 'welcome'"><a class="btn-link" ng-href="/#!/welcome">登录 | 注册</a></div>
+			<div ng-class="{open: dropdownOpen}" class="username pull-right dropdown" ng-show="username" ng-click="toggleDropdown()">
+				<span class="dropdown-label" id="username-lable" data-toggle="dropdown">{{username}}</span>
+				<span class="caret"></span>
+
+				<ul class="dropdown-menu" role="menu" aria-labelledby="username-lable">
+			    <li><a href="/#!/"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
+			    <li><a href="/#!/"><span class="glyphicon glyphicon-search"></span>找人</a></li>
+			    <li><a href="/#!/"><span class="glyphicon glyphicon-phone-alt"></span>反馈</a></li>
+			    <li><a ng-click="support()"><span class="glyphicon glyphicon-thumbs-up"></span>32个赞</a></li>
+			    <li><a href="/#!/"><span class="glyphicon glyphicon-off"></span>登出</a></li>
+			  </ul>
+			</div>
+	    <h3 class="logo hidden-xs">
+	    	<a href="/#!/home">
+	    		Mi
+	    	</a>
+	    	<a href="/#!/support" ng-if="false">
+		  		<small>
+		  			<span class="glyphicon glyphicon-thumbs-up"></span>
+		  			<span>{{supportNum}}</span>
+		  		</small>
+		  	</a>
+	    </h3>
+	    <ul class="nav nav-pills">
+	      <li ng-class="{active: currentPage === 'home'}"><a ng-href="/#!/home">首页</a></li>
+	      <li ng-class="{active: currentPage === 'msg'}"><a ng-href="/#!/msg">消息</a></li>
+	      <li ng-class="{active: currentPage === 'me'}"><a ng-href="/#!/me">个人主页</a></li>
+	      <li ng-class="{active: currentPage === 'friend'}"><a ng-href="/#!/friend">朋友</a></li>
+	    </ul>
+  	</div>
+
+		<div class="m-head visible-xs">
+			hahah
 		</div>
-    <h3 class="logo hidden-xs">
-    	<a href="/#!/home">
-    		米饭
-    	</a>
-    	<a href="/#!/support" ng-if="false">
-	  		<small>
-	  			<span class="glyphicon glyphicon-thumbs-up"></span>
-	  			<span>{{supportNum}}</span>
-	  		</small>
-	  	</a>
-    </h3>
-    <ul class="nav nav-pills">
-      <li ng-class="{active: currentPage === 'home'}"><a ng-href="/#!/home">首页</a></li>
-      <li ng-class="{active: currentPage === 'msg'}"><a ng-href="/#!/msg">消息</a></li>
-      <li ng-class="{active: currentPage === 'me'}"><a ng-href="/#!/me">个人主页</a></li>
-      <li ng-class="{active: currentPage === 'friend'}"><a ng-href="/#!/friend">朋友</a></li>
-      <li ng-class="{active: currentPage === 'welcome'}"><a ng-href="/#!/welcome">欢迎</a></li>
-    </ul>
+
   </div>
 </div>

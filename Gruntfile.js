@@ -139,11 +139,12 @@ module.exports = function(grunt) {
       options: {
         sassDir: "<%= yeoman.app %>/styles",
         cssDir: ".tmp/styles",
+        specify: "<%= yeoman.app %>/styles/main.scss",
         generatedImagesDir: ".tmp/images/generated",
         imagesDir: "<%= yeoman.app %>/images",
         javascriptsDir: "<%= yeoman.app %>/scripts",
         fontsDir: "<%= yeoman.app %>/styles/fonts",
-        importPath: "<%= yeoman.app %>/bower_components",
+        importPath: "<%= yeoman.app %>/styles/imports",
         httpImagesPath: "/images",
         httpGeneratedImagesPath: "/images/generated",
         httpFontsPath: "/styles/fonts",
@@ -264,7 +265,7 @@ module.exports = function(grunt) {
             dot: true,
             cwd: "<%= yeoman.app %>",
             dest: "<%= yeoman.dist %>",
-            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*", "bower_components/es5-shim/es5-shim.min.js", "bower_components/json3/lib/json3.min.js", "data/*"]
+            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "bower_components/bootstrap-sass/fonts/*", "bower_components/es5-shim/es5-shim.min.js", "bower_components/json3/lib/json3.min.js", "data/*"]
           }, {
             expand: true,
             cwd: ".tmp/images",
@@ -322,5 +323,6 @@ module.exports = function(grunt) {
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
   grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "rev", "usemin", "ng_template", "htmlmin", "clean:distView"]);
+  grunt.registerTask("bower", ["bowerInstall"]);
   return grunt.registerTask("default", ["test", "build"]);
 };

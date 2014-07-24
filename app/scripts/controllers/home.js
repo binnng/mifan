@@ -6,8 +6,8 @@ Mifan.controller("homeCtrl", function($scope) {
     return $scope.feedType = feedType;
   };
   $scope.$on("$viewContentLoaded", function() {
-    Common.setCurrentPage("home");
-    return $scope.separateHeight = $(".home-page .main").height();
+    $scope.$emit("pageChange", "home");
+    return $scope.separateHeight = 0;
   });
   $scope.askQuesConent = "";
   $scope.remind = {

@@ -7,8 +7,9 @@ Mifan.controller "homeCtrl", ($scope) ->
   	$scope.feedType = feedType
 
   $scope.$on "$viewContentLoaded", ->
-  	Common.setCurrentPage("home")
-  	$scope.separateHeight = $(".home-page .main").height()
+  	$scope.$emit "pageChange", "home"
+    # $scope.separateHeight = $(".home-page .main").height()
+  	$scope.separateHeight = 0
 
   $scope.askQuesConent = ""
 

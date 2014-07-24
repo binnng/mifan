@@ -6,26 +6,41 @@
 	}
 
 	.main{
-
+		.nav,
+		.feed-content{
+			background-color: $white;
+			padding: 20px;
+		}
 		.ask-ques-form{
 			textarea{
 				height: 5em;
 				display: block;
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
+				border-radius: 0;
+				border: none;
+				box-shadow: none;
 			}
 
 			button[type="submit"]{
-				height: 5em;
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
+				display: none;
+				//height: 5em;
+				//border-top-left-radius: 0;
+				//border-bottom-left-radius: 0;
 			}
 		}
 
 		.nav{
 			margin-top: 2em;
-
+			
 			li{
+				a{
+					color: $gray;
+					border: none;
+					&:hover,
+					&:active{
+						color: $black;
+						background: transparent;
+					}
+				}
 				b{
 					position: absolute;
 					top: 0;
@@ -39,6 +54,11 @@
 					display: block;
 					width: 8px;
 					height: 8px;
+				}
+				&.active{
+					a{
+						color: $tone;
+					}
 				}
 			}
 		}
@@ -140,6 +160,9 @@
 	}
 
 	.side{
+		background-color: $white;
+		padding: 16px;
+		margin-left: 3em;
 		.side-block{
 			margin-bottom: 2em;
 		}
@@ -172,6 +195,22 @@
 					color: #111;
 				}
 			}
+		}
+	}
+}
+
+@media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
+	.home-page{
+		.side{
+			margin-left: 1.4em;
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.home-page{
+		.side{
+			margin: 2em 0 0;
 		}
 	}
 }
