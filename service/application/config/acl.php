@@ -1,27 +1,69 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-//游客权限映射
-$config['acl']['visitor'] = array(
-    '' => array('index'),//首页
-    'music' => array('index', 'list'),
-    'user' => array('index', 'login', 'register')
+/*
+|--------------------------------------------------------------------------
+| Acl config
+| 
+| Acl权限控制，配置需要权限控制的方法
+|--------------------------------------------------------------------------
+*/
+
+/*
+|--------------------------------------------------------------------------
+| acl_auth_on	是否开启权限控
+| 
+| TRUE 开启
+| FALSE 关闭，并闭之后Acl权限控制模块不启作用
+|--------------------------------------------------------------------------
+*/
+$config['acl_auth_on']	             = TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| acl_auth_type
+| 
+| 验证方式
+| 1.登录认证，登录成功，记住session，通过session进行验证
+| 2.实时认证，每一次请求都自带认证标识，access_token。本例为REST Api，采用这种认证方式
+|--------------------------------------------------------------------------
+*/
+$config['acl_auth_type']	         = 2;
+
+/*
+|--------------------------------------------------------------------------
+| acl_notauth_dirc 不需要权限控制的目录,该目录下所有目录都不进行权限控制
+| 
+| 目录相对于<ci_root>/application/controllers/
+| 如 array('','example')
+|--------------------------------------------------------------------------
+*/
+$config['acl_notauth_dirc']         = array(
+	'',
 );
 
-//管理员
-$config['acl']['admin'] = array(
+/*
+|--------------------------------------------------------------------------
+| acl_notauth_class 不需要权限控制的类，即controller
+| 
+| 配置方式，目录名/类名
+| 如 array('/public','user/usersession')
+|--------------------------------------------------------------------------
+*/
+$config['acl_notauth_class']         = array(
+	'user/usersession',
+);
 
-);
- 
-//-------------配置权限不够的提示信息及跳转url------------------//
-$config['acl_info']['visitor'] = array(
-    'info' => '需要登录以继续',
-    'return_url' => 'user/login'
-);
- 
-$config['acl_info']['more_role'] = array(
-    'info' => '需要更高权限以继续',
-    'return_url' => 'user/up'
+/*
+|--------------------------------------------------------------------------
+| acl_notauth_method 不需要权限控制的方法，
+| 
+| 配置方式，目录名/类名/方法名(方法名不包括_post等REST内容,如user_post，直接为user)
+| 如 array('/public/test','user/usersession/user')
+|--------------------------------------------------------------------------
+*/
+$config['acl_notauth_method']         = array(
+
 );
 
 /* End of file acl.php */
-/* Location: ./system/application/config/acl.php */
+/* Location: ./application/config/acl.php */

@@ -9,12 +9,14 @@
 |	http://codeigniter.com/user_guide/general/hooks.html
 |
 */
-$hook['post_controller_constructor'] = array(
-	'class'    => 'Acl',
-	'function' => 'filter',
-	'filename' => 'acl.php',
-	'filepath' => 'hooks',
-	//'params'   => array('beer', 'wine', 'snacks')
+
+//RBAC权限验证
+$hook['acl_auth'] = array(
+		'class'    => 'Acl',
+		'function' => 'filter',
+		'filename' => 'acl.php',
+		'filepath' => 'hooks',
+		//'params'   => '',
 );
 
 

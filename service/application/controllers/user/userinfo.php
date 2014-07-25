@@ -28,10 +28,10 @@
 require APPPATH.'/libraries/REST_Controller.php';
 
 class Userinfo extends REST_Controller
-{
-		
+{		
 	public function __construct(){
 		parent::__construct();
+				
 		$this->load->helper('email');
 		$this->load->model('user_model');
 	}
@@ -50,6 +50,8 @@ class Userinfo extends REST_Controller
 	 */
 	public function user_get(){
     	
+		$this->hooks->_call_hook('acl_auth');
+		
 		$userid = $this->get('id');
 		
         if(!$userid){
@@ -108,11 +110,13 @@ class Userinfo extends REST_Controller
 	
 	//更新用户
 	public function user_put(){
+		$this->hooks->_call_hook('acl_auth');
 		
 	}
 	
 	//删除作户
 	public function user_delete(){
+		$this->hooks->_call_hook('acl_auth');
 		
 	}
 	

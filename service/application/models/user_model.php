@@ -81,6 +81,7 @@ class User_model extends Base_model {
 		$strToken = $this->find('user_access_token',array(
 			'accesstoken' => $accesstoken,
 		));
+		
 		if(!$strToken){
 			return array('104005','Token不存在!');
 		}
@@ -177,6 +178,32 @@ class User_model extends Base_model {
 		$this->_update_login_info_by_id($userid);
 		
 		return array('100000',$this->session->all_userdata());
+	}
+	
+	/**
+	 * check_access_token 验证access_token
+	 * 
+	 * @param string $access_token	必选，access_token
+	 */
+	public function check_access_token($access_token){
+		
+		if(empty($access_token)){
+			return array('104001','access_token不能为空!');
+		}
+		
+		$strToken = $this->find('user_access_token',array(
+			'accesstoken' => $access_token,
+		));
+		
+		if(!$strToken){
+			return array('104005','Token不存在!');
+		}
+		
+		if($strToken['invalidate'] < time()){
+			return array('104005','授权的access_token已过期!');
+		}
+		
+		return array('100000','OK');
 	}
 		
 	/**
