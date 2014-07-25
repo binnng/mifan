@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="@drawable/background_login">
+
+  <RelativeLayout 
+  	android:id="@+id/login_div"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:padding="15dip"        
+  	android:layout_margin="15dip" 
+  	android:background="@drawable/background_login_div_bg"
+  	>
+  	<!-- 账号 -->
+  	<TextView 
+  		android:id="@+id/login_user_input"
+  		android:layout_width="wrap_content"
+  		android:layout_height="wrap_content"
+  		android:layout_alignParentTop="true"
+  		android:layout_marginTop="5dp"
+  		android:text="@string/login_label_username"
+  		style="@style/normalText"/>
+  	<EditText 
+  		android:id="@+id/username"
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:hint="@string/login_username_hint"
+  		android:layout_below="@id/login_user_input"
+  		android:singleLine="true"
+  		android:inputType="text"/>
+    <!-- 密码 text -->
+    <TextView 
+    	android:id="@+id/login_password_input"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/username"
+    	android:layout_marginTop="3dp"
+    	android:text="@string/login_label_password"
+    	style="@style/normalText"/>
+    <EditText 
+    	android:id="@+id/password"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:hint="@string/login_password_hint"
+    	android:layout_below="@id/login_password_input"
+    	android:inputType="textPassword"
+    	android:singleLine="true"
+    />
+    <!-- 登录button -->
+    <Button 
+    	android:id="@+id/login"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/password"
+    	android:layout_alignRight="@id/password"
+    	android:text="@string/login_label_login"
+    	android:background="@drawable/blue_button"
+    />
+  </RelativeLayout>
+  
+  
+  <RelativeLayout 
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      >
+	 <TextView  android:id="@+id/register_link"
+	     android:text="@string/login_register_link"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginLeft="15dp"
+	     android:textColor="#888"
+	     android:textColorLink="#FF0066CC"
+	  />
+
+	</RelativeLayout>
+ 
+</LinearLayout>
