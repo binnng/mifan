@@ -21,10 +21,11 @@
  *		 104005			Token不存在或已过期  
  * 		 104006			
  * 		 104009			其他错误
+ * 
  */
 
-// This can be removed if you use __autoload() in config.php OR use Modular Extensions
-require APPPATH.'/libraries/REST_Controller.php';
+
+require_once APPPATH.'/libraries/REST_Controller.php';
 
 class Usersession extends REST_Controller
 {
@@ -37,31 +38,30 @@ class Usersession extends REST_Controller
 	}
 	
 	/**
-	 * 登录 OR 检查登录 可以通过用户名密码或者access_token来检查用户是否登录
+	 * 
+	 * 登录 OR 检查登录 
+	 * 
+	 * <pre>
 	 * 请求参数
-	 * 					必选		参数范围			说明
-	 * user_email 		false 	string			登录邮箱，以用户名/密码方式登录时必填
-	 * user_password 	false	string			登录密码，以用户名/密码方式登录时必填
-	 * access_token		false	string			access_token,以token方式登录时必填
-	 * user_id			false 	int				用户id,以token方式登录时必填
-	 * user_lastdate	false 	datetime		最后一次登录时间，以token方式登录时必填
-	 * 返回数据	json
+	 * 参数名称                         必选		参数范围		说明
+	 * user_email   	false	string 		登录邮箱，以用户名/密码方式登录时必填
+	 * user_password	false	string 		登录密码，以用户名/密码方式登录时必填
+	 * access_token 	false	string 		access_token,以token方式登录时必填
+	 * user_id      	false	int     	用户id,以token方式登录时必填
+	 * user_lastdate	false	datetime	最后一次登录时间，以token方式登录时必填
+	 * </pre>
+	 * 
+	 * @return	json
 	 * 
 	 */
 	public function user_post(){
-		log_message('debug', "user_post...");
 		
 		$data['useremail'] 	= $this->post('user_email');
         $data['password'] 	= $this->post('user_password');
 		
-		$data['userid'] = $this->post('user_id');
 		$data['accesstoken'] = $this->post('access_token');
-		$data['lastdate'] = $this->post('user_lastdate');
 		
-		if($this->post('user_email')){
-			
-			log_message('debug', "Check login by email.");
-			
+		if($this->post('user_email')){			
 			$this->_check_login_by_email_pwd($data);
 		}
 		
@@ -73,6 +73,24 @@ class Usersession extends REST_Controller
 		 $message = array( 'ret' => 104009, 'msg' => '非法操作!');
          $this->response($message, 400); 
 	}
+	
+	/**
+	 * 
+	 * 登出
+	 * 
+	 * 用户delete，表示清除access_token，将token失效时间挃为当前
+	 * 
+	 * <pre>
+	 * 请求参数
+	 * 参数名称 		必选             参数类型 	说明
+	 * access_token	true     string               
+	 * </pre>
+	 * 
+	 */
+    public function user_delete(){
+    	$data['accesstoken'] = $this->post('access_token');
+    }
+	
     
 	function _check_login_by_email_pwd($data){
 		
@@ -93,12 +111,8 @@ class Usersession extends REST_Controller
 	}
 	
 	function _check_login_by_token($data){
-		if($data['userid']=='' || $data['lastdate']==''){
-			 $message = array( 'ret' => 104001, 'msg' => 'userid和最后一次登录时间不能为空!');
-             $this->response($message, 400); 
-		}
-
-		list($ret,$result) = $this->user_model->checkUserToken($data['userid'],$data['accesstoken'],$data);
+		
+		list($ret,$result) = $this->user_model->checkUserToken($data['accesstoken'],$data);
 		
 		if($ret != '100000'){
 			 $message = array( 'ret' => $ret, 'msg' => $result);

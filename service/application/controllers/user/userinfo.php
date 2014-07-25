@@ -28,24 +28,30 @@
 require APPPATH.'/libraries/REST_Controller.php';
 
 class Userinfo extends REST_Controller
-{
-		
+{		
 	public function __construct(){
 		parent::__construct();
+				
 		$this->load->helper('email');
 		$this->load->model('user_model');
 	}
 	
 	/**
 	 * 查找用户资料
+	 * 
+	 * <pre>
 	 * 请求参数
-	 * 					必选		参数范围			说明
-	 * user_id 		    true 	int				用户ID
-	 * 返回数据	json
+	 * 参数名称			必选		参数范围			说明
+	 * user_id			true	int				用户ID
+	 * </pre>
+	 * 
+	 * @return	json	json格式返回用户信息
 	 * 
 	 */
 	public function user_get(){
     	
+		$this->hooks->_call_hook('acl_auth');
+		
 		$userid = $this->get('id');
 		
         if(!$userid){
@@ -66,14 +72,18 @@ class Userinfo extends REST_Controller
 	
 	/**
 	 * 添加用户
+	 * 
+	 * <pre>
 	 * 请求参数
-	 * 					必选		参数范围			说明
-	 * user_email 		true 	string			邮箱
-	 * user_password 	true	string			密码
+	 * 参数名称			必选		参数范围			说明
+	 * user_email		true	string			邮箱
+	 * user_password	true	string			密码
 	 * user_repwd		true	string			重复密码
-	 * username			true 	string[4,20]	用户名,，长度介于4~20个字节之间
-	 * fuserid			false 	datetime		邀请人ID
-	 * 返回数据	json
+	 * username			true	string[4,20]	用户名,，长度介于4~20个字节之间
+	 * fuserid			false	datetime		邀请人ID
+	 * </pre>
+	 * 
+	 * @return	json
 	 * 
 	 */
 	public function user_post(){
@@ -100,11 +110,13 @@ class Userinfo extends REST_Controller
 	
 	//更新用户
 	public function user_put(){
+		$this->hooks->_call_hook('acl_auth');
 		
 	}
 	
 	//删除作户
 	public function user_delete(){
+		$this->hooks->_call_hook('acl_auth');
 		
 	}
 	

@@ -4,3 +4,5 @@ dist
 .sass-cache
 app/bower_components
 service/application/logs
+service/doc
+service/application/config/database.php
