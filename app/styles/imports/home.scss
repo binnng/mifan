@@ -6,30 +6,100 @@
 	}
 
 	.main{
+
+  	max-width: 600px;
+  	margin: 0 auto;
 		.nav,
 		.feed-content{
 			background-color: $white;
 			padding: 20px;
 		}
+		.ask-ques{
+			padding: 200px 14px 30px;
+			background-color: $white;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: top center;
+			position: relative;
+
+			&.active{
+				.toolbar,
+				.ask-ques-form{
+					opacity: 1 !important;
+				}
+			}
+
+			.location{
+				position: absolute;
+				top: 20px;
+				color: $white;
+				@include text-shadow();
+				padding-left: 4px;
+			}
+		}
 		.ask-ques-form{
+			opacity: .95;
+			position: relative;
+			@include transition(all, .2s);
 			textarea{
-				height: 5em;
+				height: 6em;
 				display: block;
 				border-radius: 0;
 				border: none;
 				box-shadow: none;
 			}
 
-			button[type="submit"]{
-				display: none;
-				//height: 5em;
-				//border-top-left-radius: 0;
-				//border-bottom-left-radius: 0;
+			.arrow{
+				color: $white;
+				position: absolute;
+				font-size: 24px;
+				left: 20px;
+				bottom: -18px;
+			}
+
+			.avatar{
+				display: block;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-size: cover;
+				position: absolute;
+				left: 8px;
+				bottom: -62px;
+				border: 2px $white solid;
+			}
+			
+			.toolbar{
+				float: right;
+				margin-top: 10px;
+				opacity: 0;
+				@include transition(all, .2s);
+
+				.cancel{
+					color: $white;
+					@include text-shadow();
+					padding: 0 10px;
+					display: inline-block;
+					cursor: pointer;
+				}
+
+				button[type="submit"]{
+					padding-left: 30px;
+					padding-right: 34px;
+
+					.glyphicon-refresh{
+						-webkit-animation-name: rotate;
+						animation-name: rotate;
+					}
+					//height: 5em;
+					//border-top-left-radius: 0;
+					//border-bottom-left-radius: 0;
+				}
 			}
 		}
 
 		.nav{
-			margin-top: 2em;
+			margin-top: 16px;
 			
 			li{
 				a{
@@ -101,7 +171,7 @@
 					-webkit-transition: all .4s ease-in-out;
 
 					&:hover{
-						background: #effaff;
+						//background: #effaff;
 					}
 
 					h3{
@@ -161,8 +231,10 @@
 
 	.side{
 		background-color: $white;
-		padding: 16px;
+		padding: 24px;
 		margin-left: 3em;
+		max-width: 300px;
+		margin: 0 auto;
 		.side-block{
 			margin-bottom: 2em;
 		}
@@ -199,6 +271,13 @@
 	}
 }
 
+
+@media (max-width: $screen-sm-max) {
+  .home-page{
+  	padding-top: 4px;
+  }
+}
+
 @media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
 	.home-page{
 		.side{
@@ -209,8 +288,22 @@
 
 @media (max-width: $screen-xs-max) {
 	.home-page{
+		.main{
+			
+		}
 		.side{
-			margin: 2em 0 0;
+			margin-top: 2em;
+			max-width: 600px;
+		}
+	}
+}
+@media (max-width: $screen-xs) {
+	.home-page{
+		.main{
+			
+			.ask-ques{
+				padding-top: 100px;
+			}
 		}
 	}
 }

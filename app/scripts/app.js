@@ -2,7 +2,7 @@
 "use strict";
 var Mifan;
 
-Mifan = NG.module("mifan", ["ngCookies", "ngResource", "ngSanitize", "ngRoute"]);
+Mifan = angular.module("mifan", ["ngCookies", "ngResource", "ngSanitize", "ngRoute"]);
 
 Mifan.config(function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(false).hashPrefix("!");

@@ -10,6 +10,11 @@
 
 	.log-reg{
 		max-width: 300px;
+		.input-group-addon,
+		input{
+			border-radius: 0;
+			box-shadow: none;
+		}
 		.slider-box{
 			overflow: hidden;
 		}
@@ -23,7 +28,7 @@
 			overflow: hidden;
 			position: relative;
 			left: 0;
-			@include transition(all, 200ms);
+			@include transition(all, .9s, $easeOutCirc);
 			&.loging{
 				left: -100%;
 			}
@@ -31,10 +36,7 @@
 	}
 
 	.log-reg-btn{
-		button{
-			outline: none;
-			-webkit-highlight: none;
-		}
+		
 	}
 
 	form{
@@ -45,8 +47,6 @@
 		position: absolute;
 		bottom: 0;
 		right: 0;
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
 		z-index: 2;
 	}
 

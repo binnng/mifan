@@ -2,12 +2,20 @@
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
 			
-			<div class="ask-ques">
-				<form role="form" class="ask-ques-form" action="/c">
+			<div class="ask-ques clearfix" ng-controller="homeAskCtrl" ng-style="{'background-image': 'url(' + bgUrl + ')'}" ng-class="{active: onInputing}">
+				<div class="location">
+					<span class="glyphicon glyphicon-map-marker">北京</span>
+				</div>
+				<form role="form" class="ask-ques-form" ng-submit="send()">
 					<div class="ask-ques-text">
-						<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent" placeholder="问你朋友一个问题吧！"></textarea>
+						<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent" ng-focus="onFocus()" ng-blur="onBlur()" placeholder="问你朋友一个问题吧！"></textarea>
+						<div class="arrow"><span class="glyphicon glyphicon-chevron-down"></span></div>
+						<b class="avatar" ng-style="{'background-image': 'url(' + avatarUrl + ')'}" title="老婆婆"></b>
 					</div>
-					<button type="submit" class="btn btn-primary {{askQuesConent?'':'disabled'}}">发送</button>
+					<div class="toolbar">
+						<span class="cancel" ng-click="onBlur(true)">取消</span>
+						<button type="submit" class="btn btn-danger" ng-class="{disabled: !askQuesConent}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
+					</div>
 				</form>
 			</div>
 

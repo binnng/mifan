@@ -1,6 +1,6 @@
 "use strict"
 
-Mifan = NG.module "mifan", [
+Mifan = angular.module "mifan", [
   "ngCookies"
   "ngResource"
   "ngSanitize"

@@ -1,8 +1,13 @@
-<div class="header clearfix">
+<div class="header clearfix" ng-controller="headCtrl">
 	<div class="container">
 
-		<div class="pc-head hidden-xs">
-			<div class="login pull-right" ng-show="!username && currentPage != 'welcome'"><a class="btn-link" ng-href="/#!/welcome">登录 | 注册</a></div>
+		<div class="head-inner">
+			<div class="login pull-right" ng-show="!username && currentPage != 'welcome'">
+				<a class="btn-link" ng-href="/#!/welcome">
+					<span class="sm-user">登录 | 注册</span>
+					<span class="glyphicon glyphicon-user xs-user"></span>
+				</a>
+			</div>
 			<div ng-class="{open: dropdownOpen}" class="username pull-right dropdown" ng-show="username" ng-click="toggleDropdown()">
 				<span class="dropdown-label" id="username-lable" data-toggle="dropdown">{{username}}</span>
 				<span class="caret"></span>
@@ -15,10 +20,8 @@
 			    <li><a href="/#!/"><span class="glyphicon glyphicon-off"></span>登出</a></li>
 			  </ul>
 			</div>
-	    <h3 class="logo hidden-xs">
-	    	<a href="/#!/home">
-	    		Mi
-	    	</a>
+	    <h3 class="logo">
+	    	<a href="/#!/home">Mi</a>
 	    	<a href="/#!/support" ng-if="false">
 		  		<small>
 		  			<span class="glyphicon glyphicon-thumbs-up"></span>
@@ -29,14 +32,11 @@
 	    <ul class="nav nav-pills">
 	      <li ng-class="{active: currentPage === 'home'}"><a ng-href="/#!/home">首页</a></li>
 	      <li ng-class="{active: currentPage === 'msg'}"><a ng-href="/#!/msg">消息</a></li>
-	      <li ng-class="{active: currentPage === 'me'}"><a ng-href="/#!/me">个人主页</a></li>
+	      <li ng-class="{active: currentPage === 'me'}"><a ng-href="/#!/me"><b>个人</b>主页</a></li>
 	      <li ng-class="{active: currentPage === 'friend'}"><a ng-href="/#!/friend">朋友</a></li>
+	    	<span class="glyphicon glyphicon-chevron-up arrow" ng-style="{'left': arrowNav.left + 'px'}" ng-hide="arrowNav.hide"></span>
 	    </ul>
   	</div>
-
-		<div class="m-head visible-xs">
-			hahah
-		</div>
 
   </div>
 </div>

@@ -21,7 +21,7 @@
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
-    <div class="root" ng-controller="rootCtrl">
+    <div class="root" ng-controller="rootCtrl" ng-class="{ios: ua.ios, android: ua.android, chrome: ua.chrome, iphone: ua.iphone, ipad: ua.ipad, chrome: ua.chrome, weixin: ua.weixin, mobile: ua.mobile, ie: ua.ie}">
 
         <div ng-include src="'views/head.html'"></div>
         <div ng-view class="main-mifan-view"></div>
@@ -36,7 +36,6 @@
 
     <!-- build:js({.tmp,app}) scripts/mifan.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>

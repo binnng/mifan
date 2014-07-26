@@ -34,7 +34,7 @@ a,
 
 html,
 body{
-  background-color: #e6e6e6;
+  background-color: $bg;
 }
 
 .main-mifan-view{
@@ -83,5 +83,18 @@ body{
   100%{
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .main-mifan-view{
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: $screen-xs) {
+  .container{
+    padding-left: 7px;
+    padding-right: 7px;
   }
 }

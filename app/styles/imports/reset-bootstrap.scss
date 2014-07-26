@@ -1,0 +1,14 @@
+button,
+button:focus,
+.btn,
+.btn:focus,
+input
+input:focus{
+	border-radius: 0;
+	outline: none;
+	-webkit-highlight: none;
+}
+
+.btn-danger{
+	background-color: $tone;
+}

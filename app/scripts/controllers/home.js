@@ -9,7 +9,6 @@ Mifan.controller("homeCtrl", function($scope) {
     $scope.$emit("pageChange", "home");
     return $scope.separateHeight = 0;
   });
-  $scope.askQuesConent = "";
   $scope.remind = {
     newsNum: 0,
     answerNum: 2,
