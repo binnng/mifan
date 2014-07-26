@@ -9,8 +9,8 @@ Mifan.controller("headCtrl", function($scope) {
     return alert(1);
   };
   $scope.arrowNav = {};
-  $scope.$watch("currentPage", function() {
-    switch ($scope.currentPage) {
+  $scope.$watch("page", function() {
+    switch ($scope.page) {
       case "home":
         return $scope.arrowNav = {
           left: 20,

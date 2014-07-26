@@ -10,9 +10,9 @@ Mifan.controller "headCtrl", ($scope) ->
   # 导航三角形
   $scope.arrowNav = {}
 
-  $scope.$watch "currentPage", -> 
+  $scope.$watch "page", -> 
   
-    switch $scope.currentPage
+    switch $scope.page
       when "home"
         $scope.arrowNav = left: 20, hide: no
       when "msg"

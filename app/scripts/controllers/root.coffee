@@ -5,12 +5,12 @@
 
 Mifan.controller "rootCtrl", ($scope) ->
 
-  $scope.currentPage = "home"
+  $scope.page = "home"
 
   $scope.username = ""
   $scope.supportNum = "1万"
 
   # 设置当前页面
-  $scope.$on "pageChange", (e, msg) -> $scope.currentPage = msg
+  $scope.$on "pageChange", (e, msg) -> $scope.page = msg
 
   no

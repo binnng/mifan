@@ -24,6 +24,10 @@ Mifan.controller "homeCtrl", ["$scope", "$routeParams", ($scope, $routeParams) -
   # 清除提醒
   $scope.$on "clearAnswerRemind", -> $scope.remind.answerNum = 0
   $scope.$on "clearReplyRemind", -> $scope.remind.replyNum = 0
+
+  # 加载更多
+  $scope.loadingMore = ->
+    $scope.isLoading = yes
   
   no
 ]

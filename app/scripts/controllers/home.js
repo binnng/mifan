@@ -21,6 +21,9 @@ Mifan.controller("homeCtrl", [
     $scope.$on("clearReplyRemind", function() {
       return $scope.remind.replyNum = 0;
     });
+    $scope.loadingMore = function() {
+      return $scope.isLoading = true;
+    };
     return false;
   }
 ]);

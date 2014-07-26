@@ -67,9 +67,17 @@
 						</div>
 					</dd>
 				</dl>
+
+				<more></more>
 			</div>
-			<div class="feed-content answer" ng-if="feedType == 'answer'" ng-controller="homeAnswer">{{content}}</div>
-			<div class="feed-content reply" ng-if="feedType == 'reply'" ng-controller="homeReply">{{content}}</div>
+			<div class="feed-content answer" ng-if="feedType == 'answer'" ng-controller="homeAnswer">
+				{{content}}
+				<more></more>
+			</div>
+			<div class="feed-content reply" ng-if="feedType == 'reply'" ng-controller="homeReply">
+				{{content}}
+				<more></more>
+			</div>
 		</div>
 	</div>
 	<div class="row col-xs-12 col-sm-4">

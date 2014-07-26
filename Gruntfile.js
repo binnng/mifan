@@ -28,6 +28,20 @@ module.exports = function(grunt) {
           livereload: false
         }
       },
+      directives: {
+        files: ["<%= yeoman.app %>/scripts/directives/*.js"],
+        tasks: ["concat:directives"],
+        options: {
+          livereload: false
+        }
+      },
+      filters: {
+        files: ["<%= yeoman.app %>/scripts/filters/*.js"],
+        tasks: ["concat:filters"],
+        options: {
+          livereload: false
+        }
+      },
       requires: {
         files: ["<%= yeoman.app %>/scripts/requires/*.js"],
         tasks: ["concat:requires"],
@@ -290,6 +304,14 @@ module.exports = function(grunt) {
       controllers: {
         src: ["<%= yeoman.app %>/scripts/controllers/*.js"],
         dest: "<%= yeoman.app %>/scripts/controllers.js"
+      },
+      directives: {
+        src: ["<%= yeoman.app %>/scripts/directives/*.js"],
+        dest: "<%= yeoman.app %>/scripts/directives.js"
+      },
+      filters: {
+        src: ["<%= yeoman.app %>/scripts/filters/*.js"],
+        dest: "<%= yeoman.app %>/scripts/filters.js"
       },
       requires: {
         src: ["<%= yeoman.app %>/scripts/requires/*.js"],
