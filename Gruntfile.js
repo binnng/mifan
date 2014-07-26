@@ -180,7 +180,7 @@ module.exports = function(grunt) {
     rev: {
       dist: {
         files: {
-          src: ["<%= yeoman.dist %>/scripts/{,*/}*.js", "<%= yeoman.dist %>/styles/{,*/}*.css", "<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}", "<%= yeoman.dist %>/styles/fonts/*"]
+          src: ["<%= yeoman.dist %>/scripts/{,*/}*.js", "<%= yeoman.dist %>/styles/{,*/}*.css"]
         }
       }
     },
@@ -279,7 +279,7 @@ module.exports = function(grunt) {
             dot: true,
             cwd: "<%= yeoman.app %>",
             dest: "<%= yeoman.dist %>",
-            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "bower_components/bootstrap-sass/fonts/*", "bower_components/es5-shim/es5-shim.min.js", "bower_components/json3/lib/json3.min.js", "data/*"]
+            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "bower_components/bootstrap-sass/dist/fonts/*", "bower_components/es5-shim/es5-shim.min.js", "bower_components/json3/lib/json3.min.js", "data/*"]
           }, {
             expand: true,
             cwd: ".tmp/images",

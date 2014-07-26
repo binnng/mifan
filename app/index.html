@@ -23,9 +23,9 @@
 
     <div class="root" ng-controller="rootCtrl" ng-class="{ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile}">
 
-        <div ng-include src="'views/head.html'"></div>
-        <div ng-view class="main-mifan-view"></div>
-        <div ng-include src="'views/foot.html'"></div>
+        <div ng-include="'views/head.html'"></div>
+        <div ng-view class="main-view"></div>
+        <div ng-include="'views/foot.html'"></div>
 
     </div>
 

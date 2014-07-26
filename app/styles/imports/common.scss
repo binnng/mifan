@@ -37,7 +37,7 @@ body{
   background-color: $bg;
 }
 
-.main-mifan-view{
+.main-view{
   overflow: hidden;
   margin-top: 30px;
 }
@@ -91,7 +91,7 @@ body{
   background: $tone;
 }
 .ui-loading {
-  visibility: hidden;
+  display: none;
   padding:0!important;
   opacity:.1;
   -webkit-animation-delay:.6s;
@@ -122,7 +122,7 @@ body{
 // 标准的loading HTML结构
 // <div class="load-more [loading]"><span class="loading-tip">加载更多</span><i class="ui-loading"></i></div>
 .loading > .ui-loading{
-  visibility: visible;
+  display: block;
 }
 
 .loading > .loading-tip{
@@ -159,6 +159,13 @@ body{
   &:hover,
   &:active{
     background-color: $light-gray;
+  }
+  &.loading{
+    cursor: auto;
+    &:hover,
+    &:active{
+      background-color: transparent;
+    }
   }
 }
 
