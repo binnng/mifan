@@ -1,23 +1,9 @@
 "use strict"
 
-# 最顶层的ctrl，控制整站
+# 顶层的业务ctrl，控制整站
+# 比如用户信息等
+
 Mifan.controller "rootCtrl", ($scope) ->
-
-  # 设备
-  $scope.ua =
-    iphone: IsIPhone
-    ipad: IsIPad
-    ios: IsIOS
-
-    android: IsAndroid
-
-    weixin: IsWeixin
-
-    mobile: IsTouch
-
-    chrome: IsChrome
-    ie: IsIE
-
 
   $scope.currentPage = "home"
 

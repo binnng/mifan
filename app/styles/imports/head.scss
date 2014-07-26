@@ -79,14 +79,19 @@
 				}
 			}
 		}
-
+		
+		// 导航中小三角
+		// 在移动设备（Mobile）和chrome浏览器中设置transform偏移 -webkit
+		// 在其他情况中设置left值偏移
+		// 动画中transform性能优于left
 		.arrow{
 			color: $bg;
 			font-size: 26px;
 			position: absolute;
 			left: 20px;
 			top: 36px;
-			@include transition(left, .9s, $easeOutCirc);
+			left: 0;
+			@include transition(all, .9s, $easeOutCirc);
 		}
 	}
 
@@ -157,10 +162,10 @@
 @media (max-width: $screen-sm) {
 	.header{
 	  .nav{
-	  	margin-left: 130px;
+	  	margin-left: 110px;
 
 	  	li{
-	  		margin: 0;
+	  		//margin: 0;
 
 	  		a{
 	  			
@@ -218,5 +223,18 @@
 	  		display: block;
 	  	}
 	  }
+	}
+}
+
+
+//根据设备设置不同的CSS
+.chrome,
+.mobile{
+	.header{
+		.nav{
+			.arrow{
+				left: 0 !important;
+			}
+		}
 	}
 }

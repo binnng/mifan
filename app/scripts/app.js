@@ -11,6 +11,9 @@ Mifan.config(function($routeProvider, $locationProvider) {
   }).when("/home", {
     templateUrl: "views/home.html",
     controller: "homeCtrl"
+  }).when("/home/:type", {
+    templateUrl: "views/home.html",
+    controller: "homeCtrl"
   }).when("/msg", {
     templateUrl: "views/msg.html",
     controller: "msgCtrl"

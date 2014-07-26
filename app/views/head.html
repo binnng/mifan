@@ -34,7 +34,7 @@
 	      <li ng-class="{active: currentPage === 'msg'}"><a ng-href="/#!/msg">消息</a></li>
 	      <li ng-class="{active: currentPage === 'me'}"><a ng-href="/#!/me"><b>个人</b>主页</a></li>
 	      <li ng-class="{active: currentPage === 'friend'}"><a ng-href="/#!/friend">朋友</a></li>
-	    	<span class="glyphicon glyphicon-chevron-up arrow" ng-style="{'left': arrowNav.left + 'px'}" ng-hide="arrowNav.hide"></span>
+	    	<span class="glyphicon glyphicon-chevron-up arrow" ng-style="{'-webkit-transform': 'translateX(' + arrowNav.left + 'px)', 'left': arrowNav.left + 'px'}" ng-hide="arrowNav.hide"></span>
 	    </ul>
   	</div>
 

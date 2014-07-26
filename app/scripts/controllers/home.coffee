@@ -1,22 +1,31 @@
 "use strict"
 
-Mifan.controller "homeCtrl", ($scope) ->
-  $scope.feedType = "news"
+Mifan.controller "homeCtrl", ["$scope", "$routeParams", ($scope, $routeParams) ->
 
-  $scope.switchFeedType = (feedType) ->
-  	$scope.feedType = feedType
+  $scope.legalFeedTypes = [
+    "news"
+    "answer"
+    "reply"
+  ]
 
-  $scope.$on "$viewContentLoaded", ->
-  	$scope.$emit "pageChange", "home"
-    # $scope.separateHeight = $(".home-page .main").height()
-  	$scope.separateHeight = 0
+  # 过滤不合法的URL
+  if 0 > $scope.legalFeedTypes.indexOf $routeParams.type
+    $routeParams.type = "news"
+
+  $scope.feedType = $routeParams.type
+
+  $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "home"
 
   $scope.remind = 
   	newsNum: 0
   	answerNum: 2
   	replyNum: '...'
+
+  # 清除提醒
+  $scope.$on "clearAnswerRemind", -> $scope.remind.answerNum = 0
+  $scope.$on "clearReplyRemind", -> $scope.remind.replyNum = 0
   
   no
-
+]
 
 

@@ -20,21 +20,21 @@
 			</div>
 
 			<ul class="nav nav-tabs">
-			  <li class="{{feedType=='news'?'active':''}}" ng-click="switchFeedType('news')">
-			  	<a class="btn-link">朋友动态</a>
+			  <li ng-class="{active: feedType == 'news'}">
+			  	<a class="btn-link" ng-href="/#!/home">朋友动态</a>
 			  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
 			  </li>
-			  <li class="{{feedType=='answer'?'active':''}}" ng-click="switchFeedType('answer')">
-			  	<a class="btn-link">回答我的</a>
+			  <li ng-class="{active: feedType == 'answer'}">
+			  	<a class="btn-link" ng-href="/#!/home/answer">回答我的</a>
 			  	<b ng-show="remind.answerNum!==0">{{remind.answerNum}}</b>
 			  </li>
-			  <li class="{{feedType=='reply'?'active':''}}" ng-click="switchFeedType('reply')">
-			  	<a class="btn-link">回应我的</a>
+			  <li ng-class="{active: feedType == 'reply'}">
+			  	<a class="btn-link" ng-href="/#!/home/reply">回应我的</a>
 			  	<b ng-show="remind.replyNum!==0">{{remind.replyNum}}</b>
 			  </li>
 			</ul>
 
-			<div class="feed-content news" ng-if="feedType=='news'" ng-controller="homeNews">
+			<div class="feed-content news" ng-if="feedType == 'news'" ng-controller="homeNews">
 				<dl class="questions">
 					<dd ng-repeat="news in newsCollect">
 						<div class="avatars pull-left">
@@ -68,8 +68,8 @@
 					</dd>
 				</dl>
 			</div>
-			<div class="feed-content answer" ng-if="feedType=='answer'" ng-controller="homeAnswer">{{content}}</div>
-			<div class="feed-content reply" ng-if="feedType=='reply'" ng-controller="homeReply">{{content}}</div>
+			<div class="feed-content answer" ng-if="feedType == 'answer'" ng-controller="homeAnswer">{{content}}</div>
+			<div class="feed-content reply" ng-if="feedType == 'reply'" ng-controller="homeReply">{{content}}</div>
 		</div>
 	</div>
 	<div class="row col-xs-12 col-sm-4">

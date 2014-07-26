@@ -16,12 +16,12 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="mifan">
+  <body ng-app="mifan" ng-controller="globalCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
-    <div class="root" ng-controller="rootCtrl" ng-class="{ios: ua.ios, android: ua.android, chrome: ua.chrome, iphone: ua.iphone, ipad: ua.ipad, chrome: ua.chrome, weixin: ua.weixin, mobile: ua.mobile, ie: ua.ie}">
+    <div class="root" ng-controller="rootCtrl" ng-class="{ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile}">
 
         <div ng-include src="'views/head.html'"></div>
         <div ng-view class="main-mifan-view"></div>
@@ -45,7 +45,6 @@
     <!-- endbower -->
 
     <!-- <script src="scripts/_prefix.js"></script>-->
-    <script src="scripts/requires.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers.js"></script>
     <!--<script src="scripts/_suffix.js"></script>-->
