@@ -7,7 +7,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
     yeoman: {
       app: require("./bower.json").appPath || "app",
-      dist: "dist"
+      dist: "dist",
+      today: grunt.template.today("yyyymmddss")
     },
     watch: {
       bower: {
@@ -279,7 +280,7 @@ module.exports = function(grunt) {
             dot: true,
             cwd: "<%= yeoman.app %>",
             dest: "<%= yeoman.dist %>",
-            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "bower_components/bootstrap-sass/dist/fonts/*", "bower_components/es5-shim/es5-shim.min.js", "bower_components/json3/lib/json3.min.js", "data/*"]
+            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "fonts/*", "bower/*", "data/*"]
           }, {
             expand: true,
             cwd: ".tmp/images",
@@ -331,6 +332,45 @@ module.exports = function(grunt) {
         indexFile: "index.html",
         concat: true
       }
+    },
+    'regex-replace': {
+      dist: {
+        actions: [
+          {
+            search: '/fonts/glyphicons',
+            replace: '../fonts/glyphicons',
+            flags: 'g'
+          }
+        ],
+        src: ["<%= yeoman.dist %>/styles/mifan.css"]
+      },
+      html: {
+        actions: [
+          {
+            search: "scripts/mifan.js",
+            replace: "scripts/<%= yeoman.today %>.mifan.js",
+            flags: 'g'
+          }, {
+            search: "styles/mifan.css",
+            replace: "styles/<%= yeoman.today %>.mifan.css",
+            flags: 'g'
+          }
+        ],
+        src: ["<%= yeoman.dist %>/index.html"]
+      }
+    },
+    rename: {
+      dist: {
+        files: [
+          {
+            src: "<%= yeoman.dist %>/styles/mifan.css",
+            dest: "<%= yeoman.dist %>/styles/<%= yeoman.today %>.mifan.css"
+          }, {
+            src: "<%= yeoman.dist %>/scripts/mifan.js",
+            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.today %>.mifan.js"
+          }
+        ]
+      }
     }
   });
   grunt.registerTask("serve", function(target) {
@@ -344,7 +384,7 @@ module.exports = function(grunt) {
     grunt.task.run(["serve:" + target]);
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
-  grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "rev", "usemin", "ng_template", "htmlmin", "clean:distView"]);
+  grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace", "rename:dist"]);
   grunt.registerTask("bower", ["bowerInstall"]);
   return grunt.registerTask("default", ["test", "build"]);
 };

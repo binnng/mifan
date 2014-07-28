@@ -24,6 +24,8 @@ module.exports = (grunt) ->
       app: require("./bower.json").appPath or "app"
       dist: "dist"
 
+      today: grunt.template.today "yyyymmddss"
+
     
     # Watches files for changes and runs tasks based on the changed files
     watch:
@@ -325,9 +327,8 @@ module.exports = (grunt) ->
               "views/{,*/}*.html"
               "images/{,*/}*.{webp}"
               "fonts/*"
-              "bower_components/bootstrap-sass/dist/fonts/*"
-              "bower_components/es5-shim/es5-shim.min.js"
-              "bower_components/json3/lib/json3.min.js"
+              "fonts/*"
+              "bower/*"
               "data/*"
             ]
           }
@@ -421,6 +422,46 @@ module.exports = (grunt) ->
         # Default set to false
         concat: true
 
+    'regex-replace':
+      dist:
+        actions:[
+          search: '/fonts/glyphicons'
+          replace: '../fonts/glyphicons'
+          flags: 'g'
+        ]
+        src: [
+          "<%= yeoman.dist %>/styles/mifan.css"
+        ]
+      html:
+        actions:[
+          {
+            search: "scripts/mifan.js"
+            replace: "scripts/<%= yeoman.today %>.mifan.js"
+            flags: 'g'
+          }
+          {
+            search: "styles/mifan.css"
+            replace: "styles/<%= yeoman.today %>.mifan.css"
+            flags: 'g' 
+          }
+        ]
+        src: [
+          "<%= yeoman.dist %>/index.html"
+        ]
+
+    rename:
+      dist:
+        files: [
+          {
+            src: "<%= yeoman.dist %>/styles/mifan.css",
+            dest: "<%= yeoman.dist %>/styles/<%= yeoman.today %>.mifan.css"
+          }
+          {
+            src: "<%= yeoman.dist %>/scripts/mifan.js",
+            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.today %>.mifan.js"
+          }
+        ]
+
   grunt.registerTask "serve", (target) ->
     if target is "dist"
       return grunt.task.run([
@@ -465,11 +506,13 @@ module.exports = (grunt) ->
     "cdnify"
     "cssmin"
     "uglify"
-    "rev"
+    #"rev"
     "usemin"
     "ng_template"
     "htmlmin"
     "clean:distView"
+    "regex-replace"
+    "rename:dist"
   ]
   grunt.registerTask "bower", [
     "bowerInstall"
