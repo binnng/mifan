@@ -34,7 +34,8 @@
     "grunt-ng-template": "~0.1.1",
     "ip": "~0.3.0",
     "grunt-regex-replace": "~0.2.6",
-    "grunt-contrib-rename": "0.0.3"
+    "grunt-contrib-rename": "0.0.3",
+    "md5": "~1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"

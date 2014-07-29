@@ -26,6 +26,8 @@ module.exports = (grunt) ->
 
       today: grunt.template.today "yyyymmddss"
 
+      md5: require("md5").digest_s grunt.template.today "yyyymmddss"
+
     
     # Watches files for changes and runs tasks based on the changed files
     watch:
@@ -436,12 +438,12 @@ module.exports = (grunt) ->
         actions:[
           {
             search: "scripts/mifan.js"
-            replace: "scripts/<%= yeoman.today %>.mifan.js"
+            replace: "scripts/<%= yeoman.md5 %>.mifan.js"
             flags: 'g'
           }
           {
             search: "styles/mifan.css"
-            replace: "styles/<%= yeoman.today %>.mifan.css"
+            replace: "styles/<%= yeoman.md5 %>.mifan.css"
             flags: 'g' 
           }
         ]
@@ -454,11 +456,11 @@ module.exports = (grunt) ->
         files: [
           {
             src: "<%= yeoman.dist %>/styles/mifan.css",
-            dest: "<%= yeoman.dist %>/styles/<%= yeoman.today %>.mifan.css"
+            dest: "<%= yeoman.dist %>/styles/<%= yeoman.md5 %>.mifan.css"
           }
           {
             src: "<%= yeoman.dist %>/scripts/mifan.js",
-            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.today %>.mifan.js"
+            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.md5 %>.mifan.js"
           }
         ]
 

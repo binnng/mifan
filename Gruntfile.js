@@ -8,7 +8,8 @@ module.exports = function(grunt) {
     yeoman: {
       app: require("./bower.json").appPath || "app",
       dist: "dist",
-      today: grunt.template.today("yyyymmddss")
+      today: grunt.template.today("yyyymmddss"),
+      md5: require("md5").digest_s(grunt.template.today("yyyymmddss"))
     },
     watch: {
       bower: {
@@ -348,11 +349,11 @@ module.exports = function(grunt) {
         actions: [
           {
             search: "scripts/mifan.js",
-            replace: "scripts/<%= yeoman.today %>.mifan.js",
+            replace: "scripts/<%= yeoman.md5 %>.mifan.js",
             flags: 'g'
           }, {
             search: "styles/mifan.css",
-            replace: "styles/<%= yeoman.today %>.mifan.css",
+            replace: "styles/<%= yeoman.md5 %>.mifan.css",
             flags: 'g'
           }
         ],
@@ -364,10 +365,10 @@ module.exports = function(grunt) {
         files: [
           {
             src: "<%= yeoman.dist %>/styles/mifan.css",
-            dest: "<%= yeoman.dist %>/styles/<%= yeoman.today %>.mifan.css"
+            dest: "<%= yeoman.dist %>/styles/<%= yeoman.md5 %>.mifan.css"
           }, {
             src: "<%= yeoman.dist %>/scripts/mifan.js",
-            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.today %>.mifan.js"
+            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.md5 %>.mifan.js"
           }
         ]
       }
