@@ -9,7 +9,8 @@ module.exports = function(grunt) {
       app: require("./bower.json").appPath || "app",
       dist: "dist",
       today: grunt.template.today("yyyymmddss"),
-      md5: require("md5").digest_s(grunt.template.today("yyyymmddss"))
+      md5: require("md5").digest_s(grunt.template.today("yyyymmddss")),
+      secret: grunt.file.readJSON("secret.json")
     },
     watch: {
       bower: {
@@ -372,6 +373,22 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    sftp: {
+      dist: {
+        files: {
+          "./": ["<%= yeoman.dist %>/styles/**", "<%= yeoman.dist %>/scripts/**", "<%= yeoman.dist %>/index.html"]
+        },
+        options: {
+          path: "<%= yeoman.secret.path %>",
+          host: "<%= yeoman.secret.host %>",
+          username: "<%= yeoman.secret.username %>",
+          password: "<%= yeoman.secret.password %>",
+          progress: true,
+          srcBasePath: "<%= yeoman.dist %>",
+          createDirectories: true
+        }
+      }
     }
   });
   grunt.registerTask("serve", function(target) {
@@ -386,6 +403,6 @@ module.exports = function(grunt) {
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
   grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace", "rename:dist"]);
-  grunt.registerTask("bower", ["bowerInstall"]);
-  return grunt.registerTask("default", ["test", "build"]);
+  grunt.registerTask("publish", ["build", "sftp"]);
+  return grunt.registerTask("default", ["build"]);
 };

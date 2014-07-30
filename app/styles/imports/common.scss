@@ -169,6 +169,10 @@ body{
   }
 }
 
+.sd-card{
+  @include box-shadow(0, 1px, 1px, rgba(#000, .3));
+}
+
 
 // 响应式
 @media (max-width: $screen-xs-max) {

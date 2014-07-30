@@ -28,6 +28,8 @@ module.exports = (grunt) ->
 
       md5: require("md5").digest_s grunt.template.today "yyyymmddss"
 
+      secret: grunt.file.readJSON "secret.json"
+
     
     # Watches files for changes and runs tasks based on the changed files
     watch:
@@ -464,6 +466,25 @@ module.exports = (grunt) ->
           }
         ]
 
+    sftp:
+      dist:
+        files: {
+          "./": [
+            "<%= yeoman.dist %>/styles/**"
+            "<%= yeoman.dist %>/scripts/**"
+            "<%= yeoman.dist %>/index.html"
+          ]
+        }
+        options:
+          path: "<%= yeoman.secret.path %>"
+          host: "<%= yeoman.secret.host %>"
+          username: "<%= yeoman.secret.username %>"
+          password: "<%= yeoman.secret.password %>"
+          #port: "<%= yeoman.secret.port %>"
+          progress: yes
+          srcBasePath: "<%= yeoman.dist %>"
+          createDirectories: yes
+
   grunt.registerTask "serve", (target) ->
     if target is "dist"
       return grunt.task.run([
@@ -516,11 +537,12 @@ module.exports = (grunt) ->
     "regex-replace"
     "rename:dist"
   ]
-  grunt.registerTask "bower", [
-    "bowerInstall"
+  grunt.registerTask "publish", [
+    "build"
+    "sftp"
   ]
   grunt.registerTask "default", [
     # "newer:jshint"
-    "test"
+    # "test"
     "build"
   ]

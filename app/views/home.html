@@ -2,7 +2,7 @@
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
 			
-			<div class="ask-ques clearfix" ng-controller="homeAskCtrl" ng-style="{'background-image': 'url(' + bgUrl + ')'}" ng-class="{active: onInputing}">
+			<div class="ask-ques clearfix sd-card" ng-controller="homeAskCtrl" ng-style="{'background-image': 'url(' + bgUrl + ')'}" ng-class="{active: onInputing}">
 				<div class="location">
 					<span class="glyphicon glyphicon-map-marker">北京</span>
 				</div>
@@ -19,69 +19,72 @@
 				</form>
 			</div>
 
-			<ul class="nav nav-tabs">
-			  <li ng-class="{active: feedType == 'news'}">
-			  	<a class="btn-link" ng-href="#!/home">朋友动态</a>
-			  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
-			  </li>
-			  <li ng-class="{active: feedType == 'answer'}">
-			  	<a class="btn-link" ng-href="#!/home/answer">回答我的</a>
-			  	<b ng-show="remind.answerNum!==0">{{remind.answerNum}}</b>
-			  </li>
-			  <li ng-class="{active: feedType == 'reply'}">
-			  	<a class="btn-link" ng-href="#!/home/reply">回应我的</a>
-			  	<b ng-show="remind.replyNum!==0">{{remind.replyNum}}</b>
-			  </li>
-			</ul>
+			<div class="sd-card">
 
-			<div class="feed-content news" ng-if="feedType == 'news'" ng-controller="homeNews">
-				<dl class="questions">
-					<dd ng-repeat="news in newsCollect">
-						<div class="avatars pull-left">
-							<a href="#!/" class="avatar asker" title="username" style="background-image:url(images/avatar35.jpg)">username</a>
-							<a href="#!/" class="avatar answerer" title="username" style="background-image:url(images/avatar35.jpg)">username</a>
-						</div>
-						<div style="overflow:hidden;">
-							<h3 class="h5">
-								<a href="#" class="" title="问题">女朋友要过生日了，买个什么礼物呢？ 具体一些哈~~大谢！</a>
-							</h3>
-							<p class="lead">买一个上市公司送她，让她做老板。</p>
-							<p class="">
-								<a href="#" title="username">wayneyin</a> 对 <a href="#" title="username">hifly</a> 的回答于 <a href="#" title="" class="">1天前</a>
-							</p>
-							<div class="meta">
-								<div class="actions clearfix">
-									<a href="#" class="like liked pull-left">
-										<span class="glyphicon glyphicon-heart"></span>
-										<span class="count">5</span>
-									</a>
-									<ul class="loved pull-left">
-										<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-										<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-										<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-										<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-										<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-									</ul>
+				<ul class="nav nav-tabs">
+				  <li ng-class="{active: feedType == 'news'}">
+				  	<a class="btn-link" ng-href="#!/home">朋友动态</a>
+				  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
+				  </li>
+				  <li ng-class="{active: feedType == 'answer'}">
+				  	<a class="btn-link" ng-href="#!/home/answer">回答我的</a>
+				  	<b ng-show="remind.answerNum!==0">{{remind.answerNum}}</b>
+				  </li>
+				  <li ng-class="{active: feedType == 'reply'}">
+				  	<a class="btn-link" ng-href="#!/home/reply">回应我的</a>
+				  	<b ng-show="remind.replyNum!==0">{{remind.replyNum}}</b>
+				  </li>
+				</ul>
+
+				<div class="feed-content news" ng-if="feedType == 'news'" ng-controller="homeNews">
+					<dl class="questions">
+						<dd ng-repeat="news in newsCollect">
+							<div class="avatars pull-left">
+								<a href="#!/" class="avatar asker" title="username" style="background-image:url(images/avatar35.jpg)">username</a>
+								<a href="#!/" class="avatar answerer" title="username" style="background-image:url(images/avatar35.jpg)">username</a>
+							</div>
+							<div style="overflow:hidden;">
+								<h3 class="h5">
+									<a href="#" class="" title="问题">女朋友要过生日了，买个什么礼物呢？ 具体一些哈~~大谢！</a>
+								</h3>
+								<p class="lead">买一个上市公司送她，让她做老板。</p>
+								<p class="">
+									<a href="#" title="username">wayneyin</a> 对 <a href="#" title="username">hifly</a> 的回答于 <a href="#" title="" class="">1天前</a>
+								</p>
+								<div class="meta">
+									<div class="actions clearfix">
+										<a href="#" class="like liked pull-left">
+											<span class="glyphicon glyphicon-heart"></span>
+											<span class="count">5</span>
+										</a>
+										<ul class="loved pull-left">
+											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
+											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
+											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
+											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
+											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-					</dd>
-				</dl>
+						</dd>
+					</dl>
 
-				<more></more>
-			</div>
-			<div class="feed-content answer" ng-if="feedType == 'answer'" ng-controller="homeAnswer">
-				{{content}}
-				<more></more>
-			</div>
-			<div class="feed-content reply" ng-if="feedType == 'reply'" ng-controller="homeReply">
-				{{content}}
-				<more></more>
+					<more></more>
+				</div>
+				<div class="feed-content answer" ng-if="feedType == 'answer'" ng-controller="homeAnswer">
+					{{content}}
+					<more></more>
+				</div>
+				<div class="feed-content reply" ng-if="feedType == 'reply'" ng-controller="homeReply">
+					{{content}}
+					<more></more>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row col-xs-12 col-sm-4">
-		<div class="side">
+		<div class="side sd-card">
 			<div class="side-block">
 				<h5>每日一问</h5>
 				<div class="every-day-ask">

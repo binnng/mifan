@@ -2,6 +2,8 @@ node_modules
 dist
 .tmp
 .sass-cache
+.ftppass
+secret.json
 app/bower_components
 service/application/logs
 service/doc
