@@ -13,6 +13,9 @@ module.exports = (grunt) ->
   # Time how long tasks take. Can help when optimizing build times
   require("time-grunt") grunt
   grunt.config.set "ip", (require("ip").address())
+
+  today = grunt.template.today "yyyymmddss"
+  md5Today = require("md5").digest_s today
   
   # Define the configuration for all the tasks
   grunt.initConfig
@@ -24,11 +27,13 @@ module.exports = (grunt) ->
       app: require("./bower.json").appPath or "app"
       dist: "dist"
 
-      today: grunt.template.today "yyyymmddss"
-
-      md5: require("md5").digest_s grunt.template.today "yyyymmddss"
+      today: today
+      md5: md5Today
+      prefix: today
 
       secret: grunt.file.readJSON "secret.json"
+
+      onlineURL: "http://115.29.49.123/mifan/app"
 
     
     # Watches files for changes and runs tasks based on the changed files
@@ -125,6 +130,7 @@ module.exports = (grunt) ->
         options:
           open: true
           base: "<%= yeoman.dist %>"
+
 
     
     # Make sure code styles are up to par and there are no obvious mistakes
@@ -440,12 +446,12 @@ module.exports = (grunt) ->
         actions:[
           {
             search: "scripts/mifan.js"
-            replace: "scripts/<%= yeoman.md5 %>.mifan.js"
+            replace: "scripts/<%= yeoman.prefix %>.mifan.js"
             flags: 'g'
           }
           {
             search: "styles/mifan.css"
-            replace: "styles/<%= yeoman.md5 %>.mifan.css"
+            replace: "styles/<%= yeoman.prefix %>.mifan.css"
             flags: 'g' 
           }
         ]
@@ -458,32 +464,39 @@ module.exports = (grunt) ->
         files: [
           {
             src: "<%= yeoman.dist %>/styles/mifan.css",
-            dest: "<%= yeoman.dist %>/styles/<%= yeoman.md5 %>.mifan.css"
+            dest: "<%= yeoman.dist %>/styles/<%= yeoman.prefix %>.mifan.css"
           }
           {
             src: "<%= yeoman.dist %>/scripts/mifan.js",
-            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.md5 %>.mifan.js"
+            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.prefix %>.mifan.js"
           }
         ]
 
-    sftp:
-      dist:
-        files: {
-          "./": [
-            "<%= yeoman.dist %>/styles/**"
-            "<%= yeoman.dist %>/scripts/**"
-            "<%= yeoman.dist %>/index.html"
-          ]
-        }
-        options:
-          path: "<%= yeoman.secret.path %>"
+    'sftp-deploy':
+      build:
+        auth:
           host: "<%= yeoman.secret.host %>"
-          username: "<%= yeoman.secret.username %>"
-          password: "<%= yeoman.secret.password %>"
-          #port: "<%= yeoman.secret.port %>"
-          progress: yes
-          srcBasePath: "<%= yeoman.dist %>"
-          createDirectories: yes
+          port: "<%= yeoman.secret.port %>"
+          authKey: 'key1'
+
+        src: "<%= yeoman.dist %>"
+        dest: "<%= yeoman.secret.path %>"
+        exclusions: [
+          "<%= yeoman.dist %>/bower"
+          "<%= yeoman.dist %>/fonts"
+          "<%= yeoman.dist %>/images"
+          "<%= yeoman.dist %>/favicon.ico"
+          "<%= yeoman.dist %>/.htaccess"
+          "<%= yeoman.dist %>/robots.txt"
+        ]
+        serverSep: "/"
+        concurrency: 4
+        progress: yes
+
+    open:
+      online:
+        path: "<%= yeoman.onlineURL %>"
+        app: "Google Chrome"
 
   grunt.registerTask "serve", (target) ->
     if target is "dist"
@@ -539,7 +552,8 @@ module.exports = (grunt) ->
   ]
   grunt.registerTask "publish", [
     "build"
-    "sftp"
+    "sftp-deploy"
+    "open:online"
   ]
   grunt.registerTask "default", [
     # "newer:jshint"
