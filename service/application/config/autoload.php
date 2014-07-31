@@ -20,16 +20,17 @@
 |
 | 1. Packages
 | 2. Libraries
-| 3. Helper files
-| 4. Custom config files
-| 5. Language files
-| 6. Models
+| 3. Drivers
+| 4. Helper files
+| 5. Custom config files
+| 6. Language files
+| 7. Models
 |
 */
 
 /*
 | -------------------------------------------------------------------
-|  Auto-load Packges
+|  Auto-load Packages
 | -------------------------------------------------------------------
 | Prototype:
 |
@@ -49,10 +50,29 @@ $autoload['packages'] = array(APPPATH.'third_party',APPPATH.'third_party/rbac');
 |
 | Prototype:
 |
-|	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
+|	$autoload['libraries'] = array('database', 'email', 'xmlrpc');
+|
+| You can also supply an alternative library name to be assigned
+| in the controller:
+|
+|	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
 $autoload['libraries'] = array('database','session');
+/*
+| -------------------------------------------------------------------
+|  Auto-load Drivers
+| -------------------------------------------------------------------
+| These classes are located in the system/libraries folder or in your
+| application/libraries folder within their own subdirectory. They
+| offer multiple interchangeable driver options.
+|
+| Prototype:
+|
+|	$autoload['drivers'] = array('session', 'cache');
+*/
+
+$autoload['drivers'] = array();
 
 
 /*
@@ -105,8 +125,12 @@ $autoload['language'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['model'] = array('model1', 'model2');
+|	$autoload['model'] = array('first_model', 'second_model');
 |
+| You can also supply an alternative model name to be assigned
+| in the controller:
+|
+|	$autoload['model'] = array('first_model' => 'first');
 */
 
 $autoload['model'] = array('base_model');

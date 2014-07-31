@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url']	= 'http://115.29.49.123/mifan/service/';
 //http://127.0.0.1/mifan/service/
 
 /*
@@ -38,11 +38,11 @@ $config['index_page'] = 'index.php';
 | URI string.  The default setting of 'AUTO' works for most servers.
 | If your links do not seem to work, try one of the other delicious flavors:
 |
-| 'AUTO'			Default - auto detects
-| 'PATH_INFO'		Uses the PATH_INFO
-| 'QUERY_STRING'	Uses the QUERY_STRING
-| 'REQUEST_URI'		Uses the REQUEST_URI
-| 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
+| 'AUTO'		Default - auto detects
+| 'CLI' or 'argv'	Uses $_SERVER['argv'] (for php-cli only)
+| 'PATH_INFO'		Uses $_SERVER['PATH_INFO']
+| 'REQUEST_URI'		Uses $_SERVER['REQUEST_URI']
+| 'QUERY_STRING'	Uses $_SERVER['QUERY_STRING']
 |
 */
 $config['uri_protocol']	= 'AUTO';
@@ -80,6 +80,8 @@ $config['language']	= 'english';
 | This determines which character set is used by default in various methods
 | that require a character set to be provided.
 |
+| See http://php.net/htmlspecialchars for a list of supported charsets.
+|
 */
 $config['charset'] = 'UTF-8';
 
@@ -109,20 +111,44 @@ $config['enable_hooks'] = TRUE;
 */
 $config['subclass_prefix'] = 'MF_';
 
+/*
+|--------------------------------------------------------------------------
+| Composer auto-loading
+|--------------------------------------------------------------------------
+|
+| Enabling this setting will tell CodeIgniter to look for a Composer
+| package auto-loader script in application/vendor/autoload.php.
+|
+|	$config['composer_autoload'] = TRUE;
+|
+| Or if you have your vendor/ directory located somewhere else, you
+| can opt to set a specific path as well:
+|
+|	$config['composer_autoload'] = '/path/to/vendor/autoload.php';
+|
+| For more information about Composer, please visit http://getcomposer.org/
+|
+| Note: This will NOT disable or override the CodeIgniter-specific
+|	autoloading (application/config/autoload.php)
+*/
+$config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
 | Allowed URL Characters
 |--------------------------------------------------------------------------
 |
-| This lets you specify with a regular expression which characters are permitted
-| within your URLs.  When someone tries to submit a URL with disallowed
-| characters they will get a warning message.
+| This lets you specify which characters are permitted within your URLs.
+| When someone tries to submit a URL with disallowed characters they will
+| get a warning message.
 |
 | As a security measure you are STRONGLY encouraged to restrict URLs to
 | as few characters as possible.  By default only these are allowed: a-z 0-9~%.:_-
 |
 | Leave blank to allow all characters -- but only if you are insane.
+|
+| The configured value is actually a regular expression character group
+| and it will be executed as: ! preg_match('/^[<permitted_uri_chars>]+$/i
 |
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
@@ -177,6 +203,10 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 |	3 = Informational Messages
 |	4 = All Messages
 |
+| You can also pass in a array with threshold levels to show individual error types
+|
+| 	array(2) = Debug Messages, without Error Messages
+|
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
 |
@@ -189,10 +219,24 @@ $config['log_threshold'] = 2;
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| application/logs/ folder. Use a full server path with trailing slash.
+| application/logs/ directory. Use a full server path with trailing slash.
 |
 */
 $config['log_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Log File Extension
+|--------------------------------------------------------------------------
+|
+| The default filename extension for log files. The default 'php' allows for
+| protecting the log files via basic scripting, when they are to be stored
+| under a publicly accessible directory.
+|
+| Note: Leaving it blank will default to 'php'.
+|
+*/
+$config['log_file_extension'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -207,11 +251,32 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 
 /*
 |--------------------------------------------------------------------------
+| Error Views Directory Path
+|--------------------------------------------------------------------------
+|
+| Leave this BLANK unless you would like to set something other than the default
+| application/views/errors/ directory.  Use a full server path with trailing slash.
+|
+*/
+$config['error_views_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| 是否开启级存
+|--------------------------------------------------------------------------
+|
+| True 为开启缓存，目前这个设置只针对于自建代码中使用到
+|
+*/
+$config['enable_cache'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
 | Cache Directory Path
 |--------------------------------------------------------------------------
 |
 | Leave this BLANK unless you would like to set something other than the default
-| system/cache/ folder.  Use a full server path with trailing slash.
+| application/cache/ directory.  Use a full server path with trailing slash.
 |
 */
 $config['cache_path'] = '';
@@ -224,6 +289,9 @@ $config['cache_path'] = '';
 | If you use the Encryption class or the Session class you
 | MUST set an encryption key.  See the user guide for info.
 |
+| http://codeigniter.com/user_guide/libraries/encryption.html
+| http://codeigniter.com/user_guide/libraries/sessions.html
+|
 */
 $config['encryption_key'] = 'mifanus';
 
@@ -232,7 +300,10 @@ $config['encryption_key'] = 'mifanus';
 | Session Variables
 |--------------------------------------------------------------------------
 |
-| 'sess_cookie_name'		= the name you want for the cookie
+| 'sess_driver'				= the driver to load: cookie (Classic), native (PHP sessions),
+|	or your custom driver name
+| 'sess_valid_drivers'		= additional valid drivers which may be loaded
+| 'sess_cookie_name'		= the name you want for the cookie, must contain only [0-9a-z_-] characters
 | 'sess_expiration'			= the number of SECONDS you want the session to last.
 |   by default sessions last 7200 seconds (two hours).  Set to zero for no expiration.
 | 'sess_expire_on_close'	= Whether to cause the session to expire automatically
@@ -245,6 +316,8 @@ $config['encryption_key'] = 'mifanus';
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
 */
+$config['sess_driver']			= 'cookie';
+$config['sess_valid_drivers']	= array();
 $config['sess_cookie_name']		= 'ci_session';
 $config['sess_expiration']		= 7200;
 $config['sess_expire_on_close']	= FALSE;
@@ -263,11 +336,29 @@ $config['sess_time_to_update']	= 300;
 | 'cookie_prefix' = Set a prefix if you need to avoid collisions
 | 'cookie_domain' = Set to .your-domain.com for site-wide cookies
 | 'cookie_path'   =  Typically will be a forward slash
+| 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
+| 'cookie_httponly' = Cookie will only be accessible via HTTP(S) (no javascript)
 |
 */
 $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
+$config['cookie_secure']	= FALSE;
+$config['cookie_httponly'] 	= FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Standardize newlines
+|--------------------------------------------------------------------------
+|
+| Determines whether to standardize newline characters in input data,
+| meaning to replace \r\n, \r, \n occurences with the PHP_EOL value.
+|
+| This is particularly useful for portability between UNIX-based OSes,
+| (usually \n) and Windows (\r\n).
+|
+*/
+$config['standardize_newlines'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -291,11 +382,15 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_token_name' = The token name
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
+| 'csrf_regenerate' = Regenerate token on every submission
+| 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
+$config['csrf_regenerate'] = TRUE;
+$config['csrf_exclude_uris'] = array();
 
 /*
 |--------------------------------------------------------------------------
@@ -306,6 +401,9 @@ $config['csrf_expire'] = 7200;
 | the output class will test whether your server supports Gzip.
 | Even if it does, however, not all browsers support compression
 | so enable only if you are reasonably sure your visitors can handle it.
+|
+| Only used if zlib.output_compression is turned off in your php.ini.
+| Please do not use it together with httpd-level output compression.
 |
 | VERY IMPORTANT:  If you are getting a blank page when compression is enabled it
 | means you are prematurely outputting something to your browser. It could
@@ -318,13 +416,25 @@ $config['compress_output'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
+| Minify
+|--------------------------------------------------------------------------
+|
+| Removes extra characters (usually unnecessary spaces) from your
+| output for faster page load speeds.  Makes your outputted HTML source
+| code less readable.
+|
+*/
+$config['minify_output'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
 | Master Time Reference
 |--------------------------------------------------------------------------
 |
-| Options are 'local' or 'gmt'.  This pref tells the system whether to use
-| your server's local time as the master 'now' reference, or convert it to
-| GMT.  See the 'date helper' page of the user guide for information
-| regarding date handling.
+| Options are 'local' or any PHP supported timezone. This preference tells
+| the system whether to use your server's local time as the master 'now'
+| reference, or convert it to the configured one timezone. See the 'date
+| helper' page of the user guide for information regarding date handling.
 |
 */
 $config['time_reference'] = 'local';
@@ -348,11 +458,16 @@ $config['rewrite_short_tags'] = FALSE;
 | Reverse Proxy IPs
 |--------------------------------------------------------------------------
 |
-| If your server is behind a reverse proxy, you must whitelist the proxy IP
-| addresses from which CodeIgniter should trust the HTTP_X_FORWARDED_FOR
-| header in order to properly identify the visitor's IP address.
-| Comma-delimited, e.g. '10.0.1.200,10.0.1.201'
+| If your server is behind a reverse proxy, you must whitelist the proxy
+| IP addresses from which CodeIgniter should trust headers such as
+| HTTP_X_FORWARDED_FOR and HTTP_CLIENT_IP in order to properly identify
+| the visitor's IP address.
 |
+| You can use both an array or a comma-separated list of proxy addresses,
+| as well as specifying whole subnets. Here are a few examples:
+|
+| Comma-separated:	'10.0.1.200,192.168.5.0/24'
+| Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
 

@@ -17,6 +17,8 @@ class Base_model extends CI_Model {
 	function __construct()
 	{
 		parent::__construct();
+		log_message('DEBUG','Base_model loaded.');
+		$this->load->driver('cache', array('adapter' => 'memcached', 'backup' => 'file'));
 	}
 	
 	/**
