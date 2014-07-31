@@ -1,0 +1,94 @@
+.login-page,
+.register-page{
+
+	padding: 3em 0;
+
+	h3,
+	h4,
+	h5{
+
+		font-weight: 400;
+	}
+
+	h3{
+		font-size: 2em;
+	}
+
+	h4{
+		margin: 1.2em 0 2em;
+		color: #555;
+	}
+
+	// max-width: 600px;
+	// margin-left: auto;
+	// margin-right: auto;
+
+
+	form{
+		.glyphicon-refresh{
+			-webkit-animation-name: rotate;
+			animation-name: rotate;
+		}
+	}
+}
+
+.login-page{
+	.sns,
+	.self{
+		margin-top: 2em;
+	}
+
+	h5{
+		color: #888;
+		margin-bottom: 1.6em;
+	}
+
+	.sns-box{
+		.weibo,
+		.qq,
+		.douban{
+			width: 200px;
+			height: 50px;
+			display: inline-block;
+			line-height: 50px;
+			color: $white;
+			padding-left: 90px;
+			margin-right: 1em;
+			font-size: 1.2em;
+			&:hover,
+			&:active{
+				opacity: .9;
+			}
+		}
+
+		.weibo{
+			background: url(../images/login-wb.png) no-repeat;
+		}
+		.qq{
+			background: url(../images/login-qq.png) no-repeat;
+		}
+		.douban{
+			background: url(../images/login-db.png) no-repeat;
+		}
+	}
+
+	.self{
+		padding-top: 1em;
+	}
+
+	.login-form{
+		.form-group{
+			margin-right: .6em;
+		}
+		.btn[type="submit"]{
+			width: 4em;
+		}
+	}
+}
+
+.reg-form{
+	max-width: 300px;
+	.btn[type="submit"]{
+		width: 100%;
+	}
+}

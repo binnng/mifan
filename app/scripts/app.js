@@ -23,6 +23,12 @@ Mifan.config(function($routeProvider, $locationProvider) {
   }).when("/welcome", {
     templateUrl: "views/welcome.html",
     controller: "welcomeCtrl"
+  }).when("/login", {
+    templateUrl: "views/login.html",
+    controller: "loginCtrl"
+  }).when("/register", {
+    templateUrl: "views/register.html",
+    controller: "registerCtrl"
   }).otherwise({
     templateUrl: "views/404.html",
     controller: "404Ctrl"

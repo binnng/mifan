@@ -207,9 +207,9 @@ module.exports = (grunt) ->
         javascriptsDir: "<%= yeoman.app %>/scripts"
         fontsDir: "<%= yeoman.app %>/styles/fonts"
         importPath: "<%= yeoman.app %>/styles/imports"
-        httpImagesPath: "/images"
+        httpImagesPath: "<%= yeoman.app %>/images"
         httpGeneratedImagesPath: "/images/generated"
-        httpFontsPath: "/styles/fonts"
+        httpFontsPath: "<%= yeoman.app %>/fonts"
         relativeAssets: false
         assetCacheBuster: false
         raw: "Sass::Script::Number.precision = 10\n"
@@ -338,7 +338,7 @@ module.exports = (grunt) ->
               "images/{,*/}*.{webp}"
               "fonts/*"
               "fonts/*"
-              "bower/*"
+              "lib/*"
               "data/*"
             ]
           }
@@ -435,9 +435,16 @@ module.exports = (grunt) ->
     'regex-replace':
       dist:
         actions:[
-          search: '/fonts/glyphicons'
-          replace: '../fonts/glyphicons'
-          flags: 'g'
+          {
+            search: '/fonts/glyphicons'
+            replace: '../fonts/glyphicons'
+            flags: 'g'
+          }
+          {
+            search: "#{__dirname}/.tmp"
+            replace: '..'
+            flags: 'g'
+          }
         ]
         src: [
           "<%= yeoman.dist %>/styles/mifan.css"
@@ -482,7 +489,7 @@ module.exports = (grunt) ->
         src: "<%= yeoman.dist %>"
         dest: "<%= yeoman.secret.path %>"
         exclusions: [
-          "<%= yeoman.dist %>/bower"
+          "<%= yeoman.dist %>/lib"
           "<%= yeoman.dist %>/fonts"
           "<%= yeoman.dist %>/images"
           "<%= yeoman.dist %>/favicon.ico"
@@ -538,7 +545,7 @@ module.exports = (grunt) ->
     "autoprefixer"
     "concat"
     "ngmin"
-    "copy:dist"
+    "copy:dist"  
     "cdnify"
     "cssmin"
     "uglify"

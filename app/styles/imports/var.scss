@@ -30,12 +30,14 @@ $screen-xs-max:              ($screen-sm-min - 1) !default;
 $screen-sm-max:              ($screen-md-min - 1) !default;
 $screen-md-max:              ($screen-lg-min - 1) !default;
 
-$tone-color: #d43f3a;
+$tone-color: #c00;
 $tone: $tone-color;
 $black: #11171c;
 $light-black: #23282c;
 $white: #fff;
 $gray: #999;
 $bg: #e6e6e6;
+
+$bg: $white;
 
 $light-gray: #ddd;

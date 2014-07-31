@@ -3,12 +3,27 @@ button:focus,
 .btn,
 .btn:focus,
 input
-input:focus{
-	border-radius: 0;
+input:focus,
+.dropdown-menu{
+	border-radius: 2px;
 	outline: none;
 	-webkit-highlight: none;
 }
 
 .btn-danger{
 	background-color: $tone;
+}
+
+
+.dropdown-menu{
+	box-shadow: none;
+	min-width: 100px;
+}
+
+.input-lg,
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-addon, 
+.input-group-lg > .input-group-btn > .btn,
+.input-group-addon{
+	border-radius: 2px;
 }

@@ -13,7 +13,7 @@ Mifan.controller("headCtrl", function($scope) {
     switch ($scope.page) {
       case "home":
         return $scope.arrowNav = {
-          left: 20,
+          left: 23,
           hide: false
         };
       case "msg":

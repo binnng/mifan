@@ -1,24 +1,32 @@
+$header-height: 50px;
+
 .header{
 	//border-bottom: 1px solid #ddd;
 	margin-top: 0;
   margin-bottom: 0;
-  background: $light-black;
-  position: relative;
-  .container{
+  background: #eee;
+	line-height: $header-height;
+	position: fixed;
+	left: 0;
+	width: 100%;
+	top: 0;
+	z-index: 88;
+
+	.container{
   	position: relative;
-  	padding: 6px 0 4px;
+  	padding: 0;
   }
   .logo,
   .nav{
   	display: inline-block;
   }
 	.logo{
-		font-size: 2.4em;
+		font-size: 1.4em;
 		margin: 0;
-		//background-color: $tone;
+		background-color: $tone;
 		//width: 100px;
 		//height: 100px;
-		line-height: 50px;
+		line-height: $header-height;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -26,14 +34,15 @@
 		z-index: 88;
 		//@include box-shadow(0, 0, 10px);
     a{
-			color: $tone;
+			color: $white;
 			display: block;
 			height: 100%;
+			padding: 0 1em;
     	&:hover,
     	&:active,
     	&:visited{
     		text-decoration: none;
-				color: $tone;
+				color: $white;
     	}
     }
     small{
@@ -55,14 +64,16 @@
 
 	.nav{
 		vertical-align: bottom;
-		margin-left: 80px;
-		margin-top: -2px;
+		margin-left: 100px;
 		position: relative;
 		li{
 			margin: 0 6px;
+			a{
+				padding: 0 1em;
+			}
 			a,
 			a:visited{
-				color: $light-gray;
+				color: $gray;
 				background: transparent;
 			}
 			a:hover,
@@ -70,7 +81,7 @@
 			a.active,
 			a:focus{
 				background: transparent;
-				color: $white;
+				color: $tone;
 			}
 
 			&.active{
@@ -89,21 +100,32 @@
 			font-size: 26px;
 			position: absolute;
 			left: 20px;
-			top: 36px;
+			top: 45px;
 			left: 0;
+			border-color: transparent transparent $bg;
+			border-style: solid;
+			border-width: 0 6px 6px;
+			display: none !important;
 			@include transition(all, .3s, $easeOutCirc);
+			@include box-shadow(0, 0, 1px, rgba(#000, .2), inset);
 		}
 	}
 
 	.login,
 	.username{
-		margin-top: 10px;
+		margin-right: 1.6em;
+		position: relative;
+		z-index: 88;
 	}
 
 	.login{
+		.sm-user{
+			a{
+				margin: 0 10px;
+			}
+		}
 		.xs-user{
 			font-size: 1.2em;
-			margin: -2px 10px 0 0;
 			display: none;
 		}
 	}
@@ -142,18 +164,11 @@
 			}
 		}
 	}
-	&:after{
-		-webkit-mask-box-image: -webkit-gradient(linear,left top,right top,color-stop(0.0,rgba(0,0,0,0)),color-stop(0.5,rgba(0,0,0,.8)),color-stop(1.0,rgba(0,0,0,0)));
-		//@include background-gradient(rgba(0, 0, 0, .4), transparent);
-		background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .4)), to(transparent));
-		background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .4), transparent);
-		background-image: linear-gradient(top, rgba(0, 0, 0, .4), transparent);
+	&:after {
 		content: "";
 		display: block;
-		height: 5px;
-		width: 100%;
-		position: absolute;
-		bottom: -5px;
+		height: 1px;
+		background-color: $light-gray;
 	}
 
 	

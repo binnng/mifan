@@ -14,7 +14,7 @@ Mifan.controller "headCtrl", ($scope) ->
   
     switch $scope.page
       when "home"
-        $scope.arrowNav = left: 20, hide: no
+        $scope.arrowNav = left: 23, hide: no
       when "msg"
         $scope.arrowNav = left: 90, hide: no
       when "me"

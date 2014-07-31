@@ -1,5 +1,5 @@
 .home-page{
-	padding-top: 2.4em;
+	padding-top: 20px;
 	
 	.separate-row{
 		height: 100%;
@@ -9,7 +9,9 @@
 
   	max-width: 600px;
   	margin: 0 auto;
-		.nav,
+  	.nav{
+  		padding: 4px;
+  	}
 		.feed-content{
 			background-color: $white;
 			padding: 20px;
@@ -99,7 +101,6 @@
 		}
 
 		.nav{
-			margin-top: 16px;
 			
 			li{
 				a{
@@ -243,10 +244,10 @@
 			.ans-num{
 				width: 60px;
 				height: 60px;
-				background: #428bca;
+				background: $tone;
 				color: #fff;
 				margin-right: 1em;
-				border-radius: 3px;
+				border-radius: 2px;
 				span,
 				b{
 					display: block;
@@ -268,6 +269,11 @@
 				}
 			}
 		}
+	}
+
+
+	.feed-wrap{
+		margin-top: 26px;
 	}
 }
 

@@ -167,9 +167,9 @@ module.exports = function(grunt) {
         javascriptsDir: "<%= yeoman.app %>/scripts",
         fontsDir: "<%= yeoman.app %>/styles/fonts",
         importPath: "<%= yeoman.app %>/styles/imports",
-        httpImagesPath: "/images",
+        httpImagesPath: "<%= yeoman.app %>/images",
         httpGeneratedImagesPath: "/images/generated",
-        httpFontsPath: "/styles/fonts",
+        httpFontsPath: "<%= yeoman.app %>/fonts",
         relativeAssets: false,
         assetCacheBuster: false,
         raw: "Sass::Script::Number.precision = 10\n"
@@ -287,7 +287,7 @@ module.exports = function(grunt) {
             dot: true,
             cwd: "<%= yeoman.app %>",
             dest: "<%= yeoman.dist %>",
-            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "fonts/*", "bower/*", "data/*"]
+            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "fonts/*", "lib/*", "data/*"]
           }, {
             expand: true,
             cwd: ".tmp/images",
@@ -347,6 +347,10 @@ module.exports = function(grunt) {
             search: '/fonts/glyphicons',
             replace: '../fonts/glyphicons',
             flags: 'g'
+          }, {
+            search: "" + __dirname + "/.tmp",
+            replace: '..',
+            flags: 'g'
           }
         ],
         src: ["<%= yeoman.dist %>/styles/mifan.css"]
@@ -388,7 +392,7 @@ module.exports = function(grunt) {
         },
         src: "<%= yeoman.dist %>",
         dest: "<%= yeoman.secret.path %>",
-        exclusions: ["<%= yeoman.dist %>/bower", "<%= yeoman.dist %>/fonts", "<%= yeoman.dist %>/images", "<%= yeoman.dist %>/favicon.ico", "<%= yeoman.dist %>/.htaccess", "<%= yeoman.dist %>/robots.txt"],
+        exclusions: ["<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts", "<%= yeoman.dist %>/images", "<%= yeoman.dist %>/favicon.ico", "<%= yeoman.dist %>/.htaccess", "<%= yeoman.dist %>/robots.txt"],
         serverSep: "/",
         concurrency: 4,
         progress: true
