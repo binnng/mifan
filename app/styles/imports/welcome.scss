@@ -1,0 +1,75 @@
+.page-welcome{
+
+	background-color: #fff;
+	padding: 6em 0;
+
+	.ad{
+		border-radius: 4px;
+		background-color: $tone-color;
+	}
+
+	.log-reg{
+		max-width: 300px;
+		.input-group-addon,
+		input{
+			border-radius: 0;
+			box-shadow: none;
+		}
+		.slider-box{
+			overflow: hidden;
+		}
+		.login,
+		.reg{
+			float: left;
+			width: 50%;
+		}
+		.slider{
+			width: 200%;
+			overflow: hidden;
+			position: relative;
+			left: 0;
+			@include transition(all, .9s, $easeOutCirc);
+			&.loging{
+				left: -100%;
+			}
+		}
+	}
+
+	.log-reg-btn{
+		
+	}
+
+	form{
+		position: relative;
+	}
+
+	button[type="submit"]{
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		z-index: 2;
+	}
+
+	.glyphicon-refresh{
+		-webkit-animation-name: rotate;
+		animation-name: rotate;
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.page-welcome{
+		padding: 1em 0;
+		.log-reg{
+			max-width: none;
+			margin-top: 2em;
+
+			.slider{
+				@include transform(translate(0, 0));
+				&.loging{
+					left: 0;
+					@include transform(translate(-50%, 0));
+				}
+			}
+		}
+	}
+}

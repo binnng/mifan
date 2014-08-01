@@ -1,34 +1,40 @@
-<div class="header clearfix">
-	<div class="container">
-		<div class="login pull-right" ng-if="!username"><span class="btn-link">登录or注册</span></div>
-		<div class="username pull-right dropdown hidden-xs" ng-if="username" >
+<div class="header clearfix" ng-controller="headCtrl">
+
+	<div class="head-inner">
+		<div class="login pull-right" ng-show="!username">
+			<span class="sm-user"><a href="#!/login">登录</a> | <a href="#!/register">注册</a></span>
+			<span class="glyphicon glyphicon-user xs-user"></span>
+		</div>
+		<div ng-class="{open: dropdownOpen}" class="username pull-right dropdown" ng-show="username" ng-click="toggleDropdown()">
 			<span class="dropdown-label" id="username-lable" data-toggle="dropdown">{{username}}</span>
 			<span class="caret"></span>
 
 			<ul class="dropdown-menu" role="menu" aria-labelledby="username-lable">
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-search"></span>找人</a></li>
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-phone-alt"></span>反馈</a></li>
+		    <li><a href="#!/"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
+		    <li><a href="#!/"><span class="glyphicon glyphicon-search"></span>找人</a></li>
+		    <li><a href="#!/"><span class="glyphicon glyphicon-phone-alt"></span>反馈</a></li>
 		    <li><a ng-click="support()"><span class="glyphicon glyphicon-thumbs-up"></span>32个赞</a></li>
-		    <li><a href="/#!/"><span class="glyphicon glyphicon-off"></span>登出</a></li>
+		    <li><a href="#!/"><span class="glyphicon glyphicon-off"></span>登出</a></li>
 		  </ul>
 		</div>
-    <h3 class="logo hidden-xs">
-    	<a href="/#!/home">
-    		米饭
-    	</a>
-    	<a href="/#!/support" ng-if="false">
+    <h3 class="logo">
+    	<a href="#!/home">米饭</a>
+    	<a href="#!/support" ng-if="false">
 	  		<small>
 	  			<span class="glyphicon glyphicon-thumbs-up"></span>
 	  			<span>{{supportNum}}</span>
 	  		</small>
 	  	</a>
     </h3>
-    <ul class="nav nav-pills">
-      <li class="{{currentPage === 'home' ? 'active' : ''}}"><a ng-href="/#!/home">首页</a></li>
-      <li class="{{currentPage === 'msg' ? 'active' : ''}}"><a ng-href="/#!/msg">消息</a></li>
-      <li class="{{currentPage === 'me' ? 'active' : ''}}"><a ng-href="/#!/me">个人主页</a></li>
-      <li class="{{currentPage === 'friend' ? 'active' : ''}}"><a ng-href="/#!/friend">朋友</a></li>
-    </ul>
-  </div>
+		<div class="container">
+	    <ul class="nav nav-pills">
+	      <li ng-class="{active: page === 'home'}"><a ng-href="#!/home">首页</a></li>
+	      <li ng-class="{active: page === 'msg'}"><a ng-href="#!/msg">消息</a></li>
+	      <li ng-class="{active: page === 'me'}"><a ng-href="#!/me">个人主页</a></li>
+	      <li ng-class="{active: page === 'friend'}"><a ng-href="#!/friend">朋友</a></li>
+	    	<span class="arrow" ng-style="{'-webkit-transform': 'translateX(' + arrowNav.left + 'px)', 'left': arrowNav.left + 'px'}" ng-hide="arrowNav.hide"></span>
+	    </ul>
+		</div>
+
+	</div>
 </div>

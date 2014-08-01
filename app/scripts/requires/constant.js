@@ -3,7 +3,7 @@
 /*
 @type {Document}
  */
-var ACTIVE, CLICK, DOC, IsAndroid, IsBlackBerry, IsIE, IsIEMobile, IsIOS, IsIPad, IsIPhone, IsTouch, IsWeixin, IsWindowsPhone, NA, UA, WIN;
+var ACTIVE, CLICK, DOC, IsAndroid, IsBlackBerry, IsChrome, IsIE, IsIEMobile, IsIOS, IsIPad, IsIPhone, IsTouch, IsWeixin, IsWindowsPhone, NA, NG, UA, WIN;
 
 DOC = document;
 
@@ -100,6 +100,15 @@ IsIE = !!DOC.all;
 
 IsWeixin = /MicroMessenger/i.test(UA);
 
+
+/*
+@type {boolean}
+ */
+
+IsChrome = !!WIN['chrome'];
+
 CLICK = "click";
 
 ACTIVE = "active";
+
+NG = WIN['angular'];

@@ -1,12 +1,24 @@
 "use strict"
 
+Mifan = angular.module "mifan", [
+  "ngCookies"
+  "ngResource"
+  "ngSanitize"
+  "ngRoute"
+]
+
 Mifan.config ($routeProvider, $locationProvider) ->
-  $locationProvider.html5Mode(false).hashPrefix "!"
+  $locationProvider.html5Mode(no).hashPrefix "!"
+
   $routeProvider
     .when("/",
       redirectTo: "/home"
     )
     .when("/home",
+      templateUrl: "views/home.html"
+      controller: "homeCtrl"
+    )
+    .when("/home/:type",
       templateUrl: "views/home.html"
       controller: "homeCtrl"
     )
@@ -21,6 +33,14 @@ Mifan.config ($routeProvider, $locationProvider) ->
     .when("/welcome",
       templateUrl: "views/welcome.html"
       controller: "welcomeCtrl"
+    )
+    .when("/login",
+      templateUrl: "views/login.html"
+      controller: "loginCtrl"
+    )
+    .when("/register",
+      templateUrl: "views/register.html"
+      controller: "registerCtrl"
     )
     .otherwise
       templateUrl: "views/404.html"

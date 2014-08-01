@@ -1,5 +1,5 @@
 .home-page{
-	padding-top: 2.4em;
+	padding-top: 20px;
 	
 	.separate-row{
 		height: 100%;
@@ -7,25 +7,111 @@
 
 	.main{
 
-		.ask-ques-form{
-			textarea{
-				height: 5em;
-				display: block;
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
+  	max-width: 600px;
+  	margin: 0 auto;
+  	.nav{
+  		padding: 4px;
+  	}
+		.feed-content{
+			background-color: $white;
+			padding: 20px;
+		}
+		.ask-ques{
+			padding: 200px 14px 30px;
+			background-color: $white;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: top center;
+			position: relative;
+
+			&.active{
+				.toolbar,
+				.ask-ques-form{
+					opacity: 1 !important;
+				}
 			}
 
-			button[type="submit"]{
-				height: 5em;
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
+			.location{
+				position: absolute;
+				top: 20px;
+				color: $white;
+				@include text-shadow();
+				padding-left: 4px;
+			}
+		}
+		.ask-ques-form{
+			opacity: .95;
+			position: relative;
+			@include transition(all, .2s);
+			textarea{
+				height: 6em;
+				display: block;
+				border-radius: 0;
+				border: none;
+				box-shadow: none;
+			}
+
+			.arrow{
+				color: $white;
+				position: absolute;
+				font-size: 24px;
+				left: 20px;
+				bottom: -18px;
+			}
+
+			.avatar{
+				display: block;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background-size: cover;
+				position: absolute;
+				left: 8px;
+				bottom: -62px;
+				border: 2px $white solid;
+			}
+			
+			.toolbar{
+				float: right;
+				margin-top: 10px;
+				opacity: 0;
+				@include transition(all, .2s);
+
+				.cancel{
+					color: $white;
+					@include text-shadow();
+					padding: 0 10px;
+					display: inline-block;
+					cursor: pointer;
+				}
+
+				button[type="submit"]{
+					padding-left: 30px;
+					padding-right: 34px;
+
+					.glyphicon-refresh{
+						-webkit-animation-name: rotate;
+						animation-name: rotate;
+					}
+					//height: 5em;
+					//border-top-left-radius: 0;
+					//border-bottom-left-radius: 0;
+				}
 			}
 		}
 
 		.nav{
-			margin-top: 2em;
-
+			
 			li{
+				a{
+					color: $gray;
+					border: none;
+					&:hover,
+					&:active{
+						color: $black;
+						background: transparent;
+					}
+				}
 				b{
 					position: absolute;
 					top: 0;
@@ -39,6 +125,11 @@
 					display: block;
 					width: 8px;
 					height: 8px;
+				}
+				&.active{
+					a{
+						color: $tone;
+					}
 				}
 			}
 		}
@@ -81,7 +172,7 @@
 					-webkit-transition: all .4s ease-in-out;
 
 					&:hover{
-						background: #effaff;
+						//background: #effaff;
 					}
 
 					h3{
@@ -140,37 +231,107 @@
 	}
 
 	.side{
+		background-color: $white;
+		padding: 24px;
+		margin-left: 3em;
+		max-width: 300px;
+		margin: 0 auto;
 		.side-block{
 			margin-bottom: 2em;
 		}
-		.every-day-ask{
+	}
+	.every-day-ask{
+		color: #555;
+		.ans-num{
+			width: 60px;
+			height: 60px;
+			background: $tone;
+			color: #fff;
+			margin-right: 1em;
+			border-radius: 2px;
+			span,
+			b{
+				display: block;
+				line-height: 2;
+				text-align: center;
+			}
+			b{
+				font-size: 1.2em;
+			}
+		}
+		.content{
 			color: #555;
+			display: block;
+			overflow: hidden;
+			text-align: justify;
+			&:hover,
+			&:active{
+				color: #111;
+			}
+		}
+	}
+
+
+	.feed-wrap{
+		margin-top: 26px;
+	}
+}
+
+@media (max-width: $screen-md-max) and (min-width: $screen-sm-max) {
+	.home-page{
+		.side{
+			margin-left: 1.8em;
+		}
+	}
+}
+
+@media (max-width: $screen-sm-max) {
+  .home-page{
+  	padding-top: 4px;
+  }
+}
+
+@media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
+	.home-page{
+		.side{
+			margin-left: 1.4em;
+		}
+
+		.every-day-ask{
 			.ans-num{
-				width: 60px;
-				height: 60px;
-				background: #428bca;
-				color: #fff;
-				margin-right: 1em;
-				border-radius: 3px;
+				float: none !important;
+				display: block;
+				width: 100%;
+				text-align: center;
+				line-height: 40px;
+				height: auto;
+				margin-bottom: 1em;
 				span,
 				b{
-					display: block;
-					line-height: 2;
-					text-align: center;
-				}
-				b{
-					font-size: 1.2em;
+					display: inline;
 				}
 			}
-			.content{
-				color: #555;
-				display: block;
-				overflow: hidden;
-				text-align: justify;
-				&:hover,
-				&:active{
-					color: #111;
-				}
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.home-page{
+		.main{
+			
+		}
+		.side{
+			margin-top: 2em;
+			max-width: 600px;
+		}
+	}
+}
+@media (max-width: $screen-xs) {
+	.home-page{
+		.main{
+			
+			.ask-ques{
+				padding-top: 100px;
 			}
 		}
 	}

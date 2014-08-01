@@ -73,5 +73,12 @@ IsIE = !!DOC.all
 ###
 IsWeixin = /MicroMessenger/i.test(UA)
 
+###
+@type {boolean}
+###
+IsChrome = !!WIN['chrome']
+
 CLICK = "click"
 ACTIVE = "active"
+
+NG = WIN['angular']

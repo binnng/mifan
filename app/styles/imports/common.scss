@@ -32,17 +32,153 @@ a,
   }
 }
 
-.main-mifan-view{
-  overflow: hidden;
+html,
+body{
+  background-color: $bg;
 }
 
-.row{
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 0;
-  padding-right: 0;
+.main-view{
+  overflow: hidden;
+  margin-top: 70px;
 }
 
 .root{
-  padding: 10px 0;
+  
 }
+
+// 动画
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes rotate{
+  0%{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100%{
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate{
+  0%{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100%{
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+// 加载动画
+.ui-loading,
+.ui-loading:after,
+.ui-loading:before {
+  width:5px;
+  height:10px;
+  -webkit-animation:ui-loading 1.4s infinite linear;
+  animation:ui-loading 1.4s infinite linear;
+  background: $tone;
+}
+.ui-loading {
+  display: none;
+  padding:0!important;
+  opacity:.1;
+  -webkit-animation-delay:.6s;
+  animation-delay:.6s;
+  position: absolute;
+  top: 50%;
+  margin: -5px 0 0 -3px;
+  left: 50%;
+}
+.ui-loading:after,
+.ui-loading:before {
+  content:"";
+  position:absolute
+}
+.ui-loading:after {
+  margin-right:auto;
+  left:-6px;
+  -webkit-animation-delay:.3s;
+  animation-delay:.3s;
+}
+.ui-loading:before {
+  margin-right:auto;
+  left:6px;
+  -webkit-animation-delay:.9s;
+  animation-delay:.9s;
+}
+
+// 标准的loading HTML结构
+// <div class="load-more [loading]"><span class="loading-tip">加载更多</span><i class="ui-loading"></i></div>
+.loading > .ui-loading{
+  display: block;
+}
+
+.loading > .loading-tip{
+  visibility: hidden;
+}
+
+@-webkit-keyframes ui-loading {
+  0%,100% {
+    opacity:.1
+  }
+  30% {
+    opacity:1
+  }
+}
+
+@keyframes ui-loading {
+  0%,100% {
+    opacity:.1
+  }
+  30% {
+    opacity:1
+  }
+}
+
+// 加载更多
+.load-more{
+  text-align: center;
+  padding: 10px;
+  color: $tone;
+  cursor: pointer;
+  font-size: 1em;
+  position: relative;
+  margin-top: 12px;
+  &:hover,
+  &:active{
+    background-color: $light-gray;
+  }
+  &.loading{
+    cursor: auto;
+    &:hover,
+    &:active{
+      background-color: transparent;
+    }
+  }
+}
+
+.sd-card{
+  //@include box-shadow(0, 0, 0, rgba(#000, .3));
+  border: 1px solid rgba(#000, .1);
+}
+
+
+// 响应式
+@media (max-width: $screen-xs-max) {
+  .main-view{
+    margin-top: 90px;
+  }
+}
+

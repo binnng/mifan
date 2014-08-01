@@ -1,6 +1,6 @@
 "use strict"
 Mifan.controller "msgCtrl", ($scope) ->
   
-  $scope.$on "$viewContentLoaded", -> Common.setCurrentPage("msg")
+  $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "msg"
 
   no

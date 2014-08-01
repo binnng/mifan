@@ -1,7 +1,6 @@
 
 Mifan.controller "homeReply", ($scope) ->
-	$scope.content = "huifuwode"
-	console.log "huifuwode"
+	$scope.content = "回应我的"
+	console.log "回应我的"
 
-	homeCtrlScope = angular.element('.home-page').scope()
-	homeCtrlScope.remind.replyNum = 0
+	$scope.$emit "clearReplyRemind"

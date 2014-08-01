@@ -32,7 +32,12 @@
     "karma": "~0.12.16",
     "karma-jasmine": "~0.2.2",
     "grunt-ng-template": "~0.1.1",
-    "ip": "~0.3.0"
+    "ip": "~0.3.0",
+    "grunt-regex-replace": "~0.2.6",
+    "grunt-contrib-rename": "0.0.3",
+    "md5": "~1.0.0",
+    "grunt-sftp-deploy": "~0.2.1",
+    "grunt-open": "~0.2.3"
   },
   "engines": {
     "node": ">=0.10.0"

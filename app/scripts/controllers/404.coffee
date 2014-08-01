@@ -8,7 +8,7 @@ Mifan.controller "404Ctrl", ($scope) ->
     "Karma"
   ]
 
-  $scope.$on "$viewContentLoaded", -> Common.setCurrentPage("404")
+  $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "404"
 	  
 
   no
