@@ -7,6 +7,7 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   DOC = document
   WIN = window
+  BODY = DOC['body']
 
   ###
   设备是否支持触摸事件
@@ -41,6 +42,7 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   $scope.WIN = WIN
   $scope.DOC = DOC
+  $scope.BODY = BODY
 
 
   # 设备
@@ -58,3 +60,9 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   $scope.IsChrome = IsChrome
   $scope.IsIE = IsIE
+
+
+
+
+
+

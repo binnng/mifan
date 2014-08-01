@@ -18,3 +18,9 @@
     }
   }
 }
+
+@media (max-width: $screen-xs-max) {
+  .footer{
+    padding: 10px 0;
+  }
+}

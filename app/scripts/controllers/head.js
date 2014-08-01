@@ -38,5 +38,7 @@ Mifan.controller("headCtrl", function($scope) {
         };
     }
   });
-  return false;
+  return $scope.toggleMMenu = function() {
+    return $scope.$emit("toggleMMenu");
+  };
 });

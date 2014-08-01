@@ -1,0 +1,98 @@
+.m-menu-open{
+
+	overflow: hidden;
+	color: $white;
+
+	.m-body{
+		//padding-top: 0;
+		@include transform(translate(-160px, 0));
+		@include box-shadow(2px, 0, 8px, rgba($black, .9));
+	}
+
+
+	.m-menu{
+		//display: block;
+		@include transform(translate(0, 0));
+	}
+
+	.header{
+		.user-m-menu{
+  		background-color: $light-gray;
+
+		}
+	}
+
+}
+
+.m-menu{
+	background-color: $dark-gray;
+	position: absolute;
+	width: 160px;
+	//display: none;
+	//height: 800px;
+	top: 0;
+	right: 0;
+
+	padding-top: 16px;
+
+	//@include transform(translate(160px, 0));
+
+
+	.log-reg{
+		text-align: center;
+		a{
+			//display: inline-block;
+			padding: .4em 0;
+			margin: .4em .8em;
+			font-size: 1.1em;
+		}	}
+
+	.user{
+
+	}
+
+
+
+	.reg-logo,
+	.user-avatar{
+		display: block;
+		width: 80px;
+		height: 80px;
+		margin: 10px auto 30px auto;
+		border-radius: 999px;
+		background-color: $tone;
+		font-size: 3em;
+		line-height: 80px;
+	}
+
+	.user-avatar{
+		text-indent: -999em;
+	}
+
+	.user-menu{
+		padding: 0 1.4em;
+		li{
+			padding: 6px;
+			margin: 2px 0;
+			//border-bottom: 1px $black solid;
+			.glyphicon{
+				margin-right: 4px;
+			}
+			
+			border-radius: 2px;
+
+			&:active{
+
+				background-color: $light-black;
+
+			}
+		}
+	}
+
+}
+
+.m-body,
+.m-menu{
+
+  @include transition(all, .2s, ease-in-out);
+}

@@ -1,17 +1,16 @@
 $header-height: 50px;
 
 .header{
-	//border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #ccc;
 	margin-top: 0;
   margin-bottom: 0;
   background: #eee;
-	line-height: $header-height;
 	position: fixed;
 	left: 0;
 	width: 100%;
 	top: 0;
 	z-index: 88;
-
+	opacity: .95;
 	.container{
   	position: relative;
   	padding: 0;
@@ -23,7 +22,7 @@ $header-height: 50px;
 	.logo{
 		font-size: 1.4em;
 		margin: 0;
-		background-color: $tone;
+		//background-color: $tone;
 		//width: 100px;
 		//height: 100px;
 		line-height: $header-height;
@@ -34,7 +33,7 @@ $header-height: 50px;
 		z-index: 88;
 		//@include box-shadow(0, 0, 10px);
     a{
-			color: $white;
+			color: $tone;
 			display: block;
 			height: 100%;
 			padding: 0 1em;
@@ -42,7 +41,7 @@ $header-height: 50px;
     	&:active,
     	&:visited{
     		text-decoration: none;
-				color: $white;
+				color: $tone;
     	}
     }
     small{
@@ -66,27 +65,27 @@ $header-height: 50px;
 		vertical-align: bottom;
 		margin-left: 100px;
 		position: relative;
+		margin-top: 10px;
 		li{
 			margin: 0 6px;
 			a{
-				padding: 0 1em;
+				padding: 6px 1em;
 			}
 			a,
 			a:visited{
 				color: $gray;
-				background: transparent;
 			}
 			a:hover,
 			a:active,
-			a.active,
 			a:focus{
-				background: transparent;
 				color: $tone;
+				background-color: #ddd;
 			}
 
 			&.active{
 				a{
-					color: $tone;
+					background-color: $tone;
+					color: $white;
 				}
 			}
 		}
@@ -95,20 +94,20 @@ $header-height: 50px;
 		// 在移动设备（Mobile）和chrome浏览器中设置transform偏移 -webkit
 		// 在其他情况中设置left值偏移
 		// 动画中transform性能优于left
-		.arrow{
-			color: $bg;
-			font-size: 26px;
-			position: absolute;
-			left: 20px;
-			top: 45px;
-			left: 0;
-			border-color: transparent transparent $bg;
-			border-style: solid;
-			border-width: 0 6px 6px;
-			display: none !important;
-			@include transition(all, .3s, $easeOutCirc);
-			@include box-shadow(0, 0, 1px, rgba(#000, .2), inset);
-		}
+		// .arrow{
+		// 	color: $bg;
+		// 	font-size: 26px;
+		// 	position: absolute;
+		// 	left: 20px;
+		// 	top: 45px;
+		// 	left: 0;
+		// 	border-color: transparent transparent $bg;
+		// 	border-style: solid;
+		// 	border-width: 0 6px 6px;
+		// 	display: none !important;
+		// 	@include transition(all, .3s, $easeOutCirc);
+		// 	@include box-shadow(0, 0, 1px, rgba(#000, .2), inset);
+		// }
 	}
 
 	.login,
@@ -116,6 +115,7 @@ $header-height: 50px;
 		margin-right: 1.6em;
 		position: relative;
 		z-index: 88;
+		line-height: $header-height;
 	}
 
 	.login{
@@ -123,10 +123,6 @@ $header-height: 50px;
 			a{
 				margin: 0 10px;
 			}
-		}
-		.xs-user{
-			font-size: 1.2em;
-			display: none;
 		}
 	}
 
@@ -164,12 +160,20 @@ $header-height: 50px;
 			}
 		}
 	}
-	&:after {
-		content: "";
-		display: block;
-		height: 1px;
-		background-color: $light-gray;
+
+
+	.user-m-menu{
+		font-size: 1.2em;
+		display: none;
+		padding: 0 .6em;
 	}
+
+	// &:after {
+	// 	content: "";
+	// 	display: block;
+	// 	height: 1px;
+	// 	background-color: $light-gray;
+	// }
 
 	
 }
@@ -182,8 +186,9 @@ $header-height: 50px;
 
 @media (max-width: $screen-xs-max) {
 	.header{
-		background-color: $tone;
+		background-color: $white;
 		line-height: 40px;
+		border-bottom: none;
 		.container{
 	  }
 
@@ -194,31 +199,74 @@ $header-height: 50px;
 
 	  .nav{
 	  	margin-left: 0;
-	  	background-color: $white;
+	  	background-color: $tone;
 	  	margin-top: 40px;
 	  	display: block;
 	  	padding: 0 .4em;
-	  	@include box-shadow(0 1px 3px rgba(0,0,0,.3),inset 0 -1px 0 rgba(255,255,255,.2));
 	  	li{
+	  		margin: 0 2px;
 	  		a{
 	  			padding: 0 .4em;
+	  			color: $white !important;
+	  			margin: 8px 0;
+					padding: 0 10px;
+					line-height: 2.2;
+	  		}
+
+				a:hover,
+				a:active,
+				a:focus{
+					background-color: $dark-tone;
+				}
+
+	  		&.active{
+	  			a{
+
+						background-color: $dark-tone;
+	  			}
 	  		}
 	  	}
 	  }
 
-	  .login{
+	  .login,
+	  .username{
+
 	  	position: absolute;
 	  	top: 0;
 	  	right: 0;
+	  	margin-right: 1em;
+	  }
+
+	  .login{
 	  	.sm-user{
 	  		display: none;
 	  	}
-	  	.xs-user{
-	  		display: block;
-	  		line-height: 40px;
-	  		color: $white;
+	  }
+
+
+	  .username{
+	  	.dropdown,
+	  	.dropdown-label,
+	  	.dropdown-menu,
+	  	.caret{
+				display: none;
 	  	}
 	  }
+
+
+  	.user-m-menu{
+  		display: block;
+  		line-height: 30px;
+  		color: $gray;
+  		
+  		border-radius: 2px;
+  		margin-top: 4px;
+
+  		//&:hover,
+  		&:active{
+  			background-color: $light-gray;
+  		}
+  	}
 	}
 }
 

@@ -40,4 +40,7 @@ $bg: #e6e6e6;
 
 $bg: $white;
 
+$dark-tone: darken($tone, 10%);
+
 $light-gray: #ddd;
+$dark-gray: darken($gray, 40%);

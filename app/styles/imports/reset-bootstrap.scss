@@ -43,6 +43,10 @@ input:focus,
 	margin-right: 0;
 }
 
+.nav-pills > li > a{
+	border-radius: 2px;
+}
+
 
 @media (max-width: $screen-xs) {
   .container{

@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="mifan" ng-controller="globalCtrl"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <title>米饭</title>
@@ -17,16 +17,20 @@
     <link rel="stylesheet" href="styles/background.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="mifan" ng-controller="globalCtrl">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
-    <div class="root" ng-controller="rootCtrl" ng-class="{ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile}">
+    <div class="root" ng-controller="rootCtrl" ng-class="{'m-menu-open': isMMenuOpen, ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile}" ng-style="{'min-height': rootHeight}">
 
-        <div ng-include="'views/head.html'"></div>
-        <div ng-view class="main-view"></div>
-        <div ng-include="'views/foot.html'"></div>
+        <div ng-include="'views/m-menu.html'" class="m-menu"></div>
+        
+        <div class="m-body" ng-style="{'min-height': clientHeight}">
+            <div ng-include="'views/head.html'"></div>
+            <div ng-view class="main-view"></div>
+            <div ng-include="'views/foot.html'"></div>
+        </div>
 
     </div>
 

@@ -294,7 +294,7 @@
 @media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
 	.home-page{
 		.side{
-			margin-left: 1.4em;
+			margin-left: .6em;
 		}
 
 		.every-day-ask{
@@ -323,6 +323,10 @@
 		.side{
 			margin-top: 2em;
 			max-width: 600px;
+		}
+
+		.feed-wrap{
+			margin-top: 10px;
 		}
 	}
 }
