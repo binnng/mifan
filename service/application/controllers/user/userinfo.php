@@ -50,7 +50,7 @@ class Userinfo extends REST_Controller
 	 */
 	public function user_get(){
     	
-		$this->hooks->_call_hook('acl_auth');
+		$this->hooks->call_hook('acl_auth');
 		
 		$userid = $this->get('id');
 		

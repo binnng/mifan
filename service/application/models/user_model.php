@@ -31,6 +31,7 @@ class User_model extends Base_model {
 	 * @return 	mix	成功返回当前用户信息，失败返回错误编码和提示
 	 */
 	public function checkUserLogin($email,$password,$data = null){
+		log_message('DEBUG','Functin --> checkUserLogin');
 		
 		$strUser = $this->_get_user_by_mail($email);		
 		if(!$strUser){
@@ -233,17 +234,25 @@ class User_model extends Base_model {
 	}
 	
 	/**
-	 * _get_user_access_token_by_id 通过userid获取user_access_token信息
+	 * _get_user_access_token_by_id 
+	 * 
+	 * 通过userid获取user_access_token信息,支持缓存
 	 * 
 	 * @param	int	$id	必选，用户id
 	 * 
 	 * @return 	array|false	成功返回user_info表信息，失败返回false
 	 */
 	function _get_user_access_token_by_id($id){
-		return $this->find('user_access_token',array(
-			'userid'	=>	$id,
-			'invalidate >'	=>	time(),
-		));
+		if(@$this->config->item('enable_cache')){
+			log_message('debug',$id);
+			log_message('debug','memcached-->'.$this->cache->get('access_token_'.$id));
+			return $this->cache->get('access_token_'.$id);
+		}else{
+			return $this->find('user_access_token',array(
+				'userid'	=>	$id,
+				'invalidate >'	=>	time(),
+			));
+		}
 	}
 	
 	/**
@@ -308,10 +317,26 @@ class User_model extends Base_model {
 		$data['lastdate'] = $this->session->userdata('lastdate');
 		$data['lastguid'] = $this->session->userdata('lastguid');
 		$data['invalidate'] = 	$this->session->userdata('invalidate');
+			
+		$this->_update_user_cache_by_id($userid);
 				
 		return $this->replace('user_access_token', $data ,array(
 			'userid' => $userid,
 		));
+	}
+	
+	function _update_user_cache_by_id($userid){
+		
+		$data['userid'] = $userid;
+		$data['accesstoken'] = $this->session->userdata('session_id');
+		$data['ip'] = $this->session->userdata('ip_address');
+		$data['user_agent'] = $this->session->userdata('user_agent');
+		$data['last_activity'] = $this->session->userdata('last_activity');
+		$data['lastdate'] = $this->session->userdata('lastdate');
+		$data['lastguid'] = $this->session->userdata('lastguid');
+		$data['invalidate'] = 	$this->session->userdata('invalidate');
+		
+		$result = $this->cache->save('access_token_'.$userid, $data, 7*24*60*60);
 	}
 		
 	function _GUID(){
