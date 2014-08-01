@@ -239,34 +239,34 @@
 		.side-block{
 			margin-bottom: 2em;
 		}
-		.every-day-ask{
-			color: #555;
-			.ans-num{
-				width: 60px;
-				height: 60px;
-				background: $tone;
-				color: #fff;
-				margin-right: 1em;
-				border-radius: 2px;
-				span,
-				b{
-					display: block;
-					line-height: 2;
-					text-align: center;
-				}
-				b{
-					font-size: 1.2em;
-				}
-			}
-			.content{
-				color: #555;
+	}
+	.every-day-ask{
+		color: #555;
+		.ans-num{
+			width: 60px;
+			height: 60px;
+			background: $tone;
+			color: #fff;
+			margin-right: 1em;
+			border-radius: 2px;
+			span,
+			b{
 				display: block;
-				overflow: hidden;
-				text-align: justify;
-				&:hover,
-				&:active{
-					color: #111;
-				}
+				line-height: 2;
+				text-align: center;
+			}
+			b{
+				font-size: 1.2em;
+			}
+		}
+		.content{
+			color: #555;
+			display: block;
+			overflow: hidden;
+			text-align: justify;
+			&:hover,
+			&:active{
+				color: #111;
 			}
 		}
 	}
@@ -277,6 +277,13 @@
 	}
 }
 
+@media (max-width: $screen-md-max) and (min-width: $screen-sm-max) {
+	.home-page{
+		.side{
+			margin-left: 1.8em;
+		}
+	}
+}
 
 @media (max-width: $screen-sm-max) {
   .home-page{
@@ -288,6 +295,22 @@
 	.home-page{
 		.side{
 			margin-left: 1.4em;
+		}
+
+		.every-day-ask{
+			.ans-num{
+				float: none !important;
+				display: block;
+				width: 100%;
+				text-align: center;
+				line-height: 40px;
+				height: auto;
+				margin-bottom: 1em;
+				span,
+				b{
+					display: inline;
+				}
+			}
 		}
 	}
 }

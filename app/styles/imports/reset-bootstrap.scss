@@ -27,3 +27,30 @@ input:focus,
 .input-group-addon{
 	border-radius: 2px;
 }
+
+.form-control,
+.form-control:focus{
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.form-control:focus {
+	border-color: #66afe9;
+	outline: 0;
+}
+
+.row{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+@media (max-width: $screen-xs) {
+  .container{
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .row{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

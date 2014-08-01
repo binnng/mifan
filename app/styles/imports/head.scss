@@ -174,68 +174,49 @@ $header-height: 50px;
 	
 }
 
-@media (max-width: $screen-sm) {
+@media (max-width: $screen-sm-max) {
 	.header{
-	  .nav{
-	  	margin-left: 110px;
-
-	  	li{
-	  		//margin: 0;
-
-	  		a{
-	  			
-	  		}
-	  	}
-	  }
-
-	  .login{
-	  	.sm-user{
-	  		margin-right: 10px;
-	  	}
-	  }
+	  
 	}
 }
 
-@media (max-width: $screen-xs) {
+@media (max-width: $screen-xs-max) {
 	.header{
+		background-color: $tone;
+		line-height: 40px;
 		.container{
-	  	padding: 10px 0 2px;
 	  }
 
 	  .logo{
-	  	height: 60px;
-	  	width: 60px;
-	  	font-size: 2em;
-	  	line-height: 60px;
-	  	//left: 30px;
+	  	font-size: 1em;
+	  	line-height: 40px;
 	  }
 
 	  .nav{
-	  	margin-left: 70px;
-
+	  	margin-left: 0;
+	  	background-color: $white;
+	  	margin-top: 40px;
+	  	display: block;
+	  	padding: 0 .4em;
+	  	@include box-shadow(0 1px 3px rgba(0,0,0,.3),inset 0 -1px 0 rgba(255,255,255,.2));
 	  	li{
-	  		margin: 0;
-
 	  		a{
-	  			padding: 10px 6px;
-
-	  			b{
-	  				display: none;
-	  			}
+	  			padding: 0 .4em;
 	  		}
-	  	}
-
-	  	.arrow{
-	  		display: none;
 	  	}
 	  }
 
 	  .login{
+	  	position: absolute;
+	  	top: 0;
+	  	right: 0;
 	  	.sm-user{
 	  		display: none;
 	  	}
 	  	.xs-user{
 	  		display: block;
+	  		line-height: 40px;
+	  		color: $white;
 	  	}
 	  }
 	}
@@ -243,13 +224,13 @@ $header-height: 50px;
 
 
 //根据设备设置不同的CSS
-.chrome,
-.mobile{
-	.header{
-		.nav{
-			.arrow{
-				left: 0 !important;
-			}
-		}
-	}
-}
+// .chrome,
+// .mobile{
+// 	.header{
+// 		.nav{
+// 			.arrow{
+// 				left: 0 !important;
+// 			}
+// 		}
+// 	}
+// }

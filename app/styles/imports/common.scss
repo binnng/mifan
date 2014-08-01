@@ -177,14 +177,8 @@ body{
 
 // 响应式
 @media (max-width: $screen-xs-max) {
-  .main-mifan-view{
-    margin-top: 20px;
+  .main-view{
+    margin-top: 90px;
   }
 }
 
-@media (max-width: $screen-xs) {
-  .container{
-    padding-left: 7px;
-    padding-right: 7px;
-  }
-}
