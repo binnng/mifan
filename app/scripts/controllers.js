@@ -256,8 +256,9 @@ Mifan.controller("loginCtrl", function($scope, $http, $cookieStore, $timeout) {
     return $scope.isLoging = false;
   };
   userLogin = function() {
+    $scope.isLoging = true;
     return $http({
-      method: "POST",
+      method: IsDebug ? "GET" : "POST",
       url: API.user,
       data: {
         user_email: $scope.email,
@@ -273,8 +274,9 @@ Mifan.controller("loginCtrl", function($scope, $http, $cookieStore, $timeout) {
   });
   $scope.isLoging = false;
   return $scope.onSubmit = function() {
-    $scope.isLoging = true;
-    return userLogin();
+    if ($scope.email && $scope.password) {
+      return userLogin();
+    }
   };
 });
 

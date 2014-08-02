@@ -71,8 +71,11 @@ Mifan.controller "loginCtrl", ($scope, $http, $cookieStore, $timeout) ->
 
 
   userLogin = ->
+
+    $scope.isLoging = yes
+
     $http(
-      method: "POST"
+      method: if IsDebug then "GET" else "POST"
       url: API.user
       data:
         user_email: $scope.email
@@ -90,9 +93,8 @@ Mifan.controller "loginCtrl", ($scope, $http, $cookieStore, $timeout) ->
   $scope.isLoging = no
 
   $scope.onSubmit = ->
-    $scope.isLoging = yes
 
-    userLogin()
+    userLogin() if $scope.email and $scope.password
 
 
 
