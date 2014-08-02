@@ -32,7 +32,7 @@ Mifan.controller("loginCtrl", function($scope, $http, $cookieStore, $timeout) {
       $scope.user.username = result["user"]["username"] || "";
       $scope.user.email = result["user"]["email"] || "";
       $scope.user.face = result["user"]["face"] || "";
-      $scope.user.sex = result["user"]["sex"] || "1cookieStore";
+      $scope.user.sex = result["user"]["sex"] || "1";
       $scope.user.blog = result["user"]["blog"] || "";
       $cookieStore.put("MifanUser", JSON.stringify($scope.user));
       LOC["href"] = "#!/";

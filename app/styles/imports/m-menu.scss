@@ -17,7 +17,6 @@
 
 
 	.m-menu{
-		display: block;
 		@include transform(translate(0, 0));
 	}
 
@@ -42,7 +41,6 @@
 	background-color: $dark-gray;
 	position: absolute;
 	width: 160px;
-	display: none;
 	//height: 800px;
 	top: 0;
 	right: 0;

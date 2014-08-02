@@ -37,7 +37,7 @@ Mifan.controller "loginCtrl", ($scope, $http, $cookieStore, $timeout) ->
       $scope.user.username = result["user"]["username"] or ""
       $scope.user.email = result["user"]["email"] or ""
       $scope.user.face = result["user"]["face"] or ""
-      $scope.user.sex = result["user"]["sex"] or "1cookieStore"
+      $scope.user.sex = result["user"]["sex"] or "1"
       $scope.user.blog = result["user"]["blog"] or ""
 
       $cookieStore.put "MifanUser", JSON.stringify $scope.user
