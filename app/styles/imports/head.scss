@@ -2,6 +2,7 @@ $header-height: 50px;
 
 .header{
 	border-bottom: 1px solid #ccc;
+
 	margin-top: 0;
   margin-bottom: 0;
   background: #eee;
@@ -66,6 +67,7 @@ $header-height: 50px;
 		margin-left: 100px;
 		position: relative;
 		margin-top: 10px;
+
 		li{
 			margin: 0 6px;
 			a{
@@ -165,7 +167,11 @@ $header-height: 50px;
 	.user-m-menu{
 		font-size: 1.2em;
 		display: none;
-		padding: 0 .6em;
+		padding: 0 .5em;
+		position: absolute;
+		right: .6em;
+		top: 0;
+		z-index: 8;
 	}
 
 	// &:after {
@@ -174,6 +180,18 @@ $header-height: 50px;
 	// 	height: 1px;
 	// 	background-color: $light-gray;
 	// }
+
+
+	+ .sprise{
+		font-weight: 700;
+		color: $tone;
+		position: absolute;
+		left: 50%;
+		top: 100px;
+		z-index: 1;
+		margin-left: -10px;
+		display: none;
+	}
 
 	
 }
@@ -184,11 +202,15 @@ $header-height: 50px;
 	}
 }
 
+
+// phone
+
 @media (max-width: $screen-xs-max) {
 	.header{
 		background-color: $white;
 		line-height: 40px;
-		border-bottom: none;
+		position: absolute;
+		border-bottom: 1px solid $dark-tone;
 		.container{
 	  }
 
@@ -203,6 +225,7 @@ $header-height: 50px;
 	  	margin-top: 40px;
 	  	display: block;
 	  	padding: 0 .4em;
+			border-top: 1px solid $dark-tone;
 	  	li{
 	  		margin: 0 2px;
 	  		a{
@@ -230,27 +253,7 @@ $header-height: 50px;
 
 	  .login,
 	  .username{
-
-	  	position: absolute;
-	  	top: 0;
-	  	right: 0;
-	  	margin-right: 1em;
-	  }
-
-	  .login{
-	  	.sm-user{
-	  		display: none;
-	  	}
-	  }
-
-
-	  .username{
-	  	.dropdown,
-	  	.dropdown-label,
-	  	.dropdown-menu,
-	  	.caret{
-				display: none;
-	  	}
+			display: none;
 	  }
 
 
@@ -260,12 +263,16 @@ $header-height: 50px;
   		color: $gray;
   		
   		border-radius: 2px;
-  		margin-top: 4px;
+  		margin-top: 5px;
 
   		//&:hover,
   		&:active{
   			background-color: $light-gray;
   		}
+  	}
+
+  	+ .sprise{
+  		display: block;
   	}
 	}
 }

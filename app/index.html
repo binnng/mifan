@@ -7,11 +7,12 @@
     <meta charset="utf-8">
     <title>米饭</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css({.tmp,app}) styles/mifan.css -->
     <!-- bower:css -->
     <!-- endbower -->
+    <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/bootstrap.css" />
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/background.css">
@@ -22,14 +23,20 @@
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
-    <div class="root" ng-controller="rootCtrl" ng-class="{'m-menu-open': isMMenuOpen, ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile}" ng-style="{'min-height': rootHeight}">
+    <div class="root" ng-controller="rootCtrl" ng-class="{'m-menu-open': isMMenuOpen, ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile}">
 
         <div ng-include="'views/m-menu.html'" class="m-menu"></div>
         
-        <div class="m-body" ng-style="{'min-height': clientHeight}">
+        <div class="m-body">
             <div ng-include="'views/head.html'"></div>
-            <div ng-view class="main-view"></div>
-            <div ng-include="'views/foot.html'"></div>
+            <div class="m-wrap">
+                <div ng-view class="main-view"></div>
+                <div ng-include="'views/foot.html'"></div>
+            </div>
+
+            <!-- 遮罩 -->
+            <div class="m-menu-mask" ng-click="toggleMMenu()" ng-show="isMMenuOpen"></div>
+            <div class="m-mask"></div>
         </div>
 
     </div>

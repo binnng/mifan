@@ -2,6 +2,12 @@
 
 	overflow: hidden;
 	color: $white;
+	
+	// 侧边栏展开时，禁止页面滚动
+	.m-wrap{
+		overflow-y: hidden;
+    -webkit-overflow-scrolling: none;
+	}
 
 	.m-body{
 		//padding-top: 0;
@@ -15,6 +21,10 @@
 		@include transform(translate(0, 0));
 	}
 
+	.m-menu-mask{
+		display: block;
+	}
+
 	.header{
 		.user-m-menu{
   		background-color: $light-gray;
@@ -22,6 +32,10 @@
 		}
 	}
 
+}
+
+.m-menu-inn{
+	
 }
 
 .m-menu{
@@ -40,12 +54,34 @@
 
 	.log-reg{
 		text-align: center;
-		a{
-			//display: inline-block;
-			padding: .4em 0;
-			margin: .4em .8em;
-			font-size: 1.1em;
-		}	}
+		.logo{
+			color: $white;
+		}
+		.link{
+			a{
+				display: inline-block;
+				padding: .4em 1em;
+				//margin: .4em 0;
+				font-size: 1.1em;
+				background-color: $light-gray;
+				color: $dark-gray;
+				&:active,
+				&.active{
+					color: $tone;
+				}
+			}
+		}
+
+		.reg{
+			margin-left: -4px;
+			border-radius: 0 2px 2px 0;
+			border-left: 1px solid $gray;
+		}
+
+		.log{
+			border-radius: 2px 0 0 2px;
+		}
+	}
 
 	.user{
 
@@ -53,7 +89,7 @@
 
 
 
-	.reg-logo,
+	.logo,
 	.user-avatar{
 		display: block;
 		width: 80px;

@@ -9,7 +9,7 @@ Mifan.controller("headCtrl", function($scope) {
     return alert(1);
   };
   $scope.arrowNav = {};
-  $scope.$watch("page", function() {
+  return $scope.$watch("page", function() {
     switch ($scope.page) {
       case "home":
         return $scope.arrowNav = {
@@ -38,7 +38,4 @@ Mifan.controller("headCtrl", function($scope) {
         };
     }
   });
-  return $scope.toggleMMenu = function() {
-    return $scope.$emit("toggleMMenu");
-  };
 });

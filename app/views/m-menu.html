@@ -1,21 +1,17 @@
-<div class="m-menu-inn" ng-style="{height: clientHeight}" ng-controller="mMenuCtrl">
+<div class="m-menu-inn" ng-controller="mMenuCtrl">
 
 	<!-- 未登录 -->
 	<div class="log-reg" ng-show="!username">
-		<b class="reg-logo">米</b>
-		<a href="#!/login" ng-click="hideMMenu()">登录</a>
-		<a href="#!/register" ng-click="hideMMenu()">注册</a>
+		<a href="#!/home" ng-click="hideMMenu()" class="logo">米</a>
+		<div class="link">
+			<a href="#!/login" ng-click="hideMMenu()" class="log" ng-class="{active: page=='login'}">登录</a>
+			<a href="#!/register" ng-click="hideMMenu()" class="reg" ng-class="{active: page=='register'}">注册</a>
+		</div>
 	</div>
 
 	<!-- 登录 -->
 	<div class="user" ng-show="username">
 		<b class="user-avatar">{{username}}</b>
-		<ul class="user-menu" ng-click="hideMMenu()">
-	    <li><a href="#!/"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
-	    <li><a href="#!/"><span class="glyphicon glyphicon-search"></span>找人</a></li>
-	    <li><a href="#!/"><span class="glyphicon glyphicon-phone-alt"></span>反馈</a></li>
-	    <li><a ng-click="support()"><span class="glyphicon glyphicon-thumbs-up"></span>32个赞</a></li>
-	    <li><a href="#!/"><span class="glyphicon glyphicon-off"></span>登出</a></li>
-	  </ul>
+		<usermenu class="user-menu" ng-click="hideMMenu()">
 	</div>
 </div>

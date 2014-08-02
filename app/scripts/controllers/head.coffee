@@ -23,5 +23,3 @@ Mifan.controller "headCtrl", ($scope) ->
         $scope.arrowNav = left: 260, hide: no
       else
         $scope.arrowNav = left: 0, hide: yes
-
-  $scope.toggleMMenu = -> $scope.$emit "toggleMMenu"

@@ -3,25 +3,18 @@
 	<div class="head-inner">
 		<div class="login pull-right" ng-show="!username">
 			<span class="sm-user"><a href="#!/login">登录</a> | <a href="#!/register">注册</a></span>
-
-			<!-- 小人，切换手机菜单栏 -->
-			<span class="glyphicon glyphicon-user user-m-menu" ng-click="toggleMMenu()"></span>
 		</div>
 		<div ng-class="{open: dropdownOpen}" class="username pull-right dropdown" ng-show="username" ng-click="toggleDropdown()">
 			<span class="dropdown-label" data-toggle="dropdown">{{username}}</span>
 			<span class="caret"></span>
 
-			<ul class="dropdown-menu" role="menu" aria-labelledby="username-lable">
-		    <li><a href="#!/"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
-		    <li><a href="#!/"><span class="glyphicon glyphicon-search"></span>找人</a></li>
-		    <li><a href="#!/"><span class="glyphicon glyphicon-phone-alt"></span>反馈</a></li>
-		    <li><a ng-click="support()"><span class="glyphicon glyphicon-thumbs-up"></span>32个赞</a></li>
-		    <li><a href="#!/"><span class="glyphicon glyphicon-off"></span>登出</a></li>
-		  </ul>
+			<usermenu class="dropdown-menu" role="menu" aria-labelledby="username-lable">
 			
-			<!-- 小人，切换手机菜单栏 -->
-		  <span class="glyphicon glyphicon-user user-m-menu" ng-click="toggleMMenu()"></span>
 		</div>
+
+		<!-- 小人，切换手机菜单栏 -->
+		<span class="glyphicon glyphicon-user user-m-menu" ng-click="toggleMMenu()"></span>
+
     <h3 class="logo">
     	<a href="#!/home">米饭</a>
     	<a href="#!/support" ng-if="false">
@@ -42,4 +35,7 @@
 		</div>
 
 	</div>
+
 </div>
+
+<div class="sprise">Sprise!!</div>

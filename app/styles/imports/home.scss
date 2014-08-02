@@ -46,7 +46,7 @@
 			textarea{
 				height: 6em;
 				display: block;
-				border-radius: 0;
+				border-radius: 2px;
 				border: none;
 				box-shadow: none;
 			}
@@ -101,11 +101,14 @@
 		}
 
 		.nav{
-			
+			margin-bottom: 10px;
 			li{
+				border-radius: 0;
+				text-align: center;
 				a{
 					color: $gray;
 					border: none;
+					border-radius: 0;
 					&:hover,
 					&:active{
 						color: $black;
@@ -114,8 +117,8 @@
 				}
 				b{
 					position: absolute;
-					top: 0;
-					right: 0;
+					top: 6px;
+					right: 6px;
 					background: #f33;
 					color: #fff;
 					text-indent: -999px;
@@ -315,10 +318,18 @@
 	}
 }
 
+
+//phone
+
 @media (max-width: $screen-xs-max) {
 	.home-page{
 		.main{
-			
+			.nav{
+				padding: 0;
+				li{
+					margin-bottom: 0;
+				}
+			}
 		}
 		.side{
 			margin-top: 2em;

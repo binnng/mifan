@@ -19,9 +19,9 @@
 				</form>
 			</div>
 
-			<div class="feed-wrap sd-card">
+			<div class="feed-wrap">
 
-				<ul class="nav nav-tabs">
+				<ul class="nav nav-tabs sd-card sub-nav">
 				  <li ng-class="{active: feedType == 'news'}">
 				  	<a class="btn-link" ng-href="#!/home">朋友动态</a>
 				  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
@@ -36,7 +36,7 @@
 				  </li>
 				</ul>
 
-				<div class="feed-content news" ng-if="feedType == 'news'" ng-controller="homeNews">
+				<div class="feed-content news sd-card" ng-if="feedType == 'news'" ng-controller="homeNews">
 					<dl class="questions">
 						<dd ng-repeat="news in newsCollect">
 							<div class="avatars pull-left">
@@ -72,11 +72,11 @@
 
 					<more></more>
 				</div>
-				<div class="feed-content answer" ng-if="feedType == 'answer'" ng-controller="homeAnswer">
+				<div class="feed-content answer sd-card" ng-if="feedType == 'answer'" ng-controller="homeAnswer">
 					{{content}}
 					<more></more>
 				</div>
-				<div class="feed-content reply" ng-if="feedType == 'reply'" ng-controller="homeReply">
+				<div class="feed-content reply sd-card" ng-if="feedType == 'reply'" ng-controller="homeReply">
 					{{content}}
 					<more></more>
 				</div>
