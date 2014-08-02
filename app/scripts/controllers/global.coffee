@@ -7,6 +7,7 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   DOC = document
   WIN = window
+  LOC = location
   BODY = DOC['body']
 
   ###
@@ -42,6 +43,7 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   $scope.WIN = WIN
   $scope.DOC = DOC
+  $scope.LOC = LOC
   $scope.BODY = BODY
 
 
@@ -60,6 +62,24 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   $scope.IsChrome = IsChrome
   $scope.IsIE = IsIE
+
+
+  # 记录用户信息的cookie名
+  $scope.UCNAME = "MifanUser"
+
+
+  IsDebug = LOC["port"] is "9000"
+
+  $scope.IsDebug = IsDebug
+
+
+
+  $scope.API = 
+    user: "/mifan/service/index.php?/user/usersession/user"
+
+  if IsDebug
+    $scope.API = 
+      user: "/data/user.json"
 
 
 

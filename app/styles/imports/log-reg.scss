@@ -35,6 +35,32 @@
 			animation-name: rotate;
 		}
 	}
+
+	.self,
+	.others{
+		padding-top: 1em;
+	}
+
+	.login-form{
+		.form-group{
+			margin-right: .6em;
+		}
+		.btn[type="submit"]{
+			width: 4em;
+		}
+	}
+
+
+	.error-msg{
+		visibility: hidden;
+		height: 1.2em;
+		color: $error-color;
+		margin-top: .6em;
+		&.active{
+			visibility: visible;
+		}
+	}
+
 }
 
 .login-page{
@@ -48,60 +74,174 @@
 		margin-bottom: 1.6em;
 	}
 
-	.sns-box{
-		.weibo,
-		.qq,
-		.douban{
-			width: 200px;
-			height: 50px;
-			display: inline-block;
-			line-height: 50px;
-			color: $white;
-			padding-left: 90px;
-			margin-right: 1em;
-			font-size: 1.2em;
-			&:hover,
-			&:active{
-				opacity: .9;
-			}
-		}
+}
 
-		.weibo{
-			background: url(../images/login-wb.png) no-repeat;
+.register-page{
+
+
+
+	.reg-form{
+		max-width: 300px;
+		padding-right: 28px;
+		border-right: 1px solid $light-gray;
+		.btn[type="submit"]{
+			width: 100%;
 		}
-		.qq{
-			background: url(../images/login-qq.png) no-repeat;
-		}
-		.douban{
-			background: url(../images/login-db.png) no-repeat;
+	}
+
+	.sns-login{
+		a{
+			min-width: 0;
+			i{
+				margin: 10px;
+			}
+			span{
+				display: none;
+			}
 		}
 	}
 
 	.self{
-		padding-top: 1em;
+		float: left;
+	}
+	.others{
+		float: left;
+		margin-left: 28px;
+	}
+}
+
+
+.sns-login{
+
+	i{
+		background-image: url(../images/icon-sns.png);
+		background-repeat: no-repeat;
+		width: 25px;
+		height: 25px;
+		float: left;
+		margin: 12px 10px;
+		background-size: 25px;
 	}
 
-	.login-form{
-		.form-group{
-			margin-right: .6em;
+	a{
+		display: inline-block;
+		color: $white;
+		margin-right: 1em;
+		font-size: 1.2em;
+		border-radius: 2px;
+		min-width: 160px;
+
+		span{
+			float: left;
+			border-left: 1px solid $light-gray;
+			line-height: 26px;
+			margin: 12px 0;
+			padding-left: 1.2em;
 		}
-		.btn[type="submit"]{
-			width: 4em;
+		&:hover,
+		&:active{
+			opacity: .9;
+		}
+	}
+
+	.weibo{
+		background-color: #ee7d59;
+		i{
+			background-position: 0 -25px;
+		}
+	}
+	.qq{
+		background-color: #50b5d3;
+	}
+	.douban{
+		background-color: #65c100;
+		i{
+			background-position: 0 -50px;
 		}
 	}
 }
 
-.reg-form{
-	max-width: 300px;
-	.btn[type="submit"]{
-		width: 100%;
-	}
-}
+
+// phone
 
 @media (max-width: $screen-xs-max) {
 	.login-page,
 	.register-page{
 
 		padding-top: 0;
+		padding-bottom: 2em;
+
+		h4{
+			margin: 1em 0 1em
+		}
+
+		h5{
+			margin-bottom: 1em;
+		}
+
+		input{
+			font-size: 1em !important;
+		}
+
+		.login-form{
+			.form-group{
+				margin-right: 0;
+			}
+		}
+
+	}
+
+	.login-page{
+		.login-form{
+			.btn[type="submit"]{
+				width: 100%;
+			}
+		}
+
+		.sns,
+		.self{
+			margin-top: 0;
+		}
+
+		.self{
+			padding-top: .2em;
+		}
+	}
+
+	.register-page{
+		.self,
+		.others{
+			float: none;
+		}
+
+		.self{
+			padding-top: .2em;
+		}
+		.others{
+			margin-left: 0;
+			padding-top: 0;
+		}
+
+		.reg-form{
+			padding-right: 0;
+			border-right: none;
+		}
+	}
+
+	.sns-login{
+		i{
+			margin: 10px;
+		}
+		a{
+			min-width: 0;
+			margin-right: .4em;
+			opacity: .9;
+			&:active{
+				opacity: 1;
+			}
+			span{
+				display: none;
+			}
+		}
 	}
 }

@@ -17,7 +17,7 @@
 
 
 	.m-menu{
-		//display: block;
+		display: block;
 		@include transform(translate(0, 0));
 	}
 
@@ -42,7 +42,7 @@
 	background-color: $dark-gray;
 	position: absolute;
 	width: 160px;
-	//display: none;
+	display: none;
 	//height: 800px;
 	top: 0;
 	right: 0;
@@ -54,9 +54,6 @@
 
 	.log-reg{
 		text-align: center;
-		.logo{
-			color: $white;
-		}
 		.link{
 			a{
 				display: inline-block;
@@ -88,21 +85,27 @@
 	}
 
 
-
 	.logo,
 	.user-avatar{
 		display: block;
-		width: 80px;
-		height: 80px;
 		margin: 10px auto 30px auto;
-		border-radius: 999px;
-		background-color: $tone;
-		font-size: 3em;
-		line-height: 80px;
+		width: 80px;
 	}
 
 	.user-avatar{
 		text-indent: -999em;
+		border-radius: 999px;
+		height: 80px;
+		line-height: 80px;
+		background-color: $tone;
+	}
+
+	.logo{
+		color: $tone;
+		line-height: 1.5;
+		border-radius: 2px;
+		//background-color: $tone;
+		font-size: 1.6em;
 	}
 
 	.user-menu{

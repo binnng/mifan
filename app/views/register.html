@@ -3,7 +3,6 @@
 	<h4>米饭-用有趣的问答了解彼此！</h4>
 
 	<div class="self">
-		<h5>如果已有帐号，可以直接<a href="#!/login"> 登录</a></h5>
 		<form role="form" class="reg-form" ng-submit="onSubmit()">
 			<div class="form-group">
 				<div class="input-group">
@@ -25,5 +24,16 @@
 		  </div>
 		  <button type="submit" class="btn btn-success btn-lg" ng-class="{disabled: !isLogValid || isLoging}"><i class="glyphicon"  ng-class="{'glyphicon-refresh animated infinite': isLoging, 'glyphicon-send': !isLoging}"></i></button>
 		</form>
+		
+		<h5>如果已有帐号，可以直接<a href="#!/login"> 登录</a></h5>
+		
 	</div>
+
+
+		
+	<div class="others">
+		<h5>不想注册？可以使用社交网络直接登录</h5>
+		<snslogin>
+	</div>
+
 </div>

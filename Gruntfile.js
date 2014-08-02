@@ -392,7 +392,7 @@ module.exports = function(grunt) {
         },
         src: "<%= yeoman.dist %>",
         dest: "<%= yeoman.secret.path %>",
-        exclusions: ["<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts", "<%= yeoman.dist %>/images", "<%= yeoman.dist %>/favicon.ico", "<%= yeoman.dist %>/.htaccess", "<%= yeoman.dist %>/robots.txt"],
+        exclusions: ["<%= yeoman.dist %>/images", "<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts", "<%= yeoman.dist %>/favicon.ico", "<%= yeoman.dist %>/.htaccess", "<%= yeoman.dist %>/robots.txt"],
         serverSep: "/",
         concurrency: 4,
         progress: true
@@ -417,6 +417,14 @@ module.exports = function(grunt) {
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
   grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace", "rename:dist"]);
-  grunt.registerTask("publish", ["build", "sftp-deploy", "open:online"]);
+  grunt.registerTask("publish", ["build", "sftp-deploy:build", "open:online"]);
+  grunt.registerTask("publishAll", function() {
+    var sftpDeplayConfig;
+    sftpDeplayConfig = grunt.config.get("sftp-deploy");
+    sftpDeplayConfig.build.exclusions.shift();
+    grunt.config.set("sftp-deploy", sftpDeplayConfig);
+    return grunt.task.run("publish");
+  });
+  grunt.registerTask("publishall", ["publishAll"]);
   return grunt.registerTask("default", ["build"]);
 };

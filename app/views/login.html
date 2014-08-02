@@ -4,23 +4,20 @@
 
 	<div class="sns">
 		<h5>你可以使用社交网络登录</h5>
-		<div class="sns-box">
-			<a ng-href="http://mifan.us/index.php?app=pubs&ac=plugin&plugin=weibo&in=login" class="weibo">新浪微博</a>
-			<a ng-href="http://mifan.us/index.php?app=pubs&ac=plugin&plugin=qq&in=login" class="qq">腾讯QQ</a>
-			<a ng-href="http://mifan.us/index.php?app=pubs&ac=plugin&plugin=douban&in=login" class="douban">豆瓣</a>
-		</div>
+		<snslogin>
 	</div>
 
 	<div class="self">
 		<h5>也可以使用本站帐号登录<span> ( <a href="#!/register">注册</a> 或 <a href="#!/">找回密码</a> )</span></h5>
+
 		<form role="form" class="login-form form-inline" ng-submit="onSubmit()">
-			<div class="form-group">
+			<div class="form-group" ng-class="{'has-error': error.type == 'username'}">
 				<div class="input-group">
 					<div class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></div>
 			    <input type="email" class="form-control input-lg" placeholder="邮箱" ng-model="email">
 			  </div>
 		  </div>
-		  <div class="form-group">
+		  <div class="form-group" ng-class="{'has-error': error.type == 'password'}">
 		  	<div class="input-group">
 					<div class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></div>
 		    	<input type="password" class="form-control input-lg" placeholder="密码" ng-model="password">
@@ -28,5 +25,8 @@
 		  </div>
 		  <button type="submit" class="btn btn-success btn-lg" ng-class="{disabled: !isLogValid || isLoging}"><i class="glyphicon"  ng-class="{'glyphicon-refresh animated infinite': isLoging, 'glyphicon-send': !isLoging}"></i></button>
 		</form>
+
+		<p class="error-msg" ng-class="{active: error.msg}">{{error.msg}}</p>
+		
 	</div>
 </div>

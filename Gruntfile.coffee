@@ -489,9 +489,9 @@ module.exports = (grunt) ->
         src: "<%= yeoman.dist %>"
         dest: "<%= yeoman.secret.path %>"
         exclusions: [
+          "<%= yeoman.dist %>/images"
           "<%= yeoman.dist %>/lib"
           "<%= yeoman.dist %>/fonts"
-          "<%= yeoman.dist %>/images"
           "<%= yeoman.dist %>/favicon.ico"
           "<%= yeoman.dist %>/.htaccess"
           "<%= yeoman.dist %>/robots.txt"
@@ -557,11 +557,27 @@ module.exports = (grunt) ->
     "regex-replace"
     "rename:dist"
   ]
+  
   grunt.registerTask "publish", [
     "build"
-    "sftp-deploy"
+    "sftp-deploy:build"
     "open:online"
   ]
+  
+  grunt.registerTask "publishAll", ->
+
+    # 去除任务重忽略的images文件夹
+    sftpDeplayConfig = grunt.config.get "sftp-deploy"
+    sftpDeplayConfig.build.exclusions.shift()
+
+    grunt.config.set "sftp-deploy", sftpDeplayConfig
+
+    grunt.task.run "publish"
+  
+  grunt.registerTask "publishall", [
+    "publishAll"
+  ]
+
   grunt.registerTask "default", [
     # "newer:jshint"
     # "test"

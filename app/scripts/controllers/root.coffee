@@ -3,11 +3,14 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore) ->
+
+  UCNAME = $scope.UCNAME
 
   $scope.page = "home"
 
-  $scope.username = ""
+  $scope.user = JSON.parse($cookieStore.get(UCNAME) or "{}")
+
   $scope.supportNum = "1万"
 
   # 设置当前页面
@@ -20,3 +23,8 @@ Mifan.controller "rootCtrl", ($scope) ->
 
   $scope.toggleMMenu = -> 
     $scope.isMMenuOpen = not $scope.isMMenuOpen
+
+  $scope.logout = ->
+    $scope.user = {}
+    $cookieStore.remove UCNAME
+

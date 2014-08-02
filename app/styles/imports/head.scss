@@ -124,6 +124,10 @@ $header-height: 50px;
 		.sm-user{
 			a{
 				margin: 0 10px;
+				&.active{
+					color: $gray;
+					cursor: default;
+				}
 			}
 		}
 	}

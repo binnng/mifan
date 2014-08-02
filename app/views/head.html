@@ -1,14 +1,14 @@
 <div class="header clearfix" ng-controller="headCtrl">
 
 	<div class="head-inner">
-		<div class="login pull-right" ng-show="!username">
-			<span class="sm-user"><a href="#!/login">登录</a> | <a href="#!/register">注册</a></span>
+		<div class="login pull-right" ng-show="!user.username">
+			<span class="sm-user"><a href="#!/login" ng-class="{active: page=='login'}">登录</a> | <a href="#!/register" ng-class="{active: page=='register'}">注册</a></span>
 		</div>
-		<div ng-class="{open: dropdownOpen}" class="username pull-right dropdown" ng-show="username" ng-click="toggleDropdown()">
-			<span class="dropdown-label" data-toggle="dropdown">{{username}}</span>
+		<div ng-class="{open: dropdownOpen}" class="username pull-right dropdown" ng-show="user.username" ng-click="toggleDropdown()">
+			<span class="dropdown-label" data-toggle="dropdown">{{user.username}}</span>
 			<span class="caret"></span>
 
-			<usermenu class="dropdown-menu" role="menu" aria-labelledby="username-lable">
+			<usermenu class="dropdown-menu" role="menu" aria-labelledby="user.username-lable">
 			
 		</div>
 

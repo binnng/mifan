@@ -1,8 +1,8 @@
 <div class="m-menu-inn" ng-controller="mMenuCtrl">
 
 	<!-- 未登录 -->
-	<div class="log-reg" ng-show="!username">
-		<a href="#!/home" ng-click="toggleMMenu()" class="logo">米</a>
+	<div class="log-reg" ng-show="!user.username">
+		<a href="#!/home" ng-click="toggleMMenu()" class="logo">米饭</a>
 		<div class="link">
 			<a href="#!/login" ng-click="toggleMMenu()" class="log" ng-class="{active: page=='login'}">登录</a>
 			<a href="#!/register" ng-click="toggleMMenu()" class="reg" ng-class="{active: page=='register'}">注册</a>
@@ -10,8 +10,8 @@
 	</div>
 
 	<!-- 登录 -->
-	<div class="user" ng-show="username">
-		<b class="user-avatar">{{username}}</b>
+	<div class="user" ng-show="user.username">
+		<b class="user-avatar">{{user.username}}</b>
 		<usermenu class="user-menu" ng-click="toggleMMenu()">
 	</div>
 </div>
