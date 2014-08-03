@@ -34,26 +34,13 @@ Mifan.controller "loginCtrl", ($scope, $http, $cookieStore, $timeout) ->
       
       result = data["result"]
 
-      $scope.user.username = result["user"]["username"] or ""
-      $scope.user.email = result["user"]["email"] or ""
-      $scope.user.face = result["user"]["face"] or ""
-      $scope.user.sex = result["user"]["sex"] or "1"
-      $scope.user.blog = result["user"]["blog"] or ""
-
-      $cookieStore.put "MifanUser", JSON.stringify $scope.user
+      # 向root发送登录事件
+      $scope.$emit "onLogined", result
 
       LOC["href"] = "#!/"
 
-      $scope.isLoging = no
-
-
-
-  userLoginErrorCb = (data, status) ->
-
-    ret = data["ret"]
-
     # 密码错误
-    if ret is "104003"
+    else if ret is "104003"
       $scope.error = type: "password", msg: "密码错误 :("
 
     # 用户名错误
@@ -65,6 +52,15 @@ Mifan.controller "loginCtrl", ($scope, $http, $cookieStore, $timeout) ->
       $timeout ->
         $scope.error = null
       , 3000
+
+    
+    $scope.isLoging = no
+
+
+
+  userLoginErrorCb = (data, status) ->
+
+    ret = data["ret"]
 
 
     $scope.isLoging = no

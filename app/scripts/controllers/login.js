@@ -29,20 +29,9 @@ Mifan.controller("loginCtrl", function($scope, $http, $cookieStore, $timeout) {
     ret = data["ret"];
     if (ret === "100000") {
       result = data["result"];
-      $scope.user.username = result["user"]["username"] || "";
-      $scope.user.email = result["user"]["email"] || "";
-      $scope.user.face = result["user"]["face"] || "";
-      $scope.user.sex = result["user"]["sex"] || "1";
-      $scope.user.blog = result["user"]["blog"] || "";
-      $cookieStore.put("MifanUser", JSON.stringify($scope.user));
+      $scope.$emit("onLogined", result);
       LOC["href"] = "#!/";
-      return $scope.isLoging = false;
-    }
-  };
-  userLoginErrorCb = function(data, status) {
-    var ret;
-    ret = data["ret"];
-    if (ret === "104003") {
+    } else if (ret === "104003") {
       $scope.error = {
         type: "password",
         msg: "密码错误 :("
@@ -58,6 +47,11 @@ Mifan.controller("loginCtrl", function($scope, $http, $cookieStore, $timeout) {
         return $scope.error = null;
       }, 3000);
     }
+    return $scope.isLoging = false;
+  };
+  userLoginErrorCb = function(data, status) {
+    var ret;
+    ret = data["ret"];
     return $scope.isLoging = false;
   };
   userLogin = function() {

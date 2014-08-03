@@ -232,6 +232,24 @@ body{
 }
 
 
+// logo
+
+.logo{
+  display: inline-block;
+  text-indent: -999em;
+  background-image: url(../images/logo.png);
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  background-size: 50px;
+}
+
+// 头像
+.face{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
 // phone
 
 @media (max-width: $screen-xs-max) {

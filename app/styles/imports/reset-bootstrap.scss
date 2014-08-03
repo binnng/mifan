@@ -48,6 +48,19 @@ input:focus,
 }
 
 
+
+a{
+	color: $tone;
+	&:hover,
+	&:active{
+		color: $dark-tone;
+	}
+	&:visited{
+		color: $tone;
+	}
+}
+
+
 @media (max-width: $screen-xs) {
   .container{
     padding-left: 7px;

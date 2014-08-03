@@ -11,7 +11,9 @@
 
 	<!-- 登录 -->
 	<div class="user" ng-show="user.username">
-		<b class="user-avatar">{{user.username}}</b>
+		<b class="user-avatar face" ng-style="{'background-image': 'url(' + user.face_120 + ')'}">{{user.username}}</b>
+		<p class="username">{{user.username}}</p>
 		<usermenu class="user-menu" ng-click="toggleMMenu()">
 	</div>
+	
 </div>

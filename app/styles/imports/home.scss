@@ -43,12 +43,22 @@
 			opacity: .95;
 			position: relative;
 			@include transition(all, .2s);
-			textarea{
+			
+			textarea,
+			.login-tip{
 				height: 6em;
 				display: block;
 				border-radius: 2px;
 				border: none;
-				box-shadow: none;
+				box-shadow: inset 0 0 4px rgba(0, 0, 0, .1);
+				background-color: $white;
+			}
+
+			.login-tip{
+				line-height: 2.4em;
+				text-indent: .8em;
+				margin: 0;
+				color: #666;
 			}
 
 			.arrow{
@@ -233,46 +243,6 @@
 		height: 100%;
 	}
 
-	.side{
-		background-color: $white;
-		padding: 24px;
-		margin-left: 3em;
-		max-width: 300px;
-		margin: 0 auto;
-		.side-block{
-			margin-bottom: 2em;
-		}
-	}
-	.every-day-ask{
-		color: #555;
-		.ans-num{
-			width: 60px;
-			height: 60px;
-			background: $tone;
-			color: #fff;
-			margin-right: 1em;
-			border-radius: 2px;
-			span,
-			b{
-				display: block;
-				line-height: 2;
-				text-align: center;
-			}
-			b{
-				font-size: 1.2em;
-			}
-		}
-		.content{
-			color: #555;
-			display: block;
-			overflow: hidden;
-			text-align: justify;
-			&:hover,
-			&:active{
-				color: #111;
-			}
-		}
-	}
 
 
 	.feed-wrap{
@@ -294,27 +264,12 @@
   }
 }
 
+
+// pad
+
 @media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
 	.home-page{
-		.side{
-			margin-left: .6em;
-		}
-
-		.every-day-ask{
-			.ans-num{
-				float: none !important;
-				display: block;
-				width: 100%;
-				text-align: center;
-				line-height: 40px;
-				height: auto;
-				margin-bottom: 1em;
-				span,
-				b{
-					display: inline;
-				}
-			}
-		}
+		
 	}
 }
 

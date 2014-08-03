@@ -64,22 +64,25 @@ Mifan.controller "globalCtrl", ($scope) ->
   $scope.IsIE = IsIE
 
 
-  # 记录用户信息的cookie名
-  $scope.UCNAME = "MifanUser"
-
-
   IsDebug = LOC["port"] is "9000"
 
   $scope.IsDebug = IsDebug
 
 
+  BASE_API_PATH = "/mifan/service/index.php"
 
   $scope.API = 
-    user: "/mifan/service/index.php?/user/usersession/user"
+    user: "#{BASE_API_PATH}/user/usersession/user"
+    userInfo: "#{BASE_API_PATH}/user/userinfo/user/id" # 1
 
   if IsDebug
+    BASE_API_PATH = "/data"
+
     $scope.API = 
-      user: "/data/user.json"
+      user: "#{BASE_API_PATH}/user.json"
+      userInfo: "#{BASE_API_PATH}/user-info.json"
+
+  $scope.DEFAULT_FACE = "http://mifan.us/public/images/user_normal.jpg"
 
 
 

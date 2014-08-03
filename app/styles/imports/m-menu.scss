@@ -79,15 +79,22 @@
 	.user-avatar{
 		display: block;
 		margin: 10px auto 30px auto;
-		width: 80px;
+		width: 50px;
 	}
 
 	.user-avatar{
 		text-indent: -999em;
 		border-radius: 999px;
-		height: 80px;
-		line-height: 80px;
+		height: 50px;
+		line-height: 50px;
 		background-color: $tone;
+		margin: 10px auto;
+	}
+
+	.username{
+		text-align: center;
+		margin-bottom: 20px;
+		color: $gray;
 	}
 
 	.logo{
@@ -99,20 +106,36 @@
 	}
 
 	.user-menu{
-		padding: 0 1.4em;
+		padding: 0 1em;
 		li{
-			padding: 6px;
 			margin: 2px 0;
-			//border-bottom: 1px $black solid;
+
+
+			// border-bottom: 1px solid $gray;
+
+			// &:last-child{
+			// 	border-bottom: none;
+			// }
+			
 			.glyphicon{
 				margin-right: 4px;
 			}
 			
-			border-radius: 2px;
+			//border-radius: 2px;
+
+			a{
+				padding: 6px;
+				color: $gray;
+				display: block;
+				border-radius: 2px;
+				padding-left: 1em;
+			}
 
 			&:active{
 
-				background-color: $light-black;
+				a{
+					color: #666;
+				}
 
 			}
 		}

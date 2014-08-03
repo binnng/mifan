@@ -1,0 +1,71 @@
+.home-page{
+	
+	.side{
+		background-color: $white;
+		padding: 24px;
+		margin-left: 3em;
+		max-width: 300px;
+		margin: 0 auto;
+		.side-block{
+			margin-bottom: 2em;
+			overflow: hidden;
+		}
+	}
+	.every-day-ask{
+		color: #555;
+		.ans-num{
+			width: 60px;
+			height: 60px;
+			background-color: $tone;
+			box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
+			color: #fff;
+			margin-right: 1em;
+			border-radius: 2px;
+			span,
+			b{
+				display: block;
+				line-height: 2;
+				text-align: center;
+			}
+			b{
+				font-size: 1.2em;
+			}
+		}
+		.content{
+			color: #555;
+			display: block;
+			overflow: hidden;
+			text-align: justify;
+			&:hover,
+			&:active{
+				color: #111;
+			}
+		}
+	}
+
+}
+
+
+@media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
+	.home-page{
+		.side{
+			margin-left: .6em;
+		}
+
+		.every-day-ask{
+			.ans-num{
+				float: none !important;
+				display: block;
+				width: 100%;
+				text-align: center;
+				line-height: 40px;
+				height: auto;
+				margin-bottom: 1em;
+				span,
+				b{
+					display: inline;
+				}
+			}
+		}
+	}
+}
