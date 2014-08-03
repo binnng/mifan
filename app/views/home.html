@@ -13,7 +13,7 @@
 						<div class="arrow" ng-show="isLogin"><span class="glyphicon glyphicon-chevron-down"></span></div>
 						<b class="avatar face"  ng-show="isLogin"ng-style="{'background-image': 'url(' + user.face_60 + ')'}" title="老婆婆"></b>
 					</div>
-					<div class="toolbar">
+					<div class="toolbar" ng-show="isLogin">
 						<span class="cancel" ng-click="onBlur(true)">取消</span>
 						<button type="submit" class="btn btn-danger" ng-class="{disabled: !askQuesConent}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
 					</div>

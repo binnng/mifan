@@ -17,7 +17,7 @@
 			padding: 20px;
 		}
 		.ask-ques{
-			padding: 200px 14px 30px;
+			padding: 200px 14px 10px;
 			background-color: $white;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -302,6 +302,18 @@
 			
 			.ask-ques{
 				padding-top: 100px;
+			}
+		}
+	}
+}
+
+
+// 登录了
+.logined{
+	.home-page{
+		.main{
+			.ask-ques{
+				padding-bottom: 30px;
 			}
 		}
 	}
