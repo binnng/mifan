@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       prefix: today,
       secret: grunt.file.readJSON("secret.json"),
       onlineURL: "http://115.29.49.123/mifan/app",
-      onlineTestURL: "http://115.29.49.123/mifan/app/index.test.html"
+      onlineTestURL: "http://115.29.49.123/mifan/app/test"
     },
     watch: {
       bower: {
@@ -302,12 +302,6 @@ module.exports = function(grunt) {
         cwd: "<%= yeoman.app %>/styles",
         dest: ".tmp/styles/",
         src: "{,*/}*.css"
-      },
-      test: {
-        expand: true,
-        cwd: "<%= yeoman.dist %>",
-        dest: "<%= yeoman.dist %>/test",
-        src: ["styles/*", "scripts/*"]
       }
     },
     concurrent: {
@@ -375,20 +369,6 @@ module.exports = function(grunt) {
           }
         ],
         src: ["<%= yeoman.dist %>/index.html"]
-      },
-      testhtml: {
-        actions: [
-          {
-            search: "scripts/<%= yeoman.prefix %>.mifan.js",
-            replace: "test/scripts/<%= yeoman.prefix %>.mifan.js",
-            flags: 'g'
-          }, {
-            search: "styles/<%= yeoman.prefix %>.mifan.css",
-            replace: "test/styles/<%= yeoman.prefix %>.mifan.css",
-            flags: 'g'
-          }
-        ],
-        src: ["<%= yeoman.dist %>/index.test.html"]
       }
     },
     rename: {
@@ -400,14 +380,6 @@ module.exports = function(grunt) {
           }, {
             src: "<%= yeoman.dist %>/scripts/mifan.js",
             dest: "<%= yeoman.dist %>/scripts/<%= yeoman.prefix %>.mifan.js"
-          }
-        ]
-      },
-      test: {
-        files: [
-          {
-            src: "<%= yeoman.dist %>/index.html",
-            dest: "<%= yeoman.dist %>/index.test.html"
           }
         ]
       }
@@ -446,8 +418,8 @@ module.exports = function(grunt) {
           authKey: 'key1'
         },
         src: "<%= yeoman.dist %>",
-        dest: "<%= yeoman.secret.path %>",
-        exclusions: ["<%= yeoman.dist %>/images", "<%= yeoman.dist %>/scripts", "<%= yeoman.dist %>/styles", "<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts"],
+        dest: "<%= yeoman.secret.path %>/test",
+        exclusions: [],
         serverSep: "/",
         concurrency: 4,
         progress: true
@@ -478,7 +450,7 @@ module.exports = function(grunt) {
   grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace:dist", "regex-replace:html", "rename:dist"]);
   grunt.registerTask("publish", ["build", "sftp-deploy:build", "open:online"]);
   grunt.registerTask("publishAll", ["build", "sftp-deploy:all", "open:online"]);
-  grunt.registerTask("publishTest", ["build", "copy:test", "rename:test", "regex-replace:testhtml", "sftp-deploy:test", "open:test"]);
+  grunt.registerTask("publishTest", ["build", "sftp-deploy:test", "open:test"]);
   grunt.registerTask("publishall", ["publishAll"]);
   grunt.registerTask("publishtest", ["publishTest"]);
   return grunt.registerTask("default", ["build"]);

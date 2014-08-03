@@ -34,7 +34,7 @@ module.exports = (grunt) ->
       secret: grunt.file.readJSON "secret.json"
 
       onlineURL: "http://115.29.49.123/mifan/app"
-      onlineTestURL: "http://115.29.49.123/mifan/app/index.test.html"
+      onlineTestURL: "http://115.29.49.123/mifan/app/test"
 
     
     # Watches files for changes and runs tasks based on the changed files
@@ -357,15 +357,6 @@ module.exports = (grunt) ->
         dest: ".tmp/styles/"
         src: "{,*/}*.css"
 
-      test:
-        expand: true
-        cwd: "<%= yeoman.dist %>"
-        dest: "<%= yeoman.dist %>/test"
-        src: [
-          "styles/*"
-          "scripts/*"
-        ]
-
 
     
     # Run some tasks in parallel to speed up the build process
@@ -476,22 +467,6 @@ module.exports = (grunt) ->
         src: [
           "<%= yeoman.dist %>/index.html"
         ]
-      testhtml:
-        actions:[
-          {
-            search: "scripts/<%= yeoman.prefix %>.mifan.js"
-            replace: "test/scripts/<%= yeoman.prefix %>.mifan.js"
-            flags: 'g'
-          }
-          {
-            search: "styles/<%= yeoman.prefix %>.mifan.css"
-            replace: "test/styles/<%= yeoman.prefix %>.mifan.css"
-            flags: 'g' 
-          }
-        ]
-        src: [
-          "<%= yeoman.dist %>/index.test.html"
-        ]
 
     rename:
       dist:
@@ -503,14 +478,6 @@ module.exports = (grunt) ->
           {
             src: "<%= yeoman.dist %>/scripts/mifan.js",
             dest: "<%= yeoman.dist %>/scripts/<%= yeoman.prefix %>.mifan.js"
-          }
-        ]
-
-      test:
-        files: [
-          {
-            src: "<%= yeoman.dist %>/index.html",
-            dest: "<%= yeoman.dist %>/index.test.html"
           }
         ]
 
@@ -556,13 +523,13 @@ module.exports = (grunt) ->
           authKey: 'key1'
 
         src: "<%= yeoman.dist %>"
-        dest: "<%= yeoman.secret.path %>"
+        dest: "<%= yeoman.secret.path %>/test"
         exclusions: [
-          "<%= yeoman.dist %>/images"
-          "<%= yeoman.dist %>/scripts"
-          "<%= yeoman.dist %>/styles"
-          "<%= yeoman.dist %>/lib"
-          "<%= yeoman.dist %>/fonts"
+          #"<%= yeoman.dist %>/images"
+          #"<%= yeoman.dist %>/scripts"
+          #"<%= yeoman.dist %>/styles"
+          #"<%= yeoman.dist %>/lib"
+          #"<%= yeoman.dist %>/fonts"
         ]
         serverSep: "/"
         concurrency: 4
@@ -644,9 +611,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask "publishTest", [
     "build"
-    "copy:test"
-    "rename:test"
-    "regex-replace:testhtml"
     "sftp-deploy:test"
     "open:test"
   ]
