@@ -34,6 +34,7 @@ module.exports = (grunt) ->
       secret: grunt.file.readJSON "secret.json"
 
       onlineURL: "http://115.29.49.123/mifan/app"
+      onlineTestURL: "http://115.29.49.123/mifan/app/index.test.html"
 
     
     # Watches files for changes and runs tasks based on the changed files
@@ -331,8 +332,8 @@ module.exports = (grunt) ->
             cwd: "<%= yeoman.app %>"
             dest: "<%= yeoman.dist %>"
             src: [
-              "*.{ico,png,txt}"
-              ".htaccess"
+              # "*.{ico,png,txt}"
+              # ".htaccess"
               "*.html"
               "views/{,*/}*.html"
               "images/{,*/}*.{webp}"
@@ -355,6 +356,16 @@ module.exports = (grunt) ->
         cwd: "<%= yeoman.app %>/styles"
         dest: ".tmp/styles/"
         src: "{,*/}*.css"
+
+      test:
+        expand: true
+        cwd: "<%= yeoman.dist %>"
+        dest: "<%= yeoman.dist %>/test"
+        src: [
+          "styles/*"
+          "scripts/*"
+        ]
+
 
     
     # Run some tasks in parallel to speed up the build process
@@ -465,6 +476,22 @@ module.exports = (grunt) ->
         src: [
           "<%= yeoman.dist %>/index.html"
         ]
+      testhtml:
+        actions:[
+          {
+            search: "scripts/<%= yeoman.prefix %>.mifan.js"
+            replace: "test/scripts/<%= yeoman.prefix %>.mifan.js"
+            flags: 'g'
+          }
+          {
+            search: "styles/<%= yeoman.prefix %>.mifan.css"
+            replace: "test/styles/<%= yeoman.prefix %>.mifan.css"
+            flags: 'g' 
+          }
+        ]
+        src: [
+          "<%= yeoman.dist %>/index.test.html"
+        ]
 
     rename:
       dist:
@@ -479,6 +506,15 @@ module.exports = (grunt) ->
           }
         ]
 
+      test:
+        files: [
+          {
+            src: "<%= yeoman.dist %>/index.html",
+            dest: "<%= yeoman.dist %>/index.test.html"
+          }
+        ]
+
+
     'sftp-deploy':
       build:
         auth:
@@ -492,9 +528,41 @@ module.exports = (grunt) ->
           "<%= yeoman.dist %>/images"
           "<%= yeoman.dist %>/lib"
           "<%= yeoman.dist %>/fonts"
-          "<%= yeoman.dist %>/favicon.ico"
-          "<%= yeoman.dist %>/.htaccess"
-          "<%= yeoman.dist %>/robots.txt"
+        ]
+        serverSep: "/"
+        concurrency: 4
+        progress: yes
+
+      all:
+        auth:
+          host: "<%= yeoman.secret.host %>"
+          port: "<%= yeoman.secret.port %>"
+          authKey: 'key1'
+
+        src: "<%= yeoman.dist %>"
+        dest: "<%= yeoman.secret.path %>"
+        exclusions: [
+          "<%= yeoman.dist %>/lib"
+          "<%= yeoman.dist %>/fonts"
+        ]
+        serverSep: "/"
+        concurrency: 4
+        progress: yes
+
+      test:
+        auth:
+          host: "<%= yeoman.secret.host %>"
+          port: "<%= yeoman.secret.port %>"
+          authKey: 'key1'
+
+        src: "<%= yeoman.dist %>"
+        dest: "<%= yeoman.secret.path %>"
+        exclusions: [
+          "<%= yeoman.dist %>/images"
+          "<%= yeoman.dist %>/scripts"
+          "<%= yeoman.dist %>/styles"
+          "<%= yeoman.dist %>/lib"
+          "<%= yeoman.dist %>/fonts"
         ]
         serverSep: "/"
         concurrency: 4
@@ -503,6 +571,9 @@ module.exports = (grunt) ->
     open:
       online:
         path: "<%= yeoman.onlineURL %>"
+        app: "Google Chrome"
+      test:
+        path: "<%= yeoman.onlineTestURL %>"
         app: "Google Chrome"
 
   grunt.registerTask "serve", (target) ->
@@ -554,7 +625,8 @@ module.exports = (grunt) ->
     "ng_template"
     "htmlmin"
     "clean:distView"
-    "regex-replace"
+    "regex-replace:dist"
+    "regex-replace:html"
     "rename:dist"
   ]
   
@@ -564,18 +636,27 @@ module.exports = (grunt) ->
     "open:online"
   ]
   
-  grunt.registerTask "publishAll", ->
+  grunt.registerTask "publishAll", [
+    "build"
+    "sftp-deploy:all"
+    "open:online"
+  ]
 
-    # 去除任务重忽略的images文件夹
-    sftpDeplayConfig = grunt.config.get "sftp-deploy"
-    sftpDeplayConfig.build.exclusions.shift()
-
-    grunt.config.set "sftp-deploy", sftpDeplayConfig
-
-    grunt.task.run "publish"
+  grunt.registerTask "publishTest", [
+    "build"
+    "copy:test"
+    "rename:test"
+    "regex-replace:testhtml"
+    "sftp-deploy:test"
+    "open:test"
+  ]
   
   grunt.registerTask "publishall", [
     "publishAll"
+  ]
+  
+  grunt.registerTask "publishtest", [
+    "publishTest"
   ]
 
   grunt.registerTask "default", [

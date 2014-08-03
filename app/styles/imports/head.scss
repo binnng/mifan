@@ -122,11 +122,19 @@ $header-height: 50px;
 
 	.login{
 		.sm-user{
-			a{
-				margin: 0 10px;
+			
+		}
+
+		.switch{
+			.item{
+				padding-top: 0;
+				padding-bottom: 0;
+				color: #428bca;
+				&:hover{
+					color: #2a6496;
+				}
 				&.active{
 					color: $gray;
-					cursor: default;
 				}
 			}
 		}
@@ -230,6 +238,7 @@ $header-height: 50px;
 	  	display: block;
 	  	padding: 0 .4em;
 			border-top: 1px solid $dark-tone;
+			box-shadow: inset 0 -1px 1px rgba(0 ,0 ,0 ,.1), inset 0 1px 1px rgba(0 ,0 ,0 ,.1);
 	  	li{
 	  		margin: 0 2px;
 	  		a{

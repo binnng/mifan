@@ -2,7 +2,10 @@
 
 	<div class="head-inner">
 		<div class="login pull-right" ng-show="!user.username">
-			<span class="sm-user"><a href="#!/login" ng-class="{active: page=='login'}">登录</a> | <a href="#!/register" ng-class="{active: page=='register'}">注册</a></span>
+			<span class="sm-user switch">
+				<a href="#!/login" ng-class="{active: page=='login'}" class="item">登录</a>
+				<a href="#!/register" ng-class="{active: page=='register'}" class="item">注册</a>
+			</span>
 		</div>
 		<div ng-class="{open: dropdownOpen}" class="username pull-right dropdown" ng-show="user.username" ng-click="toggleDropdown()">
 			<span class="dropdown-label" data-toggle="dropdown">{{user.username}}</span>

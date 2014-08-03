@@ -15,7 +15,8 @@ module.exports = function(grunt) {
       md5: md5Today,
       prefix: today,
       secret: grunt.file.readJSON("secret.json"),
-      onlineURL: "http://115.29.49.123/mifan/app"
+      onlineURL: "http://115.29.49.123/mifan/app",
+      onlineTestURL: "http://115.29.49.123/mifan/app/index.test.html"
     },
     watch: {
       bower: {
@@ -287,7 +288,7 @@ module.exports = function(grunt) {
             dot: true,
             cwd: "<%= yeoman.app %>",
             dest: "<%= yeoman.dist %>",
-            src: ["*.{ico,png,txt}", ".htaccess", "*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "fonts/*", "lib/*", "data/*"]
+            src: ["*.html", "views/{,*/}*.html", "images/{,*/}*.{webp}", "fonts/*", "fonts/*", "lib/*", "data/*"]
           }, {
             expand: true,
             cwd: ".tmp/images",
@@ -301,6 +302,12 @@ module.exports = function(grunt) {
         cwd: "<%= yeoman.app %>/styles",
         dest: ".tmp/styles/",
         src: "{,*/}*.css"
+      },
+      test: {
+        expand: true,
+        cwd: "<%= yeoman.dist %>",
+        dest: "<%= yeoman.dist %>/test",
+        src: ["styles/*", "scripts/*"]
       }
     },
     concurrent: {
@@ -368,6 +375,20 @@ module.exports = function(grunt) {
           }
         ],
         src: ["<%= yeoman.dist %>/index.html"]
+      },
+      testhtml: {
+        actions: [
+          {
+            search: "scripts/<%= yeoman.prefix %>.mifan.js",
+            replace: "test/scripts/<%= yeoman.prefix %>.mifan.js",
+            flags: 'g'
+          }, {
+            search: "styles/<%= yeoman.prefix %>.mifan.css",
+            replace: "test/styles/<%= yeoman.prefix %>.mifan.css",
+            flags: 'g'
+          }
+        ],
+        src: ["<%= yeoman.dist %>/index.test.html"]
       }
     },
     rename: {
@@ -381,6 +402,14 @@ module.exports = function(grunt) {
             dest: "<%= yeoman.dist %>/scripts/<%= yeoman.prefix %>.mifan.js"
           }
         ]
+      },
+      test: {
+        files: [
+          {
+            src: "<%= yeoman.dist %>/index.html",
+            dest: "<%= yeoman.dist %>/index.test.html"
+          }
+        ]
       }
     },
     'sftp-deploy': {
@@ -392,7 +421,33 @@ module.exports = function(grunt) {
         },
         src: "<%= yeoman.dist %>",
         dest: "<%= yeoman.secret.path %>",
-        exclusions: ["<%= yeoman.dist %>/images", "<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts", "<%= yeoman.dist %>/favicon.ico", "<%= yeoman.dist %>/.htaccess", "<%= yeoman.dist %>/robots.txt"],
+        exclusions: ["<%= yeoman.dist %>/images", "<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts"],
+        serverSep: "/",
+        concurrency: 4,
+        progress: true
+      },
+      all: {
+        auth: {
+          host: "<%= yeoman.secret.host %>",
+          port: "<%= yeoman.secret.port %>",
+          authKey: 'key1'
+        },
+        src: "<%= yeoman.dist %>",
+        dest: "<%= yeoman.secret.path %>",
+        exclusions: ["<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts"],
+        serverSep: "/",
+        concurrency: 4,
+        progress: true
+      },
+      test: {
+        auth: {
+          host: "<%= yeoman.secret.host %>",
+          port: "<%= yeoman.secret.port %>",
+          authKey: 'key1'
+        },
+        src: "<%= yeoman.dist %>",
+        dest: "<%= yeoman.secret.path %>",
+        exclusions: ["<%= yeoman.dist %>/images", "<%= yeoman.dist %>/scripts", "<%= yeoman.dist %>/styles", "<%= yeoman.dist %>/lib", "<%= yeoman.dist %>/fonts"],
         serverSep: "/",
         concurrency: 4,
         progress: true
@@ -401,6 +456,10 @@ module.exports = function(grunt) {
     open: {
       online: {
         path: "<%= yeoman.onlineURL %>",
+        app: "Google Chrome"
+      },
+      test: {
+        path: "<%= yeoman.onlineTestURL %>",
         app: "Google Chrome"
       }
     }
@@ -416,15 +475,11 @@ module.exports = function(grunt) {
     grunt.task.run(["serve:" + target]);
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
-  grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace", "rename:dist"]);
+  grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace:dist", "regex-replace:html", "rename:dist"]);
   grunt.registerTask("publish", ["build", "sftp-deploy:build", "open:online"]);
-  grunt.registerTask("publishAll", function() {
-    var sftpDeplayConfig;
-    sftpDeplayConfig = grunt.config.get("sftp-deploy");
-    sftpDeplayConfig.build.exclusions.shift();
-    grunt.config.set("sftp-deploy", sftpDeplayConfig);
-    return grunt.task.run("publish");
-  });
+  grunt.registerTask("publishAll", ["build", "sftp-deploy:all", "open:online"]);
+  grunt.registerTask("publishTest", ["build", "copy:test", "rename:test", "regex-replace:testhtml", "sftp-deploy:test", "open:test"]);
   grunt.registerTask("publishall", ["publishAll"]);
+  grunt.registerTask("publishtest", ["publishTest"]);
   return grunt.registerTask("default", ["build"]);
 };
