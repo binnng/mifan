@@ -6,18 +6,24 @@
 				<div class="location">
 					<span class="glyphicon glyphicon-map-marker">北京</span>
 				</div>
-				<form role="form" class="ask-ques-form" ng-submit="send()">
-					<div class="ask-ques-text">
-						<textarea class="form-control" rows="3" name="question" ng-show="isLogin" ng-model="askQuesConent" ng-focus="onFocus()" ng-blur="onBlur()" placeholder="问你朋友一个问题吧！"></textarea>
-						<p class="login-tip" ng-hide="isLogin">提问需要 <a href="#!/login">登录</a> 哦~</p>
-						<div class="arrow" ng-show="isLogin"><span class="glyphicon glyphicon-chevron-down"></span></div>
-						<b class="avatar face"  ng-show="isLogin"ng-style="{'background-image': 'url(' + user.face_60 + ')'}" title="老婆婆"></b>
-					</div>
-					<div class="toolbar" ng-show="isLogin">
-						<span class="cancel" ng-click="onBlur(true)">取消</span>
-						<button type="submit" class="btn btn-danger" ng-class="{disabled: !askQuesConent}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
-					</div>
-				</form>
+				<div ng-if="isLogin">
+
+					<form role="form" class="ask-ques-form" ng-submit="send()">
+						<div class="ask-ques-text">
+							<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent" ng-focus="onFocus()" ng-blur="onBlur()" placeholder="问你朋友一个问题吧！"></textarea>
+							<div class="arrow"><span class="glyphicon glyphicon-chevron-down"></span></div>
+							<b class="avatar face" ng-style="{'background-image': 'url(' + user.face_60 + ')'}" title="老婆婆"></b>
+						</div>
+						<div class="toolbar">
+							<span class="cancel" ng-click="onBlur(true)">取消</span>
+							<button type="submit" class="btn btn-danger" ng-class="{disabled: !askQuesConent}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
+						</div>
+					</form>
+
+				</div>
+
+				<p class="login-tip" ng-hide="isLogin">提问需要 <a href="#!/login">登录</a> 哦~</p>
+
 			</div>
 
 			<div class="feed-wrap">

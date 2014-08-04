@@ -46,6 +46,15 @@
 }
 
 
+@media (max-width: $screen-md-max) and (min-width: $screen-sm-max) {
+	.home-page{
+		.side{
+			margin-left: 1.8em;
+		}
+	}
+}
+
+//pad
 @media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
 	.home-page{
 		.side{
@@ -66,6 +75,16 @@
 					display: inline;
 				}
 			}
+		}
+	}
+}
+
+//phone
+@media (max-width: $screen-xs-max) {
+	.home-page{
+		.side{
+			max-width: none;
+			margin-top: 10px;
 		}
 	}
 }

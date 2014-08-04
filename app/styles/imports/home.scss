@@ -39,27 +39,30 @@
 				padding-left: 4px;
 			}
 		}
+
+
+			
+		textarea,
+		.login-tip{
+			height: 6em;
+			display: block;
+			border-radius: 2px;
+			border: none;
+			box-shadow: inset 0 0 4px rgba(0, 0, 0, .1);
+			background-color: $white;
+		}
+
+		.login-tip{
+			line-height: 2.4em;
+			text-indent: .8em;
+			margin: 0;
+			color: #666;
+		}
+			
 		.ask-ques-form{
 			opacity: .95;
 			position: relative;
 			@include transition(all, .2s);
-			
-			textarea,
-			.login-tip{
-				height: 6em;
-				display: block;
-				border-radius: 2px;
-				border: none;
-				box-shadow: inset 0 0 4px rgba(0, 0, 0, .1);
-				background-color: $white;
-			}
-
-			.login-tip{
-				line-height: 2.4em;
-				text-indent: .8em;
-				margin: 0;
-				color: #666;
-			}
 
 			.arrow{
 				color: $white;
@@ -250,13 +253,6 @@
 	}
 }
 
-@media (max-width: $screen-md-max) and (min-width: $screen-sm-max) {
-	.home-page{
-		.side{
-			margin-left: 1.8em;
-		}
-	}
-}
 
 @media (max-width: $screen-sm-max) {
   .home-page{
@@ -279,6 +275,7 @@
 @media (max-width: $screen-xs-max) {
 	.home-page{
 		.main{
+			max-width: none;
 			.nav{
 				padding: 0;
 				li{
