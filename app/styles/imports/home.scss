@@ -174,10 +174,11 @@
 					margin: -10px 0 0 16px;
 				}
 			}
+
+			.contents{
+				overflow:hidden;
+			}
 			.questions{
-				:last-child{
-					border-bottom: none;
-				}
 				dd{
 					border-bottom: 1px #ddd solid;
 					box-shadow: 0 1px 1px #fff;
@@ -186,6 +187,9 @@
 					transition: all .4s ease-in-out;
 					-moz-transition: all .4s ease-in-out;
 					-webkit-transition: all .4s ease-in-out;
+					&:last-child{
+						border-bottom: none;
+					}
 
 					&:hover{
 						//background: #effaff;
@@ -193,8 +197,9 @@
 
 					h3{
 						margin: 0 0 .6em 0;
+						line-height: 1.4;
 						a{
-							color: #333;
+							color: #666;
 							&:hover{
 								color: #000;
 							}
@@ -211,9 +216,11 @@
 					}
 
 					.like{
-						color: #fff;
-						background: #f33;
+						color: $gray;
 						padding: 0 .6em;
+						&.active{
+							color: $red;
+						}
 						.glyphicon-heart{
 							margin-right: .2em;
 						}
@@ -222,7 +229,8 @@
 						}
 					}
 
-					.loved{
+					.liked-list{
+						display: none;
 						margin-left: .8em;
 						li{
 							display: inline-block;
@@ -280,6 +288,12 @@
 				padding: 0;
 				li{
 					margin-bottom: 0;
+				}
+			}
+
+			.news{
+				.avatars{
+					display: none;
 				}
 			}
 		}

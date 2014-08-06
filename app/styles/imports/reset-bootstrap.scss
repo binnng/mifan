@@ -51,6 +51,7 @@ input:focus,
 
 a{
 	color: $tone;
+	cursor: pointer;
 	&:hover,
 	&:active{
 		color: $dark-tone;

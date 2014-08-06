@@ -22,7 +22,7 @@
 
 				</div>
 
-				<p class="login-tip" ng-hide="isLogin">提问需要 <a href="#!/login">登录</a> 哦~</p>
+				<p class="login-tip" ng-hide="isLogin">提问需要 <a ng-href="#!/login">登录</a> 哦~</p>
 
 			</div>
 
@@ -47,29 +47,25 @@
 					<dl class="questions">
 						<dd ng-repeat="news in newsCollect">
 							<div class="avatars pull-left">
-								<a href="#!/" class="avatar asker" title="username" style="background-image:url(images/avatar35.jpg)">username</a>
-								<a href="#!/" class="avatar answerer" title="username" style="background-image:url(images/avatar35.jpg)">username</a>
+								<a ng-href="#!/user/{{news.ques.id}}" class="avatar asker" title="{{news.ques.username}}" style="background-image:url({{news.ques.face}})">{{news.ques.username}}</a>
+								<a ng-href="#!/user/{{news.ans.id}}" class="avatar answerer" title="{{news.ans.username}}" style="background-image:url({{news.ans.face}})">{{news.ans.username}}</a>
 							</div>
-							<div style="overflow:hidden;">
+							<div class="contents">
 								<h3 class="h5">
-									<a href="#" class="" title="问题">女朋友要过生日了，买个什么礼物呢？ 具体一些哈~~大谢！</a>
+									<a ng-href="#" class="" title="问题">{{news.ques.text}}</a>
 								</h3>
-								<p class="lead">买一个上市公司送她，让她做老板。</p>
+								<p class="lead">{{news.ans.text}}</p>
 								<p class="">
-									<a href="#" title="username">wayneyin</a> 对 <a href="#" title="username">hifly</a> 的回答于 <a href="#" title="" class="">1天前</a>
+									<a ng-href="#" title="username">{{news.ans.username}}</a> 对 <a ng-href="#" title="username">{{news.ques.username}}</a> 的回答于 <a ng-href="#" title="" class="">1天前</a>
 								</p>
 								<div class="meta">
 									<div class="actions clearfix">
-										<a href="#" class="like liked pull-left">
+										<a class="like pull-left">
 											<span class="glyphicon glyphicon-heart"></span>
 											<span class="count">5</span>
 										</a>
-										<ul class="loved pull-left">
-											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-											<li><a href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
+										<ul class="liked-list pull-left">
+											<li><a ng-href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
 										</ul>
 									</div>
 								</div>

@@ -5,6 +5,9 @@ Mifan = angular.module "mifan", [
   "ngResource"
   "ngSanitize"
   "ngRoute"
+  "ngTouch"
+  "ngTouchHref"
+  "binnng.scroller"
 ]
 
 Mifan.config ($routeProvider, $locationProvider) ->

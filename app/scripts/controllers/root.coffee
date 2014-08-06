@@ -5,6 +5,8 @@
 
 Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
 
+  LOC = $scope.LOC
+
   API = $scope.API
   IsDebug = $scope.IsDebug
 
@@ -90,7 +92,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
   # 设置手机侧边栏菜单状态
   $scope.isMMenuOpen = no
 
-  $scope.toggleMMenu = -> 
+  $scope.toggleMMenu = toggleMMenu = -> 
     $scope.isMMenuOpen = not $scope.isMMenuOpen
 
   $scope.logout = ->
@@ -98,4 +100,12 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
     $cookieStore.remove "mUID"
     $cookieStore.remove "mAccessToken"
     $scope.isLogin = no
+
+  # 用ng-click="href(url)" 手机设备使用touch，反应速度快于href
+  $scope.href = (url, isToggleMmenu) ->
+    LOC["href"] = url
+    toggleMMenu() if isToggleMmenu
+
+
+  
 

@@ -244,10 +244,26 @@ body{
 }
 
 // 头像
-.face{
+.face,
+.avatar{
   background-size: cover;
   background-repeat: no-repeat;
+  border-radius: 999px;
 }
+
+// scroller
+
+.scroller-wrap{
+  //width: 100%;
+  overflow-x: hidden;
+
+  .scroller{
+    width: 8000px;
+
+  }
+}
+
+
 
 
 // phone

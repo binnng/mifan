@@ -8,34 +8,25 @@ Mifan.controller("headCtrl", function($scope) {
   $scope.support = function() {
     return alert(1);
   };
-  $scope.arrowNav = {};
-  return $scope.$watch("page", function() {
-    switch ($scope.page) {
-      case "home":
-        return $scope.arrowNav = {
-          left: 23,
-          hide: false
-        };
-      case "msg":
-        return $scope.arrowNav = {
-          left: 90,
-          hide: false
-        };
-      case "me":
-        return $scope.arrowNav = {
-          left: 176,
-          hide: false
-        };
-      case "friend":
-        return $scope.arrowNav = {
-          left: 260,
-          hide: false
-        };
-      default:
-        return $scope.arrowNav = {
-          left: 0,
-          hide: true
-        };
+  return $scope.navs = [
+    {
+      page: "home",
+      text: "首页"
+    }, {
+      page: "msg",
+      text: "消息"
+    }, {
+      page: "me",
+      text: "个人主页"
+    }, {
+      page: "friend",
+      text: "朋友"
+    }, {
+      page: "hot",
+      text: "排行"
+    }, {
+      page: "feedback",
+      text: "反馈"
     }
-  });
+  ];
 });

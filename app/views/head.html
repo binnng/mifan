@@ -19,7 +19,7 @@
 		<span class="glyphicon glyphicon-user user-m-menu" ng-click="toggleMMenu()"></span>
 
     <h3 class="logo">
-    	<a href="#!/home">米饭</a>
+    	<a ng-href="#!/home">米饭</a>
     	<span class="glyphicon glyphicon-home icon-home" ng-hide="page=='home'"></span>
     	<a href="#!/support" ng-if="false">
 	  		<small>
@@ -29,13 +29,11 @@
 	  	</a>
     </h3>
 		<div class="container">
-	    <ul class="nav nav-pills">
-	      <li ng-class="{active: page === 'home'}"><a ng-href="#!/home">首页</a></li>
-	      <li ng-class="{active: page === 'msg'}"><a ng-href="#!/msg">消息</a></li>
-	      <li ng-class="{active: page === 'me'}"><a ng-href="#!/me">个人主页</a></li>
-	      <li ng-class="{active: page === 'friend'}"><a ng-href="#!/friend">朋友</a></li>
-	    	<span class="arrow" ng-style="{'-webkit-transform': 'translateX(' + arrowNav.left + 'px)', 'left': arrowNav.left + 'px'}" ng-hide="arrowNav.hide"></span>
-	    </ul>
+			<div class="scroller">
+		    <ul class="nav nav-pills scroller-inner">
+		      <li class="item" ng-repeat="nav in navs" ng-class="{active: page === nav.page}"><a ng-href="#!/{{nav.page}}">{{nav.text}}</a></li>
+		    </ul>
+			</div>
 		</div>
 
 	</div>
