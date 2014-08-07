@@ -55,7 +55,7 @@
 									<a ng-href="#" class="" title="问题">{{news.ques.text}}</a>
 								</h3>
 								<p class="lead">{{news.ans.text}}</p>
-								<p class="">
+								<p class="ask-ans-desc">
 									<a ng-href="#" title="username">{{news.ans.username}}</a> 对 <a ng-href="#" title="username">{{news.ques.username}}</a> 的回答于 <a ng-href="#" title="" class="">1天前</a>
 								</p>
 								<div class="meta">
@@ -67,6 +67,29 @@
 										<ul class="liked-list pull-left">
 											<li><a ng-href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
 										</ul>
+									</div>
+								</div>
+								<div class="comment">
+									<span class="btn btn-link cmt-tgl-btn">21条评论<i class="glyphicon glyphicon-chevron-down"></i></span>
+									<form class="cmt-form clearfix">
+										<textarea name="cmt-content" class="cmt-input"></textarea>
+										<button class="btn btn-success">评论</button>
+									</form>
+									<div class="cmt-list">
+											<ul>
+												<li class="cmt-item">
+													<b class="face face-30 cmt-face" title="username"></b>
+													<div class="cmt-detail">
+														<h5><a href="#">老婆婆</a><span>下午2:20</span></h5>
+														<p class="cont-txt">我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！我要做大股东！</p>
+														<div class="cmt-reply">
+															<p class="cmt-reply-btn"><span class="btn btn-link">回复</span></p>
+															<textarea class="cmt-reply-input"></textarea>
+															<button class="btn btn-success cmt-reply-btn">回复</button>
+														</div>
+													</div>
+												</li>
+											</ul>
 									</div>
 								</div>
 							</div>

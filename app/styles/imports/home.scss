@@ -13,7 +13,7 @@
   		padding: 4px;
   	}
 		.feed-content{
-			background-color: $white;
+			background-color: #fefefe;
 			padding: 20px;
 		}
 		.ask-ques{
@@ -23,6 +23,8 @@
 			background-size: cover;
 			background-position: top center;
 			position: relative;
+			border: none;
+			overflow: hidden;
 
 			&.active{
 				.toolbar,
@@ -165,13 +167,13 @@
 			.avatars{
 				margin-right: .8em;
 				.asker{
-					width: 24px;
-					height: 24px;
+					width: 28px;
+					height: 28px;
 				}
 				.answerer{
 					width: 35px;
 					height: 35px;
-					margin: -10px 0 0 16px;
+					margin: -10px 0 0 12px;
 				}
 			}
 
@@ -181,9 +183,8 @@
 			.questions{
 				dd{
 					border-bottom: 1px #ddd solid;
-					box-shadow: 0 1px 1px #fff;
 					padding: 1em 0;
-					background: #fff;
+					background-color: transparent;
 					transition: all .4s ease-in-out;
 					-moz-transition: all .4s ease-in-out;
 					-webkit-transition: all .4s ease-in-out;
@@ -202,6 +203,18 @@
 							color: #666;
 							&:hover{
 								color: #000;
+							}
+						}
+					}
+
+					.ask-ans-desc{
+						color: #555;
+						font-size: .9em;
+						a{
+							color: $dark-gray;
+							&:hover,
+							&:active{
+								color: $black;
 							}
 						}
 					}
@@ -240,6 +253,97 @@
 							height: 18px;
 							margin: 0 0px;
 						}
+					}
+
+				}
+			}
+		}
+
+
+		.comment{
+			overflow: hidden;
+
+			textarea{
+				width: 100%;
+				box-shadow: 0px 1px 1px 0px #eaeaea inset;
+				border: 1px solid #ccc;
+			}
+
+			.cmt-tgl-btn{
+				padding-left: 0;
+				padding-right: 0;
+				font-size: .9em;
+
+				i{
+					margin-left: .6em;
+					font-size: .6em;
+					font-weight: 200;
+				}
+			}
+			.cmt-form{
+				.cmt-input{
+					height: 4em;
+					padding: .2em .6em;
+					
+				}
+				.btn{
+					font-size: .9em;
+					float: right;
+					margin-top: .8em;
+				}
+			}
+			.cmt-list{
+
+			}
+			.cmt-item{
+				border-bottom: 1px solid $light-gray;
+				padding: 1em .4em;
+				&:last-child{
+					border: none;
+				}
+				.cmt-face{
+					margin-right: .8em;
+					float: left;
+				}
+				.cmt-detail{
+					overflow: hidden;
+
+					h5{
+						margin-top: 4px;
+						a{
+							color: #111;
+							font-weight: 700;
+							margin-right: 1.2em;
+						}
+						span{
+							color: $gray;
+							font-size: .9em;
+						}
+					}
+
+					.cont-txt{
+						color: #555;
+					}
+				}
+				.cmt-reply{
+					overflow: hidden;
+				}
+
+
+				.cmt-reply-input{
+					height: 2.4em;
+					padding: .5em .6em;
+				}
+
+				.cmt-reply-btn{
+					float: right;
+					font-size: .8em;
+					margin-top: .6em;
+					padding-top: .4em;
+					padding-bottom: .4em;
+					overflow: hidden;
+					.btn{
+						float: right;
 					}
 				}
 			}
@@ -291,12 +395,30 @@
 				}
 			}
 
+			.feed-content{
+				padding: 6px;
+			}
+
 			.news{
 				.avatars{
-					display: none;
+					margin-right: .6em;
+					.asker{
+					}
+					.answerer{
+						margin: -10px 0 0 8px;
+					}
+				}
+			}
+
+			.comment{
+				.cmt-form{
+					.btn{
+
+					}
 				}
 			}
 		}
+
 		.side{
 			margin-top: 2em;
 			max-width: 600px;

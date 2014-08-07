@@ -3,7 +3,7 @@
 Mifan.controller "homeAskCtrl", ($scope) ->
 
   $scope.askQuesConent = ""
-  $scope.bgUrl = "images/ask-bg-2.jpg"
+  $scope.bgUrl = "images/beijing01.jpg"
   $scope.avatarUrl = "http://tp4.sinaimg.cn/2005321383/180/5698650002/1"
 
   $scope.isSending = no

@@ -14,7 +14,6 @@ Mifan.controller "headCtrl", ($scope) ->
     {page: "me", text: "个人主页"}
     {page: "friend", text: "朋友"}
     {page: "hot", text: "排行"}
-    {page: "feedback", text: "反馈"}
   ]
 
 

@@ -24,9 +24,6 @@ Mifan.controller("headCtrl", function($scope) {
     }, {
       page: "hot",
       text: "排行"
-    }, {
-      page: "feedback",
-      text: "反馈"
     }
   ];
 });
