@@ -8,6 +8,7 @@ Mifan = angular.module "mifan", [
   "ngTouch"
   "ngTouchHref"
   "binnng.scroller"
+  "binnng.tap"
 ]
 
 Mifan.config ($routeProvider, $locationProvider) ->

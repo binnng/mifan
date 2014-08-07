@@ -64,6 +64,7 @@ body{
 .main-view{
   overflow: hidden;
   background-color: #fff;
+  padding-top: 20px;
 }
 
 .root{
@@ -299,7 +300,6 @@ body{
 
   .m-wrap{
     height: 100%;
-    padding-top: 90px;
   }
 
   .m-wrap,
@@ -307,6 +307,10 @@ body{
 
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .main-view{
+    padding-top: 88px;
   }
 
 
@@ -362,3 +366,19 @@ body{
 
 }
 
+
+@media (max-width: $screen-sm-max) {
+  .main-view{
+    padding-top: 98px;
+  }
+}
+
+@media (max-width: $screen-xs) {
+  .sd-card{
+    border: none;
+    border-radius: 0px;
+  }
+  .main-view{
+    padding-top: 88px;
+  }
+}

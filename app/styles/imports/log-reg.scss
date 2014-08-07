@@ -248,3 +248,12 @@
 		}
 	}
 }
+
+
+@media (max-width: $screen-xs) {
+  .login-page,
+	.register-page{
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+}

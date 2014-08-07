@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" ng-app="mifan" ng-controller="globalCtrl"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="mifan" ng-controller="globalCtrl" lang="zh-CN"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <title>米饭</title>
@@ -27,9 +27,9 @@
 
         <div ng-include="'views/m-menu.html'" class="m-menu"></div>
         
-        <div class="m-body">
+        <div class="m-body" tap="scroll1Px()">
             <div ng-include="'views/head.html'"></div>
-            <div class="m-wrap">
+            <div class="m-wrap" id="m-wrap">
                 <div ng-view class="main-view"></div>
                 <div ng-include="'views/foot.html'"></div>
             </div>

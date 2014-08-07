@@ -5,6 +5,8 @@
 
 Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
 
+  WIN = $scope.WIN
+  DOC = $scope.DOC
   LOC = $scope.LOC
 
   API = $scope.API
@@ -105,6 +107,12 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
   $scope.href = (url, isToggleMmenu) ->
     LOC["href"] = url
     toggleMMenu() if isToggleMmenu
+
+  # 手指碰到页面，滚动1px
+  $scope.scroll1Px = -> 
+    el =  DOC["getElementById"] "m-wrap"
+    el.scrollTop = 1 if el.scrollTop is 0
+
 
 
   
