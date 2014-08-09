@@ -23,6 +23,7 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   # HTC Flyer平板的UA字符串中不包含Android关键词
   IsAndroid = (/Android|HTC/i.test(UA) or /Linux/i.test(NA.platform + "")) 
+  IsAndroidPad = IsAndroid and /Pad/i.test(UA)
 
   IsIPad = not IsAndroid and /iPad/i.test(UA)
 
@@ -39,6 +40,8 @@ Mifan.controller "globalCtrl", ($scope) ->
   IsWeixin = /MicroMessenger/i.test(UA)
   IsChrome = !!WIN['chrome']
 
+  IsPhone = IsIPhone or (IsAndroid and not IsAndroidPad)
+
   NG = WIN['angular']
 
   $scope.WIN = WIN
@@ -53,6 +56,7 @@ Mifan.controller "globalCtrl", ($scope) ->
   $scope.IsIOS = IsIOS
 
   $scope.IsAndroid = IsAndroid
+  $scope.IsAndroidPad = IsAndroidPad
 
   $scope.IsIEMobile = IsIEMobile
 
@@ -62,6 +66,8 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   $scope.IsChrome = IsChrome
   $scope.IsIE = IsIE
+
+  $scope.IsPhone = IsPhone
 
 
   IsDebug = LOC["port"] is "9000"

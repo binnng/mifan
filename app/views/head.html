@@ -28,7 +28,7 @@
 	  		</small>
 	  	</a>
     </h3>
-		<div class="container">
+		<div class="container" ng-click="backToTop('m')">
 			<div class="scroller">
 		    <ul class="nav nav-pills scroller-inner">
 		      <li class="item" ng-repeat="nav in navs" ng-class="{active: page === nav.page}"><a ng-href="#!/{{nav.page}}">{{nav.text}}</a></li>

@@ -23,20 +23,28 @@
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
-    <div class="root" ng-controller="rootCtrl" ng-class="{ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, 'm-menu-open': isMMenuOpen, logined: isLogin}">
+    <div class="root" ng-controller="rootCtrl" ng-class="{ios: IsIOS, android: IsAndroid, 'android-pad': IsAndroidPad, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, phone: IsPhone, 'm-menu-open': isMMenuOpen, 'm-design-open': isMDesignOpen, logined: isLogin}">
 
+        <!-- 手机交互弹出 -->
+        <div ng-include="'views/m-design.html'" class="m-design"></div>
+
+        <!-- 手机侧边栏 -->
         <div ng-include="'views/m-menu.html'" class="m-menu"></div>
         
-        <div class="m-body" tap="scroll1Px()">
+        <div class="m-body" tap="scrollBody1Px()">
             <div ng-include="'views/head.html'"></div>
             <div class="m-wrap" id="m-wrap">
-                <div ng-view class="main-view"></div>
+                <div ng-view class="m-view"></div>
                 <div ng-include="'views/foot.html'"></div>
             </div>
 
             <!-- 遮罩 -->
             <div class="m-menu-mask" ng-click="toggleMMenu()" ng-show="isMMenuOpen"></div>
             <div class="m-mask"></div>
+
+
+            <!-- 返回顶部 设置hidden-xs，手机页面初始化时不显示 -->
+            <b class="back-top hidden-xs" ng-click="backToTop()" ng-if="!IsTouch"><i class="glyphicon glyphicon-arrow-up"></i></b>
         </div>
 
     </div>

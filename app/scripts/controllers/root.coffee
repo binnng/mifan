@@ -8,6 +8,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
   WIN = $scope.WIN
   DOC = $scope.DOC
   LOC = $scope.LOC
+  BODY = $scope.BODY
 
   API = $scope.API
   IsDebug = $scope.IsDebug
@@ -97,6 +98,20 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
   $scope.toggleMMenu = toggleMMenu = -> 
     $scope.isMMenuOpen = not $scope.isMMenuOpen
 
+
+  # 设置手机交互弹出菜单状态
+  $scope.isMDesignOpen = no
+
+  $scope.toggleMDesign = toggleMDesign = (type) -> 
+    $scope.isMDesignOpen = not $scope.isMDesignOpen
+
+    # 如果打开mDesign
+    # 广播到 mDesignCtrl 里设置展示类型
+    $scope.$broadcast "setMDesignType", type if type and $scope.isMDesignOpen
+
+    # 如果关闭 mDesign，取消内容发送
+    $scope.$broadcast "cancelMDesingSending" if not $scope.isMDesignOpen
+
   $scope.logout = ->
     $scope.user = {}
     $cookieStore.remove "mUID"
@@ -108,10 +123,22 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
     LOC["href"] = url
     toggleMMenu() if isToggleMmenu
 
+  elMMwrap =  DOC["getElementById"] "m-wrap"
+
   # 手指碰到页面，滚动1px
-  $scope.scroll1Px = -> 
-    el =  DOC["getElementById"] "m-wrap"
-    el.scrollTop = 1 if el.scrollTop is 0
+  $scope.scrollBody1Px = -> 
+    elMMwrap["scrollTop"] = 1 if elMMwrap["scrollTop"] is 0
+
+  # 返回顶部
+  $scope.backToTop = (isM)->
+    (if isM then elMMwrap else BODY)["scrollTop"] = 0
+
+  # 刷新m-menu
+  # refreshMMenu = -> $scope.$broadcast "refreshMMenu"
+
+  # 会造成死循环
+  # $broadcast 也会向自身广播
+  # $scope.$on "refreshMMenu", refreshMMenu
 
 
 

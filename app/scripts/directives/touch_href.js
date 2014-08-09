@@ -66,7 +66,12 @@
               return false;
             }
             active = false;
-            event.preventDefault();
+            if (typeof event.preventDefault === "function") {
+              event.preventDefault();
+            }
+            if (typeof event.stopPropagation === "function") {
+              event.stopPropagation();
+            }
             return LOC["href"] = attrs.ngHref;
           };
           element.on("touchstart", onTouchStart);

@@ -9,20 +9,27 @@
 				<div ng-if="isLogin">
 
 					<form role="form" class="ask-ques-form" ng-submit="send()">
-						<div class="ask-ques-text">
+						<div class="ask-ques-text hidden-xs">
 							<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent" ng-focus="onFocus()" ng-blur="onBlur()" placeholder="问你朋友一个问题吧！"></textarea>
 							<div class="arrow"><span class="glyphicon glyphicon-chevron-down"></span></div>
 							<b class="avatar face" ng-style="{'background-image': 'url(' + user.face_60 + ')'}" title="老婆婆"></b>
 						</div>
-						<div class="toolbar">
+						<div class="toolbar hidden-xs">
 							<span class="cancel" ng-click="onBlur(true)">取消</span>
-							<button type="submit" class="btn btn-danger" ng-class="{disabled: !askQuesConent}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
+							<button type="submit" class="btn btn-danger" ng-class="{disabled: !askQuesConent || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
 						</div>
+
+						<button class="btn btn-danger visible-xs-inline-block" ng-click="toggleMDesign('ask')">提问</button>
 					</form>
 
 				</div>
 
-				<p class="login-tip" ng-hide="isLogin">提问需要 <a ng-href="#!/login">登录</a> 哦~</p>
+				<p class="login-tip" ng-hide="isLogin">
+					<span class="hidden-xs">提问需要 </span>
+					<a ng-href="#!/login" class="btn btn-success visible-xs-inline-block">登录</a>
+					<a ng-href="#!/login" class="hidden-xs">登录</a>
+					<span class="hidden-xs"> 哦~</span>
+				</p>
 
 			</div>
 
@@ -69,7 +76,7 @@
 										</ul>
 									</div>
 								</div>
-								<div class="comment">
+								<div class="comment hidden-xs">
 									<span class="btn btn-link cmt-tgl-btn">21条评论<i class="glyphicon glyphicon-chevron-down"></i></span>
 									<form class="cmt-form clearfix">
 										<textarea name="cmt-content" class="cmt-input"></textarea>

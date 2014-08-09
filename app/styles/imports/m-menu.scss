@@ -1,51 +1,14 @@
-.m-menu-open{
 
-	overflow: hidden;
-	color: $white;
-	
-	// 侧边栏展开时，禁止页面滚动
-	.m-wrap{
-		overflow-y: hidden;
-    -webkit-overflow-scrolling: none;
-	}
-
-	.m-body{
-		//padding-top: 0;
-		@include transform(translate(-160px, 0));
-		@include box-shadow(2px, 0, 8px, rgba($black, .9));
-	}
-
-
-	.m-menu{
-		@include transform(translate(0, 0));
-	}
-
-	.m-menu-mask{
-		display: block;
-	}
-
-	.header{
-		.user-m-menu{
-  		background-color: $light-gray;
-
-		}
-	}
-
-}
-
-.m-menu-inn{
-	
-}
 
 .m-menu{
-	background-color: #1e1e1e;
+	background-color: $root-bg;
 	position: absolute;
 	width: 160px;
 	//height: 800px;
 	top: 0;
 	right: 0;
 
-	padding-top: 16px;
+  @include transition(all, .2s, ease-in-out);
 
 	//@include transform(translate(160px, 0));
 
@@ -143,8 +106,43 @@
 
 }
 
-.m-body,
-.m-menu{
 
-  @include transition(all, .2s, ease-in-out);
+.m-menu-in{
+	padding-top: 16px;
+	min-height: 100%;	
+}
+
+.m-menu-open{
+
+	overflow: hidden;
+	color: $white;
+	
+	// 侧边栏展开时，禁止页面滚动
+	.m-wrap{
+		overflow-y: hidden;
+    -webkit-overflow-scrolling: none;
+	}
+
+	.m-body{
+		//padding-top: 0;
+		@include transform(translate3d(-160px, 0, 0));
+		@include box-shadow(2px, 0, 8px, rgba($black, .9));
+	}
+
+
+	.m-menu{
+
+	}
+
+	.m-menu-mask{
+		display: block;
+	}
+
+	.header{
+		.user-m-menu{
+  		background-color: $light-gray;
+
+		}
+	}
+
 }

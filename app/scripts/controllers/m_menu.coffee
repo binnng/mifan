@@ -1,4 +1,5 @@
 
-Mifan.controller "mMenuCtrl", ($scope) ->
+Mifan.controller "mMenuCtrl", ($scope, $timeout) ->
+
 	
 	

@@ -1,10 +1,10 @@
 ::-moz-selection {
-  background: #b3d4fc;
+  background: $tone;
   text-shadow: none;
 }
 
 ::selection {
-  background: #b3d4fc;
+  background: $tone;
   text-shadow: none;
 }
 
@@ -43,6 +43,13 @@ body{
   // 为了遮住 Sprise
   position: relative;
   z-index: 8;
+
+  // 初始化的背景
+  //background-image: url(../images/init-loading.png);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAACMCAMAAACAuZ3vAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowMTgwMTE3NDA3MjA2ODExOEMxNEMxQzA1Rjc4REE4RiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGRjYyMERDRjE3QkYxMUU0QjNFODg4M0Y4QUQ1NTJEQiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGRjYyMERDRTE3QkYxMUU0QjNFODg4M0Y4QUQ1NTJEQiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDM4MDExNzQwNzIwNjgxMThDMTRDMUMwNUY3OERBOEYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE4MDExNzQwNzIwNjgxMThDMTRDMUMwNUY3OERBOEYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6vC0tRAAAAe1BMVEXMzMzm5ubZ2dnPz8/Nzc3y8vLT09Pl5eXs7OzW1tb5+fnd3d38/Pz19fXS0tL9/f3f39/09PTv7+/i4uLOzs7j4+P39/fc3Nz////p6enQ0ND+/v729vbz8/PU1NT7+/vb29vo6OjR0dHx8fHq6urh4eHt7e3X19f////bGxy0AAAAKXRSTlP/////////////////////////////////////////////////////AFL0IIcAAARRSURBVHja7NqJeqMgEADgASRVo0k8cjc99/D9n3AHUBOEpBpJ0q8L3TbbSueXG2ygelACD3vYwx72sIc97GEPf5k+QKXlveFJDT/dDo5X8Wr1vMqSHvCzyImf2cYBvKgJ6AE3WWHuAN5Yg1nhpybrxEkbl3W0xZdwW+C9E3hZRwu+gvP+Be4Fz211bYNZ7xbuOZyCOh69DLedAVyN48hS1xa4mVMgcwW/NhGpHJ4bK/y6A1tfGDdzgZ4MWL/86Q7eDYIdztXZEHjpEK6GwE5Xp6f+cOx2WZz2hbPKLYyFnrbpFH6XtzV9U1ey3uG+80bgMvz+KPhWe65nVuKH+NekcsfYble2vaks1U/L3Y6dps04+Bdcm17HwfnV8Hwc/Pko+GElvr6Nk5ElDroJ5OcRCM6k+Y3GcbOxi+49gbz81JnrWywSh0OG6ZCt7gw3lDpD3RHWN1UWeL+YBAF7yxzDnROZCf9tR3bsFA703VwX3gTDdri94fYYU9p7tT5f/nEHv4F+PO/AExh4moDrulYXnneXiBdXcLtKUSv8ZixOG0fwR3e10+HSgHNHcBOP2adMczn+7QZunr/AoS88dXxarPrCSyfwCoxHXTrMDPjgBH4xH5zp8JMBOxlOe8vo7EwgQ2u6B7zZZ4Hl8NuBl7objJ+5Xs/UX3eungzZVPeB52fqz1gWo5PyunikOD/TYczzcWZ9yusCfvlqsxcvaTT97DkzDID3d91lHmF63+3tvj4Ksew/3NA7TR72sIc97GEPe9jDHvawh38WnPCzucNcXiPckiWkCz4O5gDrM7mpugIQrWdp5xoBSMfBKYDl1mPxswIIXo8jIGuA0IDHtrEVJscDOqHo4/fFjWAOVCaVhZMt5wtYcEK4gLFNU5ewlCASL3gD+DU6jUeEKJqa6FUxw4wzmZ32fe8LGKUFJmDhyQhcxbH+pZYqmMmKqWHxOqaqeQcmIjG2lq8UqHwNFUy1qiadhyWD4NiAZcfGOq1j46iiYVK5hRMRgaOhwSERQyjnHP9TYOy0eZDmDuYKpjpMT9qWQFRt69K7hkkXrgTFCa+nmGrdDGN3cCh+04QTBltSFxPrvH3jljtYdh0DTiJgCdYxNnJYRUDb8MQYZdGVsJweTJidDF/xBmTewrN6jEHzeiUsY5pVjb0Zp0wsMU+xNZquZavqK+FQ/lGL4GDpjmOFpCGJEd4e1+FCA3Eyr+PI9StlcthhS0XJZZjKjGIBPIVTvsVqrJ/CY7Bjic8tElRNqQSaMPqaZ8Bb1V0jCR8fzKsuxER75jnevShymF6CC7Vu5qqzxQxYfAnGwhQVz/G3QpwhsUG3Kl5MwrrlK9wHsLTAODNWXFoW41TbSfHkUhtzLFOCkwPeZsLtbRzivaeizWb6JmTcelwwDFrla5InWEgib5h3YZFFVA0ObHcbgfjiOxq4WAnrLAkhqb7LpPEI2J8kPOxhD3vYw4+H/wkwAOvoy0ww4WesAAAAAElFTkSuQmCC);
+  background-position: center 140px;
+  background-repeat: no-repeat;
+  background-size: 60px;
 }
 
 .m-menu-mask,
@@ -61,7 +68,7 @@ body{
   background: transparent;
 }
 
-.main-view{
+.m-view{
   overflow: hidden;
   background-color: #fff;
   padding-top: 20px;
@@ -70,6 +77,13 @@ body{
 .root{
   width: 100%;
   overflow-x: hidden;
+}
+
+
+
+.m-body,
+.m-win{
+  @include transition(all, .2s, ease-in-out);
 }
 
 // 动画
@@ -275,7 +289,38 @@ body{
   }
 }
 
+// 返回顶部
+.back-top{
+  position: fixed;
+  right: .4em;
+  bottom: .4em;
+  font-size: 1em;
+  padding: 4px 8px 2px 6px;
+  border-radius: 2px;
+  color: $white;
+  background-color: $light-gray;
+  z-index: 88;
+  cursor: pointer;
+  &:hover,
+  &:active{
+    background-color: $gray;
+  }
+}
 
+// 发送的动画
+
+.glyphicon-refresh.animated{
+  -webkit-animation-name: rotate;
+  animation-name: rotate;
+}
+
+
+
+@media (max-width: $screen-sm-max) {
+  .m-view{
+    padding-top: 0;
+  }
+}
 
 
 // phone
@@ -287,11 +332,28 @@ body{
 
   html,
   body,
+
+  // 最外层
   .root,
+
+  // 手机交互弹出菜单
+  .m-design,
+
+  // 包括手机侧边栏主视窗
+  // 已经删除
+  //.m-win,
+
+  // 手机侧边栏
   .m-menu,
+
+  // 主题内容
   .m-body{
     height: 100%;
     overflow: hidden;
+  }
+
+  .root{
+    background-color: $root-bg;
   }
 
   .m-body{
@@ -309,8 +371,8 @@ body{
     -webkit-overflow-scrolling: touch;
   }
 
-  .main-view{
-    padding-top: 88px;
+  .m-view{
+    padding-top: 108px;
   }
 
 
@@ -367,18 +429,12 @@ body{
 }
 
 
-@media (max-width: $screen-sm-max) {
-  .main-view{
-    padding-top: 98px;
-  }
-}
-
 @media (max-width: $screen-xs) {
   .sd-card{
     border: none;
     border-radius: 0px;
   }
-  .main-view{
+  .m-view{
     padding-top: 88px;
   }
 }

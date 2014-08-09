@@ -86,7 +86,8 @@
 
           active = no
 
-          event.preventDefault()
+          event.preventDefault?()
+          event.stopPropagation?()
 
           LOC["href"] = attrs.ngHref
 
