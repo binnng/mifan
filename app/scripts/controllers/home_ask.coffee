@@ -10,8 +10,8 @@ Mifan.controller "homeAskCtrl", ($scope) ->
 
   $scope.onFocus = -> $scope.onInputing = yes
   $scope.onBlur = (force) -> 
-  	if force or $scope.askQuesConent is "" 
-  		$scope.onInputing = no 
+  	if force or $scope.askQuesConent is ""
+  		$scope.onInputing = $scope.isSending = no
 
   $scope.send = ->
   	$scope.isSending = yes

@@ -10,7 +10,7 @@ Mifan.controller("homeAskCtrl", function($scope) {
   };
   $scope.onBlur = function(force) {
     if (force || $scope.askQuesConent === "") {
-      return $scope.onInputing = false;
+      return $scope.onInputing = $scope.isSending = false;
     }
   };
   return $scope.send = function() {

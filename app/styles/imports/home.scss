@@ -30,6 +30,12 @@
 				.ask-ques-form{
 					opacity: 1 !important;
 				}
+
+				.toolbar{
+					.cancel{
+						cursor: pointer;
+					}
+				}
 			}
 
 			.location{
@@ -88,15 +94,15 @@
 			.toolbar{
 				float: right;
 				margin-top: 10px;
-				//opacity: 0;
-				//@include transition(all, .2s);
+				opacity: 0;
+				@include transition(all, .2s);
 
 				.cancel{
 					color: $white;
 					@include text-shadow();
 					padding: 0 10px;
 					display: inline-block;
-					cursor: pointer;
+					cursor: default;
 				}
 
 				button[type="submit"]{
