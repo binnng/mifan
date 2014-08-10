@@ -1,10 +1,10 @@
 ::-moz-selection {
-  background: $tone;
+  background: $link-color;
   text-shadow: none;
 }
 
 ::selection {
-  background: $tone;
+  background: $link-color;
   text-shadow: none;
 }
 
@@ -266,8 +266,13 @@ body{
   border-radius: 999px;
   background-color: $light-gray;
   display: inline-block;
+  text-indent: -999em;
 }
 
+.face-42{
+  width: 42px;
+  height: 42px;
+}
 .face-30{
   width: 30px;
   height: 30px;
@@ -322,6 +327,31 @@ body{
 .username-inline{
   max-width: 100px;
   display: inline-block;
+}
+
+
+// 问题信息
+.ques-meta{
+  a{
+    font-size: .9em;
+    color: $black;
+    &:hover,
+    &:active{
+      color: $link-color;
+    }
+  }
+}
+
+// 唤起手机交互菜单的三个点
+.bill-btn-dots{
+  font-size: 1.8em;
+  margin: -10px 0 0;
+  color: $gray;
+  padding: 0 10px 10px;
+  line-height: 1;
+  &:active{
+    color: $tone;
+  }
 }
 
 

@@ -166,7 +166,35 @@ $header-height: 50px;
 		}
 	}
 
+	.remind-dtl{
+		position: absolute;
+		right: 14px;
+		top: 42px;
+		background-color: $light-gray;
+		padding: .4em .6em .4em 1em;
+		border-radius: 2px;
+		font-size: .9em;
+		.caret{
+			color: $light-gray;
+			position: absolute;
+			top: -4px;
+			right: 28px;
+		}
+		.close{
+			margin-left: 1em;
+			font-size: .9em;
+		}
+		a{
+			color: $link-color;
+			&:hover,
+			&:active{
+				color: darken($link-color, 10%);
+			}
+		}
+	}
+
 	.login{
+		line-height: $header-height;
 		.sm-user{
 			
 		}

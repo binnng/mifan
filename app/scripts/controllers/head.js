@@ -8,7 +8,7 @@ Mifan.controller("headCtrl", function($scope) {
   $scope.support = function() {
     return alert(1);
   };
-  return $scope.navs = [
+  $scope.navs = [
     {
       page: "home",
       text: "首页"
@@ -26,4 +26,6 @@ Mifan.controller("headCtrl", function($scope) {
       text: "排行"
     }
   ];
+  $scope.remind = "米饭新增豆瓣登录!";
+  return $scope.remind = "";
 });

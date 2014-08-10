@@ -62,7 +62,7 @@
 									<a ng-href="#" class="" title="问题">{{news.ques.text}}</a>
 								</h3>
 								<p class="lead">{{news.ans.text}}</p>
-								<p class="ask-ans-desc">
+								<p class="ask-ans-desc ques-meta">
 									<a ng-href="#" title="username">{{news.ans.username}}</a> 对 <a ng-href="#" title="username">{{news.ques.username}}</a> 的回答于 <a ng-href="#" title="" class="">1天前</a>
 								</p>
 								<div class="meta">
@@ -78,7 +78,7 @@
 											<span class="glyphicon glyphicon-comment"></span>
 											<span class="count">5</span>
 										</a>
-										<b class="pull-right bill-btn visible-xs" ng-click="toggleMBill()">...</b>
+										<b class="pull-right bill-btn bill-btn-dots visible-xs" ng-click="toggleMBill()">...</b>
 									</div>
 								</div>
 								<div class="comment hidden-xs">

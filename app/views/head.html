@@ -8,9 +8,15 @@
 			</span>
 		</div>
 
-		<div class="bg-menu pull-right hidden-xs">
+		<div class="bg-menu pull-right hidden-xs" ng-if="isLogin">
 	  	<a class="remind"><b>提醒</b><i class="glyphicon glyphicon-bell"></i></a>
 	  	<a class="remind"><b>找人</b><i class="glyphicon glyphicon-search"></i></a>
+	  </div>
+
+	  <div class="remind-dtl hidden-xs" ng-if="remind">
+	  	<a href="!">{{remind}}</a>
+	  	<i class="glyphicon glyphicon-remove close"></i>
+			<span class="caret up"></span>
 	  </div>
 		
 		<div ng-class="{open: dropdownOpen}" class="user-box pull-right dropdown" ng-show="user.username" ng-click="toggleDropdown()">

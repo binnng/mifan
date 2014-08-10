@@ -6,17 +6,32 @@
   <head>
     <meta charset="utf-8">
     <title>米饭</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta name="description" content="米饭，用有趣的问答了解朋友和自己。">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- build:css({.tmp,app}) styles/mifan.css -->
     <!-- bower:css -->
     <!-- endbower -->
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/bootstrap.css" />
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/background.css">
     <!-- endbuild -->
+    <!-- 应用程序名字 -->
+    <meta name="apple-mobile-web-app-title" content="米饭"> 
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!-- 去除地址栏工具栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- 应用程序图标 -->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-iconl.png">
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-iconl.png">
+
+    <!-- 启动图 -->
+    <link rel="apple-touch-startup-image" href="images/apple-startup-5.png" sizes="640x1136" media="(device-width: 640px) and (device-height: 1136px)">
   </head>
   <body ng-class="{ios: IsIOS, android: IsAndroid, 'android-pad': IsAndroidPad, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, phone: IsPhone}">
     <!--[if lt IE 7]>

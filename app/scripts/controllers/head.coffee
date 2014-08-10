@@ -16,6 +16,9 @@ Mifan.controller "headCtrl", ($scope) ->
     {page: "hot", text: "排行"}
   ]
 
+  $scope.remind = "米饭新增豆瓣登录!"
+  $scope.remind = ""
+
 
 
 

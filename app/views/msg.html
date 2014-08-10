@@ -1,1 +1,27 @@
-msg
+<div class="container msg-page">
+	<div class="main">
+		<p class="lead hidden-xs">Tips: 支持<b>ctrl + enter</b>回复</p>
+		<dl class="questions">
+			<dd ng-repeat="i in [1,2,3,4,5]">
+				<a class="face face-42 pull-left" ng-href="#!/user/{{news.ques.id}}" class="avatar asker" title="{{news.ques.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">news.ques.username</a>
+				<div class="ques-dtl">
+					<a class="h5" href="#">这不是一个严格的问题，因为我希望大家为鲁甸祈福~</a>
+					<p class="ques-meta"><a ng-href="#" title="username" class="ng-binding" href="#">老婆婆</a> 提问于 <a ng-href="#" title="" class="" href="#">1天前</a></p>
+
+					<form class="ans-form clearfix hidden-xs">
+						<textarea name="ans-content" class="ans-input"></textarea>
+						<button class="btn btn-success">回答</button>
+					</form>
+
+
+					<div class="m-acts pull-right visible-xs">
+						
+						<b class="bill-btn bill-btn-dots" ng-click="toggleMBill()">...</b>
+					</div>
+				</div>
+
+			</dd>
+		</dl>
+		<more></more>
+	</div>
+</div>

@@ -7,6 +7,7 @@ data
 .ftppass
 secret.json
 app/bower_components
+app/mifan
 service/application/logs
 service/doc
 service/application/config/database.php

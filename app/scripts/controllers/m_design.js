@@ -7,7 +7,7 @@ Mifan.controller("mDesginCtrl", function($scope, $timeout) {
     $scope.viewType = msg;
     return $timeout(function() {
       return elMDesignTextarea.focus();
-    }, 400);
+    }, 800);
   });
   $scope.$on("cancelMDesingSending", function() {
     $scope.isSending = false;

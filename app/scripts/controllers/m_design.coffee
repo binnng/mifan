@@ -12,7 +12,7 @@ Mifan.controller "mDesginCtrl", ($scope, $timeout) ->
 
 		$timeout ->
 			elMDesignTextarea.focus()
-		, 400
+		, 800
 
 	# 取消内容发送的展示
 	# 实际上后台还会继续网络请求发送

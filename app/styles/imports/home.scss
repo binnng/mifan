@@ -126,6 +126,7 @@
 			li{
 				border-radius: 0;
 				text-align: center;
+				position: relative;
 				a{
 					color: $gray;
 					border: none;
@@ -202,9 +203,10 @@
 						//background: #effaff;
 					}
 
-					h3{
+					.h5{
 						margin: 0 0 .6em 0;
 						line-height: 1.4;
+						font-weight: 400;
 						a{
 							color: #666;
 							&:hover{
@@ -215,14 +217,6 @@
 
 					.ask-ans-desc{
 						color: #555;
-						font-size: .9em;
-						a{
-							color: $dark-gray;
-							&:hover,
-							&:active{
-								color: $black;
-							}
-						}
 					}
 
 					.lead{
@@ -264,11 +258,7 @@
 					}
 
 					.bill-btn{
-						font-size: 1.8em;
-						margin: -10px 0 0;
-						color: $gray;
-						padding: 0 10px 10px;
-						line-height: 1;
+						
 					}
 
 					.liked-list{

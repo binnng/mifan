@@ -61,6 +61,11 @@ a{
 	}
 }
 
+.caret.up{
+  border-top: 0;
+  border-bottom: 4px solid;
+}
+
 
 @media (max-width: $screen-xs) {
   .container{
