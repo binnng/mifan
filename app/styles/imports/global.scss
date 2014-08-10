@@ -314,6 +314,16 @@ body{
   animation-name: rotate;
 }
 
+// 用户名，截断
+.username{
+  @include ellipsis();
+}
+
+.username-inline{
+  max-width: 100px;
+  display: inline-block;
+}
+
 
 
 @media (max-width: $screen-sm-max) {
@@ -367,8 +377,9 @@ body{
   .m-wrap,
   .m-menu{
 
-    overflow-y: scroll;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+
   }
 
   .m-view{

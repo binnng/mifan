@@ -1,0 +1,1 @@
+Mifan.controller "mBillCtrl", ($scope) ->

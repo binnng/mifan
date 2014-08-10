@@ -25,6 +25,7 @@
 			border: none;
 			overflow: hidden;
 
+
 			&.active{
 				.toolbar,
 				.ask-ques-form{
@@ -231,9 +232,18 @@
 
 					.meta{
 						margin: .8em 0;
+
+						.actions{
+							a,b{
+								&:active{
+									color: $tone;
+								}
+							}
+						}
 					}
 
-					.like{
+					.like,
+					.m-cmt{
 						color: $gray;
 						padding: 0 .6em;
 						&.active{
@@ -245,6 +255,20 @@
 						.count{
 							vertical-align: bottom;
 						}
+					}
+
+					.m-cmt{
+						.glyphicon-comment{
+							margin-right: .24em;
+						}
+					}
+
+					.bill-btn{
+						font-size: 1.8em;
+						margin: -10px 0 0;
+						color: $gray;
+						padding: 0 10px 10px;
+						line-height: 1;
 					}
 
 					.liked-list{
@@ -377,7 +401,11 @@
 
 @media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
 	.home-page{
-		
+		.main{
+			.ask-ques{
+				padding-top: 120px;
+			}
+		}
 	}
 }
 
@@ -452,6 +480,7 @@
 		}
 	}
 }
+
 @media (max-width: $screen-xs) {
 	.home-page{
 		.main{

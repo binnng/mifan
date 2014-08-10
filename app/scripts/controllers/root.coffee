@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
 
   WIN = $scope.WIN
   DOC = $scope.DOC
@@ -91,6 +91,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
   # 设置当前页面
   $scope.$on "pageChange", (e, msg) -> $scope.page = msg
 
+
+
   
   # 设置手机侧边栏菜单状态
   $scope.isMMenuOpen = no
@@ -99,11 +101,25 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
     $scope.isMMenuOpen = not $scope.isMMenuOpen
 
 
-  # 设置手机交互弹出菜单状态
+  # 设置手机交互输入内容弹出状态
   $scope.isMDesignOpen = no
+  $scope.isMDesignOpenMask = no
 
   $scope.toggleMDesign = toggleMDesign = (type) -> 
-    $scope.isMDesignOpen = not $scope.isMDesignOpen
+
+
+    if $scope.isMDesignOpen
+      $scope.isMDesignOpenMask = not $scope.isMDesignOpenMask
+
+      $timeout ->
+        $scope.isMDesignOpen = not $scope.isMDesignOpen
+      , 200
+    else
+      $scope.isMDesignOpen = not $scope.isMDesignOpen
+
+      $timeout ->
+        $scope.isMDesignOpenMask = not $scope.isMDesignOpenMask
+      , 200
 
     # 如果打开mDesign
     # 广播到 mDesignCtrl 里设置展示类型
@@ -111,6 +127,28 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http) ->
 
     # 如果关闭 mDesign，取消内容发送
     $scope.$broadcast "cancelMDesingSending" if not $scope.isMDesignOpen
+
+  # 设置手机菜单弹出状态
+  $scope.isMBillOpen = no
+  $scope.isMBillOpenMask = no
+
+  $scope.toggleMBill = toggleMBill = (type) -> 
+
+    if $scope.isMBillOpen
+      $scope.isMBillOpenMask = not $scope.isMBillOpenMask
+    
+      $timeout ->
+        $scope.isMBillOpen = not $scope.isMBillOpen
+      , 200
+    else
+      $scope.isMBillOpen = not $scope.isMBillOpen
+    
+      $timeout ->
+        $scope.isMBillOpenMask = not $scope.isMBillOpenMask
+      , 100
+
+
+
 
   $scope.logout = ->
     $scope.user = {}

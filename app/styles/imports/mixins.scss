@@ -5,3 +5,9 @@
 	background-image: -o-linear-gradient($value...);
 	background-image: linear-gradient($value...);
 }
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

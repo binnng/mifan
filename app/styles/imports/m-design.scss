@@ -8,7 +8,7 @@
 	background: #f2f2f2;
 	z-index: 10;
 	display: none;
-	@include transform(translate3d(0, -100%, 0));
+	@include transform(translate3d(0, 100%, 0));
   @include transition(all, .4s, ease-in-out);
   -webkit-transition-delay: 0;
   transition-delay: 0;
@@ -72,9 +72,7 @@
 
 .m-design-open{
 	.m-design{
-		@include transform(translate3d(0, 0, 0));
-  	-webkit-transition-delay: .1s;
-  	transition-delay: .1s;
+    display: block;
 	}
 
 	.m-menu-in{
@@ -82,13 +80,12 @@
 	}
 
 	.m-body{
-		@include transform(scale(.92));
+		@include transform(scale(.94));
 	}
 }
 
-@media (max-width: $screen-xs-max) {
-	.m-design{
-		display: block;
-	}
-
+.m-design-open-mask{
+  .m-design{
+    @include transform(translate3d(0, 0, 0));
+  }
 }

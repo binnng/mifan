@@ -18,15 +18,18 @@
     <link rel="stylesheet" href="styles/background.css">
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-class="{ios: IsIOS, android: IsAndroid, 'android-pad': IsAndroidPad, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, phone: IsPhone}">
     <!--[if lt IE 7]>
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
-    <div class="root" ng-controller="rootCtrl" ng-class="{ios: IsIOS, android: IsAndroid, 'android-pad': IsAndroidPad, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, phone: IsPhone, 'm-menu-open': isMMenuOpen, 'm-design-open': isMDesignOpen, logined: isLogin}">
+    <div class="root" ng-controller="rootCtrl" ng-class="{logined: isLogin, 'm-menu-open': isMMenuOpen, 'm-design-open': isMDesignOpen,'m-design-open-mask': isMDesignOpenMask, 'm-bill-open': isMBillOpen, 'm-bill-open-mask': isMBillOpenMask}">
 
-        <!-- 手机交互弹出 -->
+        <!-- 手机交互输入内容弹出 -->
         <div ng-include="'views/m-design.html'" class="m-design"></div>
+
+        <!-- 手机菜单弹出 -->
+        <div ng-include="'views/m-bill.html'" class="m-bill"></div>
 
         <!-- 手机侧边栏 -->
         <div ng-include="'views/m-menu.html'" class="m-menu"></div>
@@ -57,7 +60,6 @@
     <!-- build:js({.tmp,app}) scripts/mifan.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
