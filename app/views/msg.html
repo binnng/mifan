@@ -1,7 +1,7 @@
 <div class="container msg-page">
 	<div class="main">
 		<p class="lead hidden-xs">Tips: 支持<b>ctrl + enter</b>回复</p>
-		<dl class="questions">
+		<dl class="questions" id="msg-ques">
 			<dd ng-repeat="i in [1,2,3,4,5]">
 				<a class="face face-42 pull-left" ng-href="#!/user/{{news.ques.id}}" class="avatar asker" title="{{news.ques.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">news.ques.username</a>
 				<div class="ques-dtl">
@@ -9,14 +9,26 @@
 					<p class="ques-meta"><a ng-href="#" title="username" class="ng-binding" href="#">老婆婆</a> 提问于 <a ng-href="#" title="" class="" href="#">1天前</a></p>
 
 					<form class="ans-form clearfix hidden-xs">
-						<textarea name="ans-content" class="ans-input"></textarea>
-						<button class="btn btn-success">回答</button>
+						<textarea name="ans-content" class="ans-input" ng-focus="toggle()" expander></textarea>
+						<button class="btn btn-success disabled">回答</button>
 					</form>
 
 
-					<div class="m-acts pull-right visible-xs">
+					<div class="m-acts">
+
+						<b class="bill-btn bill-btn-dots" ng-click="toggleMBill($index)">...</b>
 						
-						<b class="bill-btn bill-btn-dots" ng-click="toggleMBill()">...</b>
+						<!-- <div class="visible-xs m-bubble" ng-class="{active: news.bblActv}">
+							<div class="bbl-list">
+								<ul>
+									<li ng-click="toggleMDesign('comment')">评论</li>
+									<li>喜欢</li>
+									<li>分享</li>
+								</ul>
+							</div>
+							<b class="bill-btn bill-btn-dots" ng-click="toggleMBill($index)">...</b>
+						</div> -->
+
 					</div>
 				</div>
 

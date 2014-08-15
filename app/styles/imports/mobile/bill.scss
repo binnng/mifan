@@ -66,8 +66,8 @@
 
 			@include transform(translate3d(0, 200%, 0));
   		@include transition(all, .4s, ease-in-out);
-  		-webkit-transition-delay: .4s;
-  		transition-delay: .4s;
+  		-webkit-transition-delay: .1s;
+  		transition-delay: .1s;
 
 			.btn{
 				width: 80%;

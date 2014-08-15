@@ -31,28 +31,35 @@ module.exports = function(grunt) {
         }
       },
       controllers: {
-        files: ["<%= yeoman.app %>/scripts/controllers/*.js"],
+        files: ["<%= yeoman.app %>/scripts/controllers/{,*/}*.js"],
         tasks: ["concat:controllers"],
         options: {
           livereload: false
         }
       },
       directives: {
-        files: ["<%= yeoman.app %>/scripts/directives/*.js"],
+        files: ["<%= yeoman.app %>/scripts/directives/{,*/}*.js"],
         tasks: ["concat:directives"],
         options: {
           livereload: false
         }
       },
+      services: {
+        files: ["<%= yeoman.app %>/scripts/services/{,*/}*.js"],
+        tasks: ["concat:services"],
+        options: {
+          livereload: false
+        }
+      },
       filters: {
-        files: ["<%= yeoman.app %>/scripts/filters/*.js"],
+        files: ["<%= yeoman.app %>/scripts/filters/{,*/}*.js"],
         tasks: ["concat:filters"],
         options: {
           livereload: false
         }
       },
       requires: {
-        files: ["<%= yeoman.app %>/scripts/requires/*.js"],
+        files: ["<%= yeoman.app %>/scripts/requires/{,*/}*.js"],
         tasks: ["concat:requires"],
         options: {
           livereload: false
@@ -311,19 +318,23 @@ module.exports = function(grunt) {
     },
     concat: {
       controllers: {
-        src: ["<%= yeoman.app %>/scripts/controllers/*.js"],
+        src: ["<%= yeoman.app %>/scripts/controllers/{,*/}*.js"],
         dest: "<%= yeoman.app %>/scripts/controllers.js"
       },
       directives: {
-        src: ["<%= yeoman.app %>/scripts/directives/*.js"],
+        src: ["<%= yeoman.app %>/scripts/directives/{,*/}*.js"],
         dest: "<%= yeoman.app %>/scripts/directives.js"
       },
+      services: {
+        src: ["<%= yeoman.app %>/scripts/services/{,*/}*.js"],
+        dest: "<%= yeoman.app %>/scripts/services.js"
+      },
       filters: {
-        src: ["<%= yeoman.app %>/scripts/filters/*.js"],
+        src: ["<%= yeoman.app %>/scripts/filters/{,*/}*.js"],
         dest: "<%= yeoman.app %>/scripts/filters.js"
       },
       requires: {
-        src: ["<%= yeoman.app %>/scripts/requires/*.js"],
+        src: ["<%= yeoman.app %>/scripts/requires/{,*/}*.js"],
         dest: "<%= yeoman.app %>/scripts/requires.js"
       }
     },

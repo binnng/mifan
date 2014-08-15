@@ -1,0 +1,67 @@
+
+// 加载动画
+.ui-loading,
+.ui-loading:after,
+.ui-loading:before {
+  width:5px;
+  height:10px;
+  -webkit-animation:ui-loading 1.4s infinite linear;
+  animation:ui-loading 1.4s infinite linear;
+  background: $tone;
+}
+.ui-loading {
+  display: none;
+  padding:0!important;
+  opacity:.1;
+  -webkit-animation-delay:.6s;
+  animation-delay:.6s;
+  position: absolute;
+  top: 50%;
+  margin: -5px 0 0 -3px;
+  left: 50%;
+}
+.ui-loading:after,
+.ui-loading:before {
+  content:"";
+  position:absolute
+}
+.ui-loading:after {
+  margin-right:auto;
+  left:-6px;
+  -webkit-animation-delay:.3s;
+  animation-delay:.3s;
+}
+.ui-loading:before {
+  margin-right:auto;
+  left:6px;
+  -webkit-animation-delay:.9s;
+  animation-delay:.9s;
+}
+
+// 标准的loading HTML结构
+// <div class="load-more [loading]"><span class="loading-tip">加载更多</span><i class="ui-loading"></i></div>
+.loading > .ui-loading{
+  display: block;
+}
+
+.loading > .loading-tip{
+  visibility: hidden;
+}
+
+@-webkit-keyframes ui-loading {
+  0%,100% {
+    opacity:.1
+  }
+  30% {
+    opacity:1
+  }
+}
+
+@keyframes ui-loading {
+  0%,100% {
+    opacity:.1
+  }
+  30% {
+    opacity:1
+  }
+}

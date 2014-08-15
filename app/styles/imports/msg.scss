@@ -20,7 +20,7 @@
   	.questions{
   		dd{
   			border-bottom: 1px #ddd solid;
-				padding: 1em 0;
+				padding: 1em 0 0;
 				&:last-child{
 					border: none;
 				}
@@ -44,7 +44,7 @@
   			}
   		}
   		.ques-meta{
-  			margin-top: .8em;
+  			margin: .8em 0;
   		}
   	}
 
@@ -72,6 +72,12 @@
 				padding: 4px 1em;
 
 			}
+		}
+
+		.m-acts{
+			position: relative;
+			margin-bottom: .8em;
+			overflow: hidden;
 		}
 	}
 }

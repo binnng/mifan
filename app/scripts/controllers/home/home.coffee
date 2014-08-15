@@ -28,6 +28,8 @@ Mifan.controller "homeCtrl", ["$scope", "$routeParams", ($scope, $routeParams) -
   # 加载更多
   $scope.loadingMore = ->
     $scope.isLoading = yes
+
+  $scope.switchFeed = (type) -> $scope.feedType = type or "news"
   
   no
 ]

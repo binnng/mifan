@@ -42,6 +42,8 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   IsPhone = IsIPhone or (IsAndroid and not IsAndroidPad)
 
+  IsWebapp = !!NA["standalone"]
+
   NG = WIN['angular']
 
   $scope.WIN = WIN
@@ -68,6 +70,7 @@ Mifan.controller "globalCtrl", ($scope) ->
   $scope.IsIE = IsIE
 
   $scope.IsPhone = IsPhone
+  $scope.IsWebapp = IsWebapp
 
 
   IsDebug = LOC["port"] is "9000"

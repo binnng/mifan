@@ -24,6 +24,9 @@ Mifan.controller("homeCtrl", [
     $scope.loadingMore = function() {
       return $scope.isLoading = true;
     };
+    $scope.switchFeed = function(type) {
+      return $scope.feedType = type || "news";
+    };
     return false;
   }
 ]);

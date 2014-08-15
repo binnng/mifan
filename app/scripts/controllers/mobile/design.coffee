@@ -4,11 +4,17 @@ Mifan.controller "mDesginCtrl", ($scope, $timeout) ->
 
 	elMDesignTextarea = DOC["getElementById"] "m-design-input"
 
+	titleMap = 
+		'ask': "提出问题"
+		'comment': "评论"
+
 	# 设置展示界面类型
 	# ask => 提问
+	# comment => 评论
 	#
 	$scope.$on "setMDesignType", (detail, msg) ->
 		$scope.viewType = msg
+		$scope.title = titleMap[msg]
 
 		$timeout ->
 			elMDesignTextarea.focus()

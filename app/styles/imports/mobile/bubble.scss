@@ -1,0 +1,81 @@
+// 冒泡式交互菜单
+.m-bubble{
+  height: 42px;
+  padding-right: 3.3em;
+  position: relative;
+  .bbl-list{
+    white-space: nowrap;
+    position: relative;
+    top: 0;
+    font-size: .9em;
+
+    float: right;
+
+    //@include transform(scale(200px, 0, 0));
+    //@include transition(all, .2s, ease-in-out);
+    display: none;
+
+    &:after{
+      content: "";
+      position: absolute;
+      top: 50%;
+      background: $white;
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid #bbb;
+      border-right: 1px solid #bbb;
+      right: -4px;
+      margin-top: -5px;
+      @include transform(rotate(45deg));
+    }
+  }
+  ul{
+    margin: 0;
+    border: 1px solid #bbb;
+    @include box-shadow(0, 1px, 3px, rgba(0,0,0,.12));
+    padding: 6px 10px;
+    border-radius: 3px;
+    background-color: $white;
+    color: $black;
+    position: relative;
+    
+    margin: 0;
+    
+    li{
+      display: inline-block;
+      border-radius: 2px;
+      padding: 4px 10px;
+      margin: 0 2px;
+      background-color: darken($white, 10%);
+
+      &:active{
+        background-color: darken($white, 30%);
+
+      }
+    }
+  }
+  .bill-btn{
+    float: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 8;
+    margin: -10px 0 0;
+    background-color: $white;
+  }
+  &.active{
+    .bbl-list{
+      display: block;
+    }
+    .bill-btn{
+      color: $tone;
+    }
+  }
+
+  &.active-show{
+    .bbl-list{
+      //@include transform(translate3d(0, 0, 0));
+    }
+  }
+
+}

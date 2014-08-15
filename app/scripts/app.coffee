@@ -9,6 +9,7 @@ Mifan = angular.module "mifan", [
   "ngTouchHref"
   "binnng.scroller"
   "binnng.tap"
+  "binnng.storage"
 ]
 
 Mifan.config ($routeProvider, $locationProvider) ->
@@ -19,11 +20,11 @@ Mifan.config ($routeProvider, $locationProvider) ->
       redirectTo: "/home"
     )
     .when("/home",
-      templateUrl: "views/home.html"
+      templateUrl: "views/home/home.html"
       controller: "homeCtrl"
     )
     .when("/home/:type",
-      templateUrl: "views/home.html"
+      templateUrl: "views/home/home.html"
       controller: "homeCtrl"
     )
     .when("/msg",

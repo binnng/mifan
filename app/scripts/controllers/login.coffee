@@ -1,10 +1,12 @@
 "use strict"
 
-Mifan.controller "loginCtrl", ($scope, $http, $cookieStore, $timeout) ->
-    
+Mifan.controller "loginCtrl", ($scope, $http, $timeout) ->
+
   API = $scope.API
   IsDebug = $scope.IsDebug
   LOC = $scope.LOC
+
+  IsWebapp = $scope.IsWebapp
 
   $scope.error = null
 

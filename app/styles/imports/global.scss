@@ -120,72 +120,7 @@ body{
   }
 }
 
-// 加载动画
-.ui-loading,
-.ui-loading:after,
-.ui-loading:before {
-  width:5px;
-  height:10px;
-  -webkit-animation:ui-loading 1.4s infinite linear;
-  animation:ui-loading 1.4s infinite linear;
-  background: $tone;
-}
-.ui-loading {
-  display: none;
-  padding:0!important;
-  opacity:.1;
-  -webkit-animation-delay:.6s;
-  animation-delay:.6s;
-  position: absolute;
-  top: 50%;
-  margin: -5px 0 0 -3px;
-  left: 50%;
-}
-.ui-loading:after,
-.ui-loading:before {
-  content:"";
-  position:absolute
-}
-.ui-loading:after {
-  margin-right:auto;
-  left:-6px;
-  -webkit-animation-delay:.3s;
-  animation-delay:.3s;
-}
-.ui-loading:before {
-  margin-right:auto;
-  left:6px;
-  -webkit-animation-delay:.9s;
-  animation-delay:.9s;
-}
 
-// 标准的loading HTML结构
-// <div class="load-more [loading]"><span class="loading-tip">加载更多</span><i class="ui-loading"></i></div>
-.loading > .ui-loading{
-  display: block;
-}
-
-.loading > .loading-tip{
-  visibility: hidden;
-}
-
-@-webkit-keyframes ui-loading {
-  0%,100% {
-    opacity:.1
-  }
-  30% {
-    opacity:1
-  }
-}
-
-@keyframes ui-loading {
-  0%,100% {
-    opacity:.1
-  }
-  30% {
-    opacity:1
-  }
-}
 
 // 加载更多
 .load-more{
@@ -344,15 +279,76 @@ body{
 
 // 唤起手机交互菜单的三个点
 .bill-btn-dots{
+  display: none;
   font-size: 1.8em;
-  margin: -10px 0 0;
+  margin: -4px 0 0;
   color: $gray;
-  padding: 0 10px 10px;
+  padding: 6px 10px;
   line-height: 1;
+  float: right;
   &:active{
     color: $tone;
   }
 }
+
+// 二级导航
+.sub-nav-wrap{
+  position: relative;
+  li{
+    //width: 33.3333%;
+  }
+  .caret-b{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 25%;
+    @include transform(translate(0, 0));
+    @include transition(all, .2s, ease-in-out);
+    .caret{
+      border-bottom-color: $light-gray;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+    b.caret{
+      border-bottom-color: $white;
+      bottom: -1px;
+    }
+  }
+
+  // .caret-25{
+  //   + .caret-b{
+  //     left: 25%;
+  //   }
+  // }
+
+  // .caret-50{
+  //   + .caret-b{
+  //     left: 50%;
+  //   }
+  // }
+
+  // .caret-75{
+  //   + .caret-b{
+  //     left: 75%;
+  //   }
+  // }
+
+  // .caret-33{
+  //   + .caret-b{
+  //     left: 33.333%;
+  //   }
+  // }
+
+  // .caret-66{
+  //   + .caret-b{
+  //     left: 66.666%;
+  //   }
+  // }
+}
+
+
 
 
 
@@ -443,27 +439,57 @@ body{
     }
   }
 
+  .bill-btn-dots{
+    display: block;
+  }
+
 
 
 
   // 二级导航
-  .sub-nav{
-    border: none !important;
+
+  .sub-nav-wrap{
+    position: relative;
     li{
-      width: 33.3333%;
-      border: 1px solid $light-gray;
-      &:first-child{
-        border-right: none;
-        border-radius: 2px 0 0 2px !important; 
-      }
-      &:last-child{
-        border-left: none;
-        border-radius: 0 2px 2px 0 !important;
-      }
       a{
         margin-right: 0 !important;
+        padding: 10px 8px;
       }
     }
+    .caret-b{
+      //left: 0 !important;
+      //@include transform(translate(0, 0));
+    }
+
+    // .caret-25{
+    //   + .caret-b{
+    //     @include transform(translate(25%, 0));
+    //   }
+    // }
+
+    // .caret-50{
+    //   + .caret-b{
+    //     @include transform(translate(50%, 0));
+    //   }
+    // }
+
+    // .caret-75{
+    //   + .caret-b{
+    //     @include transform(translate(75%, 0));
+    //   }
+    // }
+
+    // .caret-33{
+    //   + .caret-b{
+    //     @include transform(translate(33.333%, 0));
+    //   }
+    // }
+
+    // .caret-66{
+    //   + .caret-b{
+    //     @include transform(translate(66.66%, 0));
+    //   }
+    // }
   }
 
 

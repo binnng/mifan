@@ -65,6 +65,20 @@ a{
   border-top: 0;
   border-bottom: 4px solid;
 }
+.caret.left{
+	border-right: 4px solid;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+}
+.caret.right{
+	border-left: 4px solid;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+}
+
+p{
+	margin: 0;
+}
 
 
 @media (max-width: $screen-xs) {

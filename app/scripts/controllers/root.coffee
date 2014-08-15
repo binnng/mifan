@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage) ->
 
   WIN = $scope.WIN
   DOC = $scope.DOC
@@ -12,6 +12,14 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
 
   API = $scope.API
   IsDebug = $scope.IsDebug
+
+  IsWebapp = $scope.IsWebapp
+
+  $storage.put = $storage.set
+
+  # 存储信息
+  # ios webapp 状态不能存cookie，只能用localstorage存
+  store = if IsWebapp then $storage else $cookieStore
 
   $scope.page = "home"
 
@@ -30,9 +38,10 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
 
     $scope.user.accessToken = accessToken
 
-    $cookieStore.put "mUID", user["userid"]
-    $cookieStore.put "mUsername", user["username"]
-    $cookieStore.put "mAccessToken", $scope.accessToken
+    store.put "mUID", user["userid"]
+    store.put "mUsername", user["username"]
+    store.put "mAccessToken", $scope.accessToken
+
 
   setUserInfo = (user) ->
 
@@ -65,9 +74,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
 
   $scope.user = {}
 
-  uid = $cookieStore.get "mUID"
-  accessToken = $cookieStore.get "mAccessToken"
-  username = $cookieStore.get "mUsername"
+  uid = store.get "mUID"
+  accessToken = store.get "mAccessToken"
+  username = store.get "mUsername"
 
   if uid and accessToken
     # 已经登录
@@ -90,8 +99,6 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
 
   # 设置当前页面
   $scope.$on "pageChange", (e, msg) -> $scope.page = msg
-
-
 
   
   # 设置手机侧边栏菜单状态
@@ -120,6 +127,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
       $timeout ->
         $scope.isMDesignOpenMask = not $scope.isMDesignOpenMask
       , 200
+
+    toggleMBill() if $scope.isMBillOpen
 
     # 如果打开mDesign
     # 广播到 mDesignCtrl 里设置展示类型
@@ -156,20 +165,22 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout) ->
     $cookieStore.remove "mAccessToken"
     $scope.isLogin = no
 
-  # 用ng-click="href(url)" 手机设备使用touch，反应速度快于href
-  $scope.href = (url, isToggleMmenu) ->
-    LOC["href"] = url
-    toggleMMenu() if isToggleMmenu
-
-  elMMwrap =  DOC["getElementById"] "m-wrap"
+  elMwrap =  DOC["getElementById"] "m-wrap"
 
   # 手指碰到页面，滚动1px
   $scope.scrollBody1Px = -> 
-    elMMwrap["scrollTop"] = 1 if elMMwrap["scrollTop"] is 0
+    elMwrap["scrollTop"] = 1 if elMwrap["scrollTop"] is 0
 
   # 返回顶部
   $scope.backToTop = (isM)->
-    (if isM then elMMwrap else BODY)["scrollTop"] = 0
+    (if isM then elMwrap else BODY)["scrollTop"] = 0
+
+
+
+  # 用ng-click="href(url)" 手机设备使用touch，反应速度快于href
+  # $scope.href = (url, isToggleMmenu) ->
+  #   LOC["href"] = url
+  #   toggleMMenu() if isToggleMmenu
 
   # 刷新m-menu
   # refreshMMenu = -> $scope.$broadcast "refreshMMenu"

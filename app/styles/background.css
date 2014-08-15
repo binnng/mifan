@@ -30,12 +30,12 @@
 	/** 轻微凸起 **/
 	
 	/* 开关 */
-	.switch .item,
+	.switch .item
 
 	/* 二级导航 */
-	.sub-nav li a,
+	/*.sub-nav li a,
 	.sub-nav li a:hover,
-	.sub-nav li a:active
+	.sub-nav li a:active*/
 
 
 	/* .m-menu .user-menu li a */
@@ -43,14 +43,14 @@
 	{
 		background: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#eee)) !important;
 	}
-
+/*
 	.sub-nav li.active a
 
-	/* .m-menu .user-menu li.active a */
+	 .m-menu .user-menu li.active a 
 
 	{
-		box-shadow: inset 0 0 6px rgba(0, 0, 0, .1);
-	}
+		box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
+	}*/
 
 }
 

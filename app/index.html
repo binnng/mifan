@@ -24,16 +24,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    <!-- 应用程序图标 -->
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-iconl.png">
+    <!--
+    应用程序图标
+    57 * 57 iPhone iTouch (默认)
+    114 * 114 iPhone retina or iPad retina
+    72 * 72 iPad
+    http://www.cocoachina.com/gamedev/misc/2013/0521/6249.html
+    -->
     <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-iconl.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114.png">
 
     <!-- 启动图 -->
     <link rel="apple-touch-startup-image" href="images/apple-startup-5.png" sizes="640x1136" media="(device-width: 640px) and (device-height: 1136px)">
   </head>
-  <body ng-class="{ios: IsIOS, android: IsAndroid, 'android-pad': IsAndroidPad, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, phone: IsPhone}">
+  <body ng-class="{ios: IsIOS, android: IsAndroid, 'android-pad': IsAndroidPad, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, phone: IsPhone, webapp: IsWebapp}">
     <!--[if lt IE 7]>
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
@@ -41,18 +45,18 @@
     <div class="root" ng-controller="rootCtrl" ng-class="{logined: isLogin, 'm-menu-open': isMMenuOpen, 'm-design-open': isMDesignOpen,'m-design-open-mask': isMDesignOpenMask, 'm-bill-open': isMBillOpen, 'm-bill-open-mask': isMBillOpenMask}">
 
         <!-- 手机交互输入内容弹出 -->
-        <div ng-include="'views/m-design.html'" class="m-design"></div>
+        <div ng-include="'views/mobile/design.html'" class="m-design"></div>
 
         <!-- 手机菜单弹出 -->
-        <div ng-include="'views/m-bill.html'" class="m-bill"></div>
+        <div ng-include="'views/mobile/bill.html'" class="m-bill"></div>
 
         <!-- 手机侧边栏 -->
-        <div ng-include="'views/m-menu.html'" class="m-menu"></div>
+        <div ng-include="'views/mobile/menu.html'" class="m-menu"></div>
         
         <div class="m-body" tap="scrollBody1Px()">
             <div ng-include="'views/head.html'"></div>
             <div class="m-wrap" id="m-wrap">
-                <div ng-view class="m-view"></div>
+                <div ng-view class="m-view" id="m-view"></div>
                 <div ng-include="'views/foot.html'"></div>
             </div>
 
@@ -86,6 +90,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/filters.js"></script>
     <script src="scripts/directives.js"></script>
+    <script src="scripts/services.js"></script>
     <script src="scripts/controllers.js"></script>
     <!--<script src="scripts/_suffix.js"></script>-->
     <!-- endbuild -->

@@ -1,0 +1,66 @@
+<div class="home-page container clearfix">
+	<div class="row col-xs-12 col-sm-8">
+		<div class="main">
+			
+			<div class="ask-ques clearfix sd-card" ng-controller="homeAskCtrl" ng-style="{'background-image': 'url(' + bgUrl + ')'}" ng-class="{active: onInputing || isSending}">
+				<div class="location">
+					<span class="glyphicon glyphicon-map-marker">北京</span>
+				</div>
+				<div ng-if="isLogin">
+
+					<form role="form" class="ask-ques-form" ng-submit="send()">
+						<div class="ask-ques-text hidden-xs">
+							<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent" ng-focus="onFocus()" ng-blur="onBlur()" placeholder="问你朋友一个问题吧！"></textarea>
+							<div class="arrow"><span class="glyphicon glyphicon-chevron-down"></span></div>
+							<b class="avatar face" ng-style="{'background-image': 'url(' + user.face_60 + ')'}" title="老婆婆"></b>
+						</div>
+						<div class="toolbar hidden-xs">
+							<span class="cancel" ng-click="onBlur(true)">取消</span>
+							<button type="submit" class="btn btn-danger" ng-class="{disabled: !askQuesConent || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
+						</div>
+
+						<button class="btn btn-danger visible-xs-inline-block" ng-click="toggleMDesign('ask')">提问</button>
+					</form>
+
+				</div>
+
+				<p class="login-tip" ng-hide="isLogin">
+					<span class="hidden-xs">提问需要 </span>
+					<a ng-href="#!/login" class="btn btn-success visible-xs-inline-block">登录</a>
+					<a ng-href="#!/login" class="hidden-xs">登录</a>
+					<span class="hidden-xs"> 哦~</span>
+				</p>
+
+			</div>
+
+			<div class="feed-wrap">
+
+				<div sub-nav class="sub-nav-wrap" ng-show="isLogin" feed-type="feedType">
+					<li ng-class="{active: feedType == 'news'}">
+				  	<a class="btn-link" ng-click="switchFeed()">朋友动态</a>
+				  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
+				  </li>
+				  <li ng-class="{active: feedType == 'answer'}">
+				  	<a class="btn-link" ng-click="switchFeed('answer')">回答我的</a>
+				  	<b ng-show="remind.answerNum!==0">{{remind.answerNum}}</b>
+				  </li>
+				  <li ng-class="{active: feedType == 'reply'}">
+				  	<a class="btn-link" ng-click="switchFeed('reply')">回应我的</a>
+				  	<b ng-show="remind.replyNum!==0">{{remind.replyNum}}</b>
+				  </li>
+				  <li ng-class="{active: feedType == 'love'}">
+				  	<a class="btn-link" ng-click="switchFeed('love')">喜欢我的</a>
+				  	<b ng-show="remind.loveNum!==0">{{remind.loveNum}}</b>
+				  </li>
+				</div>
+
+				<div ng-include="'views/home/news.html'" ng-if="feedType == 'news'"></div>
+				<div ng-include="'views/home/answer.html'" ng-if="feedType == 'answer'"></div>
+				<div ng-include="'views/home/reply.html'" ng-if="feedType == 'reply'"></div>
+				<div ng-include="'views/home/love.html'" ng-if="feedType == 'love'"></div>
+
+			</div>
+		</div>
+	</div>
+	<div class="row col-xs-12 col-sm-4" ng-include="'views/home/side.html'"></div>
+</div>
