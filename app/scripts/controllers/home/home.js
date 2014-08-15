@@ -2,8 +2,16 @@
 "use strict";
 Mifan.controller("homeCtrl", [
   "$scope", "$routeParams", function($scope, $routeParams) {
-    $scope.legalFeedTypes = ["news", "answer", "reply"];
-    if (0 > $scope.legalFeedTypes.indexOf($routeParams.type)) {
+    var legalFeedTypes, setCaretLeft;
+    legalFeedTypes = ["news", "answer", "reply", "love"];
+    setCaretLeft = function(type) {
+      var index;
+      index = legalFeedTypes.indexOf(type);
+      return $scope.caretLeft = "" + (index * 25) + "%";
+    };
+    $scope.legalFeedTypes = legalFeedTypes;
+    $scope.caretLeft = "0";
+    if (0 > legalFeedTypes.indexOf($routeParams.type)) {
       $routeParams.type = "news";
     }
     $scope.feedType = $routeParams.type;
@@ -13,7 +21,8 @@ Mifan.controller("homeCtrl", [
     $scope.remind = {
       newsNum: 0,
       answerNum: 2,
-      replyNum: '...'
+      replyNum: '...',
+      loveNum: 0
     };
     $scope.$on("clearAnswerRemind", function() {
       return $scope.remind.answerNum = 0;
@@ -25,7 +34,10 @@ Mifan.controller("homeCtrl", [
       return $scope.isLoading = true;
     };
     $scope.switchFeed = function(type) {
-      return $scope.feedType = type || "news";
+      type = type || "news";
+      $scope.feedType = type;
+      $scope.isLoading = false;
+      return setCaretLeft(type);
     };
     return false;
   }

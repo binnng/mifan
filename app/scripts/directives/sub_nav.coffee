@@ -1,24 +1,23 @@
 # 二级导航
 Mifan.directive "subNav", ->
-	templateUrl: "views/template/sub-nav.html"
-	replace: no
-	transclude: yes
-	restrict: "AE"
-	scope:
-		feedType: "=feedType"
+  templateUrl: "views/template/sub-nav.html"
+  replace: no
+  transclude: yes
+  restrict: "AE"
+  scope: no
 
-	link: (scope, element, attrs)->
+  compile: (element, attrs, transclude) ->
 
-		#console.log scope
+    post: (scope, element, attrs) ->
 
-	compile: (element, attrs, transclude) ->
-		pre: ->
-		post: (scope, element, attrs, controller) ->
+      wrapEle = element[0]
+      ul = wrapEle.getElementsByTagName("ul")[0]
+      items = ul.getElementsByTagName("li")
+      caret = wrapEle.getElementsByTagName("em")[0]
 
-			ul = element[0].getElementsByTagName("ul")[0]
-			items = ul.getElementsByTagName("li")
+      length = items.length
 
-			length = items.length
+      caret.style.left = "0px";
 
-			for ele in items
-				ele.style.width = "#{100/length}%"
+      for ele in items
+        ele.style.width = "#{100/length}%"

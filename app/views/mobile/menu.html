@@ -4,8 +4,8 @@
 	<div class="log-reg" ng-show="!user.username">
 		<a ng-href="#!/home" ng-click="toggleMMenu()" class="logo">米饭</a>
 		<div class="link switch">
-			<a ng-href="#!/login" ng-click="href('#!/login', 1)" class="log item" ng-class="{active: page=='login'}">登录</a>
-			<a ng-href="#!/register" ng-click="href('#!/register', 1)" class="reg item" ng-class="{active: page=='register'}">注册</a>
+			<a ng-href="#!/login" ng-click="toggleMMenu()" class="log item" ng-class="{active: page=='login'}">登录</a>
+			<a ng-href="#!/register" ng-click="toggleMMenu()" class="reg item" ng-class="{active: page=='register'}">注册</a>
 		</div>
 	</div>
 
