@@ -6,6 +6,12 @@ Mifan.controller "msgCtrl", ($scope, $rootScope) ->
   $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "msg"
 
   $scope.focus = -> console.log 111
+
+
+
+  $scope.setMBill = (index) ->
+
+    $scope.toggleMBill ["love", "answer", "share"]
   
 
   no

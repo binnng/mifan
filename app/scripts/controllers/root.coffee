@@ -98,7 +98,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage) -
   $scope.supportNum = "1万"
 
   # 设置当前页面
-  $scope.$on "pageChange", (e, msg) -> $scope.page = msg
+  $scope.$on "pageChange", (e, msg) ->
+    $scope.page = msg
+    elMwrap["scrollTop"] = 1
 
   
   # 设置手机侧边栏菜单状态
@@ -141,7 +143,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage) -
   $scope.isMBillOpen = no
   $scope.isMBillOpenMask = no
 
-  $scope.toggleMBill = toggleMBill = (type) -> 
+  $scope.toggleMBill = toggleMBill = (billList) -> 
 
     if $scope.isMBillOpen
       $scope.isMBillOpenMask = not $scope.isMBillOpenMask
@@ -150,6 +152,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage) -
         $scope.isMBillOpen = not $scope.isMBillOpen
       , 200
     else
+
+      $scope.$broadcast "setBillList", billList
+
       $scope.isMBillOpen = not $scope.isMBillOpen
     
       $timeout ->

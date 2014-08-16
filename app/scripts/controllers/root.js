@@ -65,7 +65,8 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
   }
   $scope.supportNum = "1万";
   $scope.$on("pageChange", function(e, msg) {
-    return $scope.page = msg;
+    $scope.page = msg;
+    return elMwrap["scrollTop"] = 1;
   });
   $scope.isMMenuOpen = false;
   $scope.toggleMMenu = toggleMMenu = function() {
@@ -97,13 +98,14 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
   };
   $scope.isMBillOpen = false;
   $scope.isMBillOpenMask = false;
-  $scope.toggleMBill = toggleMBill = function(type) {
+  $scope.toggleMBill = toggleMBill = function(billList) {
     if ($scope.isMBillOpen) {
       $scope.isMBillOpenMask = !$scope.isMBillOpenMask;
       return $timeout(function() {
         return $scope.isMBillOpen = !$scope.isMBillOpen;
       }, 200);
     } else {
+      $scope.$broadcast("setBillList", billList);
       $scope.isMBillOpen = !$scope.isMBillOpen;
       return $timeout(function() {
         return $scope.isMBillOpenMask = !$scope.isMBillOpenMask;

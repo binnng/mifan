@@ -441,11 +441,15 @@
 				}
 			}
 
+			.sub-nav-wrap{
+				
+				margin-left: 6px;
+				margin-right: 6px;
+			}
+
 			.nav{
 				padding: 0;
 				border-bottom: 1px solid $light-gray;
-				margin-left: 6px;
-				margin-right: 6px;
 				li{
 					margin-bottom: 0;
 				}

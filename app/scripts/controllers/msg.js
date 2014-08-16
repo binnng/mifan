@@ -9,5 +9,8 @@ Mifan.controller("msgCtrl", function($scope, $rootScope) {
   $scope.focus = function() {
     return console.log(111);
   };
+  $scope.setMBill = function(index) {
+    return $scope.toggleMBill(["love", "answer", "share"]);
+  };
   return false;
 });

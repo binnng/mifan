@@ -31,28 +31,28 @@ module.exports = function(grunt) {
         }
       },
       controllers: {
-        files: ["<%= yeoman.app %>/scripts/controllers/{,*/}*.js"],
+        files: ["<%= yeoman.app %>/scripts/controllers/{,*/}{,*/}*.js"],
         tasks: ["concat:controllers"],
         options: {
           livereload: false
         }
       },
       directives: {
-        files: ["<%= yeoman.app %>/scripts/directives/{,*/}*.js"],
+        files: ["<%= yeoman.app %>/scripts/directives/{,*/}{,*/}*.js"],
         tasks: ["concat:directives"],
         options: {
           livereload: false
         }
       },
       services: {
-        files: ["<%= yeoman.app %>/scripts/services/{,*/}*.js"],
+        files: ["<%= yeoman.app %>/scripts/services/{,*/}{,*/}*.js"],
         tasks: ["concat:services"],
         options: {
           livereload: false
         }
       },
       filters: {
-        files: ["<%= yeoman.app %>/scripts/filters/{,*/}*.js"],
+        files: ["<%= yeoman.app %>/scripts/filters/{,*/}{,*/}*.js"],
         tasks: ["concat:filters"],
         options: {
           livereload: false
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
         tasks: ["karma"]
       },
       compass: {
-        files: ["<%= yeoman.app %>/styles/{,*/}*.{scss,sass}"],
+        files: ["<%= yeoman.app %>/styles/{,*/}{,*/}*.{scss,sass}"],
         tasks: ["compass:server", "autoprefixer"]
       },
       gruntfile: {

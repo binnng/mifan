@@ -7,7 +7,9 @@
 @import "imports/functions";
 @import "imports/mixins";
 @import "imports/reset-bootstrap";
-@import "imports/ui-loading";
+@import "imports/module/ui-loading";
+@import "imports/module/face";
+@import "imports/module/sub-nav";
 @import "imports/global";
 @import "imports/head";
 @import "imports/msg";

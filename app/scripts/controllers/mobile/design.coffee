@@ -5,8 +5,9 @@ Mifan.controller "mDesginCtrl", ($scope, $timeout) ->
 	elMDesignTextarea = DOC["getElementById"] "m-design-input"
 
 	titleMap = 
-		'ask': "提出问题"
-		'comment': "评论"
+		"ask": "提出问题"
+		"comment": "评论"
+		"answer": "回答"
 
 	# 设置展示界面类型
 	# ask => 提问

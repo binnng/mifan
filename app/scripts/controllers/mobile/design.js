@@ -4,8 +4,9 @@ Mifan.controller("mDesginCtrl", function($scope, $timeout) {
   DOC = $scope.DOC;
   elMDesignTextarea = DOC["getElementById"]("m-design-input");
   titleMap = {
-    'ask': "提出问题",
-    'comment': "评论"
+    "ask": "提出问题",
+    "comment": "评论",
+    "answer": "回答"
   };
   $scope.$on("setMDesignType", function(detail, msg) {
     $scope.viewType = msg;

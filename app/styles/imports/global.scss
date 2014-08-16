@@ -193,41 +193,6 @@ body{
   background-size: 50px;
 }
 
-// 头像
-.face,
-.avatar{
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 999px;
-  background-color: $light-gray;
-  display: inline-block;
-  text-indent: -999em;
-}
-
-.face-42{
-  width: 42px;
-  height: 42px;
-}
-.face-30{
-  width: 30px;
-  height: 30px;
-}
-.face-20{
-  width: 20px;
-  height: 20px;
-}
-
-// scroller
-
-.scroller-wrap{
-  //width: 100%;
-  overflow-x: hidden;
-
-  .scroller{
-    width: 8000px;
-
-  }
-}
 
 // 返回顶部
 .back-top{
@@ -291,62 +256,6 @@ body{
   }
 }
 
-// 二级导航
-.sub-nav-wrap{
-  position: relative;
-  li{
-    //width: 33.3333%;
-  }
-  .caret-b{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 25%;
-    @include transform(translate(0, 0));
-    @include transition(all, .2s, ease-in-out);
-    .caret{
-      border-bottom-color: $light-gray;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      margin-left: -2px;
-    }
-    b.caret{
-      border-bottom-color: $white;
-      bottom: -1px;
-    }
-  }
-
-  // .caret-25{
-  //   + .caret-b{
-  //     left: 25%;
-  //   }
-  // }
-
-  // .caret-50{
-  //   + .caret-b{
-  //     left: 50%;
-  //   }
-  // }
-
-  // .caret-75{
-  //   + .caret-b{
-  //     left: 75%;
-  //   }
-  // }
-
-  // .caret-33{
-  //   + .caret-b{
-  //     left: 33.333%;
-  //   }
-  // }
-
-  // .caret-66{
-  //   + .caret-b{
-  //     left: 66.666%;
-  //   }
-  // }
-}
 
 
 
@@ -444,53 +353,6 @@ body{
   }
 
 
-
-
-  // 二级导航
-
-  .sub-nav-wrap{
-    position: relative;
-    li{
-      a{
-        margin-right: 0 !important;
-        padding: 10px 8px;
-      }
-    }
-    .caret-b{
-      //left: 0 !important;
-      //@include transform(translate(0, 0));
-    }
-
-    // .caret-25{
-    //   + .caret-b{
-    //     @include transform(translate(25%, 0));
-    //   }
-    // }
-
-    // .caret-50{
-    //   + .caret-b{
-    //     @include transform(translate(50%, 0));
-    //   }
-    // }
-
-    // .caret-75{
-    //   + .caret-b{
-    //     @include transform(translate(75%, 0));
-    //   }
-    // }
-
-    // .caret-33{
-    //   + .caret-b{
-    //     @include transform(translate(33.333%, 0));
-    //   }
-    // }
-
-    // .caret-66{
-    //   + .caret-b{
-    //     @include transform(translate(66.66%, 0));
-    //   }
-    // }
-  }
 
 
 }

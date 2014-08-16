@@ -4,6 +4,9 @@ Mifan.controller("homeNews", function($scope, $timeout) {
   $scope.toggleMBubble = function(index) {
     return $scope.newsCollect[index].bblActv = !$scope.newsCollect[index].bblActv;
   };
+  $scope.setMBill = function(index) {
+    return $scope.toggleMBill(["love", "comment", "share"]);
+  };
   return $scope.newsCollect = [
     {
       ques: {

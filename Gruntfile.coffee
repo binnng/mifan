@@ -50,25 +50,25 @@ module.exports = (grunt) ->
           livereload: true
 
       controllers:
-        files: ["<%= yeoman.app %>/scripts/controllers/{,*/}*.js"]
+        files: ["<%= yeoman.app %>/scripts/controllers/{,*/}{,*/}*.js"]
         tasks: ["concat:controllers"] # "newer:jshint:all"]
         options:
           livereload: false
 
       directives:
-        files: ["<%= yeoman.app %>/scripts/directives/{,*/}*.js"]
+        files: ["<%= yeoman.app %>/scripts/directives/{,*/}{,*/}*.js"]
         tasks: ["concat:directives"] # "newer:jshint:all"]
         options:
           livereload: false
 
       services:
-        files: ["<%= yeoman.app %>/scripts/services/{,*/}*.js"]
+        files: ["<%= yeoman.app %>/scripts/services/{,*/}{,*/}*.js"]
         tasks: ["concat:services"] # "newer:jshint:all"]
         options:
           livereload: false
 
       filters:
-        files: ["<%= yeoman.app %>/scripts/filters/{,*/}*.js"]
+        files: ["<%= yeoman.app %>/scripts/filters/{,*/}{,*/}*.js"]
         tasks: ["concat:filters"] # "newer:jshint:all"]
         options:
           livereload: false
@@ -87,7 +87,7 @@ module.exports = (grunt) ->
         ]
 
       compass:
-        files: ["<%= yeoman.app %>/styles/{,*/}*.{scss,sass}"]
+        files: ["<%= yeoman.app %>/styles/{,*/}{,*/}*.{scss,sass}"]
         tasks: [
           "compass:server"
           "autoprefixer"

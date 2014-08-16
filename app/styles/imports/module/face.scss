@@ -1,0 +1,36 @@
+
+// 头像
+.face,
+.avatar{
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 999px;
+  background-color: $light-gray;
+  display: inline-block;
+  text-indent: -999em;
+}
+
+.face-42{
+  width: 42px;
+  height: 42px;
+}
+.face-30{
+  width: 30px;
+  height: 30px;
+}
+.face-20{
+  width: 20px;
+  height: 20px;
+}
+
+// scroller
+
+.scroller-wrap{
+  //width: 100%;
+  overflow-x: hidden;
+
+  .scroller{
+    width: 8000px;
+
+  }
+}
