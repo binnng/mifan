@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji) ->
 
   WIN = $scope.WIN
   DOC = $scope.DOC
@@ -193,6 +193,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage) -
   # 会造成死循环
   # $broadcast 也会向自身广播
   # $scope.$on "refreshMMenu", refreshMMenu
+
+
+  #$emoji.setEmojiPath "images/emoji/"
 
 
 

@@ -6,10 +6,11 @@ Mifan = angular.module "mifan", [
   "ngSanitize"
   "ngRoute"
   "ngTouch"
-  "ngTouchHref"
+  "binnng.touch.href"
   "binnng.scroller"
   "binnng.tap"
   "binnng.storage"
+  "binnng.emoji"
 ]
 
 Mifan.config ($routeProvider, $locationProvider) ->
@@ -32,7 +33,7 @@ Mifan.config ($routeProvider, $locationProvider) ->
       controller: "msgCtrl"
     )
     .when("/me",
-      templateUrl: "views/me.html"
+      templateUrl: "views/me/me.html"
       controller: "meCtrl"
     )
     .when("/welcome",

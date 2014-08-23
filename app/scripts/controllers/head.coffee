@@ -13,7 +13,8 @@ Mifan.controller "headCtrl", ($scope) ->
     {page: "msg", text: "消息"}
     {page: "me", text: "个人主页"}
     {page: "friend", text: "朋友"}
-    {page: "hot", text: "排行"}
+    # {page: "hot", text: "排行"}
+    {page: "square", text: "广场"}
   ]
 
   $scope.remind = "米饭新增豆瓣登录!"

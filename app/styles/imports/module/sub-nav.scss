@@ -3,6 +3,7 @@
 .sub-nav-wrap{
   position: relative;
   li{
+    text-align: center;
     //width: 33.3333%;
   }
   .caret-b{
@@ -28,11 +29,61 @@
 
 }
 
+
+.sub-nav{
+  margin-bottom: 20px;
+  padding: 0;
+  border-bottom: 1px solid $light-gray;
+  border-radius: 2px;
+  li{
+    border-radius: 0;
+    text-align: center;
+    position: relative;
+    a{
+      color: $gray;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      &:hover,
+      &:active{
+        color: $black;
+        background: transparent;
+      }
+    }
+    b{
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: #f33;
+      color: #fff;
+      text-indent: -999px;
+      //padding: 0 .4em;
+      border-radius: 100px;
+      font-size: .8em;
+      display: block;
+      width: 8px;
+      height: 8px;
+    }
+    &.active{
+      a{
+        color: $tone !important;
+      }
+      border-bottom: 1px $tone solid;
+    }
+  }
+}
+
+
+// phone
 @media (max-width: $screen-xs-max) {
 
 
 
   // 二级导航
+
+  .sub-nav{
+    margin-bottom: 2px;
+  }
 
   .sub-nav-wrap{
     position: relative;
@@ -46,3 +97,5 @@
     }
   }
 }
+
+

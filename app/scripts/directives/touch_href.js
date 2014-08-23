@@ -7,7 +7,7 @@
    */
   'use strict';
   var IsAndroid, IsTouch, LOC, MOVE_BUFFER_RADIUS, NA, UA, WIN, getCoordinates, ngTouchHref;
-  ngTouchHref = angular.module('ngTouchHref', []);
+  ngTouchHref = angular.module('binnng.touch.href', []);
   WIN = window;
   IsTouch = "ontouchend" in WIN;
   if (!IsTouch) {

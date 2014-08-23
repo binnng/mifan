@@ -13,13 +13,13 @@ Mifan.controller("homeNews", function($scope, $timeout) {
         id: 1,
         username: "依然大头",
         face: "http://mifan.us/cache/user/0/0/48/7dfecd76fb_48_48.png",
-        text: "女朋友要过生日了，买个什么礼物呢？ 具体一些哈~~大谢！"
+        text: "现在支持emoji表情了，看👀，喜欢不？😄"
       },
       ans: {
         id: 2,
         username: "老婆婆",
         face: "http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg",
-        text: "买一个上市公司送她，让她做老板。"
+        text: "喜欢啊😍"
       },
       bblActv: false,
       bblActvShow: false

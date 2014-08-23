@@ -241,7 +241,9 @@ $header-height: 50px;
 		}
 
 		.dropdown-menu{
-			margin-top: .3em;
+			margin-top: 0;
+			opacity: 0;
+			@include transition(all, .3s);
 			li{
 				padding: .3em;
 				.glyphicon{
@@ -251,6 +253,11 @@ $header-height: 50px;
 		}
 
 		&.open{
+			.dropdown-menu{
+				margin-top: .3em;
+				opacity: 1;
+
+			}
 			.caret{
 				@include rotate(180);
 			}
@@ -338,15 +345,17 @@ $header-height: 50px;
 					line-height: 2.2;
 	  		}
 
-				a:hover,
 				a:active,
 				a:focus{
 					background-color: $dark-tone;
 				}
 
+				a:hover{
+					background: transparent;
+				}
+
 	  		&.active{
 	  			a{
-
 						background-color: $dark-tone;
 	  			}
 	  		}

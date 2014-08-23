@@ -9,14 +9,9 @@
   	max-width: 600px;
   	margin: 0 auto;
   	.nav{
-  		padding: 4px;
   	}
-		.feed-content{
-			background-color: #fefefe;
-			padding: 20px;
-		}
 		.ask-ques{
-			padding: 200px 14px 10px;
+			padding: 160px 14px 10px;
 			background-color: $dark-gray;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -46,31 +41,34 @@
 				@include text-shadow();
 				padding-left: 4px;
 			}
-		}
 
 
 			
-		textarea,
-		.login-tip{
-			height: 6em;
-			display: block;
-			border-radius: 2px;
-			border: none;
-			box-shadow: inset 0 0 4px rgba(0, 0, 0, .1);
-			background-color: $white;
-		}
+			textarea,
+			.login-tip{
+				height: 6em;
+				display: block;
+				border-radius: 0;
+				border: none;
+				//box-shadow: inset 0 0 4px rgba(0, 0, 0, .1);
+				background-color: $white;
+			}
 
-		.login-tip{
-			line-height: 2.4em;
-			text-indent: .8em;
-			margin: 0;
-			color: #666;
+			.login-tip{
+				line-height: 2.4em;
+				text-indent: .8em;
+				margin: 0;
+				color: #666;
+			}
 		}
 			
 		.ask-ques-form{
-			opacity: .95;
+			opacity: 1;
 			position: relative;
 			@include transition(all, .2s);
+			border-radius: 2px;
+			overflow: hidden;
+			border: 1px $light-gray solid;
 
 			.arrow{
 				color: $white;
@@ -93,9 +91,10 @@
 			}
 			
 			.toolbar{
-				float: right;
-				margin-top: 10px;
-				opacity: 0;
+				background-color: darken($white, 6%);
+				border-top: 1px $light-gray solid;
+				padding: 8px;
+				opacity: 1;
 				@include transition(all, .2s);
 
 				.cancel{
@@ -107,12 +106,8 @@
 				}
 
 				button[type="submit"]{
-					padding-left: 30px;
-					padding-right: 34px;
-
-					&.disabled{
-						opacity: 1;
-					}
+					padding-left: 20px;
+					padding-right: 24px;
 
 					//height: 5em;
 					//border-top-left-radius: 0;
@@ -121,264 +116,7 @@
 			}
 		}
 
-		.nav{
-			margin-bottom: 20px;
-			li{
-				border-radius: 0;
-				text-align: center;
-				position: relative;
-				a{
-					color: $gray;
-					background: transparent;
-					border: none;
-					border-radius: 0;
-					&:hover,
-					&:active{
-						color: $black;
-						background: transparent;
-					}
-				}
-				b{
-					position: absolute;
-					top: 6px;
-					right: 6px;
-					background: #f33;
-					color: #fff;
-					text-indent: -999px;
-					//padding: 0 .4em;
-					border-radius: 100px;
-					font-size: .8em;
-					display: block;
-					width: 8px;
-					height: 8px;
-				}
-				&.active{
-					a{
-						color: $tone;
-					}
-				}
-			}
-		}
 
-		.feed-content{
-		
-		}
-
-		.news{
-			.avatar{
-				display: block;
-				background-repeat: no-repeat;
-				background-size: cover;
-				text-indent: -999em;
-				font-size: 1px;
-			}
-			.avatars{
-				margin-right: .8em;
-				.asker{
-					width: 28px;
-					height: 28px;
-				}
-				.answerer{
-					width: 35px;
-					height: 35px;
-					margin: -10px 0 0 12px;
-				}
-			}
-
-			.contents{
-				overflow:hidden;
-			}
-			.questions{
-				dd{
-					border-bottom: 1px #ddd solid;
-					padding: .8em 0 .2em;
-					background-color: transparent;
-					transition: all .4s ease-in-out;
-					-moz-transition: all .4s ease-in-out;
-					-webkit-transition: all .4s ease-in-out;
-					&:last-child{
-						border-bottom: none;
-					}
-
-					&:hover{
-						//background: #effaff;
-					}
-
-					.h5{
-						margin: 0 0 .6em 0;
-						line-height: 1.4;
-						font-weight: 400;
-						a{
-							color: #666;
-							&:hover{
-								color: #000;
-							}
-						}
-					}
-
-					.ask-ans-desc{
-						color: #555;
-						margin: 0;
-					}
-
-					.lead{
-						font-size: 1.1em;
-						margin-bottom: .6em;
-					}
-
-					.meta{
-
-						.actions{
-							padding: 12px 0;
-							position: relative;
-
-							.act-left{
-								margin-top: 12px;
-							}
-
-							.m-bubble{
-								position: absolute;
-								right: 0;
-							}
-							a,b{
-								&:active{
-									color: $tone;
-								}
-							}
-						}
-					}
-
-					.like,
-					.m-cmt{
-						color: $gray;
-						padding: 0 .6em;
-						&.active{
-							color: $red;
-						}
-						.glyphicon-heart{
-							margin-right: .2em;
-						}
-						.count{
-							vertical-align: bottom;
-						}
-					}
-
-					.m-cmt{
-						.glyphicon-comment{
-							margin-right: .24em;
-						}
-					}
-
-					.bill-btn{
-						
-					}
-
-					.liked-list{
-						display: none;
-						margin-left: .8em;
-						li{
-							display: inline-block;
-						}
-						.avatar{
-							width: 18px;
-							height: 18px;
-							margin: 0 0px;
-						}
-					}
-
-				}
-			}
-		}
-
-
-		.comment{
-			overflow: hidden;
-
-			textarea{
-				width: 100%;
-				box-shadow: 0px 1px 1px 0px #eaeaea inset;
-				border: 1px solid #ccc;
-			}
-
-			.cmt-tgl-btn{
-				padding-left: 0;
-				padding-right: 0;
-				font-size: .9em;
-
-				i{
-					margin-left: .6em;
-					font-size: .6em;
-					font-weight: 200;
-				}
-			}
-			.cmt-form{
-				.cmt-input{
-					height: 4em;
-					padding: .2em .6em;
-					
-				}
-				.btn{
-					font-size: .9em;
-					float: right;
-					margin-top: .8em;
-				}
-			}
-			.cmt-list{
-
-			}
-			.cmt-item{
-				border-bottom: 1px solid $light-gray;
-				padding: 1em .4em;
-				&:last-child{
-					border: none;
-				}
-				.cmt-face{
-					margin-right: .8em;
-					float: left;
-				}
-				.cmt-detail{
-					overflow: hidden;
-
-					h5{
-						margin-top: 4px;
-						a{
-							color: #111;
-							font-weight: 700;
-							margin-right: 1.2em;
-						}
-						span{
-							color: $gray;
-							font-size: .9em;
-						}
-					}
-
-					.cont-txt{
-						color: #555;
-					}
-				}
-				.cmt-reply{
-					overflow: hidden;
-				}
-
-
-				.cmt-reply-input{
-					height: 2.4em;
-					padding: .5em .6em;
-				}
-
-				.cmt-reply-btn{
-					float: right;
-					font-size: .8em;
-					margin-top: .6em;
-					padding-top: .4em;
-					padding-bottom: .4em;
-					overflow: hidden;
-					.btn{
-						float: right;
-					}
-				}
-			}
-		}
 		
 	}
 
@@ -418,11 +156,9 @@
 	.home-page{
 		.main{
 			max-width: none;
-			.ask-ques{
-				padding-bottom: 14px !important;
-			}
 			.ask-ques-form{
 				min-height: 26px;
+				border: none;
 				.avatar{
 					width: 38px;
 					height: 38px;
@@ -432,12 +168,15 @@
 					display: inline-block;
 				}
 			}
-			.login-tip{
-				height: auto;
-				background: transparent;
-				text-indent: 0;
-				a{
-					color: $white;
+			.ask-ques{
+				padding-bottom: 14px !important;
+				.login-tip{
+					height: auto;
+					background: transparent;
+					text-indent: 0;
+					a{
+						color: $white;
+					}
 				}
 			}
 
@@ -448,10 +187,8 @@
 			}
 
 			.nav{
-				padding: 0;
-				border-bottom: 1px solid $light-gray;
 				li{
-					margin-bottom: 0;
+					width: 25%;
 				}
 			}
 
@@ -460,12 +197,12 @@
 			}
 
 			.news{
-				.avatars{
-					margin-right: .6em;
-					.asker{
-					}
-					.answerer{
-						margin: -10px 0 0 8px;
+
+				.questions{
+					.meta{	
+						.act-left{
+							margin-top: 10px !important;
+						}
 					}
 				}
 			}
@@ -507,7 +244,7 @@
 	.home-page{
 		.main{
 			.ask-ques{
-				padding-bottom: 30px;
+				padding-bottom: 20px;
 			}
 		}
 	}

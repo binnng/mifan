@@ -1,0 +1,24 @@
+.me-page{
+	.main{
+		max-width: 600px;
+	}
+
+	.side{
+		background-color: #fefefe;
+	}
+}
+
+
+
+
+// phone
+@media (max-width: $screen-xs-max) {
+
+	.me-page{
+	  .sub-nav{
+	    li{
+				width: 33.3333%;
+		  }
+		}
+	}
+}

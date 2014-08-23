@@ -22,8 +22,8 @@ Mifan.controller("headCtrl", function($scope) {
       page: "friend",
       text: "朋友"
     }, {
-      page: "hot",
-      text: "排行"
+      page: "square",
+      text: "广场"
     }
   ];
   $scope.remind = "米饭新增豆瓣登录!";

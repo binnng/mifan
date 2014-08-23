@@ -4,6 +4,7 @@
   	max-width: 600px;
   	margin: 0 auto;
   	padding: 0 8px;
+  	padding-bottom: 2em;
 
   	.lead{
   		//background-color: $light-gray;
@@ -19,11 +20,7 @@
 
   	.questions{
   		dd{
-  			border-bottom: 1px #ddd solid;
-				padding: 1em 0 0;
-				&:last-child{
-					border: none;
-				}
+  			
   		}
   	}
 
@@ -43,7 +40,7 @@
   				color: $dark-gray;
   			}
   		}
-  		.ques-meta{
+  		.meta{
   			margin: .8em 0;
   		}
   	}
@@ -51,7 +48,6 @@
 
 		.ans-form{
 			.ans-input{
-				height: 4em;
 				padding: .2em .6em;
 				box-shadow: 0px 1px 1px 0px #eaeaea inset;
 				border: 1px solid #ccc;
@@ -59,6 +55,11 @@
 				width: 100%;
 				border-radius: 2px;
 				height: 2.2em;
+				@include transition(all, .2s);
+
+				&.active{
+					height: 4em;
+				}
 			}
 			.btn{
 				font-size: .9em;
@@ -76,7 +77,7 @@
 
 		.m-acts{
 			position: relative;
-			margin-bottom: .8em;
+			margin-bottom: 0;
 			overflow: hidden;
 		}
 	}
@@ -97,6 +98,13 @@
 						height: 35px;
 					}
 				}
+			}
+
+			.ques-dtl{
+
+	  		.meta{
+	  			margin-bottom: -.4em;
+	  		}
 			}
 		}
 	}

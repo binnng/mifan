@@ -2,7 +2,7 @@
 "use strict";
 var Mifan;
 
-Mifan = angular.module("mifan", ["ngCookies", "ngResource", "ngSanitize", "ngRoute", "ngTouch", "ngTouchHref", "binnng.scroller", "binnng.tap", "binnng.storage"]);
+Mifan = angular.module("mifan", ["ngCookies", "ngResource", "ngSanitize", "ngRoute", "ngTouch", "binnng.touch.href", "binnng.scroller", "binnng.tap", "binnng.storage", "binnng.emoji"]);
 
 Mifan.config(function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(false).hashPrefix("!");
@@ -18,7 +18,7 @@ Mifan.config(function($routeProvider, $locationProvider) {
     templateUrl: "views/msg.html",
     controller: "msgCtrl"
   }).when("/me", {
-    templateUrl: "views/me.html",
+    templateUrl: "views/me/me.html",
     controller: "meCtrl"
   }).when("/welcome", {
     templateUrl: "views/welcome.html",

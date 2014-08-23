@@ -1,0 +1,61 @@
+
+.feed-content{
+	background-color: #fefefe;
+	padding: 20px;
+}
+
+.feed-blk{
+	border-bottom: 1px #ddd solid;
+	padding: 1em 0;
+
+	background-color: transparent;
+	&:last-child{
+		border-bottom: none;
+	}
+	
+	a{
+		color: $black;
+		margin: 0 .2em;
+		&:hover,
+		&:active{
+			color: $tone;
+		}
+	}
+
+
+	.avatar{
+		display: block;
+	}
+	.avatars{
+		margin-right: .8em;
+		.asker{
+			width: 28px;
+			height: 28px;
+		}
+		.answerer{
+			width: 35px;
+			height: 35px;
+			margin: -10px 0 0 12px;
+		}
+	}
+	.contents{
+		overflow:hidden;
+	}
+
+
+
+
+	.meta{
+		color: #555;
+	  font-size: .9em;
+		margin: 0;
+		margin-top: .6em;
+	  a{
+	    color: $black;
+	    &:hover,
+	    &:active{
+	      color: $link-color;
+	    }
+	  }
+	}
+}

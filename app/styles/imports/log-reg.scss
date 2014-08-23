@@ -114,13 +114,9 @@
 .sns-login{
 
 	i{
-		background-image: url(../images/icon-sns.png);
-		background-repeat: no-repeat;
-		width: 25px;
-		height: 25px;
+		@extend .sns-icon;
 		float: left;
 		margin: 12px 10px;
-		background-size: 25px;
 	}
 
 	a{
@@ -146,18 +142,12 @@
 
 	.weibo{
 		background-color: #ee7d59;
-		i{
-			background-position: 0 -25px;
-		}
 	}
 	.qq{
 		background-color: #50b5d3;
 	}
 	.douban{
 		background-color: #65c100;
-		i{
-			background-position: 0 -50px;
-		}
 	}
 }
 

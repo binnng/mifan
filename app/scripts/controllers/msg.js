@@ -6,9 +6,7 @@ Mifan.controller("msgCtrl", function($scope, $rootScope) {
   $scope.$on("$viewContentLoaded", function() {
     return $scope.$emit("pageChange", "msg");
   });
-  $scope.focus = function() {
-    return console.log(111);
-  };
+  $scope.expander = function(target) {};
   $scope.setMBill = function(index) {
     return $scope.toggleMBill(["love", "answer", "share"]);
   };

@@ -2,6 +2,7 @@ node_modules
 dist
 doc
 data
+emoji
 .tmp
 .sass-cache
 .ftppass

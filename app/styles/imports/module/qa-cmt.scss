@@ -1,0 +1,76 @@
+.qa-cmt{
+	overflow: hidden;
+
+	textarea{
+		width: 100%;
+		box-shadow: 0px 1px 1px 0px #eaeaea inset;
+		border: 1px solid #ccc;
+	}
+	.cmt-form{
+		.cmt-input{
+			height: 4em;
+			padding: .2em .6em;
+			
+		}
+		.btn{
+			font-size: .9em;
+			float: right;
+			margin-top: .8em;
+		}
+	}
+	.cmt-list{
+
+	}
+	.cmt-item{
+		border-bottom: 1px solid $light-gray;
+		padding: 1em .4em;
+		&:last-child{
+			border: none;
+		}
+		.cmt-face{
+			margin-right: .8em;
+			float: left;
+		}
+		.cmt-detail{
+			overflow: hidden;
+
+			h5{
+				margin-top: 4px;
+				a{
+					color: #111;
+					font-weight: 700;
+					margin-right: 1.2em;
+				}
+				span{
+					color: $gray;
+					font-size: .9em;
+				}
+			}
+
+			.cont-txt{
+				color: #555;
+			}
+		}
+		.cmt-reply{
+			overflow: hidden;
+		}
+
+
+		.cmt-reply-input{
+			height: 2.4em;
+			padding: .5em .6em;
+		}
+
+		.cmt-reply-btn{
+			float: right;
+			font-size: .8em;
+			margin-top: .6em;
+			padding-top: .4em;
+			padding-bottom: .4em;
+			overflow: hidden;
+			.btn{
+				float: right;
+			}
+		}
+	}
+}

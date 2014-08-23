@@ -7,7 +7,7 @@
 
   'use strict'
 
-  ngTouchHref = angular.module 'ngTouchHref', []
+  ngTouchHref = angular.module 'binnng.touch.href', []
 
   WIN = window
   IsTouch = "ontouchend" of WIN

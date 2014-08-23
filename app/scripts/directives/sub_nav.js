@@ -5,25 +5,6 @@ Mifan.directive("subNav", function() {
     replace: false,
     transclude: true,
     restrict: "AE",
-    scope: false,
-    compile: function(element, attrs, transclude) {
-      return {
-        post: function(scope, element, attrs) {
-          var caret, ele, items, length, ul, wrapEle, _i, _len, _results;
-          wrapEle = element[0];
-          ul = wrapEle.getElementsByTagName("ul")[0];
-          items = ul.getElementsByTagName("li");
-          caret = wrapEle.getElementsByTagName("em")[0];
-          length = items.length;
-          caret.style.left = "0px";
-          _results = [];
-          for (_i = 0, _len = items.length; _i < _len; _i++) {
-            ele = items[_i];
-            _results.push(ele.style.width = "" + (100 / length) + "%");
-          }
-          return _results;
-        }
-      };
-    }
+    scope: false
   };
 });

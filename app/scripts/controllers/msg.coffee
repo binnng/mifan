@@ -5,8 +5,8 @@ Mifan.controller "msgCtrl", ($scope, $rootScope) ->
   
   $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "msg"
 
-  $scope.focus = -> console.log 111
-
+  $scope.expander = (target) ->
+  	#angular.element(target).addClass "active"
 
 
   $scope.setMBill = (index) ->
