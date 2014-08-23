@@ -1,0 +1,33 @@
+
+
+// 加载更多
+.load-more{
+  text-align: center;
+  padding: 10px;
+  color: $tone;
+  cursor: pointer;
+  font-size: 1em;
+  position: relative;
+  margin-top: 12px;
+  &:hover,
+  &:active{
+    background-color: $light-gray;
+  }
+  &.loading{
+    cursor: auto;
+    &:hover,
+    &:active{
+      background-color: transparent;
+    }
+  }
+}
+.loading-tip i,
+.loading-tip:after,
+.loading-tip:before{
+  content: "";
+  width: 4px;
+  height: 4px;
+  background-color: $tone;
+  display: inline-block;
+  margin-right: 2px;
+}
