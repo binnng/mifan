@@ -3,21 +3,18 @@
 .ui-loading,
 .ui-loading:after,
 .ui-loading:before {
-  width:5px;
-  height:10px;
-  -webkit-animation:ui-loading 1.4s infinite linear;
-  animation:ui-loading 1.4s infinite linear;
+  width:4px;
+  height:4px;
   background: $tone;
 }
 .ui-loading {
-  display: none;
   padding:0!important;
-  opacity:.1;
+  opacity:1;
   -webkit-animation-delay:.6s;
   animation-delay:.6s;
   position: absolute;
   top: 50%;
-  margin: -5px 0 0 -3px;
+  margin: -2px 0 0 -3px;
   left: 50%;
 }
 .ui-loading:after,
@@ -27,26 +24,40 @@
 }
 .ui-loading:after {
   margin-right:auto;
-  left:-6px;
+  left:-7px;
   -webkit-animation-delay:.3s;
   animation-delay:.3s;
 }
 .ui-loading:before {
   margin-right:auto;
-  left:6px;
+  left:7px;
   -webkit-animation-delay:.9s;
   animation-delay:.9s;
 }
 
 // 标准的loading HTML结构
 // <div class="load-more [loading]"><span class="loading-tip">加载更多</span><i class="ui-loading"></i></div>
-.loading > .ui-loading{
-  display: block;
+.loading {
+  > .ui-loading,
+  > .ui-loading:after,
+  > .ui-loading:before {
+    //display: block;
+    -webkit-animation:ui-loading .8s infinite linear;
+    animation:ui-loading .8s infinite linear;
+  }
+  > .ui-loading:after {
+    -webkit-animation-delay:.3s;
+    animation-delay:.3s;
+  }
+  > .ui-loading:before {
+    -webkit-animation-delay:.9s;
+    animation-delay:.9s;
+  }
 }
 
-.loading > .loading-tip{
-  visibility: hidden;
-}
+// .loading > .loading-tip{
+//   visibility: hidden;
+// }
 
 @-webkit-keyframes ui-loading {
   0%,100% {
