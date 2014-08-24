@@ -1,4 +1,4 @@
-.qa-blk{
+.qa-mod{
 
 	&:hover{
 		//background: #effaff;
@@ -90,7 +90,7 @@
 }
 
 @media (max-width: $screen-xs-max) {
-	.qa-blk{
+	.qa-mod{
 
 		.avatars{
 			margin-right: .6em;

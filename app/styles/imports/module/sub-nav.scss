@@ -82,11 +82,15 @@
   // 二级导航
 
   .sub-nav{
-    margin-bottom: 2px;
+    margin-bottom: 0;
   }
 
   .sub-nav-wrap{
     position: relative;
+
+    margin-left: 6px;
+    margin-right: 6px;
+
     li{
       a{
         margin-right: 0 !important;
@@ -95,6 +99,15 @@
     }
     .caret-b{
     }
+  }
+}
+
+@media (max-width: $screen-xs-max) and (min-width: $screen-xs) {
+
+  // 二级导航
+
+  .sub-nav{
+    margin-bottom: 14px;
   }
 }
 

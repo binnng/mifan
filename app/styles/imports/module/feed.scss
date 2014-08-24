@@ -4,8 +4,12 @@
 	padding: 20px;
 }
 
-.feed-blk{
-	border-bottom: 1px #ddd solid;
+.feed-wrap{
+	margin-top: 26px;
+}
+
+.feed-mod{
+	border-bottom: 1px #ddd dashed;
 	padding: 1em 0;
 
 	background-color: transparent;
@@ -21,12 +25,19 @@
 			color: $tone;
 		}
 	}
-
-
+	
+	.face,
 	.avatar{
-		display: block;
+		margin-right: .8em;
+		float: left;
 	}
+
 	.avatars{
+		.avatar{
+			display: block;
+			float: none;
+			margin-right: 0;
+		}
 		margin-right: .8em;
 		.asker{
 			width: 28px;
@@ -44,6 +55,14 @@
 
 
 
+	.ques{
+		overflow: hidden;
+		display: block;
+		line-height: 1.5;
+	}
+
+
+
 
 	.meta{
 		color: #555;
@@ -57,5 +76,32 @@
 	      color: $link-color;
 	    }
 	  }
+	}
+}
+
+.reply-mod{
+	.content{
+		margin-top: 1em;
+		overflow: hidden;
+	}
+}
+
+.love-mod{
+	@extend .reply-mod;
+}
+
+//phone
+
+@media (max-width: $screen-xs-max) {
+
+	.feed-wrap{
+		margin-top: 0px;
+	}
+}
+
+@media (max-width: $screen-xs-max) and (min-width: $screen-xs) {
+
+	.feed-wrap{
+		margin-top: 10px;
 	}
 }

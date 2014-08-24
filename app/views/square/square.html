@@ -1,0 +1,25 @@
+<div class="square-page page-mod container clearfix">
+
+	<div class="row col-xs-12 col-sm-8">
+		<div class="main">
+			
+			<div class="square-top sd-card">
+				<h5>米饭广场 - 大家都在问：</h5>
+				<ul>
+					<li class="feed-mod">
+						<p class="content">
+							<a ng-href="#!/user/" class="face face-30" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>	
+							<a ng-href="#" class="ques">《驯龙高手2》好看么？</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="feed-wrap">
+				<div ng-include="'views/square/feeds.html'"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row col-xs-12 col-sm-4" ng-include="'views/square/newers.html'"></div>
+</div>

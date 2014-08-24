@@ -1,6 +1,6 @@
 <div class="feed-content news sd-card" ng-controller="homeNews">
 	<dl class="questions">
-		<dd ng-repeat="news in newsCollect" class="qa-blk feed-blk">
+		<dd ng-repeat="news in newsCollect" class="qa-mod feed-mod">
 			<div class="avatars pull-left">
 				<a ng-href="#!/user/{{news.ques.id}}" class="avatar asker" title="{{news.ques.username}}" style="background-image:url({{news.ques.face}})">{{news.ques.username}}</a>
 				<a ng-href="#!/user/{{news.ans.id}}" class="avatar answerer" title="{{news.ans.username}}" style="background-image:url({{news.ans.face}})">{{news.ans.username}}</a>

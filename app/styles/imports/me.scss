@@ -1,9 +1,15 @@
 .me-page{
 	.main{
-		max-width: 600px;
+
+	}
+
+
+	.sub-nav-wrap{
+		margin-top: 0;
 	}
 
 	.side{
+		padding: 0;
 		background-color: #fefefe;
 	}
 }
@@ -15,10 +21,19 @@
 @media (max-width: $screen-xs-max) {
 
 	.me-page{
+
+		.sub-nav-wrap{
+			margin-top: 10px;
+		}
 	  .sub-nav{
 	    li{
 				width: 33.3333%;
 		  }
+		}
+
+		.side{
+			margin: 0;
+			padding: 0;
 		}
 	}
 }

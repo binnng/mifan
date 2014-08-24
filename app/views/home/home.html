@@ -1,4 +1,4 @@
-<div class="home-page container clearfix">
+<div class="home-page page-mod container clearfix">
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
 			
@@ -33,26 +33,26 @@
 
 			</div>
 
-			<div class="feed-wrap">
+			<div sub-nav class="sub-nav-wrap" caretLeft="caretLeft">
+				<li ng-class="{active: feedType == 'news'}">
+			  	<a class="btn-link" ng-click="switchFeed()">朋友动态</a>
+			  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
+			  </li>
+			  <li ng-class="{active: feedType == 'answer'}">
+			  	<a class="btn-link" ng-click="switchFeed('answer')">回答我的</a>
+			  	<b ng-show="remind.answerNum!==0">{{remind.answerNum}}</b>
+			  </li>
+			  <li ng-class="{active: feedType == 'reply'}">
+			  	<a class="btn-link" ng-click="switchFeed('reply')">评论我的</a>
+			  	<b ng-show="remind.replyNum!==0">{{remind.replyNum}}</b>
+			  </li>
+			  <li ng-class="{active: feedType == 'love'}">
+			  	<a class="btn-link" ng-click="switchFeed('love')">喜欢我的</a>
+			  	<b ng-show="remind.loveNum!==0">{{remind.loveNum}}</b>
+			  </li>
+			</div>
 
-				<div sub-nav class="sub-nav-wrap" ng-show="isLogin" caretLeft="caretLeft">
-					<li ng-class="{active: feedType == 'news'}">
-				  	<a class="btn-link" ng-click="switchFeed()">朋友动态</a>
-				  	<b ng-show="remind.newsNum!==0">{{remind.newsNum}}</b>
-				  </li>
-				  <li ng-class="{active: feedType == 'answer'}">
-				  	<a class="btn-link" ng-click="switchFeed('answer')">回答我的</a>
-				  	<b ng-show="remind.answerNum!==0">{{remind.answerNum}}</b>
-				  </li>
-				  <li ng-class="{active: feedType == 'reply'}">
-				  	<a class="btn-link" ng-click="switchFeed('reply')">评论我的</a>
-				  	<b ng-show="remind.replyNum!==0">{{remind.replyNum}}</b>
-				  </li>
-				  <li ng-class="{active: feedType == 'love'}">
-				  	<a class="btn-link" ng-click="switchFeed('love')">喜欢我的</a>
-				  	<b ng-show="remind.loveNum!==0">{{remind.loveNum}}</b>
-				  </li>
-				</div>
+			<div class="feed-wrap">
 
 				<div ng-include="'views/home/news.html'" ng-if="feedType == 'news'"></div>
 				<div ng-include="'views/home/answer.html'" ng-if="feedType == 'answer'"></div>

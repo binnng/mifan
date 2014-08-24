@@ -1,16 +1,5 @@
 .home-page{
 	
-	.side{
-		background-color: #fefefe;
-		padding: 24px;
-		margin-left: 3em;
-		max-width: 300px;
-		margin: 0 auto;
-		.side-block{
-			margin-bottom: 2em;
-			overflow: hidden;
-		}
-	}
 	.every-day-ask{
 		color: #555;
 		.ans-num{
@@ -61,20 +50,10 @@
 }
 
 
-@media (max-width: $screen-md-max) and (min-width: $screen-sm-max) {
-	.home-page{
-		.side{
-			margin-left: 1.8em;
-		}
-	}
-}
 
 //pad
 @media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
 	.home-page{
-		.side{
-			margin-left: .6em;
-		}
 
 		.every-day-ask{
 			.ans-num{
@@ -90,16 +69,6 @@
 					display: inline;
 				}
 			}
-		}
-	}
-}
-
-//phone
-@media (max-width: $screen-xs-max) {
-	.home-page{
-		.side{
-			max-width: none;
-			margin-top: 10px;
 		}
 	}
 }

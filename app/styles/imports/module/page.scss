@@ -1,0 +1,60 @@
+.page-mod{
+
+	.main{
+
+  	max-width: 600px;
+  	margin: 0 auto;
+
+	}
+
+
+	.side{
+		background-color: #fefefe;
+		padding: 14px 18px;
+		margin-left: 3em;
+		max-width: 300px;
+		margin: 0 auto;
+		.side-mod{
+			margin-bottom: 2em;
+			overflow: hidden;
+		}
+	}
+
+}
+
+
+@media (max-width: $screen-md-max) and (min-width: $screen-sm-max) {
+	.page-mod{
+		.side{
+			margin-left: 1.8em;
+		}
+	}
+}
+
+//pad
+@media (max-width: $screen-sm-max) and (min-width: $screen-xs-max) {
+	.page-mod{
+		.side{
+			margin-left: .6em;
+		}
+	}
+}
+
+
+//phone
+
+@media (max-width: $screen-xs-max) {
+	.page-mod{
+
+		.main{
+			max-width: none;
+		}
+
+		.side{
+			margin-top: 2em;
+			max-width: none;
+		}
+
+		
+	}
+}

@@ -1,0 +1,15 @@
+.square-top{
+	padding: 1em;
+
+	background-image: url(../images/square-bg.jpg);
+	// this is a hack
+	background-size: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	h5{
+		//border-bottom: 1px solid $white;
+		padding-bottom: .4em;
+	}
+}
+

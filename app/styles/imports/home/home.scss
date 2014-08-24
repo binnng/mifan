@@ -4,12 +4,12 @@
 		height: 100%;
 	}
 
+	.sub-nav-wrap{
+		margin-top: 20px;
+	}
+
 	.main{
 
-  	max-width: 600px;
-  	margin: 0 auto;
-  	.nav{
-  	}
 		.ask-ques{
 			padding: 160px 14px 10px;
 			background-color: $dark-gray;
@@ -129,9 +129,6 @@
 
 
 
-	.feed-wrap{
-		margin-top: 26px;
-	}
 }
 
 
@@ -154,6 +151,11 @@
 
 @media (max-width: $screen-xs-max) {
 	.home-page{
+
+  	.sub-nav-wrap{
+  		margin-top: 10px;
+  	}
+
 		.main{
 			max-width: none;
 			.ask-ques-form{
@@ -178,12 +180,6 @@
 						color: $white;
 					}
 				}
-			}
-
-			.sub-nav-wrap{
-				
-				margin-left: 6px;
-				margin-right: 6px;
 			}
 
 			.nav{
@@ -216,14 +212,7 @@
 			}
 		}
 
-		.side{
-			margin-top: 2em;
-			max-width: 600px;
-		}
-
-		.feed-wrap{
-			margin-top: 10px;
-		}
+		
 	}
 }
 

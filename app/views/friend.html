@@ -1,25 +1,21 @@
 <div class="me-page page-mod container clearfix">
 
-	<div class="row col-xs-12 col-sm-4" ng-include="'views/me/side.html'"></div>
+	<div class="row col-xs-12 col-sm-4" ng-show="false" ng-include="'views/me/side.html'"></div>
 
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
 
 			<div sub-nav class="sub-nav-wrap">
 				<li ng-class="{active: feedType == 'ask'}">
-			  	<a class="btn-link" ng-click="switchFeed()">我的提问</a>
+			  	<a class="btn-link" ng-click="switchFeed()">我的关注</a>
 			  </li>
 			  <li ng-class="{active: feedType == 'answer'}">
-			  	<a class="btn-link" ng-click="switchFeed('answer')">我的回答</a>
-			  </li>
-			  <li ng-class="{active: feedType == 'love'}">
-			  	<a class="btn-link" ng-click="switchFeed('love')">我的喜欢</a>
+			  	<a class="btn-link" ng-click="switchFeed('answer')">我的粉丝</a>
 			  </li>
 			</div>
 
 			<div ng-include="'views/me/ask.html'" ng-if="feedType == 'ask'"></div>
 			<div ng-include="'views/me/answer.html'" ng-if="feedType == 'answer'"></div>
-			<div ng-include="'views/me/love.html'" ng-if="feedType == 'love'"></div>
 
 		</div>
 	</div>
