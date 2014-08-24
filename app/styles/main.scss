@@ -3,7 +3,9 @@
 @import "../bower_components/sass-easing/_sass-easing.scss";
 // endbower
 
-@import "imports/var";
+@import "imports/define/screen";
+@import "imports/define/color";
+
 @import "imports/functions";
 @import "imports/mixins";
 
@@ -20,6 +22,7 @@
 @import "imports/module/qa-cmt";
 @import "imports/module/feed";
 @import "imports/module/user";
+@import "imports/module/user-list";
 
 @import "imports/global";
 

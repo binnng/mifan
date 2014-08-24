@@ -1,0 +1,10 @@
+.user-list-mod{
+	
+	li{
+		border-bottom: 1px dashed $light-gray;
+
+		&:last-child{
+			border: none;
+		}
+	}
+}

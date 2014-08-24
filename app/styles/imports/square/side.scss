@@ -1,18 +1,3 @@
 .square-page{
-	.newer-list{
-		h5{
-			.refresh{
-				float: right;
-				cursor: pointer;
-			}
-		}
 
-		li{
-			border-bottom: 1px dashed $light-gray;
-
-			&:last-child{
-				border: none;
-			}
-		}
-	}
 }

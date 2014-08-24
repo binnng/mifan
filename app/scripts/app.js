@@ -30,7 +30,7 @@ Mifan.config(function($routeProvider, $locationProvider) {
     templateUrl: "views/register.html",
     controller: "registerCtrl"
   }).when("/friend", {
-    templateUrl: "views/friend.html",
+    templateUrl: "views/friend/friend.html",
     controller: "friendCtrl"
   }).when("/square", {
     templateUrl: "views/square/square.html",

@@ -49,7 +49,7 @@ Mifan.config ($routeProvider, $locationProvider) ->
       controller: "registerCtrl"
     )
     .when("/friend",
-      templateUrl: "views/friend.html"
+      templateUrl: "views/friend/friend.html"
       controller: "friendCtrl"
     )
     .when("/square",

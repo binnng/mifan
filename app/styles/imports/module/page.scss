@@ -17,6 +17,12 @@
 		.side-mod{
 			margin-bottom: 2em;
 			overflow: hidden;
+			h5{
+				.icon{
+					float: right;
+					cursor: pointer;
+				}
+			}
 		}
 	}
 
