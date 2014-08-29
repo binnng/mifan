@@ -2,24 +2,24 @@
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
 			
-			<div class="ask-ques clearfix sd-card" ng-controller="homeAskCtrl" ng-style="{'background-image': 'url(' + bgUrl + ')'}" ng-class="{active: onInputing || isSending}">
+			<div class="ask-ques clearfix sd-card" ng-controller="homePosCtrl" ng-style="{'background-image': 'url(' + bgUrl + ')'}" ng-class="{active: onInputing || isSending}">
 				<div class="location">
 					<span class="glyphicon glyphicon-map-marker">北京</span>
 				</div>
 				<div ng-if="isLogin">
 
-					<form role="form" class="ask-ques-form" ng-submit="send()">
+					<form role="form" class="ask-ques-form" ng-submit="send()" ng-controller="homeAskCtrl">
 						<div class="ask-ques-text hidden-xs">
-							<textarea class="form-control" rows="3" name="question" ng-model="askQuesConent" ng-focus="onFocus()" ng-blur="onBlur()" placeholder="问你朋友一个问题吧！"></textarea>
+							<textarea class="form-control" rows="3" name="content" ng-model="quesContent" placeholder="问你朋友一个问题吧！"></textarea>
 							<!-- <div class="arrow"><span class="glyphicon glyphicon-chevron-down"></span></div>
 							<b class="avatar face" ng-style="{'background-image': 'url(' + user.face_60 + ')'}" title="老婆婆"></b> -->
 						</div>
 						<div class="toolbar hidden-xs clearfix">
 							<!-- <span class="cancel" ng-click="onBlur(true)">取消</span> -->
-							<button type="submit" class="btn btn-success pull-right" ng-class="{disabled: !askQuesConent || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending}"></i></span></button>
+							<button type="submit" class="btn btn-success pull-right" ng-class="{disabled: !quesContent || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending && !isSendSucs, 'glyphicon-ok': 'isSendSucs'}"></i></span></button>
 						</div>
 
-						<button class="btn btn-success visible-xs pull-right" ng-click="toggleMDesign('ask')">提问</button>
+						<b class="btn btn-success visible-xs pull-right" ng-click="toggleMDesign('ask')">提问</b>
 					</form>
 
 				</div>

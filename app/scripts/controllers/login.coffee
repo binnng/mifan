@@ -3,10 +3,6 @@
 Mifan.controller "loginCtrl", ($scope, $http, $timeout) ->
 
   API = $scope.API
-  IsDebug = $scope.IsDebug
-  LOC = $scope.LOC
-
-  IsWebapp = $scope.IsWebapp
 
   $scope.error = null
 

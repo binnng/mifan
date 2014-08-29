@@ -1,20 +1,19 @@
-<div class="friend-page page-mod container clearfix">
-
+<div class="friend-page page-mod container clearfix" ng-controller="friendCtrl">
 
 	<div class="row col-xs-12 col-sm-8">
 		<div class="main">
 
 			<div sub-nav class="sub-nav-wrap">
-				<li ng-class="{active: feedType == 'ask'}">
+				<li ng-class="{active: feedType == 'follow'}">
 			  	<a class="btn-link" ng-click="switchFeed()">我的关注</a>
 			  </li>
-			  <li ng-class="{active: feedType == 'answer'}">
-			  	<a class="btn-link" ng-click="switchFeed('answer')">我的粉丝</a>
+			  <li ng-class="{active: feedType == 'fans'}">
+			  	<a class="btn-link" ng-click="switchFeed('fans')">我的粉丝</a>
 			  </li>
 			</div>
 
-			<div ng-include="'views/me/ask.html'" ng-if="feedType == 'ask'"></div>
-			<div ng-include="'views/me/answer.html'" ng-if="feedType == 'answer'"></div>
+			<div ng-include="'views/friend/follow.html'" ng-if="feedType == 'follow'"></div>
+			<div ng-include="'views/friend/fans.html'" ng-if="feedType == 'fans'"></div>
 
 		</div>
 	</div>

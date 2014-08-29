@@ -5,15 +5,7 @@
 
 Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji) ->
 
-  WIN = $scope.WIN
-  DOC = $scope.DOC
-  LOC = $scope.LOC
-  BODY = $scope.BODY
-
   API = $scope.API
-  IsDebug = $scope.IsDebug
-
-  IsWebapp = $scope.IsWebapp
 
   $storage.put = $storage.set
 
@@ -21,165 +13,308 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
   # ios webapp 状态不能存cookie，只能用localstorage存
   store = if IsWebapp then $storage else $cookieStore
 
-  $scope.page = "home"
-
-  $scope.accessToken = $scope.UID = undefined
-  $scope.isLogin = no
-
-  $scope.$on "onLogined", (detail, result) ->
-    $scope.isLogin = yes
-
-    $scope.accessToken = result["accesstoken"]
-
-    user = result["user"]
-    $scope.UID = user["userid"]
-
-    setUserInfo(user)
-
-    $scope.user.accessToken = accessToken
-
-    store.put "mUID", user["userid"]
-    store.put "mUsername", user["username"]
-    store.put "mAccessToken", $scope.accessToken
-
-
-  setUserInfo = (user) ->
-
-    $scope.user.username = user["username"] or ""
-    $scope.user.email = user["email"] or ""
-    $scope.user.face = user["face"] or ""
-    $scope.user.face_60 = user["face_60"] or ""
-    $scope.user.face_120 = user["face_120"] or ""
-    $scope.user.sex = user["sex"] or "1"
-    $scope.user.blog = user["blog"] or ""
-    $scope.user.uid = user["userid"] or ""
-
-  getUserInfo = ->
-
-    url = "#{API.userInfo}" + ( if IsDebug then "" else "/#{uid}" ) + "#{$scope.privacyParam}"
-
-    $http.get(url)
-      .success(getUserInfoCb)
-      .error(getUserInfoErrorCb)
-
-  getUserInfoCb = (data) ->
-
-    ret = data["ret"]
-
-    if ret is "100000"
-      user = data["result"]
-      setUserInfo(user)
-
-  getUserInfoErrorCb = (data) ->
-
-  $scope.user = {}
-
-  uid = store.get "mUID"
-  accessToken = store.get "mAccessToken"
-  username = store.get "mUsername"
-
-  if uid and accessToken
-    # 已经登录
-    $scope.isLogin = yes
-
-    $scope.user.uid = $scope.UID = uid
-    $scope.accessToken = accessToken
-
-    # 默认用户设置，请求到用户数据之前的显示
-    # 请求到后会被覆盖
-    $scope.user.face_60 = $scope.user.face_120 = $scope.DEFAULT_FACE
-    $scope.user.username = username
-
-    # 通用的接口鉴权
-    $scope.privacyParam = "?access_token=#{accessToken}&userid=#{uid}"
-
-    getUserInfo()
-
   $scope.supportNum = "1万"
 
-  # 设置当前页面
-  $scope.$on "pageChange", (e, msg) ->
-    $scope.page = msg
-    elMwrap["scrollTop"] = 1
+  ###
+  用户信息，用户操作的方法
+  ###
+  User = 
 
-  
-  # 设置手机侧边栏菜单状态
-  $scope.isMMenuOpen = no
+    init: ->
 
-  $scope.toggleMMenu = toggleMMenu = -> 
-    $scope.isMMenuOpen = not $scope.isMMenuOpen
+      $scope.user = {}
+      $scope.accessToken = $scope.UID = undefined
+
+      $scope.isLogin = no
+      $scope.$on "onLogined", User.onLoginCb
+
+      $scope.User = User
+
+      User.getLocal()
+
+    set: (user) ->
+
+      $scope.user.username = user["username"] or ""
+      $scope.user.email = user["email"] or ""
+      $scope.user.face = user["face"] or ""
+      $scope.user.face_60 = user["face_60"] or ""
+      $scope.user.face_120 = user["face_120"] or ""
+      $scope.user.sex = user["sex"] or "1"
+      $scope.user.blog = user["blog"] or ""
+      $scope.user.uid = user["userid"] or ""
+
+    getRemote: ->
+
+      url = "#{API.userInfo}" + ( if IsDebug then "" else "/#{uid}" ) + "#{$scope.privacyParam}"
+
+      $http.get(url).success(User.getRemoteCb).error(User.getRemoteErrorCb)
 
 
-  # 设置手机交互输入内容弹出状态
-  $scope.isMDesignOpen = no
-  $scope.isMDesignOpenMask = no
+    getRemoteCb: (data) ->
 
-  $scope.toggleMDesign = toggleMDesign = (type) -> 
+      ret = data["ret"]
+
+      if ret is "100000"
+        user = data["result"]
+
+        User.set user
+
+        $scope.isLogin = yes
 
 
-    if $scope.isMDesignOpen
-      $scope.isMDesignOpenMask = not $scope.isMDesignOpenMask
+      else
+        User.onOutOfDate()
 
-      $timeout ->
-        $scope.isMDesignOpen = not $scope.isMDesignOpen
-      , 200
-    else
-      $scope.isMDesignOpen = not $scope.isMDesignOpen
+    getRemoteErrorCb: (data) ->
 
-      $timeout ->
-        $scope.isMDesignOpenMask = not $scope.isMDesignOpenMask
-      , 200
+    isLocalLogin: no
 
-    toggleMBill() if $scope.isMBillOpen
+    getLocal: ->
 
-    # 如果打开mDesign
-    # 广播到 mDesignCtrl 里设置展示类型
-    $scope.$broadcast "setMDesignType", type if type and $scope.isMDesignOpen
 
-    # 如果关闭 mDesign，取消内容发送
-    $scope.$broadcast "cancelMDesingSending" if not $scope.isMDesignOpen
+      uid = store.get "mUID"
+      accessToken = store.get "mAccessToken"
 
-  # 设置手机菜单弹出状态
-  $scope.isMBillOpen = no
-  $scope.isMBillOpenMask = no
-
-  $scope.toggleMBill = toggleMBill = (billList) -> 
-
-    if $scope.isMBillOpen
-      $scope.isMBillOpenMask = not $scope.isMBillOpenMask
+      User.getLocalCb(uid, accessToken) if uid and accessToken
     
-      $timeout ->
-        $scope.isMBillOpen = not $scope.isMBillOpen
-      , 200
-    else
+    getLocalCb: (uid, accessToken) ->
+      User.isLocalLogin = yes
 
-      $scope.$broadcast "setBillList", billList
+      username = store.get "mUsername"
+      $scope.user.uid = $scope.UID = uid
 
-      $scope.isMBillOpen = not $scope.isMBillOpen
-    
-      $timeout ->
-        $scope.isMBillOpenMask = not $scope.isMBillOpenMask
-      , 100
+      # 默认用户设置，请求到用户数据之前的显示
+      # 请求到后会被覆盖
+      $scope.user.face_60 = $scope.user.face_120 = $scope.DEFAULT_FACE
+      $scope.user.username = username
+
+      $scope.accessToken = accessToken
+
+      User.setPrivacy()
+
+      User.getRemote()
+
+    setPrivacy: ->
+
+      accessToken = $scope.accessToken
+      uid = $scope.UID
+
+      # 通用的接口鉴权
+      $scope.privacyParam = "?access_token=#{accessToken}&userid=#{uid}"
+      $scope.privacyParamDir = "/access_token/#{accessToken}/userid/#{uid}"
+
+
+    store: (user) ->
+
+      store.put "mUID", user["userid"]
+      store.put "mUsername", user["username"]
+      store.put "mAccessToken", $scope.accessToken
+
+
+    remove: ->
+      store.remove "mUID"
+      store.remove "mUsername"
+      store.remove "mAccessToken"
+
+    onLoginCb: (event, result) ->
+      $scope.isLogin = yes
+
+      accessToken = $scope.accessToken = result["accesstoken"]
+
+      user = result["user"]
+      $scope.UID = user["userid"]
+
+      $scope.user.accessToken = accessToken
+
+      User.set user
+      User.store user
+
+    # 登录过期
+    onOutOfDate: ->
+      User.remove()
+
+      $scope.isLogin = no
+
+      User.login()
+
+    logout: ->
+      $scope.user = {}
+      $cookieStore.remove "mUID"
+      $cookieStore.remove "mAccessToken"
+      $scope.isLogin = no
+
+    login: ->
+      LOC["href"] = "#!/login"
+
+  User.init()
 
 
 
-
-  $scope.logout = ->
-    $scope.user = {}
-    $cookieStore.remove "mUID"
-    $cookieStore.remove "mAccessToken"
-    $scope.isLogin = no
-
+  ###
+  页面切换，页面操作
+  ###
   elMwrap =  DOC["getElementById"] "m-wrap"
 
-  # 手指碰到页面，滚动1px
-  $scope.scrollBody1Px = -> 
-    elMwrap["scrollTop"] = 1 if elMwrap["scrollTop"] is 0
+  Page = 
 
-  # 返回顶部
-  $scope.backToTop = (isM)->
-    (if isM then elMwrap else BODY)["scrollTop"] = 0
+    init: ->
+      $scope.page = "home"
 
+      $scope.scrollBody1Px = Page.scrollBody1Px
+
+      # 返回顶部
+      $scope.backToTop = Page.onBackToTop
+
+      # 设置当前页面
+      $scope.$on "pageChange", Page.onPageChangeCb
+
+      $scope.logout = User.logout
+
+      $scope.Page = Page
+
+    onPageChangeCb: (event, msg) ->
+      $scope.page = msg
+      elMwrap["scrollTop"] = 1
+
+      User.login() if $scope.isLogin is no
+
+    onBackToTop: (isM)->
+      (if isM then elMwrap else BODY)["scrollTop"] = 0
+    
+    # 手指碰到页面，滚动1px
+    scrollBody1Px: -> 
+      elMwrap["scrollTop"] = 1 if elMwrap["scrollTop"] is 0
+
+  Page.init()
+
+
+  ###
+  移动用户侧边栏菜单
+  ###
+  MMenu = 
+    init: ->
+  
+      # 设置手机侧边栏菜单状态
+      $scope.isMMenuOpen = no
+
+      $scope.toggleMMenu = MMenu.toggle
+
+      $scope.MMenu = MMenu
+
+    toggle: ->
+      $scope.isMMenuOpen = not $scope.isMMenuOpen
+
+
+  MMenu.init()
+
+  ###
+  移动全屏输入框
+  ###
+  MDesign = 
+    init: ->
+      $scope.isMDesignOpen = no
+      $scope.isMDesignOpenMask = no
+
+      $scope.toggleMDesign = MDesign.toggle 
+
+      $scope.$on "onMDesignSend", MDesign.onSend
+
+    toggle: (type) -> 
+      if $scope.isMDesignOpen
+        $scope.isMDesignOpenMask = not $scope.isMDesignOpenMask
+
+        $timeout ->
+          $scope.isMDesignOpen = not $scope.isMDesignOpen
+        , 200
+      else
+        $scope.isMDesignOpen = not $scope.isMDesignOpen
+
+        $timeout ->
+          $scope.isMDesignOpenMask = not $scope.isMDesignOpenMask
+        , 200
+
+      MBill.toggle() if $scope.isMBillOpen
+
+      # 如果打开mDesign
+      # 广播到 mDesignCtrl 里设置展示类型
+      $scope.$broadcast "setMDesignType", type if type and $scope.isMDesignOpen
+
+      # 如果关闭 mDesign，取消内容发送
+      $scope.$broadcast "cancelMDesingSending" if not $scope.isMDesignOpen
+
+    onSend: (event, msg) ->
+
+      type = msg.type
+      content = msg.content
+
+      switch type
+        when "ask"
+          askQues content
+
+    onOpen: ->
+
+    onClose: ->
+
+  MDesign.init()
+
+  ###
+  移动底部弹出交互菜单
+  ###
+  MBill = 
+    init: ->
+      $scope.isMBillOpen = no
+      $scope.isMBillOpenMask = no
+
+      $scope.toggleMBill = MBill.toggle
+
+
+    toggle: (billList) -> 
+
+      if $scope.isMBillOpen
+        $scope.isMBillOpenMask = not $scope.isMBillOpenMask
+      
+        $timeout ->
+          $scope.isMBillOpen = not $scope.isMBillOpen
+        , 200
+      else
+
+        $scope.$broadcast "setBillList", billList
+
+        $scope.isMBillOpen = not $scope.isMBillOpen
+      
+        $timeout ->
+          $scope.isMBillOpenMask = not $scope.isMBillOpenMask
+        , 100
+
+  MBill.init()
+
+
+
+
+  ###
+  提问
+  ###
+  Ask = 
+    init: ->
+      $scope.askQues = Ask.ask
+
+    ask: (content) ->
+
+      url = "#{API.ask}#{$scope.privacyParamDir}"
+      url = API.ask if IsDebug
+
+      (if IsDebug then $http.get else $http.post)(url,
+        content: content
+      ).success askCb
+
+    askCb: (data)->
+      ret = data["ret"]
+
+      if String(ret) is "100000"
+        $scope.$broadcast "onAskQuesSuccess", queId: data["result"]
+        $scope.$broadcast "onMDesignSendSuccess"
+
+  Ask.init()
 
 
   # 用ng-click="href(url)" 手机设备使用touch，反应速度快于href
@@ -196,6 +331,10 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
 
   #$emoji.setEmojiPath "images/emoji/"
+
+
+
+
 
 
 

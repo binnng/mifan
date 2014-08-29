@@ -73,9 +73,9 @@ module.exports = (grunt) ->
         options:
           livereload: false
 
-      requires:
-        files: ["<%= yeoman.app %>/scripts/requires/{,*/}*.js"]
-        tasks: ["concat:requires"] # "newer:jshint:all"]
+      defines:
+        files: ["<%= yeoman.app %>/scripts/defines/{,*/}*.js"]
+        tasks: ["concat:defines"] # "newer:jshint:all"]
         options:
           livereload: false
 
@@ -259,6 +259,13 @@ module.exports = (grunt) ->
               css: ["cssmin"]
 
             post: {}
+              # js: [
+              #   name: "uglifyjs"
+              #   createConfig: (context, block) ->
+              #     generated = context.options.generated
+              #     generated.options = 
+              #       foo: "bar"
+              # ]
 
     
     # Performs rewrites based on rev and the useminPrepare configuration
@@ -267,6 +274,10 @@ module.exports = (grunt) ->
       css: ["<%= yeoman.dist %>/styles/{,*/}*.css"]
       options:
         assetsDirs: ["<%= yeoman.dist %>"]
+        patterns: 
+          js: [
+            ["IsDebug", "false"]
+          ]
 
     
     # The following *-min tasks produce minified files in the dist folder
@@ -419,9 +430,9 @@ module.exports = (grunt) ->
         src: ["<%= yeoman.app %>/scripts/filters/{,*/}*.js"]
         dest: "<%= yeoman.app %>/scripts/filters.js"
 
-      requires: 
-        src: ["<%= yeoman.app %>/scripts/requires/{,*/}*.js"]
-        dest: "<%= yeoman.app %>/scripts/requires.js"
+      defines: 
+        src: ["<%= yeoman.app %>/scripts/defines/{,*/}*.js"]
+        dest: "<%= yeoman.app %>/scripts/defines.js"
     
     # Test settings
     karma:
@@ -477,6 +488,16 @@ module.exports = (grunt) ->
         src: [
           "<%= yeoman.dist %>/index.html"
         ]
+
+      debug: 
+        actions:
+          search: "IsDebug"
+          replace: "false"
+          flags: 'g'
+        src: [
+          ".tmp/concat/scripts/mifan.js"
+        ]
+
 
     rename:
       dist:
@@ -566,7 +587,7 @@ module.exports = (grunt) ->
       "autoprefixer"
       "connect:livereload"
       "concat:controllers"
-      "concat:requires"
+      "concat:defines"
       "watch"
     ]
     return
@@ -587,7 +608,7 @@ module.exports = (grunt) ->
     "clean:dist"
     "bowerInstall"
     "concat:controllers"
-    "concat:requires"
+    "concat:defines"
     "useminPrepare"
     "concurrent:dist"
     "autoprefixer"

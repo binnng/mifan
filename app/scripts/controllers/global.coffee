@@ -5,47 +5,6 @@
 
 Mifan.controller "globalCtrl", ($scope) ->
 
-  DOC = document
-  WIN = window
-  LOC = location
-  BODY = DOC['body']
-
-  ###
-  设备是否支持触摸事件
-  这里使用WIN.hasOwnProperty('ontouchend')在Android上会得到错误的结果
-  @type {boolean}
-  ###
-  IsTouch = "ontouchend" of WIN
-
-  NA = WIN.navigator
-
-  UA = NA.userAgent
-
-  # HTC Flyer平板的UA字符串中不包含Android关键词
-  IsAndroid = (/Android|HTC/i.test(UA) or /Linux/i.test(NA.platform + "")) 
-  IsAndroidPad = IsAndroid and /Pad/i.test(UA)
-
-  IsIPad = not IsAndroid and /iPad/i.test(UA)
-
-  IsIPhone = not IsAndroid and /iPod|iPhone/i.test(UA)
-
-  IsIOS = IsIPad or IsIPhone
-
-  IsWindowsPhone = /Windows Phone/i.test(UA)
-
-  IsBlackBerry = /BB10|BlackBerry/i.test(UA)
-
-  IsIEMobile = /IEMobile/i.test(UA)
-  IsIE = !!DOC.all
-  IsWeixin = /MicroMessenger/i.test(UA)
-  IsChrome = !!WIN['chrome']
-
-  IsPhone = IsIPhone or (IsAndroid and not IsAndroidPad)
-
-  IsWebapp = !!NA["standalone"]
-
-  NG = WIN['angular']
-
   $scope.WIN = WIN
   $scope.DOC = DOC
   $scope.LOC = LOC
@@ -73,23 +32,27 @@ Mifan.controller "globalCtrl", ($scope) ->
   $scope.IsWebapp = IsWebapp
 
 
-  IsDebug = LOC["port"] is "9000"
-
-  $scope.IsDebug = IsDebug
 
 
   BASE_API_PATH = "/mifan/service/index.php"
 
   $scope.API = 
-    user: "#{BASE_API_PATH}/user/usersession/user"
-    userInfo: "#{BASE_API_PATH}/user/userinfo/user/id" # 1
+    user: "/user/usersession/user"
+    userInfo: "/user/userinfo/user/id" # 1
+    ask: "/ask/askinfo/ask"
+    news: "/feed/feedinfo/feeds"
 
   if IsDebug
     BASE_API_PATH = "/data"
 
     $scope.API = 
-      user: "#{BASE_API_PATH}/user.json"
-      userInfo: "#{BASE_API_PATH}/user-info.json"
+      user: "/user.json"
+      userInfo: "/user-info.json"
+      ask: "/ask.json"
+      news: "/news.json"
+
+  $scope.API[api] = "#{BASE_API_PATH}#{$scope.API[api]}" for api of $scope.API
+
 
   $scope.DEFAULT_FACE = "http://mifan.us/public/images/user_normal.jpg"
 

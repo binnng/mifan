@@ -58,9 +58,9 @@ module.exports = function(grunt) {
           livereload: false
         }
       },
-      requires: {
-        files: ["<%= yeoman.app %>/scripts/requires/{,*/}*.js"],
-        tasks: ["concat:requires"],
+      defines: {
+        files: ["<%= yeoman.app %>/scripts/defines/{,*/}*.js"],
+        tasks: ["concat:defines"],
         options: {
           livereload: false
         }
@@ -219,7 +219,10 @@ module.exports = function(grunt) {
       html: ["<%= yeoman.dist %>/{,*/}*.html"],
       css: ["<%= yeoman.dist %>/styles/{,*/}*.css"],
       options: {
-        assetsDirs: ["<%= yeoman.dist %>"]
+        assetsDirs: ["<%= yeoman.dist %>"],
+        patterns: {
+          js: [["IsDebug", "false"]]
+        }
       }
     },
     cssmin: {
@@ -333,9 +336,9 @@ module.exports = function(grunt) {
         src: ["<%= yeoman.app %>/scripts/filters/{,*/}*.js"],
         dest: "<%= yeoman.app %>/scripts/filters.js"
       },
-      requires: {
-        src: ["<%= yeoman.app %>/scripts/requires/{,*/}*.js"],
-        dest: "<%= yeoman.app %>/scripts/requires.js"
+      defines: {
+        src: ["<%= yeoman.app %>/scripts/defines/{,*/}*.js"],
+        dest: "<%= yeoman.app %>/scripts/defines.js"
       }
     },
     karma: {
@@ -380,6 +383,14 @@ module.exports = function(grunt) {
           }
         ],
         src: ["<%= yeoman.dist %>/index.html"]
+      },
+      debug: {
+        actions: {
+          search: "IsDebug",
+          replace: "false",
+          flags: 'g'
+        },
+        src: [".tmp/concat/scripts/mifan.js"]
       }
     },
     rename: {
@@ -451,14 +462,14 @@ module.exports = function(grunt) {
     if (target === "dist") {
       return grunt.task.run(["build", "connect:dist:keepalive"]);
     }
-    grunt.task.run(["clean:server", "bowerInstall", "concurrent:server", "autoprefixer", "connect:livereload", "concat:controllers", "concat:requires", "watch"]);
+    grunt.task.run(["clean:server", "bowerInstall", "concurrent:server", "autoprefixer", "connect:livereload", "concat:controllers", "concat:defines", "watch"]);
   });
   grunt.registerTask("server", function(target) {
     grunt.log.warn("The `server` task has been deprecated. Use `grunt serve` to start a server.");
     grunt.task.run(["serve:" + target]);
   });
   grunt.registerTask("test", ["clean:server", "concurrent:test", "autoprefixer", "connect:test", "karma"]);
-  grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:requires", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace:dist", "regex-replace:html", "rename:dist"]);
+  grunt.registerTask("build", ["clean:dist", "bowerInstall", "concat:controllers", "concat:defines", "useminPrepare", "concurrent:dist", "autoprefixer", "concat", "ngmin", "copy:dist", "cdnify", "cssmin", "uglify", "usemin", "ng_template", "htmlmin", "clean:distView", "regex-replace:dist", "regex-replace:html", "rename:dist"]);
   grunt.registerTask("publish", ["build", "sftp-deploy:build", "open:online"]);
   grunt.registerTask("publishAll", ["build", "sftp-deploy:all", "open:online"]);
   grunt.registerTask("publishTest", ["build", "sftp-deploy:test", "open:test"]);
