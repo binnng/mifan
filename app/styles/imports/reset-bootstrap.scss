@@ -1,0 +1,56 @@
+button,
+button:focus,
+.btn,
+.btn:focus,
+input
+input:focus,
+.dropdown-menu{
+	border-radius: 2px;
+	outline: none;
+	-webkit-highlight: none;
+}
+
+.btn-danger{
+	background-color: $tone;
+}
+
+
+.dropdown-menu{
+	box-shadow: none;
+	min-width: 100px;
+}
+
+.input-lg,
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-addon, 
+.input-group-lg > .input-group-btn > .btn,
+.input-group-addon{
+	border-radius: 2px;
+}
+
+.form-control,
+.form-control:focus{
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.form-control:focus {
+	border-color: #66afe9;
+	outline: 0;
+}
+
+.row{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+@media (max-width: $screen-xs) {
+  .container{
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .row{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

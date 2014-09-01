@@ -7,69 +7,51 @@
     <meta charset="utf-8">
     <title>米饭</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css({.tmp,app}) styles/mifan.css -->
     <!-- bower:css -->
     <!-- endbower -->
+    <link rel="stylesheet" href="styles/bootstrap.css" />
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/background.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="mifan">
+  <body ng-app="mifan" ng-controller="globalCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">你的浏览器版本<strong>太低</strong> browser. 去<a href="http://browsehappy.com/">升级</a>吧！</p>
     <![endif]-->
 
+    <div class="root" ng-controller="rootCtrl" ng-class="{ios: IsIOS, android: IsAndroid, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile}">
 
-    <!-- Add your site or application content here -->
-    <div class="root">
-
-        <div ng-controller="headCtrl" ng-include src="'views/head.html'"></div>
-        <div ng-view="" class="main-mifan-view" class></div>
-        <div ng-controller="footCtrl" ng-include src="'views/foot.html'"></div>
+        <div ng-include="'views/head.html'"></div>
+        <div ng-view class="main-view"></div>
+        <div ng-include="'views/foot.html'"></div>
 
     </div>
 
     <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.min.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="bower/es5-shim.min.js"></script>
+    <script src="bower/json3.min.js"></script>
     <![endif]-->
 
     <!-- build:js({.tmp,app}) scripts/mifan.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <!-- endbower -->
 
-    <script src="scripts/requires/constant.js"></script>
-    <script src="scripts/requires/common.js"></script>
+    <!-- <script src="scripts/_prefix.js"></script>-->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/head.js"></script>
-    <script src="scripts/controllers/foot.js"></script>
-    <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/home_news.js"></script>
-    <script src="scripts/controllers/home_answer.js"></script>
-    <script src="scripts/controllers/home_reply.js"></script>
-    <script src="scripts/controllers/msg.js"></script>
-    <script src="scripts/controllers/me.js"></script>
-    <script src="scripts/controllers/404.js"></script>
-    <script src="scripts/controllers/welcome.js"></script>
+    <script src="scripts/filters.js"></script>
+    <script src="scripts/directives.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <!--<script src="scripts/_suffix.js"></script>-->
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

@@ -1,16 +1,15 @@
-$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-
-@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
-
 // bower:scss
-@import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 @import "../bower_components/sass-css3-mixins/css3-mixins.scss";
 @import "../bower_components/sass-easing/_sass-easing.scss";
 // endbower
 
-@import "imports/core";
+@import "imports/var";
+@import "imports/mixins";
+@import "imports/reset-bootstrap";
 @import "imports/common";
 @import "imports/head";
 @import "imports/home";
 @import "imports/foot";
 @import "imports/404";
+@import "imports/log-reg";
+@import "imports/welcome";

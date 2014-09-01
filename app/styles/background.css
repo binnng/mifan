@@ -1,0 +1,7 @@
+/*.header:after{
+	background-color: #ddd;
+	background-image: -webkit-linear-gradient(left,#7560df 0,#7560df 16.6%,#df42a8 16.6%,#df42a8 33.2%,#ea8b46 33.2%,#ea8b46 49.8%,#f1d13c 49.8%,#f1d13c 66.4%,#52de7f 66.4%,#52de7f 83%,#2aa6e2 83%,#2aa6e2 100%);
+	background-image: -moz-linear-gradient(left,#7560df 0,#7560df 16.6%,#df42a8 16.6%,#df42a8 33.2%,#ea8b46 33.2%,#ea8b46 49.8%,#f1d13c 49.8%,#f1d13c 66.4%,#52de7f 66.4%,#52de7f 83%,#2aa6e2 83%,#2aa6e2 100%);
+	background-image: -ms-linear-gradient(left,#7560df 0,#7560df 16.6%,#df42a8 16.6%,#df42a8 33.2%,#ea8b46 33.2%,#ea8b46 49.8%,#f1d13c 49.8%,#f1d13c 66.4%,#52de7f 66.4%,#52de7f 83%,#2aa6e2 83%,#2aa6e2 100%);
+	background-image: linear-gradient(left,#7560df 0,#7560df 16.6%,#df42a8 16.6%,#df42a8 33.2%,#ea8b46 33.2%,#ea8b46 49.8%,#f1d13c 49.8%,#f1d13c 66.4%,#52de7f 66.4%,#52de7f 83%,#2aa6e2 83%,#2aa6e2 100%);
+};*/

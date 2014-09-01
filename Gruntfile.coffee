@@ -13,6 +13,9 @@ module.exports = (grunt) ->
   # Time how long tasks take. Can help when optimizing build times
   require("time-grunt") grunt
   grunt.config.set "ip", (require("ip").address())
+
+  today = grunt.template.today "yyyymmddss"
+  md5Today = require("md5").digest_s today
   
   # Define the configuration for all the tasks
   grunt.initConfig
@@ -24,6 +27,14 @@ module.exports = (grunt) ->
       app: require("./bower.json").appPath or "app"
       dist: "dist"
 
+      today: today
+      md5: md5Today
+      prefix: today
+
+      secret: grunt.file.readJSON "secret.json"
+
+      onlineURL: "http://115.29.49.123/mifan/app"
+
     
     # Watches files for changes and runs tasks based on the changed files
     watch:
@@ -32,10 +43,34 @@ module.exports = (grunt) ->
         tasks: ["bowerInstall"]
 
       js:
-        files: ["<%= yeoman.app %>/scripts/{,*/}*.js"]
+        files: ["<%= yeoman.app %>/scripts/*.js"]
         tasks: [] # "newer:jshint:all"]
         options:
           livereload: true
+
+      controllers:
+        files: ["<%= yeoman.app %>/scripts/controllers/*.js"]
+        tasks: ["concat:controllers"] # "newer:jshint:all"]
+        options:
+          livereload: false
+
+      directives:
+        files: ["<%= yeoman.app %>/scripts/directives/*.js"]
+        tasks: ["concat:directives"] # "newer:jshint:all"]
+        options:
+          livereload: false
+
+      filters:
+        files: ["<%= yeoman.app %>/scripts/filters/*.js"]
+        tasks: ["concat:filters"] # "newer:jshint:all"]
+        options:
+          livereload: false
+
+      requires:
+        files: ["<%= yeoman.app %>/scripts/requires/*.js"]
+        tasks: ["concat:requires"] # "newer:jshint:all"]
+        options:
+          livereload: false
 
       jsTest:
         files: ["test/spec/{,*/}*.js"]
@@ -95,6 +130,7 @@ module.exports = (grunt) ->
         options:
           open: true
           base: "<%= yeoman.dist %>"
+
 
     
     # Make sure code styles are up to par and there are no obvious mistakes
@@ -165,14 +201,15 @@ module.exports = (grunt) ->
       options:
         sassDir: "<%= yeoman.app %>/styles"
         cssDir: ".tmp/styles"
+        specify: "<%= yeoman.app %>/styles/main.scss"
         generatedImagesDir: ".tmp/images/generated"
         imagesDir: "<%= yeoman.app %>/images"
         javascriptsDir: "<%= yeoman.app %>/scripts"
         fontsDir: "<%= yeoman.app %>/styles/fonts"
-        importPath: "<%= yeoman.app %>/bower_components"
-        httpImagesPath: "/images"
+        importPath: "<%= yeoman.app %>/styles/imports"
+        httpImagesPath: "<%= yeoman.app %>/images"
         httpGeneratedImagesPath: "/images/generated"
-        httpFontsPath: "/styles/fonts"
+        httpFontsPath: "<%= yeoman.app %>/fonts"
         relativeAssets: false
         assetCacheBuster: false
         raw: "Sass::Script::Number.precision = 10\n"
@@ -193,8 +230,8 @@ module.exports = (grunt) ->
           src: [
             "<%= yeoman.dist %>/scripts/{,*/}*.js"
             "<%= yeoman.dist %>/styles/{,*/}*.css"
-            "<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
-            "<%= yeoman.dist %>/styles/fonts/*"
+            # "<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}"
+            # "<%= yeoman.dist %>/styles/fonts/*"
           ]
 
     
@@ -300,9 +337,8 @@ module.exports = (grunt) ->
               "views/{,*/}*.html"
               "images/{,*/}*.{webp}"
               "fonts/*"
-              "bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*"
-              "bower_components/es5-shim/es5-shim.min.js"
-              "bower_components/json3/lib/json3.min.js"
+              "fonts/*"
+              "lib/*"
               "data/*"
             ]
           }
@@ -357,6 +393,23 @@ module.exports = (grunt) ->
     # concat: {
     #   dist: {}
     # },
+
+    concat:
+      controllers: 
+        src: ["<%= yeoman.app %>/scripts/controllers/*.js"]
+        dest: "<%= yeoman.app %>/scripts/controllers.js"
+
+      directives: 
+        src: ["<%= yeoman.app %>/scripts/directives/*.js"]
+        dest: "<%= yeoman.app %>/scripts/directives.js"
+
+      filters: 
+        src: ["<%= yeoman.app %>/scripts/filters/*.js"]
+        dest: "<%= yeoman.app %>/scripts/filters.js"
+
+      requires: 
+        src: ["<%= yeoman.app %>/scripts/requires/*.js"]
+        dest: "<%= yeoman.app %>/scripts/requires.js"
     
     # Test settings
     karma:
@@ -379,6 +432,79 @@ module.exports = (grunt) ->
         # Default set to false
         concat: true
 
+    'regex-replace':
+      dist:
+        actions:[
+          {
+            search: '/fonts/glyphicons'
+            replace: '../fonts/glyphicons'
+            flags: 'g'
+          }
+          {
+            search: "#{__dirname}/.tmp"
+            replace: '..'
+            flags: 'g'
+          }
+        ]
+        src: [
+          "<%= yeoman.dist %>/styles/mifan.css"
+        ]
+      html:
+        actions:[
+          {
+            search: "scripts/mifan.js"
+            replace: "scripts/<%= yeoman.prefix %>.mifan.js"
+            flags: 'g'
+          }
+          {
+            search: "styles/mifan.css"
+            replace: "styles/<%= yeoman.prefix %>.mifan.css"
+            flags: 'g' 
+          }
+        ]
+        src: [
+          "<%= yeoman.dist %>/index.html"
+        ]
+
+    rename:
+      dist:
+        files: [
+          {
+            src: "<%= yeoman.dist %>/styles/mifan.css",
+            dest: "<%= yeoman.dist %>/styles/<%= yeoman.prefix %>.mifan.css"
+          }
+          {
+            src: "<%= yeoman.dist %>/scripts/mifan.js",
+            dest: "<%= yeoman.dist %>/scripts/<%= yeoman.prefix %>.mifan.js"
+          }
+        ]
+
+    'sftp-deploy':
+      build:
+        auth:
+          host: "<%= yeoman.secret.host %>"
+          port: "<%= yeoman.secret.port %>"
+          authKey: 'key1'
+
+        src: "<%= yeoman.dist %>"
+        dest: "<%= yeoman.secret.path %>"
+        exclusions: [
+          "<%= yeoman.dist %>/lib"
+          "<%= yeoman.dist %>/fonts"
+          "<%= yeoman.dist %>/images"
+          "<%= yeoman.dist %>/favicon.ico"
+          "<%= yeoman.dist %>/.htaccess"
+          "<%= yeoman.dist %>/robots.txt"
+        ]
+        serverSep: "/"
+        concurrency: 4
+        progress: yes
+
+    open:
+      online:
+        path: "<%= yeoman.onlineURL %>"
+        app: "Google Chrome"
+
   grunt.registerTask "serve", (target) ->
     if target is "dist"
       return grunt.task.run([
@@ -391,6 +517,8 @@ module.exports = (grunt) ->
       "concurrent:server"
       "autoprefixer"
       "connect:livereload"
+      "concat:controllers"
+      "concat:requires"
       "watch"
     ]
     return
@@ -410,23 +538,32 @@ module.exports = (grunt) ->
   grunt.registerTask "build", [
     "clean:dist"
     "bowerInstall"
+    "concat:controllers"
+    "concat:requires"
     "useminPrepare"
     "concurrent:dist"
     "autoprefixer"
     "concat"
     "ngmin"
-    "copy:dist"
+    "copy:dist"  
     "cdnify"
     "cssmin"
     "uglify"
-    "rev"
+    #"rev"
     "usemin"
     "ng_template"
     "htmlmin"
     "clean:distView"
+    "regex-replace"
+    "rename:dist"
+  ]
+  grunt.registerTask "publish", [
+    "build"
+    "sftp-deploy"
+    "open:online"
   ]
   grunt.registerTask "default", [
     # "newer:jshint"
-    "test"
+    # "test"
     "build"
   ]
