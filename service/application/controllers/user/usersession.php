@@ -3,6 +3,7 @@
 /**
  * Usersession
  *
+ * <pre>
  * 检查用户登陆 并返回session信息 
  * 提供登录等方法
  * @package		CodeIgniter
@@ -21,20 +22,19 @@
  *		 104005			Token不存在或已过期  
  * 		 104006			
  * 		 104009			其他错误
+ *</pre>
  * 
  */
 
+//require_once APPPATH.'/libraries/REST_Controller.php';
 
-require_once APPPATH.'/libraries/REST_Controller.php';
-
-class Usersession extends REST_Controller
+class Usersession extends MF_Controller
 {
 	
 	public function __construct(){
 		parent::__construct();
 		
 		$this->load->model('user_model');
-		
 	}
 	
 	/**
@@ -71,7 +71,7 @@ class Usersession extends REST_Controller
 		
 		//请求中即没email,也没access_token
 		 $message = array( 'ret' => 104009, 'msg' => '非法操作!');
-         $this->response($message, 400); 
+         $this->response($message, 200); 
 	}
 	
 	/**
@@ -96,14 +96,14 @@ class Usersession extends REST_Controller
 		
 		if($data['useremail']=='' || $data['password']==''){
 			 $message = array( 'ret' => 104001, 'msg' => '用户名和密码不能为空!');
-             $this->response($message, 400); 
+             $this->response($message, 200); 
 		}
 
 		list($ret,$result) = $this->user_model->checkUserLogin($data['useremail'],$data['password'],$data);
 		
 		if($ret != '100000'){
 			 $message = array( 'ret' => $ret, 'msg' => $result);
-             $this->response($message, 400); 
+             $this->response($message, 200); 
 		}
 		
 		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);
@@ -116,7 +116,7 @@ class Usersession extends REST_Controller
 		
 		if($ret != '100000'){
 			 $message = array( 'ret' => $ret, 'msg' => $result);
-             $this->response($message, 400); 
+             $this->response($message, 200); 
 		}
 		
 		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);

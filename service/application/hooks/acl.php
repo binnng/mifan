@@ -54,15 +54,20 @@ class Acl{
 		
 		if($this->ci_obj->config->item('acl_auth_type') == 2){
 			$data['accesstoken'] = $this->ci_obj->get('access_token');
+			$data['userid'] = $this->ci_obj->get('userid');
 		
 			list($ret,$result) = $this->ci_obj->user_model->check_access_token($data['accesstoken']);
 			if($ret != '100000'){
 				$message = array( 'ret' => $ret, 'msg' => $result);
-	            $this->ci_obj->response($message, 400); 
+	            $this->ci_obj->response($message, 200); 
+			}
+			
+			if($result['userid'] !=$data['userid']){
+				$message = array( 'ret' => '104001', 'msg' => '不要乱来哟.');
+	            $this->ci_obj->response($message, 200); 
 			}
 		}
-		
+				
 		return TRUE;
-
 	}
 }

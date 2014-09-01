@@ -38,7 +38,7 @@
 |
 */
 
-$autoload['packages'] = array(APPPATH.'third_party',APPPATH.'third_party/rbac');
+$autoload['packages'] = array(APPPATH.'third_party',MFCMS_SHARE_PATH);
 
 
 /*
