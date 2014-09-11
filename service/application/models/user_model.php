@@ -241,6 +241,72 @@ class User_model extends Base_model {
 		return array('100000',$arrUser);
 	}
 	
+	
+	/**
+	 * get_ask_by_id 根据Userid获取提问
+	 * 
+	 * @param int $userid	必选，用户ID
+	 */
+	public function get_ask_by_id($userid){
+		$arrAsk = $this->findAll('ask_topic',array(
+			'userid'	=>	$userid
+		));
+		
+		if(!$arrAsk){
+			return array('104008','还没有发起过提问!');
+		}
+		
+		return array('100000',$arrAsk);
+	}
+	
+	/**
+	 * get_comment_by_id 根据Userid获取回答
+	 * 
+	 * @param int $userid	必选，用户ID
+	 */
+	public function get_comment_by_id($userid){
+		$arrComment = $this->findAll('ask_comment',array(
+			'userid'	=>	$userid,
+			'parentid'	=>	0
+		));
+		
+		if(!$arrComment){
+			return array('104008','还没回答过问题!');
+		}
+		
+		//取该回答对应的问题
+		foreach ($arrComment as $key => $item) {
+			$item[$key]['topic'] = $this->ask_model->_get_ask_topic_by_id($item['askid']);
+		}
+		
+		return array('100000',$arrAsk);
+	}
+	
+	/**
+	 * get_love_ask_by_id 根据Userid获取喜欢的问题和问题的最近一条评论
+	 * 
+	 * @param int $userid	必选，用户ID
+	 */
+	public function get_love_ask_by_id($userid){
+		$arrLove = $this->findAll('ask_operate',array(
+			'userid'	=>	$userid,
+			'type'	=>	2
+		));
+		
+		if(!$arrLove){
+			return array('104008','还没喜欢过任何问题!');
+		}
+		
+		//获取喜欢的问题的信息
+		foreach ($arrLove as $key => $item) {
+			$strAsk = $this->ask_model->_get_ask_topic_by_id($item['commentid']);
+			$item[$key]['topic'] = $strAsk;
+			$item[$key]['comment'] = ($strAsk['pid'] == 0? '':$this->ask_model->_get_ask_comment_by_id($strAsk['pid']));
+		}
+		
+		return array('100000',$arrAsk);
+	}
+	
 	/**
 	 * _get_follow_users_by_id 获取关注的用户
 	 * 
