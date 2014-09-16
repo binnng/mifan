@@ -65,16 +65,12 @@
 
 
 	.meta{
-		color: #555;
+		color: #999;
 	  font-size: .9em;
 		margin: 0;
 		margin-top: .6em;
 	  a{
-	    color: $black;
-	    &:hover,
-	    &:active{
-	      color: $link-color;
-	    }
+	    color: lighten(#000, 60%) !important;
 	  }
 	}
 }

@@ -4,7 +4,7 @@ Mifan.controller "homeNews", ($scope, $timeout, $http) ->
   API = $scope.API
 
   # ajax取到数据进行缓存，用户手动刷新
-  $scope.content = "最新动态"
+  $scope.content = ""
 
   $scope.toggleMBubble = (index) ->
     $scope.newsCollect[index].bblActv = not $scope.newsCollect[index].bblActv
@@ -15,18 +15,42 @@ Mifan.controller "homeNews", ($scope, $timeout, $http) ->
 
   $scope.newsCollect = []
 
-  getNews = ->
+  news = 
+    init: ->
 
-    url = "#{API.news}#{$scope.privacyParamDir}"
+      # 接受验证登录成功
+      $scope.$on "getHomeNews", -> news.get()
+      news.get() if $scope.isLogin
 
-    url = API.news if IsDebug
+    get: ->
 
-    cb = (data) ->
-      ret = data['ret']
+      url = "#{API.news}#{$scope.privacyParamDir}"
 
-      if String(ret) is "100000"
-        $scope.newsCollect = data['result']
+      url = API.news if IsDebug
 
-    $http.get(url, {}).success cb
+      cb = (data) ->
+        ret = data['ret']
 
-  getNews()
+        if String(ret) is "100000"
+          $scope.newsCollect = data['result']
+
+      $http.get(url,
+        cache: "lruCache"
+      ).success cb
+
+  news.init()
+
+
+
+  comment = 
+    init: ->
+      $scope.comment = @
+
+    show: ($index) ->
+      for news, index in $scope.newsCollect
+        news.cmtActive = if $index is index then yes else no 
+
+      console.log $scope.newsCollect
+
+  comment.init()
+

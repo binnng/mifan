@@ -2,16 +2,16 @@
 	<dl class="questions">
 		<dd ng-repeat="news in newsCollect" class="qa-mod feed-mod">
 			<div class="avatars pull-left">
-				<a ng-href="#!/user/{{news.feedid}}" class="avatar asker" title="{{news.ask.username}}" style="background-image:url({{news.ask.face}})">{{news.ask.username}}</a>
-				<a ng-href="#!/user/{{news.user.userid}}" class="avatar answerer" title="{{news.user.username}}" style="background-image:url({{news.user.face_60}})">{{news.user.username}}</a>
+				<a ng-href="#!/user/{{news.ask.user.userid}}" class="avatar asker" title="{{news.ask.user.username}}" style="background-image:url({{news.ask.user.face_60}})">{{news.ask.user.username}}</a>
+				<a ng-href="#!/user/{{news.ask_comment.user.userid}}" class="avatar answerer" title="{{news.user.username}}" style="background-image:url({{news.ask_comment.user.face_60}})">{{news.ask_comment.user.username}}</a>
 			</div>
 			<div class="contents">
 				<h3 class="h5">
-					<p><a ng-href="#" class="" title="问题">{{news.ask.content}}</a></p>
+					<p><a ng-href="#!/q/{{news.feedid}}" class="" title="问题">{{news.ask.content}}</a></p>
 				</h3>
 				<p class="lead">{{news.ask_comment.content}}</p>
 				<p class="ask-ans-desc meta">
-					<a ng-href="#" title="username">{{news.user.username}}</a> 对 <a ng-href="#" title="username">{{news.ask.username}}</a> 的回答于 <a ng-href="#" title="" class="">1天前</a>
+					<a ng-href="#!/user/{{news.ask_comment.user.userid}}" title="username">{{news.ask_comment.user.username}}</a> 对 <a ng-href="#!/user/{{news.ask.user.userid}}" title="username">{{news.ask.user.username}}</a> 的回答于 <a ng-href="#!/q/{{news.feedid}}" title="" class="">1天前</a>
 				</p>
 
 				<div class="actions clearfix">
@@ -29,7 +29,7 @@
 						</a>
 					</div>
 
-					<b class="cmt-tgl-btn pull-right hidden-xs">21条评论</b>
+					<b class="cmt-tgl-btn pull-right hidden-xs" ng-click="comment.show($index)">21条评论</b>
 					<b class="bill-btn bill-btn-dots" ng-click="setMBill($index)">...</b>
 					
 					<!-- m-bubble 用m-bill代替了，现在用不到-->

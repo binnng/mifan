@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji, $cacheFactory) ->
 
   API = $scope.API
 
@@ -45,6 +45,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
     getRemote: ->
 
+      uid = $scope.user.uid
+
       url = "#{API.userInfo}" + ( if IsDebug then "" else "/#{uid}" ) + "#{$scope.privacyParam}"
 
       $http.get(url).success(User.getRemoteCb).error(User.getRemoteErrorCb)
@@ -54,14 +56,14 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
       ret = data["ret"]
 
-      if ret is "100000"
+      if String(ret) is "100000"
         user = data["result"]
 
         User.set user
 
         $scope.isLogin = yes
 
-
+        $scope.$broadcast "getHomeNews"
       else
         User.onOutOfDate()
 
@@ -70,8 +72,6 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     isLocalLogin: no
 
     getLocal: ->
-
-
       uid = store.get "mUID"
       accessToken = store.get "mAccessToken"
 
@@ -129,6 +129,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       User.set user
       User.store user
 
+
     # 登录过期
     onOutOfDate: ->
       User.remove()
@@ -176,7 +177,6 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $scope.page = msg
       elMwrap["scrollTop"] = 1
 
-      User.login() if $scope.isLogin is no
 
     onBackToTop: (isM)->
       (if isM then elMwrap else BODY)["scrollTop"] = 0
@@ -249,7 +249,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
       switch type
         when "ask"
-          askQues content
+          Ask.ask content
 
     onOpen: ->
 
@@ -305,7 +305,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
       (if IsDebug then $http.get else $http.post)(url,
         content: content
-      ).success askCb
+      ).success Ask.askCb
 
     askCb: (data)->
       ret = data["ret"]
@@ -332,7 +332,16 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
   #$emoji.setEmojiPath "images/emoji/"
 
+  ###
+  缓存的配置
+  ###
+  Cache = 
 
+    init: ->
+      $httpDefaultCache = $cacheFactory.get $http
+      lruCache = $cacheFactory "lruCache", capacity: 8
+
+  Cache.init()
 
 
 
