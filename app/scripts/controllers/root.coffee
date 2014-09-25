@@ -343,6 +343,27 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
   Cache.init()
 
+  Notification = 
+    init: ->
+      Notification.get()
+
+    time: 0
+
+    get: ->
+      url = if IsDebug then API.msgcount else "#{API.msgcount}#{$scope.privacyParamDir}"
+
+      $http.get(url).success Notification.cb
+
+      Notification.time++
+
+    cb: (data)->
+      if data.msg is "ok"
+        $scope.msgCount = data.result
+
+      $timeout Notification.get, 30000
+
+  Notification.init()
+
 
 
 

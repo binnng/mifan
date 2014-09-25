@@ -5,7 +5,7 @@
 				<a ng-href="#!/user/{{news.ask.user.userid}}" class="avatar asker" title="{{news.ask.user.username}}" style="background-image:url({{news.ask.user.face_60}})">{{news.ask.user.username}}</a>
 				<a ng-href="#!/user/{{news.ask_comment.user.userid}}" class="avatar answerer" title="{{news.user.username}}" style="background-image:url({{news.ask_comment.user.face_60}})">{{news.ask_comment.user.username}}</a>
 			</div>
-			<div class="contents">
+			<div class="contents" ng-init="expander = {comment: false}">
 				<h3 class="h5">
 					<p><a ng-href="#!/q/{{news.feedid}}" class="" title="问题">{{news.ask.content}}</a></p>
 				</h3>
@@ -18,18 +18,18 @@
 					<div class="act-left pull-left">
 						<a class="like pull-left">
 							<span class="glyphicon glyphicon-heart"></span>
-							<span class="count">5</span>
+							<span class="count">{{news.ask.love_count}}</span>
 						</a>
 						<ul class="liked-list hidden-xs">
 							<li><a ng-href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
 						</ul>
 						<a class="m-cmt pull-left visible-xs" ng-click="toggleMDesign('comment')">
 							<span class="glyphicon glyphicon-comment"></span>
-							<span class="count">5</span>
+							<span class="count">{{news.ask.comment_cout}}</span>
 						</a>
 					</div>
 
-					<b class="cmt-tgl-btn pull-right hidden-xs" ng-click="comment.show($index)">21条评论</b>
+					<b class="cmt-tgl-btn pull-right hidden-xs" ng-click="toggleComment(expander)">{{news.ask.comment_cout}}条评论</b>
 					<b class="bill-btn bill-btn-dots" ng-click="setMBill($index)">...</b>
 					
 					<!-- m-bubble 用m-bill代替了，现在用不到-->
@@ -47,7 +47,7 @@
 
 				</div>
 
-				<div class="qa-cmt comment hidden-xs" ng-show="cmtActive">
+				<div class="qa-cmt comment hidden-xs" ng-show="expander.comment">
 					<form class="cmt-form clearfix">
 						<textarea name="cmt-content" class="cmt-input"></textarea>
 						<button class="btn btn-success">评论</button>

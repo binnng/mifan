@@ -42,15 +42,11 @@ Mifan.controller "homeNews", ($scope, $timeout, $http) ->
 
 
 
-  comment = 
-    init: ->
-      $scope.comment = @
+  $scope.toggleComment = (expander) ->
+    expander.comment = !expander.comment;
 
-    show: ($index) ->
-      for news, index in $scope.newsCollect
-        news.cmtActive = if $index is index then yes else no 
+  $scope.toggleReply = (expander) ->
+    expander.reply = !expander.reply;
+      
 
-      console.log $scope.newsCollect
-
-  comment.init()
 

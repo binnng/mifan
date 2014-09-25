@@ -10,6 +10,8 @@ Mifan.controller "globalCtrl", ($scope) ->
   $scope.LOC = LOC
   $scope.BODY = BODY
 
+  $scope.API = API
+
 
   # 设备
   $scope.IsIPhone = IsIPhone
@@ -30,28 +32,6 @@ Mifan.controller "globalCtrl", ($scope) ->
 
   $scope.IsPhone = IsPhone
   $scope.IsWebapp = IsWebapp
-
-
-
-
-  BASE_API_PATH = "/mifan/service/index.php"
-
-  $scope.API = 
-    user: "/user/usersession/user"
-    userInfo: "/user/userinfo/user/id" # 1
-    ask: "/ask/askinfo/ask"
-    news: "/feed/feedinfo/feeds"
-
-  if IsDebug
-    BASE_API_PATH = "/data"
-
-    $scope.API = 
-      user: "/user.json"
-      userInfo: "/user-info.json"
-      ask: "/ask.json"
-      news: "/news.json"
-
-  $scope.API[api] = "#{BASE_API_PATH}#{$scope.API[api]}" for api of $scope.API
 
 
   $scope.DEFAULT_FACE = "http://mifan.us/public/images/user_normal.jpg"

@@ -15,17 +15,12 @@
 # 			expanders.push expander
 
 
-# Mifan.directive "expander", ->
-# 	restrict: "EA"
-# 	require: "?accordion"
-# 	transclude: yes
-# 	scope: {}
-# 	link: (scope, element, attrs, ctrl) ->
+Mifan.directive "expander", ->
+	restrict: "EA"
+	#require: ""
+	#transclude: yes
+	scope: {}
+	link: (scope, element, attrs, ctrl) ->
 
-# 		console.log ctrl
-# 		scope.active = no
-# 		ctrl.addExpander scope
-
-# 		scope.toggle = ->
-# 			scope.active = not scope.active
-# 			ctrl.gotOpened(scope)
+		element.on "click", ->
+			
