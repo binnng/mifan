@@ -33,6 +33,7 @@ class Feedinfo extends MF_Controller
 		parent::__construct();
 		$this->load->model('user_model');
 		$this->load->model('ask_model');
+		
 	}
 	
 	/**
@@ -72,4 +73,47 @@ class Feedinfo extends MF_Controller
 		
     }
 	
+	public function answerme_get(){
+		$this->hooks->call_hook('acl_auth');
+		
+		$data['userid'] = $this->get_post('userid');
+		
+		list($ret,$result) = $this->feed_model->get_answerme($data['userid']);
+		
+		if($ret != '100000'){
+			 $message = array( 'ret' => $ret, 'msg' => $result);
+             $this->response($message, 200); 
+		}
+		
+		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);
+		$this->response($message, 200); 
+	}
+	
+	public function replyme_get(){
+		$this->hooks->call_hook('acl_auth');
+		$data['userid'] = $this->get_post('userid');
+		list($ret,$result) = $this->feed_model->get_replyme($data['userid']);
+		
+		if($ret != '100000'){
+			 $message = array( 'ret' => $ret, 'msg' => $result);
+             $this->response($message, 200); 
+		}
+		
+		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);
+		$this->response($message, 200); 
+	}
+	
+	public function loveme_get(){
+		$this->hooks->call_hook('acl_auth');
+		$data['userid'] = $this->get_post('userid');
+		list($ret,$result) = $this->feed_model->get_loveme($data['userid']);
+		
+		if($ret != '100000'){
+			 $message = array( 'ret' => $ret, 'msg' => $result);
+             $this->response($message, 200); 
+		}
+		
+		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);
+		$this->response($message, 200);
+	}
 }

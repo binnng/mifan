@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Notice
+ * Message
  *
  * <pre>
  * 提供通知，消息查询接口
@@ -26,13 +26,14 @@
  * </pre>
  */
 
-class Notice extends MF_Controller
+class Message extends MF_Controller
 {
 		
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('email');
 		$this->load->model('user_model');
+		$this->load->model('message_model');
 	}
 	
 	/**
@@ -47,17 +48,18 @@ class Notice extends MF_Controller
 	 * @return	json
 	 * 
 	 */
-	public function notice_get(){
+	public function message_get(){
 		$this->hooks->call_hook('acl_auth');
     	
-		$data['noticeid'] = $this->get('noticeid');
+		$data['userid'] = $this->get_post('userid');
+		$data['messageid'] = $this->get('messageid');
 		
-        if(!$data['noticeid']){
+        if(!$data['messageid']){
         	$message = array( 'ret' => 904001, 'msg' => '请选择你要查看的消息!');
             $this->response($message, 200); 
         }
 		
-        list($ret,$result) = $this->notice_model->get_source_by_id('_get_notice_by_id',$data['noticeid']);
+        list($ret,$result) = $this->message_model->get_source_by_id('_get_message_by_id',$data['messageid']);
 		if($ret != '100000'){
 			 $message = array( 'ret' => $ret, 'msg' => $result);
              $this->response($message, 200); 
@@ -65,7 +67,20 @@ class Notice extends MF_Controller
 		
 		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);
 		$this->response($message, 200); 
-		
+	
     }
+	
+	public function msgcount_get(){
+		$data['userid'] = $this->get('userid');
+		
+		list($ret,$result) = $this->message_model->msg_count($data['userid'],$data);
+		if($ret != '100000'){
+			 $message = array( 'ret' => $ret, 'msg' => $result,'result' => 0);
+             $this->response($message, 200); 
+		}
+		
+		$message = array('ret' => $ret,'msg' => 'ok','result' => $result);
+		$this->response($message, 200); 
+	}
 	
 }

@@ -18,6 +18,7 @@ class Ask_model extends Base_model {
 	function __construct()
 	{
 		parent::__construct();
+		log_message('debug', 'Ask_model loaded.');
 		$this->load->model('user_model');
 		$this->load->model('feed_model');
 		$this->load->model('message_model');
@@ -143,7 +144,7 @@ class Ask_model extends Base_model {
 			$this->message_model->send_msg_to_all_follow($data['userid'],$data['content']);
 			
 			return array('100000',$result);	
-		} else if ($pid) {			
+		} else if ($pid) {
 			pcntl_waitpid($pid,$status,WUNTRACED);//主进程很闲时，可以用这个方法，当关闭主线程子，回收子进程，但是主进程很忙，要关才的主线程也很多，这不是个好方法
 			log_message('debug', '主线程执行完成,直接返回.');
 		    return array('100000',$result);
@@ -192,24 +193,126 @@ class Ask_model extends Base_model {
 		if(!$result){
 			 return array('204009','问题发表失败.');
 		}
-		//添加动态
-		$this->create('ask_feed', array(
-			'userid'	=>	$data['userid'],
-			'ftype'		=>	1,
-			'askid'		=>	$data['askid'],
-			'acid'		=>	$result,
-			'addtime'	=>	time()
-		));
 		
-		//更新评论信息
-		$this->db->set('comment_cout', 'comment_cout+1', FALSE);
-		$this->db->update('ask_topic',array(
-			'pid'			=>	$result,
-		),array(
-			'askid'		=>	$data['askid']
-		));
+		if(!function_exists('pcntl_fork')){
+			//添加动态
+			$this->feed_model->add_feed(array(
+				'userid'	=>	$data['userid'],
+				'ftype'		=>	1,
+				'askid'		=>	$data['askid'],
+				'acid'		=>	$result,
+			));
+			
+			//更新评论信息
+			$this->db->set('comment_cout', 'comment_cout+1', FALSE);
+			$this->db->update('ask_topic',array(
+				'pid'			=>	$result,
+			),array(
+				'askid'		=>	$data['askid']
+			));
+			
+			$ask = $this->_get_ask_topic_by_id($data['askid']);
+			
+			//发送消息提醒
+			$this->message_model->sendmsg($data['userid'],$ask['userid'],array(
+				'content'	=>	$data['content'],
+				'topicid'	=>	$result
+			),'answer');
+			return array('100000',$result);
+		}
 		
-		return array('100000',$result);
+		$pid = pcntl_fork();
+		if ($pid == -1) {
+			//添加动态
+			$this->feed_model->add_feed(array(
+				'userid'	=>	$data['userid'],
+				'ftype'		=>	1,
+				'askid'		=>	$data['askid'],
+				'acid'		=>	$result,
+			));
+			
+			//更新评论信息
+			$this->db->set('comment_cout', 'comment_cout+1', FALSE);
+			$this->db->update('ask_topic',array(
+				'pid'			=>	$result,
+			),array(
+				'askid'		=>	$data['askid']
+			));
+			
+			$ask = $this->_get_ask_topic_by_id($data['askid']);			
+			//发送消息提醒
+			$this->message_model->sendmsg($data['userid'],$ask['userid'],array(
+				'content'	=>	$data['content'],
+				'topicid'	=>	$result
+			),'comment');
+			return array('100000',$result);
+		} else if ($pid) {
+			pcntl_waitpid($pid,$status,WUNTRACED);
+			return array('100000',$result);
+		} else {//子进程
+			$pid = pcntl_fork();
+			if($pid == -1){
+				//添加动态
+				$this->feed_model->add_feed(array(
+					'userid'	=>	$data['userid'],
+					'ftype'		=>	1,
+					'askid'		=>	$data['askid'],
+					'acid'		=>	$result,
+				));
+				
+				//更新评论信息
+				$this->db->set('comment_cout', 'comment_cout+1', FALSE);
+				$this->db->update('ask_topic',array(
+					'pid'			=>	$result,
+				),array(
+					'askid'		=>	$data['askid']
+				));
+				
+				$ask = $this->_get_ask_topic_by_id($data['askid']);
+				
+				//发送消息提醒
+				$this->message_model->sendmsg($data['userid'],$ask['userid'],array(
+					'content'	=>	$data['content'],
+					'topicid'	=>	$result
+				),'comment');
+				return array('100000',$result);
+				exit(1);
+			}else if($pid == 0){
+				posix_setsid();//把子进程session设为当前会话头，防止主进程exit时把子进程杀死
+				sleep(1);
+				//添加动态
+				$this->feed_model->add_feed(array(
+					'userid'	=>	$data['userid'],
+					'ftype'		=>	1,
+					'askid'		=>	$data['askid'],
+					'acid'		=>	$result,
+				));
+				
+				//更新评论信息
+				$this->db->set('comment_cout', 'comment_cout+1', FALSE);
+				$this->db->update('ask_topic',array(
+					'pid'			=>	$result,
+				),array(
+					'askid'		=>	$data['askid']
+				));
+				
+				$ask = $this->_get_ask_topic_by_id($data['askid']);
+				
+				//发送消息提醒
+				$this->message_model->sendmsg($data['userid'],$ask['userid'],array(
+					'content'	=>	$data['content'],
+					'topicid'	=>	$result
+				),'comment');
+				return array('100000',$result);
+				//posix_kill(posix_getpid(),SIGTERM);
+				exit(0);
+			}else{
+				//子进程直接退出
+				//posix_kill(posix_getpid(),SIGTERM);
+				exit(0);
+			}
+		}
+
 	}
 	
 	/**
@@ -366,7 +469,7 @@ class Ask_model extends Base_model {
 		}
 		
 		$query = $this->db->get('ask_feed');
-		print_r($this->db->last_query());
+		//print_r($this->db->last_query());
 		$result = $query->result();
 		
 		
