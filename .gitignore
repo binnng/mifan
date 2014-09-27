@@ -12,3 +12,5 @@ app/mifan
 service/application/logs
 service/doc
 service/application/config/database.php
+service/application/cache
+service/uploadfile

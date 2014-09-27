@@ -253,8 +253,9 @@ class CI_Loader {
 			$name = $model;
 		}
 
-		if (in_array($name, $this->_ci_models, TRUE))
+		if (in_array($name, $this->_ci_models, TRUE) || class_exists($model))
 		{
+			log_message('debug', $model.' has been loaded,no need to re-load.');
 			return $this;
 		}
 
@@ -278,20 +279,21 @@ class CI_Loader {
 		{
 			load_class('Model', 'core');
 		}
-
+		
 		$model = ucfirst(strtolower($model));
-
+		
 		foreach ($this->_ci_model_paths as $mod_path)
 		{
 			if ( ! file_exists($mod_path.'models/'.$path.$model.'.php'))
 			{
 				continue;
 			}
-
+			
 			require_once($mod_path.'models/'.$path.$model.'.php');
 
 			$CI->$name = new $model();
 			$this->_ci_models[] = $name;
+			
 			return $this;
 		}
 

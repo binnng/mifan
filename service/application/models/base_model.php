@@ -15,9 +15,9 @@
 class Base_model extends CI_Model {
 
 	function __construct()
-	{
+	{	
 		parent::__construct();
-		log_message('DEBUG','Base_model loaded.');
+		log_message('DEBUG','Base_model loaded.');		
 		$this->load->driver('cache', array('adapter' => 'memcached', 'backup' => 'file'));
 	}
 	
@@ -178,7 +178,31 @@ class Base_model extends CI_Model {
 			return $this->db->truncate($table);
 		}
 	}
+	
+	/**
+	 * get_source_by_id
+	 * 
+	 * 根据ID获取资源
+	 * 
+	 * @param	string	$method	必选，实际获取资源的方法名
+	 * @param	int $id 可选，资源ID，为空获取第一条资源记录
+	 * @param	array $data 可选，错误码和错误提示
+	 */
+	public function get_source_by_id($method,$id = 1,$data = null){
 		
+		$ret = isset($data['ret'])?$data['ret']:'104002';
+		$msg = isset($data['msg'])?$data['msg']:'查找的资源不存在!';
+		
+		$strSource = call_user_func(array($this,$method),$id);
+		
+		if(!$strSource){
+			return array($ret,$msg);
+		}
+		
+		return array('100000',$strSource);
+		
+	}
+
 }
 
 /* End of file base_model.php */

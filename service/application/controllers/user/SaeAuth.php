@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Usersession
+ * SaeAuth
  *
  * <pre>
  * 检查用户登陆 并返回session信息 
@@ -28,7 +28,7 @@
 
 //require_once APPPATH.'/libraries/REST_Controller.php';
 
-class Usersession extends MF_Controller
+class SaeAuth extends MF_Controller
 {
 	
 	public function __construct(){

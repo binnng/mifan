@@ -166,6 +166,18 @@ class CI_Cache_memcached extends CI_Driver {
 	}
 
 	// ------------------------------------------------------------------------
+	
+	/**
+	 * All Cache Info
+	 *
+	 * @return	mixed	array on success, false on failure
+	 */
+	public function all_cache_info()
+	{
+		return $this->_memcached->getExtendedStats();
+	}
+
+	// ------------------------------------------------------------------------
 
 	/**
 	 * Get Cache Metadata

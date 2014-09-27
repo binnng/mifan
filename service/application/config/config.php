@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://115.29.49.123/mifan/service/';
+$config['base_url']	= 'http://115.29.49.123/mifan/service';
 //http://127.0.0.1/mifan/service/
 
 /*
@@ -70,7 +70,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'zh-cn';
 
 /*
 |--------------------------------------------------------------------------
