@@ -75,7 +75,10 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       uid = store.get "mUID"
       accessToken = store.get "mAccessToken"
 
-      User.getLocalCb(uid, accessToken) if uid and accessToken
+      if uid and accessToken
+        User.getLocalCb(uid, accessToken)
+      else
+        User.login()
     
     getLocalCb: (uid, accessToken) ->
       User.isLocalLogin = yes
@@ -176,6 +179,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     onPageChangeCb: (event, msg) ->
       $scope.page = msg
       elMwrap["scrollTop"] = 1
+
+      if "login|register|square".indexOf($scope.page) < 0
+        User.login() unless $scope.isLogin
 
 
     onBackToTop: (isM)->

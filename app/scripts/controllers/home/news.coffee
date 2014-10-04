@@ -43,10 +43,10 @@ Mifan.controller "homeNews", ($scope, $timeout, $http) ->
 
 
   $scope.toggleComment = (expander) ->
-    expander.comment = !expander.comment;
+    expander.comment = not expander.comment
 
   $scope.toggleReply = (expander) ->
-    expander.reply = !expander.reply;
+    expander.reply = not expander.reply
       
 
 

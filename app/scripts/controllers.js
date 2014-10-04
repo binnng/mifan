@@ -509,6 +509,8 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       accessToken = store.get("mAccessToken");
       if (uid && accessToken) {
         return User.getLocalCb(uid, accessToken);
+      } else {
+        return User.login();
       }
     },
     getLocalCb: function(uid, accessToken) {
@@ -581,7 +583,12 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
     },
     onPageChangeCb: function(event, msg) {
       $scope.page = msg;
-      return elMwrap["scrollTop"] = 1;
+      elMwrap["scrollTop"] = 1;
+      if ("login|register|square".indexOf($scope.page) < 0) {
+        if (!$scope.isLogin) {
+          return User.login();
+        }
+      }
     },
     onBackToTop: function(isM) {
       return (isM ? elMwrap : BODY)["scrollTop"] = 0;

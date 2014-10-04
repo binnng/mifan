@@ -5,7 +5,7 @@
 				<a ng-href="#!/user/{{news.ask.user.userid}}" class="avatar asker" title="{{news.ask.user.username}}" style="background-image:url({{news.ask.user.face_60}})">{{news.ask.user.username}}</a>
 				<a ng-href="#!/user/{{news.ask_comment.user.userid}}" class="avatar answerer" title="{{news.user.username}}" style="background-image:url({{news.ask_comment.user.face_60}})">{{news.ask_comment.user.username}}</a>
 			</div>
-			<div class="contents" ng-init="expander = {comment: false}">
+			<div class="contents" ng-init="expander = {comment: false, reply: false}">
 				<h3 class="h5">
 					<p><a ng-href="#!/q/{{news.feedid}}" class="" title="问题">{{news.ask.content}}</a></p>
 				</h3>
@@ -60,9 +60,11 @@
 										<h5><a href="#">老婆婆</a><span>下午2:20</span></h5>
 										<p class="cont-txt">我要做大股东！</p>
 										<div class="cmt-reply">
-											<p class="cmt-reply-btn"><span class="btn btn-link">回复</span></p>
-											<textarea class="cmt-reply-input"></textarea>
-											<button class="btn btn-success cmt-reply-btn">回复</button>
+											<p class="cmt-reply-btn" ng-click="toggleReply(expander)"><span class="btn btn-link">回复</span></p>
+											<div ng-show="expander.reply">
+												<textarea class="cmt-reply-input"></textarea>
+												<button class="btn btn-success cmt-reply-btn">回复</button>
+											</div>
 										</div>
 									</div>
 								</li>
