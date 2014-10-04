@@ -132,6 +132,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       User.set user
       User.store user
 
+      LOC["href"] = "#!/"
+
+      LOC["reload"]()
 
     # 登录过期
     onOutOfDate: ->
@@ -146,6 +149,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $cookieStore.remove "mUID"
       $cookieStore.remove "mAccessToken"
       $scope.isLogin = no
+
+      $timeout User.login, 200
 
     login: ->
       LOC["href"] = "#!/login"
@@ -180,8 +185,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $scope.page = msg
       elMwrap["scrollTop"] = 1
 
-      if "login|register|square".indexOf($scope.page) < 0
-        User.login() unless $scope.isLogin
+      # if "login|register|square".indexOf($scope.page) < 0
+      #   User.login() unless $scope.isLogin
 
 
     onBackToTop: (isM)->

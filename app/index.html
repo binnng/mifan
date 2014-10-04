@@ -39,7 +39,7 @@
   </head>
   <body ng-class="{ios: IsIOS, android: IsAndroid, 'android-pad': IsAndroidPad, iphone: IsIPhone, ipad: IsIPad, chrome: IsChrome, weixin: IsWeixin, mobile: IsMobile, ie: IsIE, 'ie-mobile': IsIEMobile, phone: IsPhone, webapp: IsWebapp}">
 
-    <div class="root" ng-controller="rootCtrl" ng-class="{logined: isLogin, 'm-menu-open': isMMenuOpen, 'm-design-open': isMDesignOpen,'m-design-open-mask': isMDesignOpenMask, 'm-bill-open': isMBillOpen, 'm-bill-open-mask': isMBillOpenMask}">
+    <div class="root" ng-controller="rootCtrl" ng-class="{logined: isLogin, 'not-login': !isLogin, 'm-menu-open': isMMenuOpen, 'm-design-open': isMDesignOpen,'m-design-open-mask': isMDesignOpenMask, 'm-bill-open': isMBillOpen, 'm-bill-open-mask': isMBillOpenMask}">
 
         <!-- 手机交互输入内容弹出 -->
         <div ng-include="'views/mobile/design.html'" class="m-design"></div>

@@ -314,6 +314,7 @@ $header-height: 50px;
 		border-bottom: 1px solid $dark-tone;
 		height: auto;
 		.container{
+			background: #fff;
 	  }
 
 	  .logo{
@@ -385,6 +386,15 @@ $header-height: 50px;
   	+ .sprise{
   		display: block;
   	}
+	}
+}
+
+.not-login{
+	.header{
+		border: none;
+		.nav{
+			display: none;
+		}
 	}
 }
 

@@ -95,7 +95,9 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       $scope.UID = user["userid"];
       $scope.user.accessToken = accessToken;
       User.set(user);
-      return User.store(user);
+      User.store(user);
+      LOC["href"] = "#!/";
+      return LOC["reload"]();
     },
     onOutOfDate: function() {
       User.remove();
@@ -106,7 +108,8 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       $scope.user = {};
       $cookieStore.remove("mUID");
       $cookieStore.remove("mAccessToken");
-      return $scope.isLogin = false;
+      $scope.isLogin = false;
+      return $timeout(User.login, 200);
     },
     login: function() {
       return LOC["href"] = "#!/login";
@@ -129,12 +132,7 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
     },
     onPageChangeCb: function(event, msg) {
       $scope.page = msg;
-      elMwrap["scrollTop"] = 1;
-      if ("login|register|square".indexOf($scope.page) < 0) {
-        if (!$scope.isLogin) {
-          return User.login();
-        }
-      }
+      return elMwrap["scrollTop"] = 1;
     },
     onBackToTop: function(isM) {
       return (isM ? elMwrap : BODY)["scrollTop"] = 0;

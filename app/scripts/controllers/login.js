@@ -28,7 +28,6 @@ Mifan.controller("loginCtrl", function($scope, $http, $timeout) {
     if (ret === "100000") {
       result = data["result"];
       $scope.$emit("onLogined", result);
-      LOC["href"] = "#!/";
     } else if (ret === "104003") {
       $scope.error = {
         type: "password",

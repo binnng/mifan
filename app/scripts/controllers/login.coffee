@@ -35,7 +35,6 @@ Mifan.controller "loginCtrl", ($scope, $http, $timeout) ->
       # 向root发送登录事件
       $scope.$emit "onLogined", result
 
-      LOC["href"] = "#!/"
 
     # 密码错误
     else if ret is "104003"
