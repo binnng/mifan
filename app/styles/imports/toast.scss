@@ -1,0 +1,16 @@
+.toast{
+	position: absolute;
+	right: 0;
+	top: 120px;
+	background: $tone;
+	color: $white;
+	z-index: 800;
+	padding: 10px 20px;
+	border-radius: 2px 0 0 2px;
+	opacity: 1;
+	@include transition(all, 200ms, ease-in);
+
+	&.show{
+		opacity: 1;
+	}
+}

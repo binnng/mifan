@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji, $cacheFactory) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji, $cacheFactory, $debug) ->
 
   API = $scope.API
 
@@ -153,7 +153,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $timeout User.login, 200
 
     login: ->
-      LOC["href"] = "#!/login"
+      LOC["href"] = "#!/login" unless LOC["href"].match /login/
 
   User.init()
 
@@ -309,13 +309,16 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     init: ->
       $scope.askQues = Ask.ask
 
-    ask: (content) ->
+    ask: (data) ->
 
       url = "#{API.ask}#{$scope.privacyParamDir}"
       url = API.ask if IsDebug
 
+      query = content: data.content
+      query.foruser = data.foruser if data.foruser
+
       (if IsDebug then $http.get else $http.post)(url,
-        content: content
+        query
       ).success Ask.askCb
 
     askCb: (data)->
@@ -324,6 +327,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       if String(ret) is "100000"
         $scope.$broadcast "onAskQuesSuccess", queId: data["result"]
         $scope.$broadcast "onMDesignSendSuccess"
+
+      else
+        $scope.$broadcast "onAskQuesFail", msg: data.msg
 
   Ask.init()
 
@@ -361,20 +367,36 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     time: 0
 
     get: ->
-      url = if IsDebug then API.msgcount else "#{API.msgcount}#{$scope.privacyParamDir}"
+      api = if IsDebug then API.notice else "#{API.notice}#{$scope.privacyParamDir}"
 
-      $http.get(url).success Notification.cb
+      $http.get(api).success Notification.cb
 
       Notification.time++
 
     cb: (data)->
       if data.msg is "ok"
-        $scope.msgCount = data.result
+        $scope.msgCount = data.result or 0
 
       $timeout Notification.get, 30000
 
   Notification.init()
 
+  # 弹出的提示信息
+  Toast = 
+    init: ->
+      $scope.toast = Toast.toast
+      $scope.Toast = Toast
+    text: ""
+
+    isShow: no
+
+    toast: (msg) ->
+      Toast.text = msg
+      Toast.isShow = yes
+
+      $timeout (-> Toast.isShow = no), 3000
+
+  Toast.init()
 
 
 

@@ -11,6 +11,7 @@ Mifan = angular.module "mifan", [
   "binnng.tap"
   "binnng.storage"
   "binnng.emoji"
+  "binnng.debug"
 ]
 
 Mifan.config ($routeProvider, $locationProvider) ->
@@ -35,6 +36,10 @@ Mifan.config ($routeProvider, $locationProvider) ->
     .when("/me",
       templateUrl: "views/me/me.html"
       controller: "meCtrl"
+    )
+    .when("/user/:id",
+      templateUrl: "views/user/user.html"
+      controller: "userCtrl"
     )
     .when("/welcome",
       templateUrl: "views/welcome.html"

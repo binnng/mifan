@@ -1,7 +1,11 @@
 "use strict"
-Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
-  
-  $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "me"
+Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
+
+  userid = $routeParams.id
+
+  return LOC["href"] = "#!/me" if $scope.UID is userid
+
+  $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "user"
 
  	legalFeedTypes = [
     "ask"
@@ -21,22 +25,22 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
     $scope.feedType = type
     $scope.isLoading = no
 
-  me = 
+  user = 
     init: ->
-      me.getMyAsk()
-      $timeout me.getMyAnswer, 500
+      user.getMyAsk()
+      $timeout user.getMyAnswer, 500
 
       $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = ""
       $scope.myAsk = $scope.myAnswer = $scope.myLove = []
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = no
 
-      $scope.myself = yes
+      $scope.followed = no
 
     getMyAsk: ->
       api = "#{API.myask}#{$scope.privacyParamDir}"
       api = API.myask if IsDebug
 
-      $http.get(api).success me.getMyAskCb
+      $http.get(api).success user.getMyAskCb
 
     getMyAskCb: (data) ->
       if String(data.msg) is "ok"
@@ -48,7 +52,7 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
       api = "#{API.myanswer}#{$scope.privacyParamDir}"
       api = API.myanswer if IsDebug
 
-      $http.get(api).success me.getMyAnswerCb
+      $http.get(api).success user.getMyAnswerCb
 
     getMyAnswerCb: (data) ->
       if String(data.msg) is "ok"
@@ -57,4 +61,9 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
         $scope.myAnswerMsg = data.msg
 
 
-  me.init()
+  user.init()
+
+
+  # 向TA提问
+  $scope.askHim = () ->
+    $scope.showAskBox = yes

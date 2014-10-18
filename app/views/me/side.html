@@ -13,8 +13,6 @@
 				<span class="weibo"><i></i>@老婆婆me</span>
 				<span class="weixin"><i></i>@imbinnng</span>
 			</p>
-			
-			<div class="ask-him blk"><button class="btn btn-primary">向TA提问</button></div>
 
 			<div class="fans blk">
 				<p>
@@ -23,9 +21,21 @@
 				</p>
 			</div>
 
-			<div class="follow blk">
-				<button class="btn btn-success">关注</button>
-				<button class="btn btn-warning">取消关注</button>
+			<div class="follow blk" ng-hide="myself">
+				<button class="btn btn-success" ng-hide="followed">关注</button>
+				<button class="btn btn-warning" ng-show="followed">取消关注</button>
+			</div>
+
+			<b class="blk-sep" ng-hide="myself"></b>
+			<div class="ask-him blk" ng-hide="myself">
+				<button class="btn btn-primary" ng-click="askHim()">向TA提问</button>
+			</div>
+
+			<div class="ask-him-box blk" ng-show="showAskBox">
+				<form role="form" class="ask-ques-form" ng-submit="send()" ng-controller="userAskCtrl">
+					<textarea class="form-control" rows="3" name="content" ng-model="quesContent" placeholder="问TA一个问题吧！"></textarea>
+					<button type="submit" class="btn btn-success" ng-class="{disabled: !quesContent || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending && !isSendSucs, 'glyphicon-ok': 'isSendSucs'}"></i></span></button>
+				</form>
 			</div>
 
 		</div>

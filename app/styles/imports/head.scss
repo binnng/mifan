@@ -153,16 +153,44 @@ $header-height: 50px;
 			cursor: pointer;
 			padding-right: .4em;
 			padding-left: .4em;
-			color: #333;
 			display: inline-block;
 			line-height: $header-height;
+			position: relative;
+			color: #333;
 			b{
+				display: none;
+			}
+
+			em{
+				position: absolute;
+				top: 8px;
+				right: 0;
+				color: $red;
+				line-height: 1;
+				font-weight: 700;
+				width: 6px;
+				height: 6px;
+				font-size: 1px;
+				text-indent: -99em;
+				overflow: hidden;
+				background-color: $red;
+				border-radius: 99px;
 				display: none;
 			}
 
 			&:hover{
 				color: #111;
 			}
+		}
+		
+		.remind{
+			color: $red;
+			&:hover{
+				color: darken($red, 5%);
+			}
+		}
+		.remind[msg-count="0"] {
+			color: #333;
 		}
 	}
 
