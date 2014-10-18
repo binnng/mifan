@@ -22,8 +22,8 @@
 			</div>
 
 			<div class="follow blk" ng-hide="myself">
-				<button class="btn btn-success" ng-hide="followed">关注</button>
-				<button class="btn btn-warning" ng-show="followed">取消关注</button>
+				<button class="btn btn-success" ng-hide="followed" ng-click="follow()">关注</button>
+				<button class="btn btn-warning" ng-show="followed" ng-click="unfollow()">取消关注</button>
 			</div>
 
 			<b class="blk-sep" ng-hide="myself"></b>

@@ -11,11 +11,15 @@ API = {
   user: "/user/usersession/user",
   userInfo: "/user/userinfo/user/id",
   ask: "/ask/askinfo/ask",
+  answer: "/ask/askinfo/answer",
   news: "/feed/feedinfo/feeds",
   notice: "/common/message/msgcount",
   myask: "/user/me/myask",
   myanswer: "/user/me/myanswer",
-  askme: "/ask/askinfo/asks"
+  askme: "/ask/askinfo/asks",
+  follow: "/user/friend/follow",
+  unfollow: "/user/friend/unfollow",
+  loveanswer: "/ask/askinfo/loveanswer"
 };
 
 if (IsDebug) {
@@ -24,11 +28,15 @@ if (IsDebug) {
     user: "/user.json",
     userInfo: "/user-info.json",
     ask: "/ask.json",
+    answer: "/answer.json",
     news: "/news.json",
     myask: "/myask.json",
     myanswer: "/myanswer.json",
     notice: "/msgcount.json",
-    askme: "/askme.json"
+    askme: "/askme.json",
+    follow: "/follow.json",
+    unfollow: "/unfollow.json",
+    loveanswer: "/loveanswer.json"
   };
 }
 

@@ -66,4 +66,43 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
 
   # 向TA提问
   $scope.askHim = () ->
-    $scope.showAskBox = yes
+    $scope.showAskBox = not $scope.showAskBox
+
+
+  # 关注和取消关注
+  follow = 
+    init: ->
+      $scope.follow = follow.follow
+      $scope.unfollow = follow.unfollow
+
+      $scope.$on "followCb", (event, data) -> 
+        follow.onFollowCb data
+      $scope.$on "unfollowCb", (event, data) -> follow.onUnfollowCb data
+
+    follow: -> 
+      $scope.$emit "follow", userid: userid
+
+    unfollow: -> 
+      $scope.$emit "unfollow", userid: userid
+
+    onFollowCb: (data) ->
+      msg = data.msg
+      $scope.toast msg
+
+      $scope.followed = yes if msg is "ok"
+
+    onUnfollowCb: (data) ->
+      msg = data.msg
+      $scope.toast msg
+
+      $scope.followed = no if msg is "ok"
+
+  follow.init()
+
+
+
+
+
+
+
+

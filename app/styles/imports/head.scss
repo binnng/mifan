@@ -5,7 +5,7 @@ $header-height: 50px;
 	height: $header-height;
 	margin-top: 0;
   margin-bottom: 0;
-  background: #eee;
+  background: $white;
 	position: fixed;
 	left: 0;
 	width: 100%;
@@ -104,7 +104,7 @@ $header-height: 50px;
 			a:active,
 			a:focus{
 				color: $tone;
-				background-color: #ddd;
+				background-color: darken($white, 4%);
 			}
 
 			&.active{

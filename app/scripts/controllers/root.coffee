@@ -398,6 +398,63 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
   Toast.init()
 
+  # 关注和取消关注
+  Follow = 
+    init: ->
+      $scope.$on "follow", (event, data) ->
+        Follow.follow data.userid
+
+      $scope.$on "unfollow", (event, data) -> 
+        Follow.unfollow data.userid
+
+    send: (api, cb) ->
+      (if IsDebug then $http.get else $http.post)(api).success cb
+
+    follow: (uid) ->
+      api = "#{API.follow}#{$scope.privacyParamDir}"
+      api = API.follow if IsDebug
+
+      Follow.send api, Follow.followCb
+
+    followCb: (data) ->
+      $scope.$broadcast "followCb", data
+
+    unfollow: (uid) ->
+      api = "#{API.unfollow}#{$scope.privacyParamDir}"
+      api = API.unfollow if IsDebug
+
+      Follow.send api, Follow.unfollowCb
+
+    unfollowCb: (data) ->
+      $scope.$broadcast "unfollowCb", data
+
+  Follow.init()
+
+  # 喜欢回答
+  LoveAns = 
+    init: ->
+      $scope.loveAns = LoveAns.send
+
+    feed: null
+
+    send: (item) ->
+      query = answerid: item.answer.answerid
+      api = "#{API.loveanswer}#{$scope.privacyParamDir}"
+      api = API.loveanswer if IsDebug
+
+      LoveAns.feed = item
+
+      (if IsDebug then $http.get else $http.post)(api, query).success LoveAns.sendCb
+
+    sendCb: (data) ->
+      ret = data.ret
+
+      $scope.toast data.msg
+      if String(ret) is "100000"
+        LoveAns.feed.ask.love_count = data.result
+
+  LoveAns.init()
+
 
 
 
