@@ -60,11 +60,21 @@
 		}
 	}
 
+	.follow{
+		.btn{
+			min-width: 86px;
+		}
+	}
+
 	.ask-him-box{
 		.btn{
 			width: 100%;
 			margin-top: 10px;
 		}
+	}
+
+	.addtime{
+		color: $gray;
 	}
 
 

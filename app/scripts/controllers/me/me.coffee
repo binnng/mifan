@@ -21,16 +21,21 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
     $scope.feedType = type
     $scope.isLoading = no
 
+  $scope.profile = $scope.user
+
   me = 
     init: ->
       me.getMyAsk()
-      $timeout me.getMyAnswer, 500
+      $timeout me.getMyAnswer, 300
+      $timeout me.getMyLove, 600
 
       $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = ""
       $scope.myAsk = $scope.myAnswer = $scope.myLove = []
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = no
 
       $scope.myself = yes
+
+    feedWatcher: (feed = "ask")->
 
     getMyAsk: ->
       api = "#{API.myask}#{$scope.privacyParamDir}"
@@ -55,6 +60,10 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
         $scope.myAnswer = data.result or []
       else
         $scope.myAnswerMsg = data.msg
+
+    getMyLove: ->
+
+
 
 
   me.init()

@@ -23,7 +23,7 @@ Mifan.controller("homeAskCtrl", function($scope, $timeout) {
     return clearAsk();
   });
   return $scope.$on("onAskQuesFail", function(event, msg) {
-    $scope.toast(msg.msg);
+    $scope.toast(msg.msg, "warn");
     return clearAsk();
   });
 });

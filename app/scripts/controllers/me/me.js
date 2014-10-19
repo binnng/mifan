@@ -15,14 +15,21 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
     $scope.feedType = type;
     return $scope.isLoading = false;
   };
+  $scope.profile = $scope.user;
   me = {
     init: function() {
       me.getMyAsk();
-      $timeout(me.getMyAnswer, 500);
+      $timeout(me.getMyAnswer, 300);
+      $timeout(me.getMyLove, 600);
       $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = "";
       $scope.myAsk = $scope.myAnswer = $scope.myLove = [];
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = false;
       return $scope.myself = true;
+    },
+    feedWatcher: function(feed) {
+      if (feed == null) {
+        feed = "ask";
+      }
     },
     getMyAsk: function() {
       var api;
@@ -53,7 +60,8 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
       } else {
         return $scope.myAnswerMsg = data.msg;
       }
-    }
+    },
+    getMyLove: function() {}
   };
   return me.init();
 });

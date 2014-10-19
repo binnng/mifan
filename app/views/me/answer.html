@@ -11,7 +11,7 @@
 				</h3>
 				<p class="lead">{{news.answer.content}}</p>
 				<p class="ask-ans-desc meta">
-					<a ng-href="#!/user/{{news.answer.user.userid}}" title="username">{{news.answer.user.username}}</a> 对 <a ng-href="#!/user/{{news.ask.user.userid}}" title="username">{{news.ask.user.username}}</a> 的回答于 <a ng-href="#!/q/{{news.feedid}}" title="" class="">1天前</a>
+					<a ng-href="#!/user/{{news.answer.user.userid}}" title="username">{{news.answer.user.username}}</a> 对 <a ng-href="#!/user/{{news.ask.user.userid}}" title="username">{{news.ask.user.username}}</a> 的回答于 <a ng-href="#!/q/{{news.feedid}}" title="" class="">{{news.answer.addtime | ago}}</a>
 				</p>
 			</div>
 		</dd>

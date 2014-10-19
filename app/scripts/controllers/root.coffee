@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji, $cacheFactory, $debug) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji, $cacheFactory, $extend, $location, $debug) ->
 
   API = $scope.API
 
@@ -33,21 +33,18 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       User.getLocal()
 
     set: (user) ->
-
-      $scope.user.username = user["username"] or ""
-      $scope.user.email = user["email"] or ""
-      $scope.user.face = user["face"] or ""
-      $scope.user.face_60 = user["face_60"] or ""
-      $scope.user.face_120 = user["face_120"] or ""
-      $scope.user.sex = user["sex"] or "1"
-      $scope.user.blog = user["blog"] or ""
-      $scope.user.uid = user["userid"] or ""
+      $extend $scope.user, user
 
     getRemote: ->
 
       uid = $scope.user.uid
 
-      url = "#{API.userInfo}" + ( if IsDebug then "" else "/#{uid}" ) + "#{$scope.privacyParam}"
+      url = [
+        "#{API.userInfo}"
+        ( if IsDebug then "" else "/#{uid}" )
+        "#{$scope.privacyParam}"
+        "&uid=#{uid}"
+      ].join ""
 
       $http.get(url).success(User.getRemoteCb).error(User.getRemoteErrorCb)
 
@@ -132,7 +129,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       User.set user
       User.store user
 
-      LOC["href"] = "#!/"
+      $location.path "/"
 
       LOC["reload"]()
 
@@ -153,7 +150,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $timeout User.login, 200
 
     login: ->
-      LOC["href"] = "#!/login" unless LOC["href"].match /login/
+      $location.path "login" unless $location.path().match /login/
 
   User.init()
 
@@ -390,9 +387,12 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
     isShow: no
 
-    toast: (msg) ->
+    type: "primary"
+
+    toast: (msg, type) ->
       Toast.text = msg
       Toast.isShow = yes
+      Toast.type = type or "success"
 
       $timeout (-> Toast.isShow = no), 3000
 
@@ -411,7 +411,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       (if IsDebug then $http.get else $http.post)(api).success cb
 
     follow: (uid) ->
-      api = "#{API.follow}#{$scope.privacyParamDir}"
+      api = "#{API.follow}#{$scope.privacyParamDir}/userid_follow/#{uid}"
       api = API.follow if IsDebug
 
       Follow.send api, Follow.followCb
@@ -420,7 +420,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $scope.$broadcast "followCb", data
 
     unfollow: (uid) ->
-      api = "#{API.unfollow}#{$scope.privacyParamDir}"
+      api = "#{API.unfollow}#{$scope.privacyParamDir}/userid_follow/#{uid}"
       api = API.unfollow if IsDebug
 
       Follow.send api, Follow.unfollowCb
@@ -434,26 +434,98 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
   LoveAns = 
     init: ->
       $scope.loveAns = LoveAns.send
+      $scope.$on "loveans", (event, data) -> LoveAns.send data
 
     feed: null
 
-    send: (item) ->
-      query = answerid: item.answer.answerid
+    send: (data) ->
       api = "#{API.loveanswer}#{$scope.privacyParamDir}"
       api = API.loveanswer if IsDebug
-
-      LoveAns.feed = item
+      query = data
 
       (if IsDebug then $http.get else $http.post)(api, query).success LoveAns.sendCb
 
-    sendCb: (data) ->
-      ret = data.ret
-
-      $scope.toast data.msg
-      if String(ret) is "100000"
-        LoveAns.feed.ask.love_count = data.result
+    sendCb: (data) -> $scope.$broadcast "loveansCb", data
 
   LoveAns.init()
+
+  # 回答问题
+  Ans = 
+    init: ->
+      $scope.Ans = Ans.send
+      $scope.$on "ans", (event, data) ->
+        Ans.send data
+
+    send: (data) ->
+
+      api = "#{API.answer}#{$scope.privacyParamDir}"
+      api = API.answer if IsDebug
+
+      query = 
+        askid: data.askid
+        content: data.content
+
+      (if IsDebug then $http.get else $http.post)(api, query).success (data) ->
+        Ans.sendCb data
+
+    sendCb: (data) -> $scope.$broadcast "ansCb", data
+
+  Ans.init()
+
+  # 获取他人用户信息
+  getUserInfo = 
+    init: ->
+      $scope.$on "getUserInfo", (e, data) -> getUserInfo.get data
+
+    get: (data) ->
+      uid = data.uid
+
+      api = [
+        "#{API.userInfo}"
+        ( if IsDebug then "" else "/#{uid}" )
+        "#{$scope.privacyParam}"
+        "&uid=#{uid}"
+      ].join ""
+
+      $http.get(api).success getUserInfo.getCb
+
+    getCb: (data) -> 
+      {msg, result} = data
+
+      $scope.$broadcast "getUserInfoCb", data
+
+  getUserInfo.init()
+
+
+  # 评论
+  Comment = 
+    init: ->
+      $scope.$on "comment", (e, data) -> Comment.send data
+      $scope.$on "getcomment", (e, data) -> Comment.get data
+
+    send: (data) ->
+      api = "#{API.comment}#{$scope.privacyParamDir}"
+      api = API.comment if IsDebug
+
+      console.log data
+
+      (if IsDebug then $http.get else $http.post)(api, data).success (data) ->
+        Comment.sendCb data
+
+    sendCb: (data) ->
+      $scope.$broadcast "commentCb", data
+
+    get: (data) ->
+      api = "#{API.getComment}#{$scope.privacyParamDir}/answerid/#{data.answerid}"
+      api = API.getComment if IsDebug
+
+      $http.get(api).success (data) ->
+        Comment.getCb data
+
+    getCb: (data) ->
+      $scope.$broadcast "getcommentCb", data
+
+  Comment.init()
 
 
 

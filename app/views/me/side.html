@@ -3,27 +3,24 @@
 
 		<div class="cover" style="background-image: url(images/covers/fruit_large.jpg); background-color: rgb(52, 73, 94);">
 		</div>
-		<b class="face face-136" style="background-image: url(http://user-cdn.spring.me/profile/20121206/n50c0dbf1eec71_large.jpg)"></b>
+		<b class="face face-136" style="background-image: url({{profile.face_120}})"></b>
 
 		<div class="bio">
-			<em class="username blk">binnng</em>
-			<p class="intro blk">穷得啥都没有，标准的穷三代</p>
+			<em class="username blk" ng-bind="profile.username"></em>
+			<div class="intro blk">{{profile.about}}</div>
 
-			<p class="sns sns-color blk">
-				<span class="weibo"><i></i>@老婆婆me</span>
-				<span class="weixin"><i></i>@imbinnng</span>
-			</p>
+			<div class="sns sns-color blk">
+				<span class="weibo" ng-show="profile.weibo"><i></i>@{{profile.weibo}}</span>
+				<span class="weixin" ng-show="profile.weixin"><i></i>@{{profile.weixin}}</span>
+			</div>
 
 			<div class="fans blk">
-				<p>
-					<span>关注：<a>99</a></span>
-					<span>粉丝：<a>999</a></span>
-				</p>
+				<span>关注：<a ng-href="#!/">{{profile.count_follow}}</a></span>
+				<span>粉丝：<a ng-href="#!/">{{profile.count_followed}}</a></span>
 			</div>
 
 			<div class="follow blk" ng-hide="myself">
-				<button class="btn btn-success" ng-hide="followed" ng-click="follow()">关注</button>
-				<button class="btn btn-warning" ng-show="followed" ng-click="unfollow()">取消关注</button>
+				<button class="btn btn-{{followBtn.cls}}" ng-class="{disabled:isFollowSending}" ng-click="followFn()"><span ng-hide="isFollowSending">{{followBtn.txt}}</span><i class="glyphicon glyphicon-refresh animated infinite" ng-show="isFollowSending"></i></button>
 			</div>
 
 			<b class="blk-sep" ng-hide="myself"></b>
@@ -37,6 +34,10 @@
 					<button type="submit" class="btn btn-success" ng-class="{disabled: !quesContent || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending && !isSendSucs, 'glyphicon-ok': 'isSendSucs'}"></i></span></button>
 				</form>
 			</div>
+
+			<b class="blk-sep"></b>
+			<p class="blk addtime">始于 {{profile.addtime | date}}</p>
+
 
 		</div>
 	</div>

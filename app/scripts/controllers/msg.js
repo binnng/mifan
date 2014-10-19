@@ -39,31 +39,29 @@ Mifan.controller("msgCtrl", function($scope, $rootScope, $http, $debug, $timeout
   ans = {
     init: function() {
       $scope.send = ans.send;
-      return $scope.$watch($scope.askMe, function() {
+      $scope.$watch($scope.askMe, function() {
         if ($scope.askMe.length === 0) {
           return $scope.askMeMsg = "空";
         }
       });
+      return $scope.$on("ansCb", function(event, data) {
+        return ans.sendCb(data);
+      });
     },
     send: function(item, msg) {
-      var api, query;
+      var query;
       item.isSending = true;
-      api = "" + API.answer + $scope.privacyParamDir;
-      if (IsDebug) {
-        api = API.answer;
-      }
       query = {
         askid: msg.askid,
         content: item.content
       };
-      return (IsDebug ? $http.get : $http.post)(api, query).success(function(data) {
-        return ans.sendCb.call(item, data);
-      });
+      return $scope.$emit("ans", query);
     },
     sendCb: function(data) {
+      var toastType;
       this.content = "";
       this.isSending = false;
-      $scope.toast(data.msg);
+      toastType = "";
       if (String(data.ret) === "100000") {
         $timeout(((function(_this) {
           return function() {
@@ -74,9 +72,12 @@ Mifan.controller("msgCtrl", function($scope, $rootScope, $http, $debug, $timeout
         })(this)), 1000);
         ans.count++;
         if (ans.count >= msg.count) {
-          return $scope.askMe.length = 0;
+          $scope.askMe.length = 0;
         }
+      } else {
+        toastType = "warn";
       }
+      return $scope.toast(data.msg, toastType);
     },
     count: 0
   };

@@ -33,5 +33,5 @@ Mifan.controller "homeAskCtrl", ($scope, $timeout) ->
     clearAsk()
 
   $scope.$on "onAskQuesFail", (event, msg) -> 
-    $scope.toast msg.msg
+    $scope.toast msg.msg, "warn"
     clearAsk()

@@ -6,7 +6,7 @@
 				<a class="face face-42 pull-left" ng-href="#!/user/{{msg.user.userid}}" class="avatar asker" title="{{msg.user..username}}" style="background-image:url({{msg.user.face_120}})">{{msg.user.username}}</a>
 				<div class="ques-dtl">
 					<a class="h5" href="#!/q/{{msg.askid}}">{{msg.content}}</a>
-					<p class="meta"><a ng-href="#!/user/{{msg.user.userid}}" title="{{msg.user.username}}" class="ng-binding" href="#">{{msg.user.username}}</a> 提问于 <a ng-href="#!/q/{{msg.askid}}">1天前</a></p>
+					<p class="meta"><a ng-href="#!/user/{{msg.user.userid}}" title="{{msg.user.username}}" class="ng-binding" href="#">{{msg.user.username}}</a> 提问于 <a ng-href="#!/q/{{msg.askid}}">{{msg.addtime | ago}}</a></p>
 					<form class="ans-form clearfix hidden-xs" ng-submit="send(this, msg)">
 						<textarea name="ans-content" class="ans-input" ng-model="content"></textarea>
 						<button type="submit" class="btn btn-success" ng-class="{disabled: !content || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending && !isSendSucs, 'glyphicon-ok': 'isSendSucs'}"></i></span></button>

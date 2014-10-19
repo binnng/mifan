@@ -25,6 +25,14 @@ Mifan.directive "usermenu", ->
 	restrict: "E"
 	scope: no
 
+Mifan.directive "sending-btn", ->
+
+	priority: 0
+	templateUrl: "views/template/sending-btn.html"
+	transclude: yes
+	restrict: "AE"
+	scope: no
+
 #用户冒泡弹出菜单
 # Mifan.directive "mbubble", ->
 

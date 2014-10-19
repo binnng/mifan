@@ -11,6 +11,8 @@ Mifan = angular.module "mifan", [
   "binnng.tap"
   "binnng.storage"
   "binnng.emoji"
+  "binnng.extend"
+  "binnng.time"
   "binnng.debug"
 ]
 

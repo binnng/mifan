@@ -1,9 +1,9 @@
 "use strict"
-Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
+Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) ->
 
   userid = $routeParams.id
 
-  return LOC["href"] = "#!/me" if $scope.UID is userid
+  return $location.path "me" if $scope.UID is userid
 
   $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "user"
 
@@ -25,6 +25,8 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
     $scope.feedType = type
     $scope.isLoading = no
 
+  $scope.profile = null
+
   user = 
     init: ->
       user.getMyAsk()
@@ -34,7 +36,10 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
       $scope.myAsk = $scope.myAnswer = $scope.myLove = []
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = no
 
-      $scope.followed = no
+
+      $scope.$on "getUserInfoCb", (event, data) -> user.getUserInfoCb data
+
+      $timeout user.getUserInfo, 100
 
     getMyAsk: ->
       api = "#{API.myask}#{$scope.privacyParamDir}"
@@ -60,6 +65,20 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
       else
         $scope.myAnswerMsg = data.msg
 
+    getUserInfo: ->
+      $scope.$emit "getUserInfo", uid: userid
+
+    getUserInfoCb: (data) ->
+      {msg, ret, result} = data
+      
+      if String(ret) is "100000"
+        $scope.profile = result
+
+        # 0 未关注或自己， 1已关注，2互相关注
+        $scope.iffollow = result.iffollow
+
+        follow.setFollowBtn result.iffollow
+
 
   user.init()
 
@@ -70,6 +89,8 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
 
 
   # 关注和取消关注
+  $scope.isFollowSending = no
+
   follow = 
     init: ->
       $scope.follow = follow.follow
@@ -79,23 +100,73 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams) ->
         follow.onFollowCb data
       $scope.$on "unfollowCb", (event, data) -> follow.onUnfollowCb data
 
+      $scope.followFn = -> 
+        switch Number $scope.iffollow
+          when 0
+            follow.follow()
+          when 1
+            follow.unfollow()
+          when 2
+            follow.unfollow()
+
     follow: -> 
+      $scope.isFollowSending = yes
       $scope.$emit "follow", userid: userid
 
     unfollow: -> 
+      $scope.isFollowSending = yes
       $scope.$emit "unfollow", userid: userid
 
     onFollowCb: (data) ->
-      msg = data.msg
-      $scope.toast msg
+      {msg, ret, result} = data
+      toastType = ""
 
-      $scope.followed = yes if msg is "ok"
+      msg = "关注成功!" if msg is "ok"
+
+      if String(ret) is "100000"
+        $scope.iffollow = result
+        follow.setFollowBtn result
+      else
+        toastType = "warn"
+
+      $scope.toast msg, toastType
+      $scope.isFollowSending = no
 
     onUnfollowCb: (data) ->
-      msg = data.msg
-      $scope.toast msg
+      {msg, ret, result} = data
+      toastType = ""
 
-      $scope.followed = no if msg is "ok"
+      msg = "取消关注成功!" if msg is "ok"
+
+      if String(ret) is "100000"
+        $scope.iffollow = result
+        follow.setFollowBtn result
+      else
+        toastType = "warn"
+
+      $scope.toast msg, toastType
+      $scope.isFollowSending = no
+
+    setFollowBtn: (iffollow) ->
+      iffollow = iffollow or 0
+      followBtn = {}
+      switch Number iffollow
+        when 0
+          followBtn = 
+            txt: ""
+            cls: "success"
+        when 1
+          followBtn = 
+            txt: "取消"
+            cls: "warning"
+        when 2
+          followBtn = 
+            txt: "互相"
+            cls: "warning"
+
+      followBtn.txt += "关注"
+      $scope.followBtn = followBtn
+
 
   follow.init()
 

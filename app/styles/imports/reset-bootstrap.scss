@@ -6,7 +6,7 @@ input
 input:focus,
 .dropdown-menu{
 	border-radius: 2px;
-	outline: none;
+	outline: none !important;
 	-webkit-highlight: none;
 }
 
@@ -109,7 +109,7 @@ em{
 	font-style: normal;
 }
 
-p{
+p, ul{
 	margin: 0;
 }
 

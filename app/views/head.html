@@ -1,6 +1,6 @@
 <div class="header clearfix" ng-controller="headCtrl">
 
-	<div class="head-inner">
+	<div class="head-inner container">
 		<div class="login pull-right" ng-show="!user.username">
 			<span class="sm-user switch">
 				<a href="#!/login" ng-class="{active: page=='login'}" class="item">登录</a>
@@ -57,7 +57,5 @@
 	</div>
 
 </div>
-
-<div class="toast" ng-show="Toast.isShow">{{Toast.text}}</div>
 
 <!-- <div class="sprise">Sprise!!</div> -->

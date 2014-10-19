@@ -1,65 +1,7 @@
 <div class="feed-content news sd-card" ng-controller="homeNews">
 	<dl class="questions">
-		<dd ng-repeat="news in newsCollect" class="qa-mod feed-mod">
-			<div class="avatars pull-left">
-				<a ng-href="#!/user/{{news.ask.user.userid}}" class="avatar asker" title="{{news.ask.user.username}}" style="background-image:url({{news.ask.user.face_60}})">{{news.ask.user.username}}</a>
-				<a ng-href="#!/user/{{news.answer.user.userid}}" class="avatar answerer" title="{{news.user.username}}" style="background-image:url({{news.answer.user.face_60}})">{{news.answer.user.username}}</a>
-			</div>
-			<div class="contents" ng-init="expander = {comment: false, reply: false}">
-				<h3 class="h5">
-					<p><a ng-href="#!/q/{{news.feedid}}" class="" title="问题">{{news.ask.content}}</a></p>
-				</h3>
-				<p class="lead">{{news.answer.content}}</p>
-				<p class="ask-ans-desc meta">
-					<a ng-href="#!/user/{{news.answer.user.userid}}" title="username">{{news.answer.user.username}}</a> 对 <a ng-href="#!/user/{{news.ask.user.userid}}" title="username">{{news.ask.user.username}}</a> 的回答于 <a ng-href="#!/q/{{news.feedid}}" title="" class="">1天前</a>
-				</p>
-
-				<div class="actions clearfix">
-					<div class="act-left pull-left">
-						<a class="like pull-left">
-							<span class="glyphicon glyphicon-heart" ng-click="loveAns(news)"></span>
-							<span class="count">{{news.ask.love_count}}</span>
-						</a>
-						<ul class="liked-list hidden-xs">
-							<li><a ng-href="#" class="avatar" title="username" style="background-image:url(images/avatar24.jpg)">username</a></li>
-						</ul>
-						<a class="m-cmt pull-left visible-xs" ng-click="toggleMDesign('comment')">
-							<span class="glyphicon glyphicon-comment"></span>
-							<span class="count">{{news.ask.comment_cout || 0}}</span>
-						</a>
-					</div>
-
-					<b class="cmt-tgl-btn pull-right hidden-xs" ng-click="toggleComment(expander)">{{news.ask.comment_cout || 0}}条评论</b>
-					<b class="bill-btn bill-btn-dots" ng-click="setMBill($index)">...</b>
-				</div>
-
-				<div class="qa-cmt comment hidden-xs" ng-show="expander.comment">
-					<form class="cmt-form clearfix">
-						<textarea name="cmt-content" class="cmt-input"></textarea>
-						<button class="btn btn-success">评论</button>
-					</form>
-					<div class="cmt-list">
-							<ul>
-								<li class="cmt-item" ng-repeat="comment in news.comment">
-									<b class="face face-30 cmt-face" title="username"></b>
-									<div class="cmt-detail">
-										<h5><a href="#">老婆婆</a><span>下午2:20</span></h5>
-										<p class="cont-txt">我要做大股东！</p>
-										<div class="cmt-reply">
-											<p class="cmt-reply-btn" ng-click="toggleReply(expander)"><span class="btn btn-link">回复</span></p>
-											<div ng-show="expander.reply">
-												<textarea class="cmt-reply-input"></textarea>
-												<button class="btn btn-success cmt-reply-btn">回复</button>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-					</div>
-				</div>
-			</div>
+		<dd ng-repeat="news in newsCollect" class="qa-mod feed-mod" ng-include="'views/module/feed-mod.html'">
 		</dd>
 	</dl>
-
 	<more></more>
 </div>

@@ -52,7 +52,7 @@
 			  </li>
 			</div>
 
-			<div class="feed-wrap">
+			<div class="feed-wrap" ng-controller="homeFeed">
 
 				<div ng-include="'views/home/news.html'" ng-if="feedType == 'news'"></div>
 				<div ng-include="'views/home/answer.html'" ng-if="feedType == 'answer'"></div>

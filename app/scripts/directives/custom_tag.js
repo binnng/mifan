@@ -28,3 +28,13 @@ Mifan.directive("usermenu", function() {
     scope: false
   };
 });
+
+Mifan.directive("sending-btn", function() {
+  return {
+    priority: 0,
+    templateUrl: "views/template/sending-btn.html",
+    transclude: true,
+    restrict: "AE",
+    scope: false
+  };
+});

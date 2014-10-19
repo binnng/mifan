@@ -53,14 +53,24 @@
 		cursor: pointer;
 		padding: 0 .6em;
 		font-weight: 400;
-		&.active{
-			color: $red;
-		}
 		.glyphicon-heart{
 			margin-right: .2em;
 		}
 		.count{
 			vertical-align: bottom;
+		}
+	}
+
+	.like{
+		padding-right: 2px;
+		&.loved{
+			.glyphicon-heart{
+				color: $red;
+			}
+			cursor: auto;
+			&:hover{
+				color: $gray;
+			}
 		}
 	}
 
@@ -75,15 +85,16 @@
 	}
 
 	.liked-list{
-		display: none;
-		margin-left: .8em;
+		margin-left: .2em;
+		overflow: hidden;
 		li{
-			display: inline-block;
+			float: left;
+			margin-right: 4px;
 		}
 		.avatar{
-			width: 18px;
-			height: 18px;
-			margin: 0 0px;
+			width: 20px;
+			height: 20px;
+			margin: 0;
 		}
 	}
 

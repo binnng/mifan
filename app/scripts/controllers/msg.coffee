@@ -47,24 +47,22 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
         if $scope.askMe.length is 0
           $scope.askMeMsg = "空"
 
+      $scope.$on "ansCb", (event, data) -> ans.sendCb data
+
     send: (item, msg) ->
       item.isSending = yes
-
-      api = "#{API.answer}#{$scope.privacyParamDir}"
-      api = API.answer if IsDebug
 
       query = 
         askid: msg.askid
         content: item.content
 
-      (if IsDebug then $http.get else $http.post)(api, query).success (data) ->
-        ans.sendCb.call item, data
+      $scope.$emit "ans", query
 
     sendCb: (data) ->
       @content = ""
       @isSending = no
 
-      $scope.toast data.msg
+      toastType = ""
 
       if String(data.ret) is "100000"
         $timeout (=>
@@ -77,6 +75,11 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
 
         if ans.count >= msg.count
           $scope.askMe.length = 0
+
+      else 
+        toastType = "warn"
+
+      $scope.toast data.msg, toastType
 
     count: 0
 

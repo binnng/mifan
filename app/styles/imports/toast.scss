@@ -1,7 +1,7 @@
 .toast{
-	position: absolute;
+	position: fixed;
 	right: 0;
-	top: 120px;
+	bottom: 80px;
 	background: $tone;
 	color: $white;
 	z-index: 800;
@@ -10,7 +10,19 @@
 	opacity: 1;
 	@include transition(all, 200ms, ease-in);
 
-	&.show{
-		opacity: 1;
+	&.primary{
+		background: $primary;
+	}
+	&.error{
+		background: $error;
+	}
+	&.success{
+		background: $success;
+	}
+	&.warn{
+		background: $warn;
+	}
+	&.danger{
+		background: $danger;
 	}
 }

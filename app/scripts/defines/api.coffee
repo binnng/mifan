@@ -16,6 +16,11 @@ API =
   follow: "/user/friend/follow"
   unfollow: "/user/friend/unfollow"
   loveanswer: "/ask/askinfo/loveanswer"
+  answerme: "/feed/feedinfo/answerme"
+  comment: "/ask/askinfo/comment"
+  getComment: "/ask/askinfo/comments"
+  loveme: "/user/feedinfo/loveanswers"
+
 
 if IsDebug
   BASE_API_PATH = "/data"
@@ -33,5 +38,9 @@ if IsDebug
     follow: "/follow.json"
     unfollow: "/unfollow.json"
     loveanswer: "/loveanswer.json"
+    answerme: "/answerme.json"
+    comment: "/comment.json"
+    getComment: "/comments_list.json"
+    loveme: "/loveanswers.json"
 
 API[api] = "#{BASE_API_PATH}#{API[api]}" for api of API
