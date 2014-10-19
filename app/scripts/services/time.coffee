@@ -5,6 +5,7 @@
 
   # 2014年10月19日
   time = (timestamp) ->
+    timestamp *= 1000 if String(timestamp).length is 10
 
     date = new Date(timestamp - 0)
 
@@ -55,5 +56,16 @@
   Time.filter "ago", ->
     (timestamp) ->
       ago timestamp
+
+  Time.filter "datetime", -> 
+    (timestamp) ->
+      {year, month, day, hour, minute} = time "#{timestamp}000"
+
+      # ctime = +new Date()
+      # console.log ctime
+      # cyear = ctime.getFullYear()
+      # cday = ctime.getDate()
+
+      "#{year}-#{month}-#{day} #{hour}:#{minute}"
 
 ) window, angular

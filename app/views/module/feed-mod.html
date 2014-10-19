@@ -43,7 +43,7 @@
 					<li class="cmt-item" ng-repeat="cmt in news.comment">
 						<b class="face face-30 cmt-face" title="{{cmt.user.username}}" style="background-image:url({{cmt.user.face_60}})"></b>
 						<div class="cmt-detail">
-							<h5><a href="#!/user/{{cmt.user.userid}}">{{cmt.user.username}}</a><span>{{cmt.addtime}}</span></h5>
+							<h5><a href="#!/user/{{cmt.user.userid}}">{{cmt.user.username}}</a><span>{{cmt.addtime | datetime}}</span></h5>
 							<p class="cont-txt">{{cmt.content}}</p>
 							<div class="cmt-reply">
 								<p class="cmt-reply-btn" ng-click="expandReplyFn(news,this)"><span class="btn btn-link">回复</span></p>

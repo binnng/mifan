@@ -3,6 +3,9 @@
   var Time, ago, time;
   time = function(timestamp) {
     var date;
+    if (String(timestamp).length === 10) {
+      timestamp *= 1000;
+    }
     date = new Date(timestamp - 0);
     return {
       year: date.getFullYear(),
@@ -50,9 +53,16 @@
       return "" + year + "年" + month + "月" + day + "日";
     };
   });
-  return Time.filter("ago", function() {
+  Time.filter("ago", function() {
     return function(timestamp) {
       return ago(timestamp);
+    };
+  });
+  return Time.filter("datetime", function() {
+    return function(timestamp) {
+      var day, hour, minute, month, year, _ref;
+      _ref = time("" + timestamp + "000"), year = _ref.year, month = _ref.month, day = _ref.day, hour = _ref.hour, minute = _ref.minute;
+      return "" + year + "-" + month + "-" + day + " " + hour + ":" + minute;
     };
   });
 })(window, angular);
