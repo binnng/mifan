@@ -11,6 +11,8 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
 
   $scope.feedType = "ask"
 
+  $scope.ta = "我"
+
   # 加载更多
   $scope.loadingMore = ->
     $scope.isLoading = yes

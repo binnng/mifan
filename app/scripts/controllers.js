@@ -471,6 +471,7 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
   });
   legalFeedTypes = ["ask", "answer", "love"];
   $scope.feedType = "ask";
+  $scope.ta = "我";
   $scope.loadingMore = function() {
     return $scope.isLoading = true;
   };
@@ -1192,14 +1193,13 @@ Mifan.controller("squareCtrl", function($scope) {
 Mifan.controller("userCtrl", function($scope, $timeout, $http, $routeParams, $location) {
   var follow, legalFeedTypes, user, userid;
   userid = $routeParams.id;
-  if ($scope.UID === userid) {
-    return $location.path("me");
-  }
+  $scope.myself = $scope.UID === userid;
   $scope.$on("$viewContentLoaded", function() {
     return $scope.$emit("pageChange", "user");
   });
   legalFeedTypes = ["ask", "answer", "love"];
   $scope.feedType = "ask";
+  $scope.ta = "TA";
   $scope.loadingMore = function() {
     return $scope.isLoading = true;
   };
@@ -1262,7 +1262,17 @@ Mifan.controller("userCtrl", function($scope, $timeout, $http, $routeParams, $lo
       if (String(ret) === "100000") {
         $scope.profile = result;
         $scope.iffollow = result.iffollow;
-        return follow.setFollowBtn(result.iffollow);
+        follow.setFollowBtn(result.iffollow);
+        if (!$scope.myself) {
+          switch ("" + result.sex) {
+            case "1":
+              return $scope.ta = "他";
+            case "2":
+              return $scope.ta = "她";
+          }
+        } else {
+          return $scope.ta = "我";
+        }
       }
     }
   };

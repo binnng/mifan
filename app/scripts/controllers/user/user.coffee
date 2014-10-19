@@ -3,7 +3,7 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
 
   userid = $routeParams.id
 
-  return $location.path "me" if $scope.UID is userid
+  $scope.myself = $scope.UID is userid
 
   $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "user"
 
@@ -14,6 +14,7 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
   ]
 
   $scope.feedType = "ask"
+  $scope.ta = "TA"
 
   # 加载更多
   $scope.loadingMore = ->
@@ -76,8 +77,16 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
 
         # 0 未关注或自己， 1已关注，2互相关注
         $scope.iffollow = result.iffollow
-
         follow.setFollowBtn result.iffollow
+
+        if not $scope.myself
+          switch "#{result.sex}"
+            when "1"
+              $scope.ta = "他"
+            when "2"
+              $scope.ta = "她"
+        else
+          $scope.ta = "我"
 
 
   user.init()

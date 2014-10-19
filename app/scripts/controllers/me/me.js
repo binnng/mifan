@@ -7,6 +7,7 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
   });
   legalFeedTypes = ["ask", "answer", "love"];
   $scope.feedType = "ask";
+  $scope.ta = "我";
   $scope.loadingMore = function() {
     return $scope.isLoading = true;
   };

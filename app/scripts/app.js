@@ -21,7 +21,7 @@ Mifan.config(function($routeProvider, $locationProvider) {
     templateUrl: "views/me/me.html",
     controller: "meCtrl"
   }).when("/user/:id", {
-    templateUrl: "views/user/user.html",
+    templateUrl: "views/me/me.html",
     controller: "userCtrl"
   }).when("/welcome", {
     templateUrl: "views/welcome.html",
