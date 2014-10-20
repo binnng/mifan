@@ -131,7 +131,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
       $location.path "/"
 
-      LOC["reload"]()
+      #LOC["reload"]()
 
     # 登录过期
     onOutOfDate: ->

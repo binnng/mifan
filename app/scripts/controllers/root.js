@@ -89,8 +89,7 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       $scope.user.accessToken = accessToken;
       User.set(user);
       User.store(user);
-      $location.path("/");
-      return LOC["reload"]();
+      return $location.path("/");
     },
     onOutOfDate: function() {
       User.remove();

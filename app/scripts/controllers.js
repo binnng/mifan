@@ -812,8 +812,7 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       $scope.user.accessToken = accessToken;
       User.set(user);
       User.store(user);
-      $location.path("/");
-      return LOC["reload"]();
+      return $location.path("/");
     },
     onOutOfDate: function() {
       User.remove();
@@ -1324,6 +1323,8 @@ Mifan.controller("userCtrl", function($scope, $timeout, $http, $routeParams, $lo
       if (String(ret) === "100000") {
         $scope.iffollow = result;
         follow.setFollowBtn(result);
+        $scope.profile.count_followed = $scope.profile.count_followed - 0 + 1;
+        $scope.user.count_follow = $scope.user.count_follow - 0 + 1;
       } else {
         toastType = "warn";
       }
@@ -1340,6 +1341,8 @@ Mifan.controller("userCtrl", function($scope, $timeout, $http, $routeParams, $lo
       if (String(ret) === "100000") {
         $scope.iffollow = result;
         follow.setFollowBtn(result);
+        $scope.profile.count_followed -= 1;
+        $scope.user.count_follow -= 1;
       } else {
         toastType = "warn";
       }

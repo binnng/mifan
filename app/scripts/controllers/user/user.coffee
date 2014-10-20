@@ -135,6 +135,12 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
       if String(ret) is "100000"
         $scope.iffollow = result
         follow.setFollowBtn result
+
+        # -0 转换为数字类型
+        $scope.profile.count_followed = $scope.profile.count_followed - 0 + 1;
+
+        # 设置自己的关注数
+        $scope.user.count_follow  = $scope.user.count_follow - 0 + 1;
       else
         toastType = "warn"
 
@@ -150,6 +156,11 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
       if String(ret) is "100000"
         $scope.iffollow = result
         follow.setFollowBtn result
+
+        $scope.profile.count_followed -= 1
+
+        # 设置自己的关注数
+        $scope.user.count_follow  -= 1;
       else
         toastType = "warn"
 

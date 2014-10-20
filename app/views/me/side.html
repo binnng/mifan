@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="follow blk" ng-hide="myself">
-				<button class="btn btn-{{followBtn.cls}}" ng-class="{disabled:isFollowSending}" ng-click="followFn()"><span ng-hide="isFollowSending">{{followBtn.txt}}</span><i class="glyphicon glyphicon-refresh animated infinite" ng-show="isFollowSending"></i></button>
+				<button ng-show="followBtn" class="btn btn-{{followBtn.cls}}" ng-class="{disabled:isFollowSending}" ng-click="followFn()"><span ng-hide="isFollowSending">{{followBtn.txt}}</span><i class="glyphicon glyphicon-refresh animated infinite" ng-show="isFollowSending"></i></button>
 			</div>
 
 			<b class="blk-sep" ng-hide="myself"></b>
@@ -36,7 +36,7 @@
 			</div>
 
 			<b class="blk-sep"></b>
-			<p class="blk addtime">始于 {{profile.addtime | date}}</p>
+			<p class="blk addtime" ng-show="profile.addtime">始于 {{profile.addtime | date}}</p>
 
 
 		</div>
