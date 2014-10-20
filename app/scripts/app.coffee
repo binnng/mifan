@@ -12,8 +12,8 @@ Mifan = angular.module "mifan", [
   "binnng.storage"
   "binnng.emoji"
   "binnng.extend"
-  "binnng.time"
-  "binnng.debug"
+  "binnng/time"
+  "binnng/debug"
 ]
 
 Mifan.config ($routeProvider, $locationProvider) ->
