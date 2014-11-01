@@ -178,13 +178,15 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
       $scope.Page = Page
 
+      # 滚动页面到顶部
+      $scope.$on "onScrollTop", (e, msg) -> Page.onBackToTop()
+
     onPageChangeCb: (event, msg) ->
       $scope.page = msg
       elMwrap["scrollTop"] = 1
 
       # if "login|register|square".indexOf($scope.page) < 0
       #   User.login() unless $scope.isLogin
-
 
     onBackToTop: (isM)->
       (if isM then elMwrap else BODY)["scrollTop"] = 0
@@ -507,7 +509,6 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       api = "#{API.comment}#{$scope.privacyParamDir}"
       api = API.comment if IsDebug
 
-      console.log data
 
       (if IsDebug then $http.get else $http.post)(api, data).success (data) ->
         Comment.sendCb data
@@ -527,6 +528,51 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
   Comment.init()
 
+  # 分页
+  Pagination = 
+
+    init: ->
+
+      $scope.page = {}
+      $scope.isPageLoading = no
+
+      $scope.$on "onPaginationStartChange", Pagination.onChange
+      $scope.$on "setPaginationData", Pagination.set
+      $scope.$on "clearPaginationData", Pagination.clear
+
+    onChange: (event, msg) ->
+      $scope.curPage = msg
+      $scope.isPageLoading = yes
+
+
+    curPage: 1
+
+    totalPage: 0
+
+    set: (e, pageData) ->
+      
+      curPage = pageData['cur_page']
+      totalPage = pageData['total_page']
+
+      Pagination.curPage = curPage
+      Pagination.totalPage = totalPage
+      
+      $scope.isPageLoading = no
+      $scope.curPage = curPage
+      $scope.totalPage = totalPage
+      $scope.pages = [1..totalPage]
+
+    clear: ->
+      
+      $scope.isPageLoading = no
+      $scope.curPage = 1
+      $scope.totalPage = 0
+      $scope.pages = []
+
+
+
+  Pagination.init()
+      
 
 
 

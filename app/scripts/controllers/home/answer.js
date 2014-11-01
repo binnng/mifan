@@ -17,12 +17,10 @@ Mifan.controller("homeAnswer", function($scope, $http) {
         var ret;
         ret = data.ret;
         if (String(ret) === "100000") {
-          return $scope.ansMeCollect = data.result;
+          return $scope.ansMeCollect = data['result']['list'];
         }
       };
-      return $http.get(url, {
-        cache: "lruCache"
-      }).success(cb);
+      return $http.get(url).success(cb);
     }
   };
   return news.init();

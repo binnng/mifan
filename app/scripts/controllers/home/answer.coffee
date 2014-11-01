@@ -15,11 +15,9 @@ Mifan.controller "homeAnswer", ($scope, $http) ->
       cb = (data) ->
         {ret} = data
         if String(ret) is "100000"
-          $scope.ansMeCollect = data.result
+          $scope.ansMeCollect = data['result']['list']
 
-      $http.get(url,
-        cache: "lruCache"
-      ).success cb
+      $http.get(url).success cb
 
   news.init()
 
