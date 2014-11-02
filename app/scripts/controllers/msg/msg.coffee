@@ -5,10 +5,6 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
   
   $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "msg"
 
-  $scope.expander = (target) ->
-    #angular.element(target).addClass "active"
-
-
   $scope.setMBill = (index) ->
 
     $scope.toggleMBill ["love", "answer", "share"]
@@ -21,19 +17,30 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
       $scope.askMeMsg = ""
       $scope.askMeMore = no
 
-    getAskMe: ->
-      api = "#{API.askme}#{$scope.privacyParamDir}/type/askme"
+      $scope.getPage = msg.getAskMe
+
+    getAskMe: (page = 1)->
+      return no if $scope.isPageLoading
+
+      api = "#{API.askme}#{$scope.privacyParamDir}/type/askme/page/#{page}"
       api = API.askme if IsDebug
 
       $http.get(api).success msg.getAskMeCb
 
+      $scope.$emit "onPaginationStartChange", page
+
     getAskMeCb: (data) ->
       if String(data.msg) is "ok"
-        $scope.askMe = data.result or []
-        msg.count = data.result.length
+        list = data.result?['list']
+        $scope.askMe = list or []
+        msg.count = list.length
+
+        $scope.$emit "onPaginationGeted", data['result']['page']
 
       else
         $scope.askMeMsg = data.msg
+
+      $scope.dataLoaded = yes
 
     count: 0
 
@@ -49,8 +56,13 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
 
       $scope.$on "ansCb", (event, data) -> ans.sendCb data
 
+    # 当前回答的feed
+    item: null
+
     send: (item, msg) ->
       item.isSending = yes
+
+      ans.item = item
 
       query = 
         askid: msg.askid
@@ -59,22 +71,25 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
       $scope.$emit "ans", query
 
     sendCb: (data) ->
-      @content = ""
-      @isSending = no
+      item = ans.item
+
+      item.content = ""
+      item.isSending = no
 
       toastType = ""
 
       if String(data.ret) is "100000"
         $timeout (=>
-          @isSendSucs = yes
-          @answerd = yes
-          @isSendSucs = no
-        ), 1000
+          item.isSendSucs = yes
+          item.answerd = yes
+          item.isSendSucs = no
 
-        ans.count++
+          ans.count++
 
-        if ans.count >= msg.count
-          $scope.askMe.length = 0
+          if ans.count >= msg.count
+            $scope.askMe.length = 0
+            
+        ), 100
 
       else 
         toastType = "warn"

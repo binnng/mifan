@@ -23,7 +23,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     init: ->
 
       $scope.user = {}
-      $scope.accessToken = $scope.UID = undefined
+      $scope.accessToken = $scope.UID = $scope.username = undefined
 
       $scope.isLogin = no
       $scope.$on "onLogined", User.onLoginCb
@@ -34,6 +34,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
     set: (user) ->
       $extend $scope.user, user
+
+
 
     getRemote: ->
 
@@ -86,7 +88,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       # 默认用户设置，请求到用户数据之前的显示
       # 请求到后会被覆盖
       $scope.user.face_60 = $scope.user.face_120 = $scope.DEFAULT_FACE
-      $scope.user.username = username
+      $scope.user.username = $scope.username = username
 
       $scope.accessToken = accessToken
 
@@ -122,12 +124,15 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       accessToken = $scope.accessToken = result["accesstoken"]
 
       user = result["user"]
+      $scope.username = user["username"]
       $scope.UID = user["userid"]
 
       $scope.user.accessToken = accessToken
 
       User.set user
       User.store user
+
+      User.setPrivacy()
 
       $location.path "/"
 
@@ -184,6 +189,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     onPageChangeCb: (event, msg) ->
       $scope.page = msg
       elMwrap["scrollTop"] = 1
+
+      # 清除分页
+      Pagination.clear()
 
       # if "login|register|square".indexOf($scope.page) < 0
       #   User.login() unless $scope.isLogin
@@ -537,8 +545,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $scope.isPageLoading = no
 
       $scope.$on "onPaginationStartChange", Pagination.onChange
-      $scope.$on "setPaginationData", Pagination.set
-      $scope.$on "clearPaginationData", Pagination.clear
+      $scope.$on "onPaginationGeted", Pagination.set
+      $scope.$on "onClearPaginationData", Pagination.clear
 
     onChange: (event, msg) ->
       $scope.curPage = msg
@@ -550,9 +558,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     totalPage: 0
 
     set: (e, pageData) ->
-      
-      curPage = pageData['cur_page']
-      totalPage = pageData['total_page']
+
+      curPage = Number pageData['cur_page']
+      totalPage = Number pageData['total_page']
 
       Pagination.curPage = curPage
       Pagination.totalPage = totalPage
@@ -561,6 +569,10 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $scope.curPage = curPage
       $scope.totalPage = totalPage
       $scope.pages = [1..totalPage]
+
+      # 滚动到页面顶部
+      Page.onBackToTop()
+
 
     clear: ->
       

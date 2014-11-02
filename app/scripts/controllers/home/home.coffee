@@ -44,10 +44,11 @@ Mifan.controller "homeCtrl", ["$scope", "$routeParams", ($scope, $routeParams) -
     
     $scope.feedType = type
     $scope.isLoading = no
+    $scope.dataLoaded = no
 
     setCaretLeft(type)
 
-    $scope.$emit "clearPaginationData"
+    $scope.$emit "onClearPaginationData"
   
   no
 ]

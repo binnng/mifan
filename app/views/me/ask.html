@@ -1,6 +1,7 @@
 
 <div class="feed-content sd-card">
 	<ul>
+		<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
 		<li class="feed-mod" ng-repeat="ask in myAsk">
 			<p class="content">
 				<a ng-href="#" class="ques">{{ask.content || "空即是色 - mifan.us"}}</a>
@@ -9,5 +10,5 @@
 		</li>
 	</ul>
 	<p ng-show="!myAsk.length" class="error-mod">{{myAskMsg}}</p>
-	<more ng-show="myAskMore"></more>
+	<more></more>
 </div>

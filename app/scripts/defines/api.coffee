@@ -10,8 +10,11 @@ API =
   answer: "/ask/askinfo/answer"
   news: "/feed/feedinfo/feeds"
   notice: "/common/message/msgcount"
+
   myask: "/user/me/myask"
   myanswer: "/user/me/myanswer"
+  mylove: "/user/me/mylove"
+
   askme: "/ask/askinfo/asks"
   follow: "/user/friend/follow"
   unfollow: "/user/friend/unfollow"
@@ -20,6 +23,12 @@ API =
   comment: "/ask/askinfo/comment"
   getComment: "/ask/askinfo/comments"
   loveme: "/user/feedinfo/loveanswers"
+  commentme: "/feed/feedinfo/commentme"
+  lovemefeed: "/feed/feedinfo/loveme"
+
+  friendAsk: "/user/friend/asks"
+  friendAns: "/user/friend/answers"
+  frinedLove: "/user/friend/loveanswers"
 
 
 if IsDebug
@@ -31,8 +40,11 @@ if IsDebug
     ask: "/ask.json"
     answer: "/answer.json"
     news: "/news.json"
+
     myask: "/myask.json"
     myanswer: "/myanswer.json"
+    mylove: "/mylove.json"
+
     notice: "/msgcount.json"
     askme: "/askme.json"
     follow: "/follow.json"
@@ -42,5 +54,11 @@ if IsDebug
     comment: "/comment.json"
     getComment: "/comments_list.json"
     loveme: "/loveanswers.json"
+    commentme: "/commentme.json"
+    lovemefeed: "/loveme.json"
+
+    friendAsk: "/myask.json"
+    friendAns: "/myanswer.json"
+    frinedLove: "/mylove.json"
 
 API[api] = "#{BASE_API_PATH}#{API[api]}" for api of API

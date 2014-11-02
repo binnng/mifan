@@ -18,6 +18,9 @@ Mifan.controller("homeNews", function($scope, $timeout, $http, $time) {
     },
     get: function(page) {
       var cb, url;
+      if ($scope.isPageLoading) {
+        return false;
+      }
       url = "" + API.news + $scope.privacyParamDir + "/page/" + page;
       if (IsDebug) {
         url = API.news;
@@ -28,8 +31,8 @@ Mifan.controller("homeNews", function($scope, $timeout, $http, $time) {
         ret = data['ret'];
         if (String(ret) === "100000") {
           $scope.newsCollect = data['result']['list'];
-          $scope.$emit("setPaginationData", data['result']['page']);
-          return $scope.$emit("onScrollTop");
+          $scope.$emit("onPaginationGeted", data['result']['page']);
+          return $scope.dataLoaded = true;
         }
       };
       return $http.get(url).success(cb);

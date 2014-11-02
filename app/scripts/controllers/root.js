@@ -13,7 +13,7 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
   User = {
     init: function() {
       $scope.user = {};
-      $scope.accessToken = $scope.UID = void 0;
+      $scope.accessToken = $scope.UID = $scope.username = void 0;
       $scope.isLogin = false;
       $scope.$on("onLogined", User.onLoginCb);
       $scope.User = User;
@@ -58,7 +58,7 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       username = store.get("mUsername");
       $scope.user.uid = $scope.UID = uid;
       $scope.user.face_60 = $scope.user.face_120 = $scope.DEFAULT_FACE;
-      $scope.user.username = username;
+      $scope.user.username = $scope.username = username;
       $scope.accessToken = accessToken;
       User.setPrivacy();
       return User.getRemote();
@@ -85,10 +85,12 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       $scope.isLogin = true;
       accessToken = $scope.accessToken = result["accesstoken"];
       user = result["user"];
+      $scope.username = user["username"];
       $scope.UID = user["userid"];
       $scope.user.accessToken = accessToken;
       User.set(user);
       User.store(user);
+      User.setPrivacy();
       return $location.path("/");
     },
     onOutOfDate: function() {
@@ -129,7 +131,8 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
     },
     onPageChangeCb: function(event, msg) {
       $scope.page = msg;
-      return elMwrap["scrollTop"] = 1;
+      elMwrap["scrollTop"] = 1;
+      return Pagination.clear();
     },
     onBackToTop: function(isM) {
       return (isM ? elMwrap : BODY)["scrollTop"] = 0;
@@ -462,8 +465,8 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
       $scope.page = {};
       $scope.isPageLoading = false;
       $scope.$on("onPaginationStartChange", Pagination.onChange);
-      $scope.$on("setPaginationData", Pagination.set);
-      return $scope.$on("clearPaginationData", Pagination.clear);
+      $scope.$on("onPaginationGeted", Pagination.set);
+      return $scope.$on("onClearPaginationData", Pagination.clear);
     },
     onChange: function(event, msg) {
       $scope.curPage = msg;
@@ -473,18 +476,19 @@ Mifan.controller("rootCtrl", function($scope, $cookieStore, $http, $timeout, $st
     totalPage: 0,
     set: function(e, pageData) {
       var curPage, totalPage, _i, _results;
-      curPage = pageData['cur_page'];
-      totalPage = pageData['total_page'];
+      curPage = Number(pageData['cur_page']);
+      totalPage = Number(pageData['total_page']);
       Pagination.curPage = curPage;
       Pagination.totalPage = totalPage;
       $scope.isPageLoading = false;
       $scope.curPage = curPage;
       $scope.totalPage = totalPage;
-      return $scope.pages = (function() {
+      $scope.pages = (function() {
         _results = [];
         for (var _i = 1; 1 <= totalPage ? _i <= totalPage : _i >= totalPage; 1 <= totalPage ? _i++ : _i--){ _results.push(_i); }
         return _results;
       }).apply(this);
+      return Page.onBackToTop();
     },
     clear: function() {
       $scope.isPageLoading = false;

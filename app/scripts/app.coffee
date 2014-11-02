@@ -43,6 +43,10 @@ Mifan.config ($routeProvider, $locationProvider) ->
       templateUrl: "views/me/me.html"
       controller: "userCtrl"
     )
+    .when("/q/:id",
+      templateUrl: "views/ques/ques.html"
+      controller: "quesDetailCtrl"
+    )
     .when("/welcome",
       templateUrl: "views/welcome.html"
       controller: "welcomeCtrl"

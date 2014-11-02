@@ -6,7 +6,6 @@ Mifan.controller("msgCtrl", function($scope, $rootScope, $http, $debug, $timeout
   $scope.$on("$viewContentLoaded", function() {
     return $scope.$emit("pageChange", "msg");
   });
-  $scope.expander = function(target) {};
   $scope.setMBill = function(index) {
     return $scope.toggleMBill(["love", "answer", "share"]);
   };
@@ -15,23 +14,35 @@ Mifan.controller("msgCtrl", function($scope, $rootScope, $http, $debug, $timeout
       msg.getAskMe();
       $scope.askMe = [];
       $scope.askMeMsg = "";
-      return $scope.askMeMore = false;
+      $scope.askMeMore = false;
+      return $scope.getPage = msg.getAskMe;
     },
-    getAskMe: function() {
+    getAskMe: function(page) {
       var api;
-      api = "" + API.askme + $scope.privacyParamDir + "/type/askme";
+      if (page == null) {
+        page = 1;
+      }
+      if ($scope.isPageLoading) {
+        return false;
+      }
+      api = "" + API.askme + $scope.privacyParamDir + "/type/askme/page/" + page;
       if (IsDebug) {
         api = API.askme;
       }
-      return $http.get(api).success(msg.getAskMeCb);
+      $http.get(api).success(msg.getAskMeCb);
+      return $scope.$emit("onPaginationStartChange", page);
     },
     getAskMeCb: function(data) {
+      var list, _ref;
       if (String(data.msg) === "ok") {
-        $scope.askMe = data.result || [];
-        return msg.count = data.result.length;
+        list = (_ref = data.result) != null ? _ref['list'] : void 0;
+        $scope.askMe = list || [];
+        msg.count = list.length;
+        $scope.$emit("onPaginationGeted", data['result']['page']);
       } else {
-        return $scope.askMeMsg = data.msg;
+        $scope.askMeMsg = data.msg;
       }
+      return $scope.dataLoaded = true;
     },
     count: 0
   };
@@ -48,9 +59,11 @@ Mifan.controller("msgCtrl", function($scope, $rootScope, $http, $debug, $timeout
         return ans.sendCb(data);
       });
     },
+    item: null,
     send: function(item, msg) {
       var query;
       item.isSending = true;
+      ans.item = item;
       query = {
         askid: msg.askid,
         content: item.content
@@ -58,22 +71,23 @@ Mifan.controller("msgCtrl", function($scope, $rootScope, $http, $debug, $timeout
       return $scope.$emit("ans", query);
     },
     sendCb: function(data) {
-      var toastType;
-      this.content = "";
-      this.isSending = false;
+      var item, toastType;
+      item = ans.item;
+      item.content = "";
+      item.isSending = false;
       toastType = "";
       if (String(data.ret) === "100000") {
         $timeout(((function(_this) {
           return function() {
-            _this.isSendSucs = true;
-            _this.answerd = true;
-            return _this.isSendSucs = false;
+            item.isSendSucs = true;
+            item.answerd = true;
+            item.isSendSucs = false;
+            ans.count++;
+            if (ans.count >= msg.count) {
+              return $scope.askMe.length = 0;
+            }
           };
-        })(this)), 1000);
-        ans.count++;
-        if (ans.count >= msg.count) {
-          $scope.askMe.length = 0;
-        }
+        })(this)), 100);
       } else {
         toastType = "warn";
       }

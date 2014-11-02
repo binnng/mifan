@@ -2,6 +2,7 @@
 	<div class="main sd-card">
 		<p class="lead hiddenxs" ng-if="!IsiPad">Tips: 支持<b>ctrl + enter</b>回复</p>
 		<dl class="questions" id="msg-ques">
+			<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
 			<dd ng-repeat="msg in askMe" class="feed-mod" ng-init="{content:'',isSending:false,isSendSucs:false,answerd:false}" ng-show="!answerd">
 				<a class="face face-42 pull-left" ng-href="#!/user/{{msg.user.userid}}" class="avatar asker" title="{{msg.user..username}}" style="background-image:url({{msg.user.face_120}})">{{msg.user.username}}</a>
 				<div class="ques-dtl">
@@ -17,7 +18,7 @@
 				</div>
 			</dd>
 		</dl>
-		<p ng-show="!askMe.length" class="error-mod" ng-bind="askMeMsg"></p>
-		<more ng-show="askMeMore"></more>
+		<p ng-show="!askMe.length&&dataLoaded" class="error-mod" ng-bind="askMeMsg"></p>
+		<more></more>
 	</div>
 </div>

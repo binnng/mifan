@@ -4,60 +4,12 @@
 </div>
 <div class="contents" ng-init="{expandCmt:false,expandReply:false,isSendingCmt:false,cmtContent:''}">
 	<h3 class="h5">
-		<p><a ng-href="#!/q/{{news.feedid}}" class="" title="问题">{{news.ask.content}}</a></p>
+		<p><a ng-href="#!/q/{{news.ask.askid}}" class="" title="问题">{{news.ask.content}}</a></p>
 	</h3>
 	<p class="lead">{{news.answer.content}}</p>
 	<p class="ask-ans-desc meta">
 		<a ng-href="#!/user/{{news.answer.user.userid}}" title="username">{{news.answer.user.username}}</a> 对 <a ng-href="#!/user/{{news.ask.user.userid}}" title="username">{{news.ask.user.username}}</a> 的回答于 <a ng-href="#!/q/{{news.feedid}}">{{news.answer.addtime | ago}}</a>
 	</p>
 
-	<div class="actions clearfix">
-		<div class="act-left pull-left">
-			<a class="like pull-left" ng-click="loveAns(news, this)" ng-class="{loved:news.love.iflove}">
-				<span class="glyphicon glyphicon-heart"></span>
-				<span class="count">{{news.answer.digg}}</span>
-			</a>
-			<ul class="liked-list pull-left">
-				<li ng-repeat="lover in news.love.lovelist"><a ng-href="#!/user/{{lover.userid}}" class="avatar" title="{{lover.username}}" style="background-image:url({{lover.face_60}})">{{lover.username}}</a></li>
-			</ul>
-			<a class="m-cmt pull-left visible-xs" ng-click="toggleMDesign('comment')">
-				<span class="glyphicon glyphicon-comment"></span>
-				<span class="count">{{news.answer.comment_cout || 0}}</span>
-			</a>
-		</div>
-
-		<b class="cmt-tgl-btn pull-right hidden-xs" ng-click="expandCmtFn(news, this)">{{news.answer.comment_count || 0}}条评论</b>
-		<b class="bill-btn bill-btn-dots" ng-click="setMBill($index)">...</b>
-	</div>
-
-	<div class="qa-cmt comment hidden-xs" ng-show="expandCmt">
-		<form class="cmt-form clearfix" ng-submit="comment(news, this)">
-			<textarea name="cmt-content" class="cmt-input" ng-model="cmtContent"></textarea>
-			<button class="btn btn-success" ng-class="{disabled:!cmtContent||isSendingCmt}" type="submit">
-				<span ng-hide="isSendingCmt">评论</span>
-				<i class="glyphicon" ng-show="isSendingCmt" ng-class="{'glyphicon-refresh animated infinite': isSendingCmt}"></i>
-			</button>
-		</form>
-		<div class="cmt-list">
-				<ul>
-					<li class="cmt-item" ng-repeat="cmt in news.comment">
-						<b class="face face-30 cmt-face" title="{{cmt.user.username}}" style="background-image:url({{cmt.user.face_60}})"></b>
-						<div class="cmt-detail">
-							<h5><a href="#!/user/{{cmt.user.userid}}">{{cmt.user.username}}</a><span>{{cmt.addtime | datetime}}</span></h5>
-							<p class="cont-txt">{{cmt.content}}</p>
-							<div class="cmt-reply">
-								<p class="cmt-reply-btn" ng-click="expandReplyFn(news,this)"><span class="btn btn-link">回复</span></p>
-								<div ng-show="expandReply">
-									<textarea class="cmt-reply-input" ng-model="rplContent"></textarea>
-									<button class="btn btn-success cmt-reply-btn" ng-click="reply($index, news, this)" ng-class="{disabled:!rplContent||isSendingRpl}">
-										<span ng-hide="isSendingRpl">回复</span>
-										<i class="glyphicon" ng-show="isSendingRpl" ng-class="{'glyphicon-refresh animated infinite': isSendingRpl}"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-		</div>
-	</div>
+	<div ng-include="'views/module/feed-actions-mod.html'"></div>
 </div>

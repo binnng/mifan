@@ -24,6 +24,9 @@ Mifan.controller "homeNews", ($scope, $timeout, $http, $time) ->
 
 
     get: (page) ->
+
+      return no if $scope.isPageLoading
+
       url = "#{API.news}#{$scope.privacyParamDir}/page/#{page}"
       url = API.news if IsDebug
 
@@ -35,9 +38,10 @@ Mifan.controller "homeNews", ($scope, $timeout, $http, $time) ->
         if String(ret) is "100000"
           $scope.newsCollect = data['result']['list']
 
-          $scope.$emit "setPaginationData", data['result']['page']
+          $scope.$emit "onPaginationGeted", data['result']['page']
 
-          $scope.$emit "onScrollTop"
+          $scope.dataLoaded = yes
+
 
       $http.get(url).success cb
 

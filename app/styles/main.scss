@@ -23,6 +23,9 @@
 @import "imports/module/feed";
 @import "imports/module/user";
 @import "imports/module/user-list";
+@import "imports/module/pagination";
+@import "imports/module/ques-single-mod";
+@import "imports/module/feed-actions";
 
 @import "imports/global";
 
@@ -32,6 +35,7 @@
 
 @import "imports/msg";
 @import "imports/me";
+@import "ques/ques";
 
 @import "imports/square/square";
 @import "imports/square/side";

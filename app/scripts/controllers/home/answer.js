@@ -17,7 +17,8 @@ Mifan.controller("homeAnswer", function($scope, $http) {
         var ret;
         ret = data.ret;
         if (String(ret) === "100000") {
-          return $scope.ansMeCollect = data['result']['list'];
+          $scope.ansMeCollect = data['result']['list'];
+          return $scope.dataLoaded = true;
         }
       };
       return $http.get(url).success(cb);

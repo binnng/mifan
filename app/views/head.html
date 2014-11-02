@@ -24,9 +24,9 @@
 		
 		<div ng-class="{open: dropdownOpen}" class="user-box pull-right dropdown" ng-show="user.username" ng-click="toggleDropdown()">
 
-			<p class="dropdown-label" data-toggle="dropdown">
+			<div class="dropdown-label" data-toggle="dropdown">
 				<b class="username username-inline">{{user.username}}</b>
-			</p>
+			</div>
 
 			<span class="caret"></span>
 			<usermenu class="dropdown-menu" role="menu" aria-labelledby="user.username-lable">

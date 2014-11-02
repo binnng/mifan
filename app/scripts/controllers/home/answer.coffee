@@ -17,6 +17,9 @@ Mifan.controller "homeAnswer", ($scope, $http) ->
         if String(ret) is "100000"
           $scope.ansMeCollect = data['result']['list']
 
+          $scope.dataLoaded = yes
+
+
       $http.get(url).success cb
 
   news.init()

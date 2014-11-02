@@ -37,8 +37,9 @@ Mifan.controller("homeCtrl", [
       type = type || "news";
       $scope.feedType = type;
       $scope.isLoading = false;
+      $scope.dataLoaded = false;
       setCaretLeft(type);
-      return $scope.$emit("clearPaginationData");
+      return $scope.$emit("onClearPaginationData");
     };
     return false;
   }

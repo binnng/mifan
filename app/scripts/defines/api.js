@@ -16,6 +16,7 @@ API = {
   notice: "/common/message/msgcount",
   myask: "/user/me/myask",
   myanswer: "/user/me/myanswer",
+  mylove: "/user/me/mylove",
   askme: "/ask/askinfo/asks",
   follow: "/user/friend/follow",
   unfollow: "/user/friend/unfollow",
@@ -23,7 +24,12 @@ API = {
   answerme: "/feed/feedinfo/answerme",
   comment: "/ask/askinfo/comment",
   getComment: "/ask/askinfo/comments",
-  loveme: "/user/feedinfo/loveanswers"
+  loveme: "/user/feedinfo/loveanswers",
+  commentme: "/feed/feedinfo/commentme",
+  lovemefeed: "/feed/feedinfo/loveme",
+  friendAsk: "/user/friend/asks",
+  friendAns: "/user/friend/answers",
+  frinedLove: "/user/friend/loveanswers"
 };
 
 if (IsDebug) {
@@ -36,6 +42,7 @@ if (IsDebug) {
     news: "/news.json",
     myask: "/myask.json",
     myanswer: "/myanswer.json",
+    mylove: "/mylove.json",
     notice: "/msgcount.json",
     askme: "/askme.json",
     follow: "/follow.json",
@@ -44,7 +51,12 @@ if (IsDebug) {
     answerme: "/answerme.json",
     comment: "/comment.json",
     getComment: "/comments_list.json",
-    loveme: "/loveanswers.json"
+    loveme: "/loveanswers.json",
+    commentme: "/commentme.json",
+    lovemefeed: "/loveme.json",
+    friendAsk: "/myask.json",
+    friendAns: "/myanswer.json",
+    frinedLove: "/mylove.json"
   };
 }
 

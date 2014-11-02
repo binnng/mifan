@@ -1,5 +1,6 @@
 <div class="feed-content news sd-card" ng-controller="homeNews">
 	<dl class="questions">
+		<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
 		<dd ng-repeat="news in newsCollect" class="qa-mod feed-mod" ng-include="'views/module/feed-mod.html'">
 		</dd>
 	</dl>

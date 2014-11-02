@@ -22,16 +22,34 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
 
   $scope.switchFeed = (type) ->
     type = type or "ask"
+
+    return no if type is user.curType
     
     $scope.feedType = type
     $scope.isLoading = no
+    $scope.dataLoaded = no
+
+    $scope.$emit "onClearPaginationData"
+
+    user.curType = type
+
+    switch type
+      when "answer"
+        user.getMyAnswer()
+        $scope.getPage = user.getMyAnswer
+
+      when "love"
+        user.getMyLove()
+        $scope.getPage = user.getMyLove
+
+      else
+        user.getMyAsk()
+        $scope.getPage = user.getMyAsk
 
   $scope.profile = null
 
   user = 
     init: ->
-      user.getMyAsk()
-      $timeout user.getMyAnswer, 500
 
       $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = ""
       $scope.myAsk = $scope.myAnswer = $scope.myLove = []
@@ -41,30 +59,65 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
       $scope.$on "getUserInfoCb", (event, data) -> user.getUserInfoCb data
 
       $timeout user.getUserInfo, 100
+      
+      $scope.switchFeed ""
 
-    getMyAsk: ->
-      api = "#{API.myask}#{$scope.privacyParamDir}"
-      api = API.myask if IsDebug
+    getMyAsk: (page = 1)->
+      api = "#{API.friendAsk}#{$scope.privacyParamDir}/page/#{page}?uid=#{userid}"
+      api = API.friendAsk if IsDebug
 
       $http.get(api).success user.getMyAskCb
 
+      $scope.$emit "onPaginationStartChange", page
+
     getMyAskCb: (data) ->
       if String(data.msg) is "ok"
-        $scope.myAsk = data.result or []
+        $scope.myAsk = data.result?['list'] or []
+
+        $scope.$emit "onPaginationGeted", data['result']['page']
+
+        $scope.dataLoaded = yes
+
       else
         $scope.myAskMsg = data.msg
 
-    getMyAnswer: ->
-      api = "#{API.myanswer}#{$scope.privacyParamDir}"
-      api = API.myanswer if IsDebug
+    getMyAnswer: (page = 1)->
+      api = "#{API.friendAns}#{$scope.privacyParamDir}/page/#{page}?uid=#{userid}"
+      api = API.friendAns if IsDebug
 
       $http.get(api).success user.getMyAnswerCb
 
+      $scope.$emit "onPaginationStartChange", page
+
     getMyAnswerCb: (data) ->
       if String(data.msg) is "ok"
-        $scope.myAnswer = data.result or []
+        $scope.myAnswer = data.result?['list'] or []
+
+        $scope.$emit "onPaginationGeted", data['result']['page']
+
+        $scope.dataLoaded = yes
+
       else
         $scope.myAnswerMsg = data.msg
+
+    getMyLove: (page = 1) -> 
+      api = "#{API.frinedLove}#{$scope.privacyParamDir}/page/#{page}?uid=#{userid}"
+      api = API.frinedLove if IsDebug
+
+      $http.get(api).success user.getMyLoveCb
+
+      $scope.$emit "onPaginationStartChange", page
+
+    getMyLoveCb: (data) ->
+      if String(data.msg) is "ok"
+        $scope.myLove = data.result?['list'] or []
+
+        $scope.$emit "onPaginationGeted", data['result']['page']
+
+        $scope.dataLoaded = yes
+
+      else
+        $scope.myLoveMsg = data.msg
 
     getUserInfo: ->
       $scope.$emit "getUserInfo", uid: userid
@@ -87,6 +140,7 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
               $scope.ta = "她"
         else
           $scope.ta = "我"
+
 
 
   user.init()

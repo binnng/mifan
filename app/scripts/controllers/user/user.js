@@ -15,50 +15,102 @@ Mifan.controller("userCtrl", function($scope, $timeout, $http, $routeParams, $lo
   };
   $scope.switchFeed = function(type) {
     type = type || "ask";
+    if (type === user.curType) {
+      return false;
+    }
     $scope.feedType = type;
-    return $scope.isLoading = false;
+    $scope.isLoading = false;
+    $scope.dataLoaded = false;
+    $scope.$emit("onClearPaginationData");
+    user.curType = type;
+    switch (type) {
+      case "answer":
+        user.getMyAnswer();
+        return $scope.getPage = user.getMyAnswer;
+      case "love":
+        user.getMyLove();
+        return $scope.getPage = user.getMyLove;
+      default:
+        user.getMyAsk();
+        return $scope.getPage = user.getMyAsk;
+    }
   };
   $scope.profile = null;
   user = {
     init: function() {
-      user.getMyAsk();
-      $timeout(user.getMyAnswer, 500);
       $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = "";
       $scope.myAsk = $scope.myAnswer = $scope.myLove = [];
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = false;
       $scope.$on("getUserInfoCb", function(event, data) {
         return user.getUserInfoCb(data);
       });
-      return $timeout(user.getUserInfo, 100);
+      $timeout(user.getUserInfo, 100);
+      return $scope.switchFeed("");
     },
-    getMyAsk: function() {
+    getMyAsk: function(page) {
       var api;
-      api = "" + API.myask + $scope.privacyParamDir;
-      if (IsDebug) {
-        api = API.myask;
+      if (page == null) {
+        page = 1;
       }
-      return $http.get(api).success(user.getMyAskCb);
+      api = "" + API.friendAsk + $scope.privacyParamDir + "/page/" + page + "?uid=" + userid;
+      if (IsDebug) {
+        api = API.friendAsk;
+      }
+      $http.get(api).success(user.getMyAskCb);
+      return $scope.$emit("onPaginationStartChange", page);
     },
     getMyAskCb: function(data) {
+      var _ref;
       if (String(data.msg) === "ok") {
-        return $scope.myAsk = data.result || [];
+        $scope.myAsk = ((_ref = data.result) != null ? _ref['list'] : void 0) || [];
+        $scope.$emit("onPaginationGeted", data['result']['page']);
+        return $scope.dataLoaded = true;
       } else {
         return $scope.myAskMsg = data.msg;
       }
     },
-    getMyAnswer: function() {
+    getMyAnswer: function(page) {
       var api;
-      api = "" + API.myanswer + $scope.privacyParamDir;
-      if (IsDebug) {
-        api = API.myanswer;
+      if (page == null) {
+        page = 1;
       }
-      return $http.get(api).success(user.getMyAnswerCb);
+      api = "" + API.friendAns + $scope.privacyParamDir + "/page/" + page + "?uid=" + userid;
+      if (IsDebug) {
+        api = API.friendAns;
+      }
+      $http.get(api).success(user.getMyAnswerCb);
+      return $scope.$emit("onPaginationStartChange", page);
     },
     getMyAnswerCb: function(data) {
+      var _ref;
       if (String(data.msg) === "ok") {
-        return $scope.myAnswer = data.result || [];
+        $scope.myAnswer = ((_ref = data.result) != null ? _ref['list'] : void 0) || [];
+        $scope.$emit("onPaginationGeted", data['result']['page']);
+        return $scope.dataLoaded = true;
       } else {
         return $scope.myAnswerMsg = data.msg;
+      }
+    },
+    getMyLove: function(page) {
+      var api;
+      if (page == null) {
+        page = 1;
+      }
+      api = "" + API.frinedLove + $scope.privacyParamDir + "/page/" + page + "?uid=" + userid;
+      if (IsDebug) {
+        api = API.frinedLove;
+      }
+      $http.get(api).success(user.getMyLoveCb);
+      return $scope.$emit("onPaginationStartChange", page);
+    },
+    getMyLoveCb: function(data) {
+      var _ref;
+      if (String(data.msg) === "ok") {
+        $scope.myLove = ((_ref = data.result) != null ? _ref['list'] : void 0) || [];
+        $scope.$emit("onPaginationGeted", data['result']['page']);
+        return $scope.dataLoaded = true;
+      } else {
+        return $scope.myLoveMsg = data.msg;
       }
     },
     getUserInfo: function() {
