@@ -30,6 +30,12 @@ API =
   friendAns: "/user/friend/answers"
   frinedLove: "/user/friend/loveanswers"
 
+  askinfo: "/ask/askinfo/ask"
+  askanswers: "/ask/askinfo/answers"
+
+  reg: "/user/userinfo/user"
+
+
 
 if IsDebug
   BASE_API_PATH = "/data"
@@ -60,5 +66,10 @@ if IsDebug
     friendAsk: "/myask.json"
     friendAns: "/myanswer.json"
     frinedLove: "/mylove.json"
+
+    askinfo: "/askinfo.json"
+    askanswers: "/askanswers.json"
+
+    reg: "/reg.json"
 
 API[api] = "#{BASE_API_PATH}#{API[api]}" for api of API

@@ -77,7 +77,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       if uid and accessToken
         User.getLocalCb(uid, accessToken)
       else
-        User.login()
+        User.login() if not LOC["href"].match /register/
     
     getLocalCb: (uid, accessToken) ->
       User.isLocalLogin = yes
@@ -399,12 +399,18 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
     type: "primary"
 
-    toast: (msg, type) ->
+    # primary;
+    # error;
+    # success;
+    # warn;
+    # danger;
+
+    toast: (msg, type, time = 3000) ->
       Toast.text = msg
       Toast.isShow = yes
       Toast.type = type or "success"
 
-      $timeout (-> Toast.isShow = no), 3000
+      $timeout (-> Toast.isShow = no), time
 
   Toast.init()
 
@@ -584,6 +590,87 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
 
   Pagination.init()
+
+  # Ask 问题相关
+  Ask = 
+    init: ->
+      $scope.$on "onGetAskInfo", (e, askid) ->
+        Ask.getInfo askid
+
+      $scope.$on "onGetAskAnswers", (e, askid) ->
+        Ask.getAnswers askid
+
+    getInfo: (askid) ->
+      api = "#{API.askinfo}#{$scope.privacyParamDir}?askid=#{askid}"
+      api = API.askinfo if IsDebug
+
+      $http.get(api).success Ask.getInfoCb
+
+    getInfoCb: (data) ->
+      $scope.$broadcast "onGetAskInfoCb", data
+
+    getAnswers: (data) ->
+      {askid, page} = data
+
+      api = "#{API.askanswers}#{$scope.privacyParamDir}/page/#{page}?type=askanswer&askid=#{askid}"
+      api = API.askanswers if IsDebug
+
+      $http.get(api).success Ask.getAnswersCb
+
+    getAnswersCb: (data) ->
+      $scope.$broadcast "onGetAskAnswersCb", data
+
+
+  Ask.init()
+
+  # 注册
+  Reg = 
+    init: ->
+      $scope.$on "onReg", Reg.onReg
+      $scope.$on "onRegSuccess", Reg.onReged
+
+    onReg: (event, data) -> Reg.reg data
+
+    reg: (data) ->
+      {email, password, username, invitecode} = data
+
+      $http(
+        method: if IsDebug then "GET" else "POST"
+        url: API.reg
+        data:
+          user_email: email
+          user_password: password
+          user_repwd: password
+          username: username
+          fuserid: invitecode
+      )
+      .success(Reg.regCb)
+
+
+    regCb: (data) ->
+      $scope.$broadcast "onRegCb", data
+
+    onReged: (event, result) ->
+      $scope.isLogin = yes
+
+      accessToken = $scope.accessToken = result["accesstoken"]
+
+      user = result["user"]
+      $scope.username = user["username"]
+      $scope.UID = user["userid"]
+
+      $scope.user.accessToken = accessToken
+
+      User.set user
+      User.store user
+
+      User.setPrivacy()
+
+      $timeout ->
+        $location.path "/"
+      , 1000
+
+  Reg.init()
       
 
 

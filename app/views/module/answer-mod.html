@@ -1,6 +1,5 @@
-
-<a ng-href="#!/user/4" class="face face-30" title="老婆婆" style="background-image:url(http://115.29.49.123/mifan/api//cache/user/0/0/60/6c9e391e64_60_60.jpg)" href="#!/user/4">老婆婆</a>
-<p class="lead ng-binding">不是，第一个是我，哈哈哈</p>
+<a class="face face-30" title="{{news.answer.user.username}}" style="background-image:url({{news.answer.user.face_60}})" href="#!/user/{{news.answer.user.userid}}">{{news.answer.user.username}}</a>
+<p class="lead">{{news.answer.content}}</p>
 
 <div ng-include="'views/module/feed-actions-mod.html'"></div>
 

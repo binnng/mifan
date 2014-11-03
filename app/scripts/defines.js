@@ -29,7 +29,10 @@ API = {
   lovemefeed: "/feed/feedinfo/loveme",
   friendAsk: "/user/friend/asks",
   friendAns: "/user/friend/answers",
-  frinedLove: "/user/friend/loveanswers"
+  frinedLove: "/user/friend/loveanswers",
+  askinfo: "/ask/askinfo/ask",
+  askanswers: "/ask/askinfo/answers",
+  reg: "/user/userinfo/user"
 };
 
 if (IsDebug) {
@@ -56,7 +59,10 @@ if (IsDebug) {
     lovemefeed: "/loveme.json",
     friendAsk: "/myask.json",
     friendAns: "/myanswer.json",
-    frinedLove: "/mylove.json"
+    frinedLove: "/mylove.json",
+    askinfo: "/askinfo.json",
+    askanswers: "/askanswers.json",
+    reg: "/reg.json"
   };
 }
 
