@@ -19,51 +19,117 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
 
   $scope.switchFeed = (type) ->
     type = type or "ask"
+
+    return no if type is me.curType
     
     $scope.feedType = type
     $scope.isLoading = no
+    $scope.dataLoaded = no
+
+    $scope.$emit "onClearPaginationData"
+
+    me.curType = type
+
+    switch type
+      when "answer"
+        me.getMyAnswer(1)
+        $scope.getPage = me.getMyAnswer
+
+      when "love"
+        me.getMyLove(1)
+        $scope.getPage = me.getMyLove
+
+      else
+        me.getMyAsk(1)
+        $scope.getPage = me.getMyAsk
+
+      
+    
 
   $scope.profile = $scope.user
 
   me = 
     init: ->
-      me.getMyAsk()
-      $timeout me.getMyAnswer, 300
-      $timeout me.getMyLove, 600
 
-      $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = ""
       $scope.myAsk = $scope.myAnswer = $scope.myLove = []
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = no
 
       $scope.myself = yes
 
+      $scope.switchFeed ""
+
     feedWatcher: (feed = "ask")->
 
-    getMyAsk: ->
-      api = "#{API.myask}#{$scope.privacyParamDir}"
+    curType: ""
+
+    getMyAsk: (page = 1)->
+      api = "#{API.myask}#{$scope.privacyParamDir}/page/#{page}"
       api = API.myask if IsDebug
 
       $http.get(api).success me.getMyAskCb
 
-    getMyAskCb: (data) ->
-      if String(data.msg) is "ok"
-        $scope.myAsk = data.result or []
-      else
-        $scope.myAskMsg = data.msg
+      $scope.$emit "onPaginationStartChange", page
 
-    getMyAnswer: ->
-      api = "#{API.myanswer}#{$scope.privacyParamDir}"
+    getMyAskCb: (data) ->
+
+      {ret, msg, result}  = data
+
+      if msg is "ok"
+        $scope.myAsk = result['list'] or []
+        $scope.$emit "onPaginationGeted", result['page']
+
+      else
+        $scope.errorMsg = msg
+
+
+      $scope.dataLoaded = yes
+
+
+    getMyAnswer: (page = 1)->
+      api = "#{API.myanswer}#{$scope.privacyParamDir}/page/#{page}"
       api = API.myanswer if IsDebug
 
       $http.get(api).success me.getMyAnswerCb
 
-    getMyAnswerCb: (data) ->
-      if String(data.msg) is "ok"
-        $scope.myAnswer = data.result or []
-      else
-        $scope.myAnswerMsg = data.msg
+      $scope.$emit "onPaginationStartChange", page
 
-    getMyLove: ->
+    getMyAnswerCb: (data) ->
+
+      {ret, msg, result}  = data
+
+      if msg is "ok"
+        $scope.myAnswer = result['list'] or []
+        $scope.$emit "onPaginationGeted", result['page']
+
+      else
+        $scope.errorMsg = msg
+
+
+      $scope.dataLoaded = yes
+
+
+    getMyLove: (page = 1)->
+      api = "#{API.mylove}#{$scope.privacyParamDir}/page/#{page}"
+      api = API.mylove if IsDebug
+
+      $http.get(api).success me.getMyLoveCb
+
+      $scope.$emit "onPaginationStartChange", page
+
+    getMyLoveCb: (data) ->
+
+      {ret, msg, result}  = data
+
+      if msg is "ok"
+        $scope.myLove = result['list'] or []
+        $scope.$emit "onPaginationGeted", result['page']
+
+      else
+        $scope.errorMsg = msg
+
+
+      $scope.dataLoaded = yes
+
 
 
 

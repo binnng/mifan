@@ -6,29 +6,38 @@ Mifan.controller("homeNews", function($scope, $timeout, $http, $time) {
   $scope.newsCollect = [];
   news = {
     init: function() {
-      $scope.$on("getHomeNews", function() {
-        return news.get();
-      });
+      var getFirstPage;
+      getFirstPage = function() {
+        return news.get(1);
+      };
+      $scope.$on("getHomeNews", getFirstPage);
       if ($scope.isLogin) {
-        return news.get();
+        getFirstPage();
       }
+      return $scope.getPage = news.get;
     },
-    get: function() {
+    get: function(page) {
       var cb, url;
-      url = "" + API.news + $scope.privacyParamDir;
+      if ($scope.isPageLoading) {
+        return false;
+      }
+      url = "" + API.news + $scope.privacyParamDir + "/page/" + page;
       if (IsDebug) {
         url = API.news;
       }
+      $scope.$emit("onPaginationStartChange", page);
       cb = function(data) {
-        var ret;
-        ret = data['ret'];
-        if (String(ret) === "100000") {
-          return $scope.newsCollect = data['result'];
+        var msg, result, ret;
+        ret = data.ret, result = data.result, msg = data.msg;
+        if (result && result.page) {
+          $scope.newsCollect = result['list'];
+          $scope.$emit("onPaginationGeted", result['page']);
+        } else {
+          $scope.errorMsg = msg;
         }
+        return $scope.dataLoaded = true;
       };
-      return $http.get(url, {
-        cache: "lruCache"
-      }).success(cb);
+      return $http.get(url).success(cb);
     }
   };
   return news.init();

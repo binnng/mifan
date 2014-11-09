@@ -13,56 +13,109 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
   };
   $scope.switchFeed = function(type) {
     type = type || "ask";
+    if (type === me.curType) {
+      return false;
+    }
     $scope.feedType = type;
-    return $scope.isLoading = false;
+    $scope.isLoading = false;
+    $scope.dataLoaded = false;
+    $scope.$emit("onClearPaginationData");
+    me.curType = type;
+    switch (type) {
+      case "answer":
+        me.getMyAnswer(1);
+        return $scope.getPage = me.getMyAnswer;
+      case "love":
+        me.getMyLove(1);
+        return $scope.getPage = me.getMyLove;
+      default:
+        me.getMyAsk(1);
+        return $scope.getPage = me.getMyAsk;
+    }
   };
   $scope.profile = $scope.user;
   me = {
     init: function() {
-      me.getMyAsk();
-      $timeout(me.getMyAnswer, 300);
-      $timeout(me.getMyLove, 600);
-      $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = "";
       $scope.myAsk = $scope.myAnswer = $scope.myLove = [];
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = false;
-      return $scope.myself = true;
+      $scope.myself = true;
+      return $scope.switchFeed("");
     },
     feedWatcher: function(feed) {
       if (feed == null) {
         feed = "ask";
       }
     },
-    getMyAsk: function() {
+    curType: "",
+    getMyAsk: function(page) {
       var api;
-      api = "" + API.myask + $scope.privacyParamDir;
+      if (page == null) {
+        page = 1;
+      }
+      api = "" + API.myask + $scope.privacyParamDir + "/page/" + page;
       if (IsDebug) {
         api = API.myask;
       }
-      return $http.get(api).success(me.getMyAskCb);
+      $http.get(api).success(me.getMyAskCb);
+      return $scope.$emit("onPaginationStartChange", page);
     },
     getMyAskCb: function(data) {
-      if (String(data.msg) === "ok") {
-        return $scope.myAsk = data.result || [];
+      var msg, result, ret;
+      ret = data.ret, msg = data.msg, result = data.result;
+      if (msg === "ok") {
+        $scope.myAsk = result['list'] || [];
+        $scope.$emit("onPaginationGeted", result['page']);
       } else {
-        return $scope.myAskMsg = data.msg;
+        $scope.errorMsg = msg;
       }
+      return $scope.dataLoaded = true;
     },
-    getMyAnswer: function() {
+    getMyAnswer: function(page) {
       var api;
-      api = "" + API.myanswer + $scope.privacyParamDir;
+      if (page == null) {
+        page = 1;
+      }
+      api = "" + API.myanswer + $scope.privacyParamDir + "/page/" + page;
       if (IsDebug) {
         api = API.myanswer;
       }
-      return $http.get(api).success(me.getMyAnswerCb);
+      $http.get(api).success(me.getMyAnswerCb);
+      return $scope.$emit("onPaginationStartChange", page);
     },
     getMyAnswerCb: function(data) {
-      if (String(data.msg) === "ok") {
-        return $scope.myAnswer = data.result || [];
+      var msg, result, ret;
+      ret = data.ret, msg = data.msg, result = data.result;
+      if (msg === "ok") {
+        $scope.myAnswer = result['list'] || [];
+        $scope.$emit("onPaginationGeted", result['page']);
       } else {
-        return $scope.myAnswerMsg = data.msg;
+        $scope.errorMsg = msg;
       }
+      return $scope.dataLoaded = true;
     },
-    getMyLove: function() {}
+    getMyLove: function(page) {
+      var api;
+      if (page == null) {
+        page = 1;
+      }
+      api = "" + API.mylove + $scope.privacyParamDir + "/page/" + page;
+      if (IsDebug) {
+        api = API.mylove;
+      }
+      $http.get(api).success(me.getMyLoveCb);
+      return $scope.$emit("onPaginationStartChange", page);
+    },
+    getMyLoveCb: function(data) {
+      var msg, result, ret;
+      ret = data.ret, msg = data.msg, result = data.result;
+      if (msg === "ok") {
+        $scope.myLove = result['list'] || [];
+        $scope.$emit("onPaginationGeted", result['page']);
+      } else {
+        $scope.errorMsg = msg;
+      }
+      return $scope.dataLoaded = true;
+    }
   };
   return me.init();
 });

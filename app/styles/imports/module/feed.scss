@@ -2,6 +2,7 @@
 .feed-content{
 	background-color: $cardBg;
 	padding: 20px;
+	position: relative;
 }
 
 .feed-wrap{
@@ -75,15 +76,40 @@
 	}
 }
 
-.reply-mod{
+.reply-feed-mod{
 	.content{
 		margin-top: 1em;
 		overflow: hidden;
 	}
+	.re-lead{
+		color: #666;
+		a,
+		span{
+			margin: 0 .2em;
+			color: $black;			
+		}
+	}
+
+	+ .reply-content{
+		border-bottom: 1px #ddd dashed;
+		overflow: hidden;
+		padding-bottom: 1em;
+		.face{
+			float: left;
+			margin: 0 1em 0 2.6em;
+		}
+		p{
+			overflow: hidden;
+		}
+	}
 }
 
-.love-mod{
+.love-feed-mod{
 	@extend .reply-mod;
+
+	.loveme-tip{
+		margin-top: .6em;
+	}
 }
 
 //phone

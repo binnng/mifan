@@ -1,7 +1,10 @@
 <div class="feed-content news sd-card" ng-controller="homeNews">
-	<dl class="questions">
+	<i uiloading></i>
+	<dl class="questions" ng-show="newsCollect">
+		<i logintip ng-show="!isLogin"></i>
 		<dd ng-repeat="news in newsCollect" class="qa-mod feed-mod" ng-include="'views/module/feed-mod.html'">
 		</dd>
 	</dl>
-	<more></more>
+	<i more></i>
+	<i errormsg></i>
 </div>

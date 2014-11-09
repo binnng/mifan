@@ -9,25 +9,44 @@ Mifan.controller "homeNews", ($scope, $timeout, $http, $time) ->
   $scope.newsCollect = []
 
   news = 
+
     init: ->
 
-      # 接受验证登录成功
-      $scope.$on "getHomeNews", -> news.get()
-      if $scope.isLogin
-        news.get()
+      getFirstPage = ->
+        news.get 1
 
-    get: ->
-      url = "#{API.news}#{$scope.privacyParamDir}"
+      # 接受验证登录成功
+      $scope.$on "getHomeNews", getFirstPage
+      getFirstPage() if $scope.isLogin 
+
+      $scope.getPage = news.get
+        
+
+    get: (page) ->
+
+      return no if $scope.isPageLoading
+
+      url = "#{API.news}#{$scope.privacyParamDir}/page/#{page}"
       url = API.news if IsDebug
 
-      cb = (data) ->
-        ret = data['ret']
-        if String(ret) is "100000"
-          $scope.newsCollect = data['result']
+      $scope.$emit "onPaginationStartChange", page
 
-      $http.get(url,
-        cache: "lruCache"
-      ).success cb
+      cb = (data) ->
+
+        {ret, result, msg} = data
+        
+        if result and result.page
+          $scope.newsCollect = result['list']
+
+          $scope.$emit "onPaginationGeted", result['page']
+        else 
+          $scope.errorMsg = msg
+
+        $scope.dataLoaded = yes
+
+
+      $http.get(url).success cb
+
 
   news.init()
       

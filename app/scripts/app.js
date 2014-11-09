@@ -2,7 +2,7 @@
 "use strict";
 var Mifan;
 
-Mifan = angular.module("mifan", ["ngCookies", "ngResource", "ngSanitize", "ngRoute", "ngTouch", "binnng.touch.href", "binnng.scroller", "binnng.tap", "binnng.storage", "binnng.emoji", "binnng.extend", "binnng/time", "binnng/debug"]);
+Mifan = angular.module("mifan", ["ngCookies", "ngResource", "ngSanitize", "ngRoute", "ngTouch", "binnng.touch.href", "binnng.scroller", "binnng.tap", "binnng.storage", "binnng.extend", "binnng/time", "binnng/debug", "binnng/random"]);
 
 Mifan.config(function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(false).hashPrefix("!");
@@ -23,6 +23,9 @@ Mifan.config(function($routeProvider, $locationProvider) {
   }).when("/user/:id", {
     templateUrl: "views/me/me.html",
     controller: "userCtrl"
+  }).when("/q/:id", {
+    templateUrl: "views/ques/ques.html",
+    controller: "quesDetailCtrl"
   }).when("/welcome", {
     templateUrl: "views/welcome.html",
     controller: "welcomeCtrl"
@@ -35,12 +38,24 @@ Mifan.config(function($routeProvider, $locationProvider) {
   }).when("/friend", {
     templateUrl: "views/friend/friend.html",
     controller: "friendCtrl"
+  }).when("/friend/fans", {
+    templateUrl: "views/friend/friend.html",
+    controller: "friendCtrl"
+  }).when("/friend/user/:id", {
+    templateUrl: "views/friend/friend.html",
+    controller: "friendCtrl"
+  }).when("/friend/fans/user/:id", {
+    templateUrl: "views/friend/friend.html",
+    controller: "friendCtrl"
   }).when("/square", {
     templateUrl: "views/square/square.html",
     controller: "squareCtrl"
   }).when("/search", {
     templateUrl: "views/search.html",
     controller: "searchCtrl"
+  }).when("/about", {
+    templateUrl: "views/about.html",
+    controller: "aboutCtrl"
   }).otherwise({
     templateUrl: "views/404.html",
     controller: "404Ctrl"

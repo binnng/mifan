@@ -8,18 +8,32 @@ Mifan.controller "homeAnswer", ($scope, $http) ->
     init: ->
       news.get()
 
-    get: ->
-      url = "#{API.answerme}#{$scope.privacyParamDir}"
+      $scope.getPage = news.get
+
+
+    get: (page = 1) ->
+
+      url = "#{API.answerme}#{$scope.privacyParamDir}/page/#{page}"
       url = API.answerme if IsDebug
 
-      cb = (data) ->
-        {ret} = data
-        if String(ret) is "100000"
-          $scope.ansMeCollect = data.result
+      $scope.$emit "onPaginationStartChange", page
 
-      $http.get(url,
-        cache: "lruCache"
-      ).success cb
+      cb = (data) ->
+        {ret, result} = data
+
+        if result
+          $scope.ansMeCollect = result['list']
+
+          $scope.$emit "onPaginationGeted", result['page']
+
+        else 
+          $scope.errorMsg = data.msg
+
+
+        $scope.dataLoaded = yes
+
+
+      $http.get(url).success cb
 
   news.init()
 

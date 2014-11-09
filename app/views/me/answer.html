@@ -1,23 +1,8 @@
 <div class="feed-content sd-card" ng-controlle="">
-	<dl class="questions">
-		<dd class="qa-mod feed-mod" ng-repeat="news in myAnswer">
-			<div class="avatars pull-left">
-				<a ng-href="#!/user/{{news.ask.user.userid}}" class="avatar asker" title="{{news.ask.user.username}}" style="background-image:url({{news.ask.user.face_60}})">{{news.ask.user.username}}</a>
-				<a ng-href="#!/user/{{news.answer.user.userid}}" class="avatar answerer" title="{{news.user.username}}" style="background-image:url({{news.answer.user.face_60}})">{{news.answer.user.username}}</a>
-			</div>
-			<div class="contents">
-				<h3 class="h5">
-					<p><a ng-href="#!/q/{{news.feedid}}" class="" title="问题">{{news.ask.content}}</a></p>
-				</h3>
-				<p class="lead">{{news.answer.content}}</p>
-				<p class="ask-ans-desc meta">
-					<a ng-href="#!/user/{{news.answer.user.userid}}" title="username">{{news.answer.user.username}}</a> 对 <a ng-href="#!/user/{{news.ask.user.userid}}" title="username">{{news.ask.user.username}}</a> 的回答于 <a ng-href="#!/q/{{news.feedid}}" title="" class="">{{news.answer.addtime | ago}}</a>
-				</p>
-			</div>
-		</dd>
-
+	<i uiloading></i>
+	<dl class="questions" ng-show="myAnswer">
+		<dd ng-repeat="news in myAnswer" class="qa-mod feed-mod hide-action" ng-include="'views/module/feed-mod.html'"></dd>
 	</dl>
-	<p ng-show="!myAnswer.length" class="error-mod">{{myAnswerMsg}}</p>
-	<more ng-show="myAnswerMore"></more>
-	<more></more>
+	<i errormsg></i>
+	<i more></i>
 </div>
