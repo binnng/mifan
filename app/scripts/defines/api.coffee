@@ -30,10 +30,19 @@ API =
   friendAns: "/user/friend/answers"
   frinedLove: "/user/friend/loveanswers"
 
+  friendFollow: "/user/friend/follows"
+  friendFans: "/user/friend/followeds"
+
   askinfo: "/ask/askinfo/ask"
   askanswers: "/ask/askinfo/answers"
 
   reg: "/user/userinfo/user"
+
+  squareask: "/ask/askinfo/answers"
+
+  squareusers: "/user/userinfo/users"
+
+  aboutsite: "/common/info/siteinfo"
 
 
 
@@ -67,9 +76,18 @@ if IsDebug
     friendAns: "/myanswer.json"
     frinedLove: "/mylove.json"
 
+    friendFollow: "/follows.json"
+    friendFans: "/follows.json"
+
     askinfo: "/askinfo.json"
     askanswers: "/askanswers.json"
 
     reg: "/reg.json"
+
+    squareask: "/squareask.json"
+
+    squareusers: "/squareusers.json"
+
+    aboutsite: "/siteinfo.json"
 
 API[api] = "#{BASE_API_PATH}#{API[api]}" for api of API

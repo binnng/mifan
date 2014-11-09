@@ -45,7 +45,7 @@ Mifan.controller "quesDetailCtrl", ($scope, $timeout, $http, $routeParams, $loca
 
         $scope.$emit "onPaginationGeted", result["page"]
 
-        $scope.dataLoaded = yes
+      $scope.dataLoaded = yes
 
 
 

@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji, $cacheFactory, $extend, $location, $debug) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $cacheFactory, $extend, $location, $debug) ->
 
   API = $scope.API
 
@@ -136,11 +136,12 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
       $location.path "/"
 
-      #LOC["reload"]()
+      # LOC["reload"]()
 
     # 登录过期
     onOutOfDate: ->
       User.remove()
+      $scope.user = {}
 
       $scope.isLogin = no
 
@@ -369,7 +370,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
   Notification = 
     init: ->
-      Notification.get()
+      Notification.get() if $scope.isLogin
 
     time: 0
 
@@ -591,20 +592,20 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
   Pagination.init()
 
-  # Ask 问题相关
-  Ask = 
+  # Ques 问题相关
+  Ques = 
     init: ->
       $scope.$on "onGetAskInfo", (e, askid) ->
-        Ask.getInfo askid
+        Ques.getInfo askid
 
       $scope.$on "onGetAskAnswers", (e, askid) ->
-        Ask.getAnswers askid
+        Ques.getAnswers askid
 
     getInfo: (askid) ->
       api = "#{API.askinfo}#{$scope.privacyParamDir}?askid=#{askid}"
       api = API.askinfo if IsDebug
 
-      $http.get(api).success Ask.getInfoCb
+      $http.get(api).success Ques.getInfoCb
 
     getInfoCb: (data) ->
       $scope.$broadcast "onGetAskInfoCb", data
@@ -615,13 +616,13 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       api = "#{API.askanswers}#{$scope.privacyParamDir}/page/#{page}?type=askanswer&askid=#{askid}"
       api = API.askanswers if IsDebug
 
-      $http.get(api).success Ask.getAnswersCb
+      $http.get(api).success Ques.getAnswersCb
 
     getAnswersCb: (data) ->
       $scope.$broadcast "onGetAskAnswersCb", data
 
 
-  Ask.init()
+  Ques.init()
 
   # 注册
   Reg = 
@@ -641,8 +642,8 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
           user_email: email
           user_password: password
           user_repwd: password
-          username: username
-          fuserid: invitecode
+          user_name: username
+          invitecode: invitecode
       )
       .success(Reg.regCb)
 
@@ -671,6 +672,48 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       , 1000
 
   Reg.init()
+
+
+  # 关注和粉丝 朋友
+  Friend = 
+
+    init: ->
+
+      $scope.$on "onGetUserFollows", (e, data) ->
+        Friend.getFollow data
+
+      $scope.$on "onGetUserFans", (e, data) ->
+        Friend.getFans data
+
+    getFollow: (data) ->
+
+      {page, uid} = data
+
+      api = "#{API.friendFollow}#{$scope.privacyParamDir}/page/#{page}?uid=#{uid}"
+      api = API.friendFollow if IsDebug
+
+      $http.get(api).success Friend.getFollowCb
+
+
+    getFollowCb: (data) ->
+      $scope.$broadcast "onGetUserFollowsCb", data
+
+    getFans: (data) ->
+
+      {page, uid} = data
+
+      api = "#{API.friendFans}#{$scope.privacyParamDir}/page/#{page}?uid=#{uid}"
+      api = API.friendFans if IsDebug
+
+      $http.get(api).success Friend.getFansCb
+
+    getFansCb: (data) ->
+      $scope.$broadcast "onGetUserFansCb", data
+
+
+  Friend.init()
+
+
       
 
 

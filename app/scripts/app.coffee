@@ -10,10 +10,11 @@ Mifan = angular.module "mifan", [
   "binnng.scroller"
   "binnng.tap"
   "binnng.storage"
-  "binnng.emoji"
+  #"binnng.emoji"
   "binnng.extend"
   "binnng/time"
   "binnng/debug"
+  "binnng/random"
 ]
 
 Mifan.config ($routeProvider, $locationProvider) ->
@@ -63,6 +64,18 @@ Mifan.config ($routeProvider, $locationProvider) ->
       templateUrl: "views/friend/friend.html"
       controller: "friendCtrl"
     )
+    .when("/friend/fans",
+      templateUrl: "views/friend/friend.html"
+      controller: "friendCtrl"
+    )
+    .when("/friend/user/:id",
+      templateUrl: "views/friend/friend.html"
+      controller: "friendCtrl"
+    )
+    .when("/friend/fans/user/:id",
+      templateUrl: "views/friend/friend.html"
+      controller: "friendCtrl"
+    )
     .when("/square",
       templateUrl: "views/square/square.html"
       controller: "squareCtrl"
@@ -70,6 +83,10 @@ Mifan.config ($routeProvider, $locationProvider) ->
     .when("/search",
       templateUrl: "views/search.html"
       controller: "searchCtrl"
+    )
+    .when("/about",
+      templateUrl: "views/about.html"
+      controller: "aboutCtrl"
     )
     .otherwise
       templateUrl: "views/404.html"

@@ -1,24 +1,21 @@
 <div class="container msg-page page-mod ">
 	<div class="main sd-card">
 		<p class="lead hiddenxs" ng-if="!IsiPad">Tips: 支持<b>ctrl + enter</b>回复</p>
-		<dl class="questions" id="msg-ques">
-			<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
+		<i uiloading></i>
+		<dl class="questions" id="msg-ques" ng-show="askMe">
 			<dd ng-repeat="msg in askMe" class="feed-mod" ng-init="{content:'',isSending:false,isSendSucs:false,answerd:false}" ng-show="!answerd">
 				<a class="face face-42 pull-left" ng-href="#!/user/{{msg.user.userid}}" class="avatar asker" title="{{msg.user..username}}" style="background-image:url({{msg.user.face_120}})">{{msg.user.username}}</a>
 				<div class="ques-dtl">
 					<a class="h5" href="#!/q/{{msg.askid}}">{{msg.content}}</a>
 					<p class="meta"><a ng-href="#!/user/{{msg.user.userid}}" title="{{msg.user.username}}" class="ng-binding" href="#">{{msg.user.username}}</a> 提问于 <a ng-href="#!/q/{{msg.askid}}">{{msg.addtime | ago}}</a></p>
-					<form class="ans-form clearfix hidden-xs" ng-submit="send(this, msg)">
-						<textarea name="ans-content" class="ans-input" ng-model="content"></textarea>
-						<button type="submit" class="btn btn-success" ng-class="{disabled: !content || isSending}"><i class="glyphicon" ng-class="{'glyphicon-refresh animated infinite': isSending, 'glyphicon-send': !isSending && !isSendSucs, 'glyphicon-ok': 'isSendSucs'}"></i></span></button>
-					</form>
+					<div ng-include="'views/module/answer-form-mod.html'"></div>
 					<div class="m-acts">
 						<b class="bill-btn bill-btn-dots" ng-click="setMBill($index)">...</b>
 					</div>
 				</div>
 			</dd>
 		</dl>
-		<p ng-show="!askMe.length&&dataLoaded" class="error-mod" ng-bind="askMeMsg"></p>
-		<more></more>
+		<i errormsg></1>
+		<i more></i>
 	</div>
 </div>

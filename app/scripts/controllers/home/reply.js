@@ -21,22 +21,24 @@ Mifan.controller("homeReply", function($scope, $http) {
       }
       $scope.$emit("onPaginationStartChange", page);
       cb = function(data) {
-        var newsCollect, pageData, ret, _i, _len;
-        ret = data['ret'];
-        if (String(ret) === "100000") {
-          newsCollect = data['result']['list'];
+        var newsCollect, pageData, result, ret, _i, _len;
+        ret = data.ret, result = data.result;
+        if (result && result.page) {
+          newsCollect = result['list'];
           for (_i = 0, _len = newsCollect.length; _i < _len; _i++) {
             news = newsCollect[_i];
             news.feedMod = "replyme";
             news["commentList"] = [news.comment];
           }
           $scope.newsCollect = newsCollect;
-          pageData = data['result']['page'];
+          pageData = result['page'];
           if (pageData) {
             $scope.$emit("onPaginationGeted", pageData);
           }
-          return $scope.dataLoaded = true;
+        } else {
+          $scope.errorMsg = data.msg;
         }
+        return $scope.dataLoaded = true;
       };
       return $http.get(url).success(cb);
     }

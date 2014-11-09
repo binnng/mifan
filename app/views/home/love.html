@@ -1,8 +1,8 @@
-
 <div class="feed-content love sd-card" ng-controller="homeLove">
-	<dl>
-		<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
+	<i uiloading></i>
+	<dl ng-show="newsCollect">
 		<dd ng-repeat="news in newsCollect" class="qa-mod feed-mod hide-action love-feed-mod" ng-include="'views/module/feed-mod.html'"></dd>
 	</dl>
-	<more></more>
+	<i errormsg></i>
+	<i more></i>
 </div>

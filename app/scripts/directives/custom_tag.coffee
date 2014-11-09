@@ -7,7 +7,7 @@ Mifan.directive "more", ->
 
 	templateUrl: "views/template/more.html"
 	replace: yes
-	restrict: "E"
+	restrict: "AE"
 
 #社交网络登录
 Mifan.directive "snslogin", ->
@@ -30,6 +30,27 @@ Mifan.directive "sending-btn", ->
 	priority: 0
 	templateUrl: "views/template/sending-btn.html"
 	transclude: yes
+	restrict: "E"
+	scope: no
+
+Mifan.directive "logintip", ->
+
+	templateUrl: "views/template/logintip.html"
+	replace: yes
+	restrict: "AE"
+	scope: no
+
+Mifan.directive "errormsg", ->
+
+	templateUrl: "views/template/error-msg.html"
+	replace: yes
+	restrict: "AE"
+	scope: no
+
+Mifan.directive "uiloading", ->
+
+	templateUrl: "views/template/ui-loading.html"
+	replace: yes
 	restrict: "AE"
 	scope: no
 

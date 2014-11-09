@@ -51,7 +51,6 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
   me = 
     init: ->
 
-      $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = ""
       $scope.myAsk = $scope.myAnswer = $scope.myLove = []
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = no
 
@@ -72,12 +71,16 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
       $scope.$emit "onPaginationStartChange", page
 
     getMyAskCb: (data) ->
-      if String(data.msg) is "ok"
-        $scope.myAsk = data.result['list'] or []
-      else
-        $scope.myAskMsg = data.msg
 
-      $scope.$emit "onPaginationGeted", data['result']['page']
+      {ret, msg, result}  = data
+
+      if msg is "ok"
+        $scope.myAsk = result['list'] or []
+        $scope.$emit "onPaginationGeted", result['page']
+
+      else
+        $scope.errorMsg = msg
+
 
       $scope.dataLoaded = yes
 
@@ -91,13 +94,16 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
       $scope.$emit "onPaginationStartChange", page
 
     getMyAnswerCb: (data) ->
-      if String(data.msg) is "ok"
-        $scope.myAnswer = data.result['list'] or []
+
+      {ret, msg, result}  = data
+
+      if msg is "ok"
+        $scope.myAnswer = result['list'] or []
+        $scope.$emit "onPaginationGeted", result['page']
 
       else
-        $scope.myAnswerMsg = data.msg
+        $scope.errorMsg = msg
 
-      $scope.$emit "onPaginationGeted", data['result']['page']
 
       $scope.dataLoaded = yes
 
@@ -111,13 +117,16 @@ Mifan.controller "meCtrl", ($scope, $timeout, $http) ->
       $scope.$emit "onPaginationStartChange", page
 
     getMyLoveCb: (data) ->
-      if String(data.msg) is "ok"
-        $scope.myLove = data.result['list'] or []
+
+      {ret, msg, result}  = data
+
+      if msg is "ok"
+        $scope.myLove = result['list'] or []
+        $scope.$emit "onPaginationGeted", result['page']
 
       else
-        $scope.myLoveMsg = data.msg
+        $scope.errorMsg = msg
 
-      $scope.$emit "onPaginationGeted", data['result']['page']
 
       $scope.dataLoaded = yes
 

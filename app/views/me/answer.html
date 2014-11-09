@@ -1,8 +1,8 @@
 <div class="feed-content sd-card" ng-controlle="">
-	<dl class="questions">
-		<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
+	<i uiloading></i>
+	<dl class="questions" ng-show="myAnswer">
 		<dd ng-repeat="news in myAnswer" class="qa-mod feed-mod hide-action" ng-include="'views/module/feed-mod.html'"></dd>
 	</dl>
-	<p ng-show="!myAnswer.length" class="error-mod">{{myAnswerMsg}}</p>
-	<more></more>
+	<i errormsg></i>
+	<i more></i>
 </div>

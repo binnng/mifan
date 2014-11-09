@@ -71,15 +71,19 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
       $scope.$emit "onPaginationStartChange", page
 
     getMyAskCb: (data) ->
+      $scope.dataLoaded = yes
+
+      {ret, msg, result} = data
+
+
       if String(data.msg) is "ok"
-        $scope.myAsk = data.result?['list'] or []
+        $scope.myAsk = result?['list'] or []
 
-        $scope.$emit "onPaginationGeted", data['result']['page']
+        $scope.$emit "onPaginationGeted", result['page']
 
-        $scope.dataLoaded = yes
 
       else
-        $scope.myAskMsg = data.msg
+        $scope.errorMsg = msg
 
     getMyAnswer: (page = 1)->
       api = "#{API.friendAns}#{$scope.privacyParamDir}/page/#{page}?uid=#{userid}"
@@ -90,15 +94,19 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
       $scope.$emit "onPaginationStartChange", page
 
     getMyAnswerCb: (data) ->
+
+      {ret, msg, result} = data
+
+      $scope.dataLoaded = yes
+
       if String(data.msg) is "ok"
-        $scope.myAnswer = data.result?['list'] or []
+        $scope.myAnswer = result?['list'] or []
 
-        $scope.$emit "onPaginationGeted", data['result']['page']
+        $scope.$emit "onPaginationGeted", result['page']
 
-        $scope.dataLoaded = yes
 
       else
-        $scope.myAnswerMsg = data.msg
+        $scope.errorMsg = msg
 
     getMyLove: (page = 1) -> 
       api = "#{API.frinedLove}#{$scope.privacyParamDir}/page/#{page}?uid=#{userid}"
@@ -109,15 +117,19 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
       $scope.$emit "onPaginationStartChange", page
 
     getMyLoveCb: (data) ->
+
+      {ret, msg, result} = data
+
+      $scope.dataLoaded = yes
+      
       if String(data.msg) is "ok"
-        $scope.myLove = data.result?['list'] or []
+        $scope.myLove = result?['list'] or []
 
-        $scope.$emit "onPaginationGeted", data['result']['page']
+        $scope.$emit "onPaginationGeted", result['page']
 
-        $scope.dataLoaded = yes
 
       else
-        $scope.myLoveMsg = data.msg
+        $scope.errorMsg = msg
 
     getUserInfo: ->
       $scope.$emit "getUserInfo", uid: userid
@@ -133,6 +145,7 @@ Mifan.controller "userCtrl", ($scope, $timeout, $http, $routeParams, $location) 
         follow.setFollowBtn result.iffollow
 
         if not $scope.myself
+          # 1是男 2是女 0是保密
           switch "#{result.sex}"
             when "1"
               $scope.ta = "他"

@@ -27,13 +27,15 @@ Mifan.controller("homeNews", function($scope, $timeout, $http, $time) {
       }
       $scope.$emit("onPaginationStartChange", page);
       cb = function(data) {
-        var ret;
-        ret = data['ret'];
-        if (String(ret) === "100000") {
-          $scope.newsCollect = data['result']['list'];
-          $scope.$emit("onPaginationGeted", data['result']['page']);
-          return $scope.dataLoaded = true;
+        var msg, result, ret;
+        ret = data.ret, result = data.result, msg = data.msg;
+        if (result && result.page) {
+          $scope.newsCollect = result['list'];
+          $scope.$emit("onPaginationGeted", result['page']);
+        } else {
+          $scope.errorMsg = msg;
         }
+        return $scope.dataLoaded = true;
       };
       return $http.get(url).success(cb);
     }

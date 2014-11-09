@@ -9,15 +9,15 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
 
     $scope.toggleMBill ["love", "answer", "share"]
 
-  msg = 
+  message = 
     init: ->
-      msg.getAskMe()
+      message.getAskMe()
 
       $scope.askMe = []
       $scope.askMeMsg = ""
       $scope.askMeMore = no
 
-      $scope.getPage = msg.getAskMe
+      $scope.getPage = message.getAskMe
 
     getAskMe: (page = 1)->
       return no if $scope.isPageLoading
@@ -25,30 +25,33 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
       api = "#{API.askme}#{$scope.privacyParamDir}/type/askme/page/#{page}"
       api = API.askme if IsDebug
 
-      $http.get(api).success msg.getAskMeCb
+      $http.get(api).success message.getAskMeCb
 
       $scope.$emit "onPaginationStartChange", page
 
     getAskMeCb: (data) ->
-      if String(data.msg) is "ok"
-        list = data.result?['list']
-        $scope.askMe = list or []
-        msg.count = list.length
 
-        $scope.$emit "onPaginationGeted", data['result']['page']
+      {ret, msg, result}  = data
+
+      if msg is "ok"
+        list = result?['list']
+        $scope.askMe = list or []
+        message.count = list.length
+
+        $scope.$emit "onPaginationGeted", result['page']
 
       else
-        $scope.askMeMsg = data.msg
+        $scope.errorMsg = msg
 
       $scope.dataLoaded = yes
 
     count: 0
 
-  msg.init()
+  message.init()
 
   ans = 
     init: ->
-      $scope.send = ans.send
+      $scope.sendAns = ans.send
 
       $scope.$watch $scope.askMe,  ->
         if $scope.askMe.length is 0
@@ -65,7 +68,7 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
       ans.item = item
 
       query = 
-        askid: msg.askid
+        askid: message.askid
         content: item.content
 
       $scope.$emit "ans", query
@@ -86,7 +89,7 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
 
           ans.count++
 
-          if ans.count >= msg.count
+          if ans.count >= message.count
             $scope.askMe.length = 0
             
         ), 100

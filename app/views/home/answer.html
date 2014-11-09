@@ -1,8 +1,9 @@
 <div class="feed-content answer sd-card" ng-controller="homeAnswer">
-	<dl class="questions">
-		<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
+	<i uiloading></i>
+	<dl class="questions" ng-show="ansMeCollect">
 		<dd ng-repeat="news in ansMeCollect" class="qa-mod feed-mod" ng-include="'views/module/feed-mod.html'">
 		</dd>
 	</dl>
-	<more></more>
+	<i errormsg></i>
+	<i more></1>
 </div>

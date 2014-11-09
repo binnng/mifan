@@ -5,21 +5,29 @@ Mifan.controller("homeAnswer", function($scope, $http) {
   $scope.ansMeCollect = [];
   news = {
     init: function() {
-      return news.get();
+      news.get();
+      return $scope.getPage = news.get;
     },
-    get: function() {
+    get: function(page) {
       var cb, url;
-      url = "" + API.answerme + $scope.privacyParamDir;
+      if (page == null) {
+        page = 1;
+      }
+      url = "" + API.answerme + $scope.privacyParamDir + "/page/" + page;
       if (IsDebug) {
         url = API.answerme;
       }
+      $scope.$emit("onPaginationStartChange", page);
       cb = function(data) {
-        var ret;
-        ret = data.ret;
-        if (String(ret) === "100000") {
-          $scope.ansMeCollect = data['result']['list'];
-          return $scope.dataLoaded = true;
+        var result, ret;
+        ret = data.ret, result = data.result;
+        if (result) {
+          $scope.ansMeCollect = result['list'];
+          $scope.$emit("onPaginationGeted", result['page']);
+        } else {
+          $scope.errorMsg = data.msg;
         }
+        return $scope.dataLoaded = true;
       };
       return $http.get(url).success(cb);
     }

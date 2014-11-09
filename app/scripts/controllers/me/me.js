@@ -36,7 +36,6 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
   $scope.profile = $scope.user;
   me = {
     init: function() {
-      $scope.myAskMsg = $scope.myAnswerMsg = $scope.myLoveMsg = "";
       $scope.myAsk = $scope.myAnswer = $scope.myLove = [];
       $scope.myAskMore = $scope.myAnswerMore = $scope.myLoveMore = false;
       $scope.myself = true;
@@ -61,12 +60,14 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
       return $scope.$emit("onPaginationStartChange", page);
     },
     getMyAskCb: function(data) {
-      if (String(data.msg) === "ok") {
-        $scope.myAsk = data.result['list'] || [];
+      var msg, result, ret;
+      ret = data.ret, msg = data.msg, result = data.result;
+      if (msg === "ok") {
+        $scope.myAsk = result['list'] || [];
+        $scope.$emit("onPaginationGeted", result['page']);
       } else {
-        $scope.myAskMsg = data.msg;
+        $scope.errorMsg = msg;
       }
-      $scope.$emit("onPaginationGeted", data['result']['page']);
       return $scope.dataLoaded = true;
     },
     getMyAnswer: function(page) {
@@ -82,12 +83,14 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
       return $scope.$emit("onPaginationStartChange", page);
     },
     getMyAnswerCb: function(data) {
-      if (String(data.msg) === "ok") {
-        $scope.myAnswer = data.result['list'] || [];
+      var msg, result, ret;
+      ret = data.ret, msg = data.msg, result = data.result;
+      if (msg === "ok") {
+        $scope.myAnswer = result['list'] || [];
+        $scope.$emit("onPaginationGeted", result['page']);
       } else {
-        $scope.myAnswerMsg = data.msg;
+        $scope.errorMsg = msg;
       }
-      $scope.$emit("onPaginationGeted", data['result']['page']);
       return $scope.dataLoaded = true;
     },
     getMyLove: function(page) {
@@ -103,12 +106,14 @@ Mifan.controller("meCtrl", function($scope, $timeout, $http) {
       return $scope.$emit("onPaginationStartChange", page);
     },
     getMyLoveCb: function(data) {
-      if (String(data.msg) === "ok") {
-        $scope.myLove = data.result['list'] || [];
+      var msg, result, ret;
+      ret = data.ret, msg = data.msg, result = data.result;
+      if (msg === "ok") {
+        $scope.myLove = result['list'] || [];
+        $scope.$emit("onPaginationGeted", result['page']);
       } else {
-        $scope.myLoveMsg = data.msg;
+        $scope.errorMsg = msg;
       }
-      $scope.$emit("onPaginationGeted", data['result']['page']);
       return $scope.dataLoaded = true;
     }
   };

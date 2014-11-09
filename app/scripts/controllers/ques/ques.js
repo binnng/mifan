@@ -52,8 +52,8 @@ Mifan.controller("quesDetailCtrl", function($scope, $timeout, $http, $routeParam
         }
         $scope.askAns = askAns;
         $scope.$emit("onPaginationGeted", result["page"]);
-        return $scope.dataLoaded = true;
       }
+      return $scope.dataLoaded = true;
     }
   };
   return ques.init();

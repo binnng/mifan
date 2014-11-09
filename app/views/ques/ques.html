@@ -1,6 +1,7 @@
 <div class="container ques-page page-mod ">
 	<div class="main sd-card">
 		<div ng-include="'views/module/ques-mod.html'" class="ques-mod" ng-show="dataInfoLoaded"></div>
+		<div ng-include="'views/module/answer-form-mod.html'"></div>
 		<dl class="ans-list">
 			<div class="loading" ng-hide="dataLoaded"><i class="ui-loading"></i></div>
 			<dd ng-include="'views/module/answer-mod.html'" ng-init="{quesDetail:true}" ng-repeat="news in askAns"></dd>

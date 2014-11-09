@@ -30,9 +30,10 @@ Mifan.controller "homeReply", ($scope, $http) ->
 
       cb = (data) ->
 
-        ret = data['ret']
-        if String(ret) is "100000"
-          newsCollect = data['result']['list']
+        {ret, result} = data
+
+        if result and result.page
+          newsCollect = result['list']
 
           for news in newsCollect
             news.feedMod = "replyme" 
@@ -41,11 +42,14 @@ Mifan.controller "homeReply", ($scope, $http) ->
 
           $scope.newsCollect = newsCollect
 
-          pageData = data['result']['page']
+          pageData = result['page']
 
           $scope.$emit "onPaginationGeted", pageData if pageData
 
-          $scope.dataLoaded = yes
+        else 
+          $scope.errorMsg = data.msg
+
+        $scope.dataLoaded = yes
 
 
       $http.get(url).success cb

@@ -22,7 +22,6 @@ Mifan.controller "homeNews", ($scope, $timeout, $http, $time) ->
       $scope.getPage = news.get
         
 
-
     get: (page) ->
 
       return no if $scope.isPageLoading
@@ -34,13 +33,16 @@ Mifan.controller "homeNews", ($scope, $timeout, $http, $time) ->
 
       cb = (data) ->
 
-        ret = data['ret']
-        if String(ret) is "100000"
-          $scope.newsCollect = data['result']['list']
+        {ret, result, msg} = data
+        
+        if result and result.page
+          $scope.newsCollect = result['list']
 
-          $scope.$emit "onPaginationGeted", data['result']['page']
+          $scope.$emit "onPaginationGeted", result['page']
+        else 
+          $scope.errorMsg = msg
 
-          $scope.dataLoaded = yes
+        $scope.dataLoaded = yes
 
 
       $http.get(url).success cb

@@ -29,19 +29,26 @@ Mifan.controller "homeLove", ($scope, $http) ->
 
       cb = (data) ->
 
-        ret = data['ret']
-        if String(ret) is "100000"
-          newsCollect = data['result']['list']
+        {ret, result, msg} = data
+
+        if result and result.page
+          newsCollect = result['list']
 
           news.feedMod = "loveme" for news in newsCollect
 
           $scope.newsCollect = newsCollect
 
-          pageData = data['result']['page']
+          pageData = result['page']
 
           $scope.$emit "onPaginationGeted", pageData if pageData
 
-          $scope.dataLoaded = yes
+        else
+          $scope.errorMsg = msg
+
+
+        $scope.dataLoaded = yes
+
+
 
 
       $http.get(url).success cb

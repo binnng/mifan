@@ -15,8 +15,8 @@
 			</div>
 
 			<div class="fans blk">
-				<span>关注：<a ng-href="#!/">{{profile.count_follow}}</a></span>
-				<span>粉丝：<a ng-href="#!/">{{profile.count_followed}}</a></span>
+				<span>关注：<a ng-href="#!/friend/user/{{profile.userid}}">{{profile.count_follow}}</a></span>
+				<span>粉丝：<a ng-href="#!/friend/fans/user/{{profile.userid}}">{{profile.count_followed}}</a></span>
 			</div>
 
 			<div class="follow blk" ng-hide="myself">
