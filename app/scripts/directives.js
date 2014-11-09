@@ -15,7 +15,7 @@ Mifan.directive("snslogin", function() {
   return {
     templateUrl: "views/template/sns-login.html",
     replace: true,
-    restrict: "E"
+    restrict: "AE"
   };
 });
 
@@ -60,6 +60,15 @@ Mifan.directive("errormsg", function() {
 Mifan.directive("uiloading", function() {
   return {
     templateUrl: "views/template/ui-loading.html",
+    replace: true,
+    restrict: "AE",
+    scope: false
+  };
+});
+
+Mifan.directive("btnloading", function() {
+  return {
+    template: "<em class=\"glyphicon glyphicon-refresh animated infinite\"></em>",
     replace: true,
     restrict: "AE",
     scope: false

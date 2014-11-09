@@ -88,8 +88,8 @@ Mifan.controller "friendCtrl", ($scope, $routeParams, $location) ->
       if result and result.page
         dataLists = result["list"]
 
-        for data in dataLists
-          data.followBtn = setFollowBtn data.iffollow
+        #for data in dataLists
+        #  data.followBtn = setFollowBtn data.iffollow
 
         $scope.dataLists = dataLists
 
@@ -116,8 +116,8 @@ Mifan.controller "friendCtrl", ($scope, $routeParams, $location) ->
       if result and result.page
         dataLists = result["list"]
 
-        for data in dataLists
-          data.followBtn = setFollowBtn data.iffollow
+        #for data in dataLists
+        #  data.followBtn = setFollowBtn data.iffollow
 
         $scope.dataLists = dataLists
 

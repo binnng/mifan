@@ -1,6 +1,6 @@
 <div class="container msg-page page-mod ">
 	<div class="main sd-card">
-		<p class="lead hiddenxs" ng-if="!IsiPad">Tips: 支持<b>ctrl + enter</b>回复</p>
+		<p class="lead hiddenxs" ng-if="!IsiPad" ng-show="0">Tips: 支持<b>ctrl + enter</b>回复</p>
 		<i uiloading></i>
 		<dl class="questions" id="msg-ques" ng-show="askMe">
 			<dd ng-repeat="msg in askMe" class="feed-mod" ng-init="{content:'',isSending:false,isSendSucs:false,answerd:false}" ng-show="!answerd">

@@ -61,12 +61,12 @@ Mifan.controller("msgCtrl", function($scope, $rootScope, $http, $debug, $timeout
       });
     },
     item: null,
-    send: function(item, msg) {
+    send: function(item, data) {
       var query;
       item.isSending = true;
       ans.item = item;
       query = {
-        askid: message.askid,
+        askid: data.askid,
         content: item.content
       };
       return $scope.$emit("ans", query);

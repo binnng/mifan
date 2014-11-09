@@ -62,13 +62,13 @@ Mifan.controller "msgCtrl", ($scope, $rootScope, $http, $debug, $timeout) ->
     # 当前回答的feed
     item: null
 
-    send: (item, msg) ->
+    send: (item, data) ->
       item.isSending = yes
 
       ans.item = item
 
       query = 
-        askid: message.askid
+        askid: data.askid
         content: item.content
 
       $scope.$emit "ans", query

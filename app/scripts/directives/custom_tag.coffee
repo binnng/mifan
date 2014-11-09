@@ -14,7 +14,7 @@ Mifan.directive "snslogin", ->
 
 	templateUrl: "views/template/sns-login.html"
 	replace: yes
-	restrict: "E"
+	restrict: "AE"
 
 #用户相关菜单
 Mifan.directive "usermenu", ->
@@ -50,6 +50,13 @@ Mifan.directive "errormsg", ->
 Mifan.directive "uiloading", ->
 
 	templateUrl: "views/template/ui-loading.html"
+	replace: yes
+	restrict: "AE"
+	scope: no
+
+Mifan.directive "btnloading", ->
+
+	template: "<em class=\"glyphicon glyphicon-refresh animated infinite\"></em>"
 	replace: yes
 	restrict: "AE"
 	scope: no

@@ -87,8 +87,8 @@ Mifan.controller "squareCtrl", ($scope, $http, $random) ->
         $scope.userLists = userLists = result["list"] or []
         square.totalUserPage = result["page"]["total_page"]
 
-        for data in userLists
-          data.followBtn = setFollowBtn data.iffollow
+        #for data in userLists
+        #  data.followBtn = setFollowBtn data.iffollow
 
       else
         $scope.errorMsg = msg

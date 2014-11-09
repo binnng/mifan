@@ -92,15 +92,11 @@ Mifan.controller("squareCtrl", function($scope, $http, $random) {
       return $http.get(api).success(square.getUsersCb);
     },
     getUsersCb: function(data) {
-      var msg, result, ret, userLists, _i, _len;
+      var msg, result, ret, userLists;
       ret = data.ret, msg = data.msg, result = data.result;
       if (msg === "ok") {
         $scope.userLists = userLists = result["list"] || [];
         square.totalUserPage = result["page"]["total_page"];
-        for (_i = 0, _len = userLists.length; _i < _len; _i++) {
-          data = userLists[_i];
-          data.followBtn = setFollowBtn(data.iffollow);
-        }
       } else {
         $scope.errorMsg = msg;
       }

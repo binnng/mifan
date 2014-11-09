@@ -44,50 +44,58 @@ API =
 
   aboutsite: "/common/info/siteinfo"
 
+  weiboLogin: "/user/saeauth/login"
+  weiboLoginCb: "/user/saeauth/callback"
+
 
 
 if IsDebug
   BASE_API_PATH = "/data"
 
   API = 
-    user: "/user.json"
-    userInfo: "/user-info.json"
-    ask: "/ask.json"
-    answer: "/answer.json"
-    news: "/news.json"
+    user: "/user"
+    userInfo: "/user-info"
+    ask: "/ask"
+    answer: "/answer"
+    news: "/news"
 
-    myask: "/myask.json"
-    myanswer: "/myanswer.json"
-    mylove: "/mylove.json"
+    myask: "/myask"
+    myanswer: "/myanswer"
+    mylove: "/mylove"
 
-    notice: "/msgcount.json"
-    askme: "/askme.json"
-    follow: "/follow.json"
-    unfollow: "/unfollow.json"
-    loveanswer: "/loveanswer.json"
-    answerme: "/answerme.json"
-    comment: "/comment.json"
-    getComment: "/comments_list.json"
-    loveme: "/loveanswers.json"
-    commentme: "/commentme.json"
-    lovemefeed: "/loveme.json"
+    notice: "/msgcount"
+    askme: "/askme"
+    follow: "/follow"
+    unfollow: "/unfollow"
+    loveanswer: "/loveanswer"
+    answerme: "/answerme"
+    comment: "/comment"
+    getComment: "/comments_list"
+    loveme: "/loveanswers"
+    commentme: "/commentme"
+    lovemefeed: "/loveme"
 
-    friendAsk: "/myask.json"
-    friendAns: "/myanswer.json"
-    frinedLove: "/mylove.json"
+    friendAsk: "/myask"
+    friendAns: "/myanswer"
+    frinedLove: "/mylove"
 
-    friendFollow: "/follows.json"
-    friendFans: "/follows.json"
+    friendFollow: "/follows"
+    friendFans: "/follows"
 
-    askinfo: "/askinfo.json"
-    askanswers: "/askanswers.json"
+    askinfo: "/askinfo"
+    askanswers: "/askanswers"
 
-    reg: "/reg.json"
+    reg: "/reg"
 
-    squareask: "/squareask.json"
+    squareask: "/squareask"
 
-    squareusers: "/squareusers.json"
+    squareusers: "/squareusers"
 
-    aboutsite: "/siteinfo.json"
+    aboutsite: "/siteinfo"
+
+    weiboLogin: "/weibologin"
+    weiboLoginCb: "/weibologincallback"
+
+  API[n] += ".json" for n, v of API
 
 API[api] = "#{BASE_API_PATH}#{API[api]}" for api of API

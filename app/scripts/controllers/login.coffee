@@ -1,8 +1,10 @@
 "use strict"
 
-Mifan.controller "loginCtrl", ($scope, $http, $timeout) ->
+Mifan.controller "loginCtrl", ($scope, $http, $timeout, $location) ->
 
   API = $scope.API
+  $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "login"
+
 
   $scope.error = null
 
@@ -53,13 +55,9 @@ Mifan.controller "loginCtrl", ($scope, $http, $timeout) ->
     
     $scope.isLoging = no
 
-
-
   userLoginErrorCb = (data, status) ->
 
     ret = data["ret"]
-
-
     $scope.isLoging = no
 
 
@@ -77,7 +75,6 @@ Mifan.controller "loginCtrl", ($scope, $http, $timeout) ->
     .success(userLoginSuccessCb)
     .error(userLoginErrorCb)
 
-  $scope.$on "$viewContentLoaded", -> $scope.$emit "pageChange", "login"
 
   $scope.$watch "email + password", ->
     $scope.isLogValid = $scope.email and $scope.password
@@ -88,6 +85,58 @@ Mifan.controller "loginCtrl", ($scope, $http, $timeout) ->
   $scope.onSubmit = ->
 
     userLogin() if $scope.email and $scope.password
+
+
+  SNS = 
+    init: ->
+      $scope.loginweibo = SNS.weibo
+
+      SNS.weiboLoginSuccess() if SNS.getWeiboLoginCode()
+
+    weibo: ->
+      return no if $scope.isWeiboLoging
+
+      $scope.isWeiboLoging = yes
+
+      api = "#{API.weiboLogin}"
+      api = API.weiboLogin if IsDebug
+
+      $http.get(api).success SNS.weiboCb
+
+
+    weiboCb: (data)->
+      $scope.isWeiboLoging = no
+      {ret, msg, result} = data
+      LOC["href"] = result
+
+    getWeiboLoginCode: ->
+      code = $location.$$search?["code"]
+      SNS.weiboLoginCode = code
+
+      code
+
+    weiboLoginSuccess: ->
+      api = if IsDebug then API.weiboLoginCb else "#{API.weiboLoginCb}?code=#{SNS.weiboLoginCode}"
+      $http.get(api).success SNS.weiboLoginSuccessCb
+
+      $scope.isWeiboLoging = yes
+
+    weiboLoginSuccessCb: (data) ->
+      {ret, msg, result} = data
+      $scope.isWeiboLoging = no
+      $location.$$search = null
+
+      if result
+        $scope.$emit "onLogined", result
+      else
+        $scope.toast msg, "warn"
+
+
+
+
+
+
+  SNS.init()
 
 
 

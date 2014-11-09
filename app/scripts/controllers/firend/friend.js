@@ -81,14 +81,10 @@ Mifan.controller("friendCtrl", function($scope, $routeParams, $location) {
       });
     },
     getFollowCb: function(data) {
-      var dataLists, msg, pageData, result, ret, _i, _len;
+      var dataLists, msg, pageData, result, ret;
       ret = data.ret, msg = data.msg, result = data.result;
       if (result && result.page) {
         dataLists = result["list"];
-        for (_i = 0, _len = dataLists.length; _i < _len; _i++) {
-          data = dataLists[_i];
-          data.followBtn = setFollowBtn(data.iffollow);
-        }
         $scope.dataLists = dataLists;
         pageData = result["page"];
         if (pageData) {
@@ -112,14 +108,10 @@ Mifan.controller("friendCtrl", function($scope, $routeParams, $location) {
       });
     },
     getFansCb: function(data) {
-      var dataLists, msg, pageData, result, ret, _i, _len;
+      var dataLists, msg, pageData, result, ret;
       ret = data.ret, msg = data.msg, result = data.result;
       if (result && result.page) {
         dataLists = result["list"];
-        for (_i = 0, _len = dataLists.length; _i < _len; _i++) {
-          data = dataLists[_i];
-          data.followBtn = setFollowBtn(data.iffollow);
-        }
         $scope.dataLists = dataLists;
         pageData = result["page"];
         if (pageData) {
