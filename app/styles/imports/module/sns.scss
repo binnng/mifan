@@ -1,11 +1,14 @@
 .sns{
+	i,
+	.glyphicon-refresh{
+		position: absolute;
+	}
 	i{
-		display: inline-block;
 		background-image: url(../images/icon-sns.png);
 		background-repeat: no-repeat;
+		background-size: 50px;
 		width: 25px;
 		height: 25px;
-		background-size: 50px;
 	}
 
 	.weibo{

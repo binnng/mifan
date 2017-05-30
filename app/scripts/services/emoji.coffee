@@ -114,4 +114,8 @@
 		trans: Emoji.trans
 		setEmojiPath: (path) -> Emoji.emojiPath = path
 
+	emoji.filter "emoji", ->
+		(item) ->
+			Emoji.emoji item
+
 ) window, angular

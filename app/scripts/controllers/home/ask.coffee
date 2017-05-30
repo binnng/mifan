@@ -15,17 +15,23 @@ Mifan.controller "homeAskCtrl", ($scope, $timeout) ->
   $scope.send = ->
     $scope.isSending = yes
 
-    $scope.askQues $scope.quesContent
+    $scope.askQues
+      content: $scope.quesContent
 
-
-  $scope.$on "onAskQuesSuccess", (event, msg) ->
-
-
-    $scope.quesContent = ""
+  clearAsk = ->
     $scope.isSending = no
-    $scope.isSendSucs = yes
-
-
     $timeout ->
       $scope.isSendSucs = no
     , 1000
+
+
+  $scope.$on "onAskQuesSuccess", (event, msg) ->
+    $scope.quesContent = ""
+    $scope.isSendSucs = yes
+    $scope.toast "提问成功！"
+
+    clearAsk()
+
+  $scope.$on "onAskQuesFail", (event, msg) -> 
+    $scope.toast msg.msg, "warn"
+    clearAsk()

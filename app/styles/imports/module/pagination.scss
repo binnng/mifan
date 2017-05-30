@@ -1,0 +1,17 @@
+.pagination-nav{
+	text-align: center;
+
+	li{
+		position: relative;
+	}
+
+	.glyphicon{
+		position: absolute;
+		top: 9px;
+		right: 8px;
+	}
+
+	.unsee{
+		visibility: hidden;
+	}
+}

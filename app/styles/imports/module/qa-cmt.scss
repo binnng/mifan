@@ -1,5 +1,6 @@
 .qa-cmt{
 	overflow: hidden;
+	margin-top: 10px;
 
 	textarea{
 		width: 100%;
@@ -23,7 +24,7 @@
 	}
 	.cmt-item{
 		border-bottom: 1px solid $light-gray;
-		padding: 1em .4em;
+		padding: .5em .4em;
 		&:last-child{
 			border: none;
 		}
@@ -33,12 +34,12 @@
 		}
 		.cmt-detail{
 			overflow: hidden;
-
+			font-size: .9em;
 			h5{
 				margin-top: 4px;
 				a{
-					color: #111;
-					font-weight: 700;
+					color: #555;
+					font-weight: 400;
 					margin-right: 1.2em;
 				}
 				span{
@@ -64,12 +65,13 @@
 		.cmt-reply-btn{
 			float: right;
 			font-size: .8em;
-			margin-top: .6em;
+			margin-top: 0;
 			padding-top: .4em;
 			padding-bottom: .4em;
 			overflow: hidden;
 			.btn{
 				float: right;
+				padding: 0;
 			}
 		}
 	}

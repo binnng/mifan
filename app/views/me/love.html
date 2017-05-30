@@ -1,37 +1,9 @@
 <div class="feed-content sd-card" ng-controlle="">
-	<dl class="questions">
-		<dd class="qa-mod feed-mod">
-			<div class="avatars pull-left">
-				<a ng-href="#!/user/1" class="avatar asker ng-binding" title="依然大头" style="background-image:url(http://mifan.us/cache/user/0/0/48/7dfecd76fb_48_48.png)" href="#!/user/1">依然大头</a>
-				<a ng-href="#!/user/2" class="avatar answerer ng-binding" title="老婆婆" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)" href="#!/user/2">老婆婆</a>
-			</div>
-			<div class="contents">
-				<h3 class="h5">
-					<p><a ng-href="#" class="ng-binding" title="问题" href="#">喜欢我什么呀？</a></p>
-				</h3>
-				<p class="lead ng-binding">啥都不喜欢啊<img width="19" class="emoji" style="vertical-align:middle" src="emoji/1f60d.png"></p>
-				<p class="ask-ans-desc meta">
-					<a ng-href="#" title="" class="" href="#">1天前</a>
-				</p>
-			</div>
+	<i uiloading></i>
+	<dl class="questions" ng-show="myLove">
+		<dd ng-repeat="news in myLove" class="qa-mod feed-mod hide-action" ng-include="'views/module/feed-mod.html'">
 		</dd>
-		
-		<dd class="qa-mod feed-mod">
-			<div class="avatars pull-left">
-				<a ng-href="#!/user/1" class="avatar asker ng-binding" title="依然大头" style="background-image:url(http://mifan.us/cache/user/0/0/48/7dfecd76fb_48_48.png)" href="#!/user/1">依然大头</a>
-				<a ng-href="#!/user/2" class="avatar answerer ng-binding" title="老婆婆" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)" href="#!/user/2">老婆婆</a>
-			</div>
-			<div class="contents">
-				<h3 class="h5">
-					<p><a ng-href="#" class="ng-binding" title="问题" href="#">你在努力什么？</a></p>
-				</h3>
-				<p class="lead ng-binding">我也不知道，忙忙碌碌却觉得一事无成！呜呼<img width="19" class="emoji" style="vertical-align:middle" src="emoji/1f60d.png"></p>
-				<p class="ask-ans-desc meta">
-					<a ng-href="#" title="" class="" href="#">1天前</a>
-				</p>
-			</div>
-		</dd>
-
 	</dl>
-	<more></more>
+	<i errormsg></i>
+	<i more></i>
 </div>

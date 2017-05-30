@@ -108,13 +108,18 @@
       restrict: "E"
     };
   });
-  return emoji.factory("$emoji", function() {
+  emoji.factory("$emoji", function() {
     return {
       emoji: Emoji.emoji,
       trans: Emoji.trans,
       setEmojiPath: function(path) {
         return Emoji.emojiPath = path;
       }
+    };
+  });
+  return emoji.filter("emoji", function() {
+    return function(item) {
+      return Emoji.emoji(item);
     };
   });
 })(window, angular);

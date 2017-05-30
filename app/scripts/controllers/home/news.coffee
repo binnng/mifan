@@ -1,52 +1,54 @@
 
-Mifan.controller "homeNews", ($scope, $timeout, $http) ->
+Mifan.controller "homeNews", ($scope, $timeout, $http, $time) ->
 
   API = $scope.API
 
   # ajax取到数据进行缓存，用户手动刷新
   $scope.content = ""
 
-  $scope.toggleMBubble = (index) ->
-    $scope.newsCollect[index].bblActv = not $scope.newsCollect[index].bblActv
-
-  $scope.setMBill = (index) ->
-
-    $scope.toggleMBill ["love", "comment", "share"]
-
   $scope.newsCollect = []
 
   news = 
+
     init: ->
 
+      getFirstPage = ->
+        news.get 1
+
       # 接受验证登录成功
-      $scope.$on "getHomeNews", -> news.get()
-      news.get() if $scope.isLogin
+      $scope.$on "getHomeNews", getFirstPage
+      getFirstPage() if $scope.isLogin 
 
-    get: ->
+      $scope.getPage = news.get
+        
 
-      url = "#{API.news}#{$scope.privacyParamDir}"
+    get: (page) ->
 
+      return no if $scope.isPageLoading
+
+      url = "#{API.news}#{$scope.privacyParamDir}/page/#{page}"
       url = API.news if IsDebug
 
+      $scope.$emit "onPaginationStartChange", page
+
       cb = (data) ->
-        ret = data['ret']
 
-        if String(ret) is "100000"
-          $scope.newsCollect = data['result']
+        {ret, result, msg} = data
+        
+        if result and result.page
+          $scope.newsCollect = result['list']
 
-      $http.get(url,
-        cache: "lruCache"
-      ).success cb
+          $scope.$emit "onPaginationGeted", result['page']
+        else 
+          $scope.errorMsg = msg
+
+        $scope.dataLoaded = yes
+
+
+      $http.get(url).success cb
+
 
   news.init()
-
-
-
-  $scope.toggleComment = (expander) ->
-    expander.comment = not expander.comment
-
-  $scope.toggleReply = (expander) ->
-    expander.reply = not expander.reply
       
 
 

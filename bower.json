@@ -9,7 +9,9 @@
     "angular-route": "1.2.15",
     "sass-css3-mixins": "*",
     "sass-easing": "*",
-    "angular-touch": "~1.2.20"
+    "angular-touch": "~1.2.20",
+    "binnng/time.js": "*",
+    "binnng/debug.js": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.15",

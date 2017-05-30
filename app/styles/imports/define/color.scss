@@ -5,7 +5,6 @@ $black: #11171c;
 $light-black: #23282c;
 $white: #fff;
 $gray: #999;
-$bg: #e6e6e6;
 
 $green: #5cb85c;
 
@@ -22,3 +21,14 @@ $light-gray: #ddd;
 $dark-gray: darken($gray, 40%);
 
 $red: red;
+
+$cardBg: #fefefe;
+$cardBg: $white;
+
+
+
+$primary: #0074cc;
+$danger: #da4f49;
+$warn: #faa732;
+$success: #5bb75b;
+$error: #bd362f;

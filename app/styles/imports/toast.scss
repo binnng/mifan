@@ -1,0 +1,28 @@
+.toast{
+	position: fixed;
+	right: 0;
+	bottom: 80px;
+	background: $tone;
+	color: $white;
+	z-index: 800;
+	padding: 10px 20px;
+	border-radius: 2px 0 0 2px;
+	opacity: 1;
+	@include transition(all, 200ms, ease-in);
+
+	&.primary{
+		background: $primary;
+	}
+	&.error{
+		background: $error;
+	}
+	&.success{
+		background: $success;
+	}
+	&.warn{
+		background: $warn;
+	}
+	&.danger{
+		background: $danger;
+	}
+}
