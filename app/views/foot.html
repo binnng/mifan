@@ -1,7 +1,7 @@
-<div class="footer">
+<div class="toast {{Toast.type}}" ng-show="Toast.isShow">{{Toast.text}}</div>
+<div class="footer main-footer">
 	<div class="container">
 	  <p>
-	  	<span class="glyphicon glyphicon-heart {{loved ? 'loved' : ''}}"></span>
 	  	<a ng-href="#!/about" title="关于米饭">mifan.us</a>
 	  </p>
 

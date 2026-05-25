@@ -1,41 +1,10 @@
-
-
-<ul class="user-list-mod flat-user-list-mod">
-	<li class="user-mod">
-		
-		<a ng-href="#!/user/" class="face face-42" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>
-
-		<div class="info">
-			<p class="username">vincent</p>
-			<p class="brief">只是一个平凡的女孩。</p>
-		</div>
-		
-		<a title="添加关注" ng-show="0" class="btn btn-warning">取消关注</a>
-
-	</li>
-	<li class="user-mod">
-		
-		<a ng-href="#!/user/" class="face face-42" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>
-
-		<div class="info">
-			<p class="username">记忆消失</p>
-			<p class="brief">只是一个平凡的女孩。</p>
-		</div>
-
-		<a title="添加关注" ng-show="0" class="btn btn-warning">取消关注</a>
-	</li>
-
-	<li class="user-mod">
-		
-		<a ng-href="#!/user/" class="face face-42" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>
-
-		<div class="info">
-			<p class="username">一米阳光</p>
-			<p class="brief">只是一个平凡的女孩。</p>
-		</div>
-
-		<a title="添加关注" ng-show="0" class="btn btn-warning">取消关注</a>
-	</li>
-</ul>
-
-<more></more>
+<div class="user-list">
+	<i uiloading></i>
+	<ul class="user-list-mod flat-user-list-mod" ng-show="dataLists">
+		<li class="user-mod" ng-repeat="user in dataLists">
+			<div ng-include="'views/module/follow-user-mod.html'"></div>
+		</li>
+	</ul>
+	<i errormsg></i>
+	<i more></i>
+</div>

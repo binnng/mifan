@@ -1,0 +1,7 @@
+<div class="content ques-detail-mod" ng-init="{expandCmt:false,expandReply:false,isSendingCmt:false,cmtContent:''}">
+	<a href="#!/user/{{askInfo.user.userid}}" class="face face-50 asker" title="{{askInfo.user.username}}" style="background-image:url({{askInfo.user.face_60}})">{{askInfo.user.username}}</a>
+	<h3 class="h5">{{askInfo.content}}</h3>
+	<div class="meta">
+		<a ng-href="#!/user/4" title="username" href="#!/user/{{askInfo.user.userid}}">{{askInfo.user.username}}</a> 提问于 <span>{{askInfo.addtime | ago}}</span>
+	</div>
+</div>

@@ -5,13 +5,8 @@
 			
 			<div class="square-top sd-card">
 				<h5>米饭广场 - 大家都在问：</h5>
-				<ul>
-					<li class="feed-mod">
-						<p class="content">
-							<a ng-href="#!/user/" class="face face-42" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>	
-							<a ng-href="#" class="ques">《驯龙高手2》好看么？</a>
-						</p>
-					</li>
+				<ul ng-show="everyoneAskLists">
+					<li ng-repeat="news in everyoneAskLists" class="qa-mod feed-mod hide-action" ng-include="'views/module/feed-mod.html'"></li>
 				</ul>
 			</div>
 

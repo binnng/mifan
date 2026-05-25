@@ -3,7 +3,7 @@
 # 顶层的业务ctrl，控制整站
 # 比如用户信息等
 
-Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $emoji, $cacheFactory) ->
+Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $cacheFactory, $extend, $location, $debug) ->
 
   API = $scope.API
 
@@ -23,7 +23,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     init: ->
 
       $scope.user = {}
-      $scope.accessToken = $scope.UID = undefined
+      $scope.accessToken = $scope.UID = $scope.username = undefined
 
       $scope.isLogin = no
       $scope.$on "onLogined", User.onLoginCb
@@ -33,21 +33,20 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       User.getLocal()
 
     set: (user) ->
+      $extend $scope.user, user
 
-      $scope.user.username = user["username"] or ""
-      $scope.user.email = user["email"] or ""
-      $scope.user.face = user["face"] or ""
-      $scope.user.face_60 = user["face_60"] or ""
-      $scope.user.face_120 = user["face_120"] or ""
-      $scope.user.sex = user["sex"] or "1"
-      $scope.user.blog = user["blog"] or ""
-      $scope.user.uid = user["userid"] or ""
+
 
     getRemote: ->
 
       uid = $scope.user.uid
 
-      url = "#{API.userInfo}" + ( if IsDebug then "" else "/#{uid}" ) + "#{$scope.privacyParam}"
+      url = [
+        "#{API.userInfo}"
+        ( if IsDebug then "" else "/#{uid}" )
+        "#{$scope.privacyParam}"
+        "&uid=#{uid}"
+      ].join ""
 
       $http.get(url).success(User.getRemoteCb).error(User.getRemoteErrorCb)
 
@@ -78,7 +77,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       if uid and accessToken
         User.getLocalCb(uid, accessToken)
       else
-        User.login()
+        User.login() if not LOC["href"].match /register/
     
     getLocalCb: (uid, accessToken) ->
       User.isLocalLogin = yes
@@ -89,7 +88,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       # 默认用户设置，请求到用户数据之前的显示
       # 请求到后会被覆盖
       $scope.user.face_60 = $scope.user.face_120 = $scope.DEFAULT_FACE
-      $scope.user.username = username
+      $scope.user.username = $scope.username = username
 
       $scope.accessToken = accessToken
 
@@ -125,6 +124,7 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       accessToken = $scope.accessToken = result["accesstoken"]
 
       user = result["user"]
+      $scope.username = user["username"]
       $scope.UID = user["userid"]
 
       $scope.user.accessToken = accessToken
@@ -132,10 +132,16 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       User.set user
       User.store user
 
+      User.setPrivacy()
+
+      $location.path "/"
+
+      # LOC["reload"]()
 
     # 登录过期
     onOutOfDate: ->
       User.remove()
+      $scope.user = {}
 
       $scope.isLogin = no
 
@@ -147,8 +153,10 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       $cookieStore.remove "mAccessToken"
       $scope.isLogin = no
 
+      $timeout User.login, 200
+
     login: ->
-      LOC["href"] = "#!/login"
+      $location.path "login" unless $location.path().match /login/
 
   User.init()
 
@@ -176,13 +184,18 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
       $scope.Page = Page
 
+      # 滚动页面到顶部
+      $scope.$on "onScrollTop", (e, msg) -> Page.onBackToTop()
+
     onPageChangeCb: (event, msg) ->
       $scope.page = msg
       elMwrap["scrollTop"] = 1
 
-      if "login|register|square".indexOf($scope.page) < 0
-        User.login() unless $scope.isLogin
+      # 清除分页
+      Pagination.clear()
 
+      # if "login|register|square".indexOf($scope.page) < 0
+      #   User.login() unless $scope.isLogin
 
     onBackToTop: (isM)->
       (if isM then elMwrap else BODY)["scrollTop"] = 0
@@ -304,13 +317,16 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
     init: ->
       $scope.askQues = Ask.ask
 
-    ask: (content) ->
+    ask: (data) ->
 
       url = "#{API.ask}#{$scope.privacyParamDir}"
       url = API.ask if IsDebug
 
+      query = content: data.content
+      query.foruser = data.foruser if data.foruser
+
       (if IsDebug then $http.get else $http.post)(url,
-        content: content
+        query
       ).success Ask.askCb
 
     askCb: (data)->
@@ -319,6 +335,9 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
       if String(ret) is "100000"
         $scope.$broadcast "onAskQuesSuccess", queId: data["result"]
         $scope.$broadcast "onMDesignSendSuccess"
+
+      else
+        $scope.$broadcast "onAskQuesFail", msg: data.msg
 
   Ask.init()
 
@@ -351,26 +370,351 @@ Mifan.controller "rootCtrl", ($scope, $cookieStore, $http, $timeout, $storage, $
 
   Notification = 
     init: ->
-      Notification.get()
+      Notification.get() if $scope.isLogin
 
     time: 0
 
     get: ->
-      url = if IsDebug then API.msgcount else "#{API.msgcount}#{$scope.privacyParamDir}"
+      api = if IsDebug then API.notice else "#{API.notice}#{$scope.privacyParamDir}"
 
-      $http.get(url).success Notification.cb
+      $http.get(api).success Notification.cb
 
       Notification.time++
 
     cb: (data)->
       if data.msg is "ok"
-        $scope.msgCount = data.result
+        $scope.msgCount = data.result or 0
 
       $timeout Notification.get, 30000
 
   Notification.init()
 
+  # 弹出的提示信息
+  Toast = 
+    init: ->
+      $scope.toast = Toast.toast
+      $scope.Toast = Toast
+    text: ""
 
+    isShow: no
+
+    type: "primary"
+
+    # primary;
+    # error;
+    # success;
+    # warn;
+    # danger;
+
+    toast: (msg, type, time = 3000) ->
+      Toast.text = msg
+      Toast.isShow = yes
+      Toast.type = type or "success"
+
+      $timeout (-> Toast.isShow = no), time
+
+  Toast.init()
+
+  # 关注和取消关注
+  Follow = 
+    init: ->
+      $scope.$on "follow", (event, data) ->
+        Follow.follow data.userid
+
+      $scope.$on "unfollow", (event, data) -> 
+        Follow.unfollow data.userid
+
+    send: (api, cb) ->
+      (if IsDebug then $http.get else $http.post)(api).success cb
+
+    follow: (uid) ->
+      api = "#{API.follow}#{$scope.privacyParamDir}/userid_follow/#{uid}"
+      api = API.follow if IsDebug
+
+      Follow.send api, Follow.followCb
+
+    followCb: (data) ->
+      $scope.$broadcast "followCb", data
+
+    unfollow: (uid) ->
+      api = "#{API.unfollow}#{$scope.privacyParamDir}/userid_follow/#{uid}"
+      api = API.unfollow if IsDebug
+
+      Follow.send api, Follow.unfollowCb
+
+    unfollowCb: (data) ->
+      $scope.$broadcast "unfollowCb", data
+
+  Follow.init()
+
+  # 喜欢回答
+  LoveAns = 
+    init: ->
+      $scope.loveAns = LoveAns.send
+      $scope.$on "loveans", (event, data) -> LoveAns.send data
+
+    feed: null
+
+    send: (data) ->
+      api = "#{API.loveanswer}#{$scope.privacyParamDir}"
+      api = API.loveanswer if IsDebug
+      query = data
+
+      (if IsDebug then $http.get else $http.post)(api, query).success LoveAns.sendCb
+
+    sendCb: (data) -> $scope.$broadcast "loveansCb", data
+
+  LoveAns.init()
+
+  # 回答问题
+  Ans = 
+    init: ->
+      $scope.Ans = Ans.send
+      $scope.$on "ans", (event, data) ->
+        Ans.send data
+
+    send: (data) ->
+
+      api = "#{API.answer}#{$scope.privacyParamDir}"
+      api = API.answer if IsDebug
+
+      query = 
+        askid: data.askid
+        content: data.content
+
+      (if IsDebug then $http.get else $http.post)(api, query).success (data) ->
+        Ans.sendCb data
+
+    sendCb: (data) -> $scope.$broadcast "ansCb", data
+
+  Ans.init()
+
+  # 获取他人用户信息
+  getUserInfo = 
+    init: ->
+      $scope.$on "getUserInfo", (e, data) -> getUserInfo.get data
+
+    get: (data) ->
+      uid = data.uid
+
+      api = [
+        "#{API.userInfo}"
+        ( if IsDebug then "" else "/#{uid}" )
+        "#{$scope.privacyParam}"
+        "&uid=#{uid}"
+      ].join ""
+
+      $http.get(api).success getUserInfo.getCb
+
+    getCb: (data) -> 
+      {msg, result} = data
+
+      $scope.$broadcast "getUserInfoCb", data
+
+  getUserInfo.init()
+
+
+  # 评论
+  Comment = 
+    init: ->
+      $scope.$on "comment", (e, data) -> Comment.send data
+      $scope.$on "getcomment", (e, data) -> Comment.get data
+
+    send: (data) ->
+      api = "#{API.comment}#{$scope.privacyParamDir}"
+      api = API.comment if IsDebug
+
+
+      (if IsDebug then $http.get else $http.post)(api, data).success (data) ->
+        Comment.sendCb data
+
+    sendCb: (data) ->
+      $scope.$broadcast "commentCb", data
+
+    get: (data) ->
+      api = "#{API.getComment}#{$scope.privacyParamDir}/answerid/#{data.answerid}"
+      api = API.getComment if IsDebug
+
+      $http.get(api).success (data) ->
+        Comment.getCb data
+
+    getCb: (data) ->
+      $scope.$broadcast "getcommentCb", data
+
+  Comment.init()
+
+  # 分页
+  Pagination = 
+
+    init: ->
+
+      $scope.page = {}
+      $scope.isPageLoading = no
+
+      $scope.$on "onPaginationStartChange", Pagination.onChange
+      $scope.$on "onPaginationGeted", Pagination.set
+      $scope.$on "onClearPaginationData", Pagination.clear
+
+    onChange: (event, msg) ->
+      $scope.curPage = msg
+      $scope.isPageLoading = yes
+
+
+    curPage: 1
+
+    totalPage: 0
+
+    set: (e, pageData) ->
+
+      curPage = Number pageData['cur_page']
+      totalPage = Number pageData['total_page']
+
+      Pagination.curPage = curPage
+      Pagination.totalPage = totalPage
+      
+      $scope.isPageLoading = no
+      $scope.curPage = curPage
+      $scope.totalPage = totalPage
+      $scope.pages = [1..totalPage]
+
+      # 滚动到页面顶部
+      Page.onBackToTop()
+
+
+    clear: ->
+      
+      $scope.isPageLoading = no
+      $scope.curPage = 1
+      $scope.totalPage = 0
+      $scope.pages = []
+
+
+
+  Pagination.init()
+
+  # Ques 问题相关
+  Ques = 
+    init: ->
+      $scope.$on "onGetAskInfo", (e, askid) ->
+        Ques.getInfo askid
+
+      $scope.$on "onGetAskAnswers", (e, askid) ->
+        Ques.getAnswers askid
+
+    getInfo: (askid) ->
+      api = "#{API.askinfo}#{$scope.privacyParamDir}?askid=#{askid}"
+      api = API.askinfo if IsDebug
+
+      $http.get(api).success Ques.getInfoCb
+
+    getInfoCb: (data) ->
+      $scope.$broadcast "onGetAskInfoCb", data
+
+    getAnswers: (data) ->
+      {askid, page} = data
+
+      api = "#{API.askanswers}#{$scope.privacyParamDir}/page/#{page}?type=askanswer&askid=#{askid}"
+      api = API.askanswers if IsDebug
+
+      $http.get(api).success Ques.getAnswersCb
+
+    getAnswersCb: (data) ->
+      $scope.$broadcast "onGetAskAnswersCb", data
+
+
+  Ques.init()
+
+  # 注册
+  Reg = 
+    init: ->
+      $scope.$on "onReg", Reg.onReg
+      $scope.$on "onRegSuccess", Reg.onReged
+
+    onReg: (event, data) -> Reg.reg data
+
+    reg: (data) ->
+      {email, password, username, invitecode} = data
+
+      $http(
+        method: if IsDebug then "GET" else "POST"
+        url: API.reg
+        data:
+          user_email: email
+          user_password: password
+          user_repwd: password
+          user_name: username
+          invitecode: invitecode
+      )
+      .success(Reg.regCb)
+
+
+    regCb: (data) ->
+      $scope.$broadcast "onRegCb", data
+
+    onReged: (event, result) ->
+      $scope.isLogin = yes
+
+      accessToken = $scope.accessToken = result["accesstoken"]
+
+      user = result["user"]
+      $scope.username = user["username"]
+      $scope.UID = user["userid"]
+
+      $scope.user.accessToken = accessToken
+
+      User.set user
+      User.store user
+
+      User.setPrivacy()
+
+      $timeout ->
+        $location.path "/"
+      , 1000
+
+  Reg.init()
+
+
+  # 关注和粉丝 朋友
+  Friend = 
+
+    init: ->
+
+      $scope.$on "onGetUserFollows", (e, data) ->
+        Friend.getFollow data
+
+      $scope.$on "onGetUserFans", (e, data) ->
+        Friend.getFans data
+
+    getFollow: (data) ->
+
+      {page, uid} = data
+
+      api = "#{API.friendFollow}#{$scope.privacyParamDir}/page/#{page}?uid=#{uid}"
+      api = API.friendFollow if IsDebug
+
+      $http.get(api).success Friend.getFollowCb
+
+
+    getFollowCb: (data) ->
+      $scope.$broadcast "onGetUserFollowsCb", data
+
+    getFans: (data) ->
+
+      {page, uid} = data
+
+      api = "#{API.friendFans}#{$scope.privacyParamDir}/page/#{page}?uid=#{uid}"
+      api = API.friendFans if IsDebug
+
+      $http.get(api).success Friend.getFansCb
+
+    getFansCb: (data) ->
+      $scope.$broadcast "onGetUserFansCb", data
+
+
+  Friend.init()
+
+
+      
 
 
 

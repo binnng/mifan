@@ -33,7 +33,7 @@ module.exports = (grunt) ->
 
       secret: grunt.file.readJSON "secret.json"
 
-      onlineURL: "http://115.29.49.123/mifan/app"
+      onlineURL: "http://app.mifan.us"
       onlineTestURL: "http://115.29.49.123/mifan/app/test"
 
     

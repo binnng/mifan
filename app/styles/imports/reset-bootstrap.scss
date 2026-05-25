@@ -6,7 +6,7 @@ input
 input:focus,
 .dropdown-menu{
 	border-radius: 2px;
-	outline: none;
+	outline: none !important;
 	-webkit-highlight: none;
 }
 
@@ -109,13 +109,30 @@ em{
 	font-style: normal;
 }
 
-p{
+p, ul{
 	margin: 0;
 }
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus{
 	border: none;
 }
+
+.pagination > li > a,
+.pagination > li > span{
+	border: none;
+}
+
+.pagination > li > a:hover, 
+.pagination > li > span:hover, 
+.pagination > li > a:focus, 
+.pagination > li > span:focus{
+	background: none;
+	border: none;
+}
+
+
 
 @media (max-width: $screen-xs) {
   .container{

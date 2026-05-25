@@ -1,0 +1,15 @@
+<div class="avatars pull-left">
+	<a ng-href="#!/user/{{news.ask.user.userid}}" class="avatar asker" title="{{news.ask.user.username}}" style="background-image:url({{news.ask.user.face_60}})">{{news.ask.user.username}}</a>
+	<a ng-href="#!/user/{{news.answer.user.userid}}" class="avatar answerer" title="{{news.user.username}}" style="background-image:url({{news.answer.user.face_60}})">{{news.answer.user.username}}</a>
+</div>
+<div class="contents" ng-init="{expandCmt:false,expandReply:false,isSendingCmt:false,cmtContent:''}">
+	<h3 class="h5">
+		<p><a ng-href="#!/q/{{news.ask.askid}}" class="" title="问题">{{news.ask.content}}</a></p>
+	</h3>
+	<p class="lead">{{news.answer.content}}</p>
+	<p class="ask-ans-desc meta">
+		<a ng-href="#!/user/{{news.answer.user.userid}}" title="username">{{news.answer.user.username}}</a> 对 <a ng-href="#!/user/{{news.ask.user.userid}}" title="username">{{news.ask.user.username}}</a> 的回答于 <a ng-href="#!/q/{{news.feedid}}">{{news.answer.addtime | ago}}</a>
+	</p>
+
+	<div ng-include="'views/module/feed-actions-mod.html'"></div>
+</div>

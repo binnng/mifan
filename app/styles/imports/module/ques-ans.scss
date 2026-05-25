@@ -22,68 +22,9 @@
 	}
 
 
-	.actions{
-		padding: 14px 0 0;
-		position: relative;
-		height: 38px;
-
-		.act-left{
-			//margin-top: 12px;
-		}
-
-		.m-bubble{
-			position: absolute;
-			right: 0;
-		}
-
-		a,b{
-			&:hover{
-				color: $dark-gray;
-			}
-			&:active{
-				color: $tone;
-			}
-		}
-	}
-
-	.like,
-	.m-cmt,
-	.cmt-tgl-btn{
-		color: $gray;
-		cursor: pointer;
-		padding: 0 .6em;
-		font-weight: 400;
-		&.active{
-			color: $red;
-		}
-		.glyphicon-heart{
-			margin-right: .2em;
-		}
-		.count{
-			vertical-align: bottom;
-		}
-	}
-
-	.m-cmt{
-		.glyphicon-comment{
-			margin-right: .24em;
-		}
-	}
-
-	.bill-btn{
-		
-	}
-
-	.liked-list{
-		display: none;
-		margin-left: .8em;
-		li{
-			display: inline-block;
-		}
-		.avatar{
-			width: 18px;
-			height: 18px;
-			margin: 0 0px;
+	&.hide-action{
+		.actions{
+			display: none;
 		}
 	}
 

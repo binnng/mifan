@@ -113,10 +113,14 @@
 
 .sns-login{
 
-	i{
-		@extend .sns-icon;
+	i,
+	.glyphicon-refresh{
 		float: left;
 		margin: 12px 10px;
+	}
+
+	.glyphicon-refresh{
+		margin-top: 16px;
 	}
 
 	a{
@@ -126,13 +130,16 @@
 		font-size: 1.2em;
 		border-radius: 2px;
 		min-width: 160px;
+		position: relative;
 
 		span{
 			float: left;
+			padding-left: 25px;
 			border-left: 1px solid $light-gray;
 			line-height: 26px;
 			margin: 12px 0;
 			padding-left: 1.2em;
+			margin-left: 40px;
 		}
 		&:hover,
 		&:active{

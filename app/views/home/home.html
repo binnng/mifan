@@ -4,7 +4,7 @@
 			
 			<div class="ask-ques clearfix sd-card" ng-controller="homeCoverCtrl" ng-style="{'background-image': 'url(' + bgUrl + ')'}">
 				<div class="location">
-					<span class="glyphicon glyphicon-map-marker">北京</span>
+					<span class="glyphicon glyphicon-map-marker" ng-show="0">北京</span>
 				</div>
 				<div ng-if="isLogin">
 
@@ -52,7 +52,7 @@
 			  </li>
 			</div>
 
-			<div class="feed-wrap">
+			<div class="feed-wrap" ng-controller="homeFeed">
 
 				<div ng-include="'views/home/news.html'" ng-if="feedType == 'news'"></div>
 				<div ng-include="'views/home/answer.html'" ng-if="feedType == 'answer'"></div>

@@ -1,3 +1,7 @@
-<div class="load-more" ng-class="{loading: isLoading}" ng-click="loadingMore()">
-	<i class="ui-loading"></i>
+<div ng-show="totalPage > 1" class="pagination-nav">
+  <ul class="pagination">
+    <li ng-class="{disabled: curPage == 1}"><a ng-click="curPage > 1 && getPage(1)">&laquo;</a></li>
+		<li ng-repeat="page in pages" ng-class="{disabled: isPageLoading || curPage == page}"><a ng-click="curPage != page&&getPage(page)"><span ng-class="{unsee: curPage == page && isPageLoading}">{{page}}</span><i class="glyphicon" ng-show="isPageLoading && curPage == page" ng-class="{'glyphicon-refresh animated infinite': isPageLoading}"></i></a></li>
+    <li ng-class="{disabled: curPage == totalPage}"><a ng-click="curPage < totalPage && getPage(totalPage)">&raquo;</a></li>
+  </ul>
 </div>

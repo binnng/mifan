@@ -1,25 +1,40 @@
 
-Mifan.controller "homeAnswer", ($scope) ->
-	$scope.content = "回答我的"
-	console.log "回答我的"
+Mifan.controller "homeAnswer", ($scope, $http) ->
+  $scope.$emit "clearAnswerRemind"
 
-	$scope.$emit "clearAnswerRemind"
+  $scope.ansMeCollect = []
 
-	$scope.ansCollect = [
-		{
-			ques:
-				id: 1
-				username: "依然大头"
-				face: "http://mifan.us/cache/user/0/0/48/7dfecd76fb_48_48.png"
-				text: "女朋友要过生日了，买个什么礼物呢？ 具体一些哈~~大谢！"
+  news = 
+    init: ->
+      news.get()
 
-			ans: 
-				id: 2
-				username: "老婆婆"
-				face: "http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg"
-				text: "买一个上市公司送她，让她做老板。"
-			
-			bblActv: no
-			bblActvShow: no
-		}
-	]
+      $scope.getPage = news.get
+
+
+    get: (page = 1) ->
+
+      url = "#{API.answerme}#{$scope.privacyParamDir}/page/#{page}"
+      url = API.answerme if IsDebug
+
+      $scope.$emit "onPaginationStartChange", page
+
+      cb = (data) ->
+        {ret, result} = data
+
+        if result
+          $scope.ansMeCollect = result['list']
+
+          $scope.$emit "onPaginationGeted", result['page']
+
+        else 
+          $scope.errorMsg = data.msg
+
+
+        $scope.dataLoaded = yes
+
+
+      $http.get(url).success cb
+
+  news.init()
+
+

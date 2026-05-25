@@ -5,7 +5,7 @@ $header-height: 50px;
 	height: $header-height;
 	margin-top: 0;
   margin-bottom: 0;
-  background: #eee;
+  background: $white;
 	position: fixed;
 	left: 0;
 	width: 100%;
@@ -104,13 +104,14 @@ $header-height: 50px;
 			a:active,
 			a:focus{
 				color: $tone;
-				background-color: #ddd;
+				background-color: darken($white, 4%);
 			}
 
 			&.active{
 				a{
 					background-color: $tone;
 					color: $white;
+					cursor: default;
 				}
 			}
 		}
@@ -153,16 +154,44 @@ $header-height: 50px;
 			cursor: pointer;
 			padding-right: .4em;
 			padding-left: .4em;
-			color: #333;
 			display: inline-block;
 			line-height: $header-height;
+			position: relative;
+			color: #333;
 			b{
+				display: none;
+			}
+
+			em{
+				position: absolute;
+				top: 8px;
+				right: 0;
+				color: $red;
+				line-height: 1;
+				font-weight: 700;
+				width: 6px;
+				height: 6px;
+				font-size: 1px;
+				text-indent: -99em;
+				overflow: hidden;
+				background-color: $red;
+				border-radius: 99px;
 				display: none;
 			}
 
 			&:hover{
 				color: #111;
 			}
+		}
+		
+		.remind{
+			color: $red;
+			&:hover{
+				color: darken($red, 5%);
+			}
+		}
+		.remind[msg-count="0"] {
+			color: #333;
 		}
 	}
 
@@ -314,6 +343,7 @@ $header-height: 50px;
 		border-bottom: 1px solid $dark-tone;
 		height: auto;
 		.container{
+			background: #fff;
 	  }
 
 	  .logo{
@@ -387,6 +417,15 @@ $header-height: 50px;
   	}
 	}
 }
+
+// .not-login{
+// 	.header{
+// 		border: none;
+// 		.nav{
+// 			display: none;
+// 		}
+// 	}
+// }
 
 
 //根据设备设置不同的CSS

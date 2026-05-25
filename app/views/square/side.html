@@ -1,37 +1,11 @@
 <div class="side sd-card">
 	<div class="side-mod">
-		<h5>最新加入米饭的<i class="icon refresh glyphicon glyphicon-repeat"></i></h5>
+		<h5>最新加入米饭的<i class="icon refresh glyphicon glyphicon-repeat" ng-click="refreshUsers()"></i></h5>
 		<ul class="user-list-mod">
-			<li class="user-mod">
-				
-				<a ng-href="#!/user/" class="face face-50" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>
-
-				<div class="info">
-					<p class="username">vincent</p>
-				</div>
-				<a title="添加关注" class="btn btn-success">关注</a>
-			</li>
-
-			<li class="user-mod">
-				
-				<a ng-href="#!/user/" class="face face-50" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>
-
-				<div class="info">
-					<p class="username">玛奇朵</p>
-				</div>
-				<a title="添加关注" class="btn btn-success">关注</a>
-			</li>
-			<li class="user-mod">
-				
-				<a ng-href="#!/user/" class="face face-50" title="{{news.ans.username}}" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)">老婆婆</a>
-
-				<div class="info">
-					<p class="username">wayneyin</p>
-				</div>
-				<a title="添加关注" class="btn btn-success">关注</a>
+			<li class="user-mod" ng-repeat="user in userLists">
+				<div ng-include="'views/module/follow-user-mod.html'"></div>
 			</li>
 		</ul>
-
 	</div>
 </div>
 

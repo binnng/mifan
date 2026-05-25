@@ -1,0 +1,9 @@
+<a ng-href="#!/user/{{user.userid}}" class="face face-42" title="{{user.username}}" style="background-image:url({{user.face_60 || user.face_120 || user.face}})">{{user.username}}</a>
+
+<div class="info">
+	<p class="username"><a href="#!/user/{{user.userid}}">{{user.username}}</a></p>
+	<p class="brief">{{user.about || user.signed}}</p>
+</div>
+
+
+<button ng-show="user.followBtn" class="btn btn-{{user.followBtn.cls}} follow-btn" ng-class="{disabled:isFollowSending}" ng-click="followFn(user)"><span ng-hide="isFollowSending">{{user.followBtn.txt}}</span><i class="glyphicon glyphicon-refresh animated infinite" ng-show="isFollowSending"></i></button>

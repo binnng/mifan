@@ -3,6 +3,11 @@
 	.blk{
 		margin-top: .8em;
 	}
+	.blk-sep{
+		border-top: 1px dashed rgba(#000, .1);
+		display: block;
+		margin: 18px 0;
+	}
 	.cover{
 		height: 145px;
 		background-size: cover;
@@ -54,4 +59,23 @@
 			font-size: 1.2em;
 		}
 	}
+
+	.follow{
+		.btn{
+			min-width: 86px;
+		}
+	}
+
+	.ask-him-box{
+		.btn{
+			width: 100%;
+			margin-top: 10px;
+		}
+	}
+
+	.addtime{
+		color: $gray;
+	}
+
+
 }

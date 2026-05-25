@@ -1,0 +1,40 @@
+.ques-page{
+	.main{
+		max-width: 600px;
+  	margin: 0 auto;
+  	padding: 0 8px;
+  	padding-bottom: 2em;
+  	min-height: 100px;
+  	position: relative;
+	}
+	.ques-mod{
+		margin: 1.6em 0;
+	}
+	.ans-list{
+		margin-top: 2em;
+		dd{
+			border-bottom: 1px $light-gray dashed;
+			overflow: hidden;
+			padding: 1em;
+			margin-left: 2em;
+			.face{
+				margin-right: 1em;
+			}
+			font-size: .9em;
+
+			&:last-child{
+				border-bottom: none;
+			}
+		}
+		.lead{
+			font-size: 1.1em;
+		}
+		.face{
+			float: left;
+		}
+	}
+
+	.feed-actions-mod{
+		font-size: 1.1em;
+	}
+}

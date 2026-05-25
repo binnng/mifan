@@ -34,7 +34,7 @@ Mifan.controller "globalCtrl", ($scope) ->
   $scope.IsWebapp = IsWebapp
 
 
-  $scope.DEFAULT_FACE = "http://mifan.us/public/images/user_normal.jpg"
+  $scope.DEFAULT_FACE = DEFAULT_FACE
 
 
 

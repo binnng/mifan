@@ -18,5 +18,5 @@ Mifan.controller("globalCtrl", function($scope) {
   $scope.IsIE = IsIE;
   $scope.IsPhone = IsPhone;
   $scope.IsWebapp = IsWebapp;
-  return $scope.DEFAULT_FACE = "http://mifan.us/public/images/user_normal.jpg";
+  return $scope.DEFAULT_FACE = DEFAULT_FACE;
 });

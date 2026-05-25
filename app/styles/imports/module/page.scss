@@ -5,11 +5,13 @@
   	max-width: 600px;
   	margin: 0 auto;
 
+  	padding: 8px;
+
 	}
 
 
 	.side{
-		background-color: #fefefe;
+		background-color: $cardBg;
 		padding: 14px 18px;
 		margin-left: 3em;
 		max-width: 300px;

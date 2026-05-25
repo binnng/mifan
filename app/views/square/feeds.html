@@ -1,37 +1,9 @@
 <div class="feed-content sd-card">
+	<i class="icon refresh glyphicon glyphicon-repeat pull-right" ng-click="refreshFeed()"></i>
+	<i uiloading></i>
 	<dl class="questions">
-		<dd class="qa-mod feed-mod">
-			<div class="avatars pull-left">
-				<a ng-href="#!/user/1" class="avatar asker ng-binding" title="依然大头" style="background-image:url(http://mifan.us/cache/user/0/0/48/7dfecd76fb_48_48.png)" href="#!/user/1">依然大头</a>
-				<a ng-href="#!/user/2" class="avatar answerer ng-binding" title="老婆婆" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)" href="#!/user/2">老婆婆</a>
-			</div>
-			<div class="contents">
-				<h3 class="h5">
-					<p><a ng-href="#" class="ng-binding" title="问题" href="#">现在支持emoji表情了，看<img width="18" class="emoji" style="vertical-align:middle" src="emoji/1f440.png">，喜欢不？<img width="18" class="emoji" style="vertical-align:middle" src="emoji/1f604.png"></a></p>
-				</h3>
-				<p class="lead ng-binding">喜欢啊<img width="19" class="emoji" style="vertical-align:middle" src="emoji/1f60d.png"></p>
-				<p class="ask-ans-desc meta">
-					<a ng-href="#" title="username">米大叔</a> 对 <a ng-href="#" title="username">狼叔</a> 的回答于 <a ng-href="#" title="" class="">1天前</a>
-				</p>
-			</div>
-		</dd>
-
-		<dd class="qa-mod feed-mod">
-			<div class="avatars pull-left">
-				<a ng-href="#!/user/1" class="avatar asker ng-binding" title="依然大头" style="background-image:url(http://mifan.us/cache/user/0/0/48/7dfecd76fb_48_48.png)" href="#!/user/1">依然大头</a>
-				<a ng-href="#!/user/2" class="avatar answerer ng-binding" title="老婆婆" style="background-image:url(http://mifan.us/cache/user/0/0/48/6c9e391e64_48_48.jpg)" href="#!/user/2">老婆婆</a>
-			</div>
-			<div class="contents">
-				<h3 class="h5">
-					<p><a ng-href="#" class="ng-binding" title="问题" href="#">现在支持emoji表情了，看<img width="18" class="emoji" style="vertical-align:middle" src="emoji/1f440.png">，喜欢不？<img width="18" class="emoji" style="vertical-align:middle" src="emoji/1f604.png"></a></p>
-				</h3>
-				<p class="lead ng-binding">喜欢啊<img width="19" class="emoji" style="vertical-align:middle" src="emoji/1f60d.png"></p>
-				<p class="ask-ans-desc meta">
-					<a ng-href="#" title="username">AAAA</a> 对 <a ng-href="#" title="username">BBB</a> 的回答于 <a ng-href="#" title="" class="">1天前</a>
-				</p>
-			</div>
-		</dd>
-
+		<dd ng-repeat="news in dataLists" class="qa-mod feed-mod hide-action" ng-include="'views/module/feed-mod.html'"></dd>
 	</dl>
-	<more></more>
+	<i errormsg></i>
+	<i more></i>
 </div>

@@ -7,13 +7,13 @@
 
 			<div sub-nav class="sub-nav-wrap">
 				<li ng-class="{active: feedType == 'ask'}">
-			  	<a class="btn-link" ng-click="switchFeed()">我的提问</a>
+			  	<a class="btn-link" ng-click="switchFeed()">{{ta}}的提问</a>
 			  </li>
 			  <li ng-class="{active: feedType == 'answer'}">
-			  	<a class="btn-link" ng-click="switchFeed('answer')">我的回答</a>
+			  	<a class="btn-link" ng-click="switchFeed('answer')">{{ta}}的回答</a>
 			  </li>
 			  <li ng-class="{active: feedType == 'love'}">
-			  	<a class="btn-link" ng-click="switchFeed('love')">我的喜欢</a>
+			  	<a class="btn-link" ng-click="switchFeed('love')">{{ta}}的喜欢</a>
 			  </li>
 			</div>
 

@@ -1,6 +1,6 @@
 <div class="header clearfix" ng-controller="headCtrl">
 
-	<div class="head-inner">
+	<div class="head-inner container">
 		<div class="login pull-right" ng-show="!user.username">
 			<span class="sm-user switch">
 				<a href="#!/login" ng-class="{active: page=='login'}" class="item">登录</a>
@@ -8,22 +8,25 @@
 			</span>
 		</div>
 
-		<div class="bg-menu pull-right hidden-xs" ng-if="isLogin">
-	  	<a class="remind"><b>提醒</b><i class="glyphicon glyphicon-bell"></i></a>
-	  	<a class="remind" href="#!/search"><b>找人</b><i class="glyphicon glyphicon-search"></i></a>
+		<div class="bg-menu pull-right hidden-xs">
+	  	<a class="remind" href="#!/notice" msg-count="{{msgCount}}">
+	  		<em ng-show="msgCount">{{msgCount}}</em><b>提醒</b>
+	  		<i class="glyphicon glyphicon-bell"></i>
+	  	</a>
+	  	<a class="search" href="#!/search"><b>找人</b><i class="glyphicon glyphicon-search"></i></a>
 	  </div>
 
 	  <div class="remind-dtl hidden-xs" ng-if="remind">
-	  	<a href="!">{{remind}}</a>
+	  	<a href="#!/notice">{{msgCount}}</a>
 	  	<i class="glyphicon glyphicon-remove close"></i>
 			<span class="caret up"></span>
 	  </div>
 		
 		<div ng-class="{open: dropdownOpen}" class="user-box pull-right dropdown" ng-show="user.username" ng-click="toggleDropdown()">
 
-			<p class="dropdown-label" data-toggle="dropdown">
+			<div class="dropdown-label" data-toggle="dropdown">
 				<b class="username username-inline">{{user.username}}</b>
-			</p>
+			</div>
 
 			<span class="caret"></span>
 			<usermenu class="dropdown-menu" role="menu" aria-labelledby="user.username-lable">
@@ -45,7 +48,7 @@
     </h3>
 		<div class="container" ng-click="backToTop('m')">
 			<div class="scroller">
-		    <ul class="nav nav-pills scroller-inner" ng-show="isLogin">
+		    <ul class="nav nav-pills scroller-inner">
 		      <li class="item" ng-repeat="nav in navs" ng-class="{active: page === nav.page}"><a ng-href="#!/{{nav.page}}">{{nav.text}}</a></li>
 		    </ul>
 			</div>
@@ -55,4 +58,4 @@
 
 </div>
 
-<div class="sprise">Sprise!!</div>
+<!-- <div class="sprise">Sprise!!</div> -->
